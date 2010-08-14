@@ -1,0 +1,142 @@
+
+//    kk  ""tt""  "";;    """"JJ;;kkJJ  JJtt""    ""tt""  ;;tt""""tt    ""tt""   
+//   JJ  kk""tt;;JJ      ttkk    ""tt    ;;;;ttJJ;;  ""ttkk;;"";;;;ttkk;;  ;;kk  
+//  "";;  ""  kk  kk  tt  ttww    ZZ;;  ww    RR  ;;JJ  JJJJ  tt    RR  ;;JJ  JJ 
+//  JJ      """";;""  kk  ttkk  ;;kk    ZZ    ww  ;;""  kk""  ww    kk;;kk""  JJ 
+//  kk      JJ  kk    ww  ttkk  JJJJ  ;;ww  ""JJ  ;;tt""RR    ZZ  ;;ZZJJ      kk 
+//  kk  ;;  "";;JJ        JJtt  JJJJ  ""kk  JJ""  ww""""ww    ww  ""JJ  ZZ    kk 
+//  JJ  JJ  ;;JJ""  "";;  ww;;  kkJJ  JJ""  kk;;  ww  ;;ww  ""JJ  ww;;  ww  ;;tt 
+//;;""  RR    RR    ww""  kk""  ;;tt  ww    kkkk      kktt  JJ;;  ZZ;;  ;;  tt   
+//  JJkkttkkkk;;kkkk;;JJkktt""kkJJJJkkttJJkk;;  kkkkJJ  ttkkttJJkk;;ttkkJJkkJJ   
+//| I | - | L | U | N | A | A | T | H | E | N | A | P | R | O | J | E | C | T |  
+//------------------------------------------------------------------------------
+// iLAthena War of Emperium <http://www.i-luna.com>
+// 한글화 by 아이루나 iLAthena Project
+//------------------------------------------------------------------------------
+// 한글화 by 유란
+//------------------------------------------------------------------------------
+
+// 길드 깃발 (마을)
+//============================================================
+prontera,167,203,6	script	스쾨굴#p4-1::Skoegul	722,{
+	end;
+
+OnRecvCastlePt04:
+	FlagEmblem GetCastleData("prtg_cas04",1);
+	end;
+}
+
+// 길드 깃발 (외성)
+//============================================================
+prt_gld,120,243,6	script	스쾨굴#p4-2::Skoegul2	722,{
+	set .@GID, GetCastleData("prtg_cas04",1);
+	if (.@GID == 0) {
+		mes " [ 신성 룬 미드가츠 왕국 포고령 ]";
+		mes " ";
+		mes "1. 신성 룬 미드가츠 왕국령에";
+		mes "　 의해 아직 이 아지트는 마스터가";
+		mes "　 정해지지 않았다";
+		mes " ";
+		mes "2. 모든 예심을 극복하고 엠펠리움을";
+		mes "　 파괴하는 자에게, 국왕은 이 성의";
+		mes "　 소유권을 부여 할 것이다";
+	}
+	else {
+		if (getcharid(2) == .@GID) {
+			mes "[ 울리는 목소리 ]";
+			mes "용감한 자들이여...";
+			mes "그대의 명예로움으로 돌아가겠는가?";
+			next;
+			if (select("아지트로 돌아간다.:그만둔다.") == 1) {
+				if (getcharid(2) == GetCastleData("prtg_cas04",1)) {
+					warp "prtg_cas04",258,247;
+					end;
+				}
+			}
+			close;
+		}
+		mes " [ 신성 룬 미드가츠 왕국 포고령 ]";
+		mes " ";
+		mes "1. 이곳은 신성 룬 미드가츠 왕국령에 ";
+		mes "    따라 ^ff0000" + GetGuildName(.@GID) + "^000000 길드의";
+		mes "    사유물임을 인정한다.";
+		mes " ";
+		mes "2. ^ff0000" + GetGuildName(.@GID) + "^000000 길드의 마스터는";
+		mes "    ^ff0000" + GetGuildMaster(.@GID) + "^000000 이며 , 누구라도";
+		mes "    이사항에 이의 있는자들은 검을";
+		mes "    들어 자신의 명예를 드높이라.";
+	}
+	close;
+
+OnRecvCastlePt04:
+	FlagEmblem GetCastleData("prtg_cas04",1);
+	end;
+}
+
+prt_gld,120,236,6	duplicate(Skoegul2)	스쾨굴#p4-3	722
+prt_gld,122,243,6	duplicate(Skoegul2)	스쾨굴#p4-4	722
+prt_gld,122,236,6	duplicate(Skoegul2)	스쾨굴#p4-5	722
+
+// 길드 깃발 (내성)
+//============================================================
+prtg_cas04,82,29,4	script	스쾨굴#p4-6::Skoegul3	722,{
+	end;
+
+OnRecvCastlePt04:
+	FlagEmblem GetCastleData("prtg_cas04",1);
+	end;
+}
+
+prtg_cas04,75,29,4	duplicate(Skoegul3)	스쾨굴#p4-7	722
+prtg_cas04,75,27,4	duplicate(Skoegul3)	스쾨굴#p4-8	722
+prtg_cas04,82,27,4	duplicate(Skoegul3)	스쾨굴#p4-9	722
+prtg_cas04,59,29,4	duplicate(Skoegul3)	스쾨굴#p4-10	722
+prtg_cas04,67,29,4	duplicate(Skoegul3)	스쾨굴#p4-11	722
+prtg_cas04,258,25,4	duplicate(Skoegul3)	스쾨굴#p4-12	722
+prtg_cas04,258,20,4	duplicate(Skoegul3)	스쾨굴#p4-13	722
+prtg_cas04,263,20,4	duplicate(Skoegul3)	스쾨굴#p4-14	722
+prtg_cas04,263,27,4	duplicate(Skoegul3)	스쾨굴#p4-15	722
+
+// 공성 매니져
+//============================================================
+prtg_cas04,292,14,0	duplicate(Gld_Agit_Manager)	Agit#prtg_cas04	-1
+
+// 집사
+//============================================================
+prtg_cas04,259,265,4	duplicate(Gld_Mngr_Template)	반드레드#prtg_cas04	55
+
+// 가디언
+//============================================================
+prtg_cas04,259,265,4	duplicate(Gld_Guard_Template)	Guardian#prtg_cas04	-1
+
+// 카프라 직원
+//============================================================
+prtg_cas04,258,247,4	duplicate(Gld_Kafra_Template)	카프라 직원prtg_cas04	117
+
+// 마스터방
+//============================================================
+prtg_cas04,275,160,0	script	#switch_Pt04	111,{
+	mes " ";
+	mes "레버가 있습니다. 당기시겠습니까?";
+	next;
+	switch(select("당긴다.:당기지 않는다.")) {
+	case 1:
+		warp "prtg_cas04",259,265;
+		break;
+	case 2:
+		break;
+	}
+	end;
+}
+
+// 길드 보물 안정장치
+//============================================================
+prtg_cas04,271,162,0	duplicate(Gld_Trea_Protect)	ban_warp#prtg_cas04	-1,6,6
+
+// 길드 보물 소환
+//============================================================
+prtg_cas04,271,162,0	duplicate(Gld_Trea_Spawn)	Treasure#prtg_cas04	-1
+
+// 길드 던젼 스위치
+//============================================================
+prtg_cas04,56,283,0	duplicate(Gld_Dun_Template)	#prtg_cas04	111

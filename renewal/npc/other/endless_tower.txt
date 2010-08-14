@@ -1,0 +1,1692 @@
+
+//    kk  ""tt""  "";;    """"JJ;;kkJJ  JJtt""    ""tt""  ;;tt""""tt    ""tt""   
+//   JJ  kk""tt;;JJ      ttkk    ""tt    ;;;;ttJJ;;  ""ttkk;;"";;;;ttkk;;  ;;kk  
+//  "";;  ""  kk  kk  tt  ttww    ZZ;;  ww    RR  ;;JJ  JJJJ  tt    RR  ;;JJ  JJ 
+//  JJ      """";;""  kk  ttkk  ;;kk    ZZ    ww  ;;""  kk""  ww    kk;;kk""  JJ 
+//  kk      JJ  kk    ww  ttkk  JJJJ  ;;ww  ""JJ  ;;tt""RR    ZZ  ;;ZZJJ      kk 
+//  kk  ;;  "";;JJ        JJtt  JJJJ  ""kk  JJ""  ww""""ww    ww  ""JJ  ZZ    kk 
+//  JJ  JJ  ;;JJ""  "";;  ww;;  kkJJ  JJ""  kk;;  ww  ;;ww  ""JJ  ww;;  ww  ;;tt 
+//;;""  RR    RR    ww""  kk""  ;;tt  ww    kkkk      kktt  JJ;;  ZZ;;  ;;  tt   
+//  JJkkttkkkk;;kkkk;;JJkktt""kkJJJJkkttJJkk;;  kkkkJJ  ttkkttJJkk;;ttkkJJkkJJ   
+//| I | - | L | U | N | A | A | T | H | E | N | A | P | R | O | J | E | C | T |  
+//------------------------------------------------------------------------------
+// iLAthena 인스턴스 던전 스크립트 - http://www.i-luna.com
+// 한글화 by 아이루나 iLAthena Project
+//------------------------------------------------------------------------------
+// 제작: Saithis, Cephiyo, Jobbie, Timexy, LimitLine
+// 한글화: 아이루나(사이버짱)
+//------------------------------------------------------------------------------
+// 버전 2009-08-15 (3.5)
+//------------------------------------------------------------------------------
+
+// = 설정 =
+// ====================================================================================================
+-	script	ET_Settings	-1,{
+OnInit:
+	set $ET_Cooldown,583200;	// Seconds
+	set $ET_Timelimit,14400;	// Seconds
+	set $ET_Minlevel,50;		// Min level to enter the tower
+	set $ET_Minparty,1;		// # of players a party must have
+	set $ET_AshID,6000;		// ItemID
+	set $ET_GM,60;			// Min GM level to control the tower
+	end;
+}
+
+// = 탑의수호석 =
+// ====================================================================================================
+e_tower,82,105,3	script	탑의수호석	406,{
+	if(ET_Lasttime + $ET_Cooldown > gettimetick(2) && ET_Lasttime < gettimetick(2) && getgmlevel() < $ET_GM){
+		set .@last,ET_Lasttime + $ET_Cooldown - gettimetick(2);
+		set .@hours,.@last / 60 / 60;
+		set .@minutes,.@last / 60 % 60;
+		set .@seconds,.@last % 60;
+		mes "이 타워를 클리어 하셨기 때문에,";
+		mes "다음에는 "+.@hours+"시간 "+.@minutes+"분 "+.@seconds+"초";
+		mes "이후에 입장이 가능합니다.";
+		next;
+		mes "이 장소는 위험합니다. 원래 있던 장소로 당신을 이동하여 드리겠습니다.";
+		close2;
+		warp "alberta",223,36;
+		end;
+	}
+	getpartymember(getcharid(1)); 
+	if(!getcharid(1) || $@partymembercount < $ET_Minparty){
+		mes ""+$ET_Minparty+"인 이상의 파티를 구성하시거나 파티에 가입하셔서 다시 시도해주시기 바랍니다.";
+		set ET_makeparty,1;
+		close;
+	}
+	if(ET_makeparty){
+		mes "파티 생성을 확인하였습니다.";
+		set ET_makeparty,0;
+		next;
+	}
+	mes "던전을 생성하신 상태라면, 입장을 하시면 됩니다.";
+	next;
+	if(getpartyleader(getcharid(1),2) == getcharid(0)){
+		select("Endless Tower던전 생성:던전 입장:알베르타로 복귀:취소");
+	} else {
+		select(":던전 입장:알베르타로 복귀:취소");
+	}
+	switch(@menu){
+	case 1:
+		if(instance_id(1)){
+			if(has_instance("1@tower") == ""){
+				mes "Your group is already registered at an other instance."; 
+				close;
+			}
+			mes "이미 던전을 생성하였습니다."; 
+			mes "^0000FF던전 입장^000000 을 선택하여 주세요."; 
+			close;
+		}
+		if(ET_Lasttime + $ET_Cooldown > gettimetick(2) && getgmlevel() < $ET_GM) {
+			mes "생성하신 던전의 유효시간이 지났습니다.";
+			close;	
+		}
+		mes "^0000FFEndless Tower^000000 - 예약 시도합니다.";
+		mes "예약에 성공하신 뒤에는 NPC 에게 다시 말을 걸어 메모리얼 던전 입장 메뉴를 선택하셔서 입장하실 수 있습니다.";
+		close2;
+		set .@instance_id,instance_create("Endless Tower",getcharid(1)); // > Rev 14006
+		//set .@instance_id,instance_create("Endless Tower",getcharid(1),5); // < Rev 14003
+		if(.@instance_id < 0){
+			mes "Failed to create Memorial Dungeon."; 
+			mes "^FF0000Memorial Dungeon instances reached its limit.^000000"; 
+			mes "Please report this error to an administrator or GM."; 
+			close;
+		}
+		// > Rev 14006
+		instance_attachmap("1@tower",.@instance_id);
+		instance_attachmap("2@tower",.@instance_id);
+		instance_attachmap("3@tower",.@instance_id);
+		instance_attachmap("4@tower",.@instance_id);
+		instance_attachmap("5@tower",.@instance_id);
+		instance_attachmap("6@tower",.@instance_id);
+		// < Rev 14003
+		//instance_attachmap(.@instance_id,"1@tower");
+		//instance_attachmap(.@instance_id,"2@tower");
+		//instance_attachmap(.@instance_id,"3@tower");
+		//instance_attachmap(.@instance_id,"4@tower");
+		//instance_attachmap(.@instance_id,"5@tower");
+		//instance_attachmap(.@instance_id,"6@tower");
+		//instance_set_timeout $ET_Timelimit,300,.@instance_id;
+		instance_init .@instance_id;
+		instance_attach .@instance_id;
+		set 'ET_Floor,1;
+		set 'ET_Lasttime,gettimetick(2) + $ET_Timelimit;
+		set 'ET_Leadertalk,ET_Talk;
+		set .@k,1;
+		while(.@k < 100){
+			disablenpc instance_npcname("ETwarp_"+.@k);
+			set .@k,.@k+1;
+		}
+		disablenpc instance_npcname("ET_Lost_Soul");
+		callfunc "ET_Spawns",'ET_Floor,has_instance("1@tower");
+		end;
+	case 2:
+		if(!instance_id(1) || has_instance("1@tower") == ""){ 
+			mes "The memorial dungeon Endless Tower does not exist.";
+			mes "Please confirm with your party leader wether the memorial dungeon";
+			mes "has been destructed or if the time given for entering has been expired.";
+			close;
+		}
+		instance_attach instance_id(1);
+		if(ET_Lasttime + $ET_Cooldown < gettimetick(2))
+			set ET_Lasttime,'ET_Lasttime;
+		mapannounce "e_tower",strcharinfo(0)+" of the party "+getpartyname(getcharid(1))+" is entering the dungeon, Endless Tower.",bc_map | bc_blue;
+		warp has_instance("1@tower"),53,355; 
+		end; 
+	case 3:
+		warp "alberta",223,36;
+		end;
+	case 4:
+		close;
+	}
+}
+
+// = ET_Manager - Many general functions regarding the Endless Tower - Controls the instance =
+// ====================================================================================================
+6@tower,1,1,1	script	ET_Manager	-1,{
+	end;
+OnInit: 
+	set .@k,'ET_Floor;
+	while(.@k < 100){
+		disablenpc instance_npcname("ETwarp_"+.@k);
+		set .@k,.@k+1;
+	}
+	if('ET_Floor <= 100){
+		getmapxy(.@map$,.@x,.@y,1,instance_npcname(('ET_Floor == 100 ? "Lucid Crystal" : "ETwarp_"+'ET_Floor)));
+		callfunc "ET_Spawns",'ET_Floor,.@map$;
+		disablenpc instance_npcname("ET_Lost_Soul");
+	} else
+		donpcevent instance_npcname("ET_Manager")+"::OnNaght0";
+	end;
+	
+OnMobDead:
+	set .@i,instance_id(0);
+	set 'ET_Mobs,'ET_Mobs-1;
+	if('ET_Mobs){
+		instance_announce .@i,'ET_Floor+" 층의 남은 몬스터 - "+'ET_Mobs,bc_map,0x00FF00;
+		end;
+	}
+	if('ET_Floor < 100)
+		enablenpc instance_npcname("ETwarp_"+'ET_Floor);
+	if('ET_Floor == 25) 
+		donpcevent instance_npcname("ETwarp_25")+"::OnEnableAshtimer";
+	if('ET_Floor == 50) 
+		donpcevent instance_npcname("ETwarp_50")+"::OnEnableAshtimer";
+	if('ET_Floor == 75) 
+		donpcevent instance_npcname("ETwarp_75")+"::OnEnableAshtimer";
+	instance_announce .@i,"All monsters on the "+'ET_Floor+('ET_Floor % 10 == 1 ? "st" : ('ET_Floor % 10 == 2 ? "nd" : ('ET_Floor % 10 == 3 ? "rd" : "th")))+" level have been defeated.",bc_map;
+	set 'ET_Floor,'ET_Floor+1;
+	if('ET_Floor == 100)
+		callfunc "ET_Spawns",'ET_Floor,has_instance("5@tower");
+	else if('ET_Floor < 100)
+		callfunc "ET_Spawns",'ET_Floor,has_instance((('ET_Floor-1) / 25 + 1)+"@tower");
+	else {
+		mes "[Endless Tower]";
+		mes "Error on OnMobDead Label";
+		mes "'ET_Floor = "+'ET_Floor;
+		mes "Please report this to a Game Master or Administrator.";
+		close;
+	}
+	end;
+	
+OnEntDead:
+	set .@i,instance_id(0);
+	getmapxy(.@map$,.@x,.@y,1,instance_npcname("Lucid Crystal"));
+	killmonsterall .@map$;
+	// TODO: get more info, which things decide if you can fight NS or not...
+	if('ET_Leadertalk == 5){
+		instance_announce .@i,"Mysterious Voice: Who are you to dare intrude upon my sanctuary?!",bc_map,0xFF0000;
+	} else {
+		instance_announce .@i,"Mysterious Voice: Congratulations..................",bc_map,0xFF0000;
+		sleep 3000;
+		instance_announce .@i,"Mysterious Voice: Apparently Entweihen wasn't strength enough......",bc_map,0xFF0000;
+		sleep 3000;
+		instance_announce .@i,"Mysterious Voice: If you are desperate to die, I'll give you the honor to fight against me......",bc_map,0xFF0000;
+		sleep 3000;
+		instance_announce .@i,"Mysterious Voice: Goodbye... for now...",bc_map,0xFF0000;
+		sleep 3000;
+		instance_announce .@i,"Mysterious Voice: But the next time you enter the Tower, I will be waiting.",bc_map,0xFF0000;
+	}
+	set 'ET_Floor,'ET_Floor+1;
+OnNaght0:
+	getmapxy(.@map$,.@x,.@y,1);
+	areamonster .@map$,150,70,160,85,"Anopheles",1627,10,instance_npcname("ET_Manager")+"::OnNaght1";
+	set 'ET_Mobs,10;
+	end;
+	
+OnNaght1:
+	set .@i,instance_id(0);
+	set 'ET_Mobs,'ET_Mobs-1;
+	instance_announce .@i,"Remaining Targets "+'ET_Mobs+"ea",bc_map,0x00FF00;
+	if('ET_Mobs)
+		end;
+	instance_announce .@i,"Guests, huh? I hope you've come here knowing that you'll be buried in this place. If you didn't know, well... it's too late!",bc_map,0x00FF00;
+	sleep 5000;
+	instance_announce .@i,"This is why you adventurers always end up dead.",bc_map,0x00FF00;
+	sleep 5000;
+	instance_announce .@i,"I applaud you for your courage... Of course, I intend to play with you a little bit first.",bc_map,0x00FF00;
+	sleep 5000;
+	instance_announce .@i,"You know, I like watching humans running around in fear.",bc_map,0x00FF00;
+	sleep 5000;
+	instance_announce .@i,"Lets see who runs fastest. Are you ready?",bc_map,0x00FF00;
+	getmapxy(.@map$,.@x,.@y,1);
+	areamonster .@map$,152,69,152,106,"Orc Skeleton",1152,50,instance_npcname("ET_Manager")+"::OnNaght2";
+	areamonster .@map$,159,69,159,106,"Orc Skeleton",1152,50,instance_npcname("ET_Manager")+"::OnNaght2";
+	set 'ET_Mobs,100;
+	end;
+	
+OnNaght2:
+	set .@i,instance_id(0);
+	set 'ET_Mobs,'ET_Mobs-1;
+	instance_announce .@i,"Remaining Targets "+'ET_Mobs+"ea",bc_map,0x00FF00;
+	if('ET_Mobs)
+		end;
+	instance_announce .@i,"Well, I guess they aren't too challenging for you.",bc_map,0x00FF00;
+	sleep 5000;
+	instance_announce .@i,"Lets speed up a little bit, shall we?",bc_map,0x00FF00;
+	sleep 5000;
+	instance_announce .@i,"I demand an endure!",bc_map,0x00FF00;
+	getmapxy(.@map$,.@x,.@y,1);
+	areamonster .@map$,152,69,152,106,"Wind Ghost",1263,30,instance_npcname("ET_Manager")+"::OnNaght3";
+	areamonster .@map$,159,69,159,106,"Wind Ghost",1263,30,instance_npcname("ET_Manager")+"::OnNaght3";
+	set 'ET_Mobs,60;
+	end;
+
+OnNaght3:
+	set .@i,instance_id(0);
+	set 'ET_Mobs,'ET_Mobs-1;
+	instance_announce .@i,"Remaining Targets "+'ET_Mobs+"ea",bc_map,0x00FF00;
+	if('ET_Mobs)
+		end;
+	instance_announce .@i,"Yes, this is getting exciting!",bc_map,0x00FF00;
+	sleep 5000;
+	instance_announce .@i,"I'll remember you as one of a few that have managed to entertain me.",bc_map,0x00FF00;
+	sleep 5000;
+	instance_announce .@i,"Would you like to play one more round?",bc_map,0x00FF00;
+	getmapxy(.@map$,.@x,.@y,1);
+	areamonster .@map$,152,69,152,106,"Khalitzburg",1132,20,instance_npcname("ET_Manager")+"::OnNaght4";
+	areamonster .@map$,159,69,159,106,"Khalitzburg",1132,20,instance_npcname("ET_Manager")+"::OnNaght4";
+	set 'ET_Mobs,40;
+	end;
+	
+OnNaght4:
+	set .@i,instance_id(0);
+	set 'ET_Mobs,'ET_Mobs-1;
+	instance_announce .@i,"Remaining Targets "+'ET_Mobs+"ea",bc_map,0x00FF00;
+	if('ET_Mobs)
+		end;
+	instance_announce .@i,"Okay, the time has come to make my appearance!",bc_map,0x00FF00;
+	sleep 5000;
+	instance_announce .@i,"Do you want to know who I am?",bc_map,0x00FF00;
+	sleep 5000;
+	instance_announce .@i,"You'll soon know. Mine is the face of death!",bc_map,0x00FF00;
+	getmapxy(.@map$,.@x,.@y,1);
+	monster	.@map$,155,147,"Naght Sieger",1956,1,instance_npcname("ET_Manager")+"::OnNaghtDead";
+	end;
+	
+OnNaghtDead:
+	set .@i,instance_id(0);
+	instance_announce .@i,"This..... This can't be happening! I can't be defeated!",bc_map,0xFFD700;
+	sleep 5000;
+	instance_announce .@i,"Nooo! My soul.. My shell..! Nooo--!",bc_map,0xFFD700;
+	sleep 5000;
+	instance_announce .@i,"Naght Sieger's body has turned into dark ashes that scattered in the wind.",bc_map,0x00FF00;
+	enablenpc instance_npcname("ET_Lost_Soul");
+	end;
+}
+
+// = Eternal Brazier - Allows you to skip 3 floors at the max for the price of X Dark Ashes =
+// ====================================================================================================
+1@tower,50,360,5	script	Eternal Brazier	111,{
+	if(getgmlevel() >= $ET_GM){
+		mes "Hi, Master!";
+		next;
+		switch(select("Skip GM Menu:Set to Level:Warp to Level:instance infos:Delete Instance:Cancel")){
+		case 1:
+			break;
+		case 2:
+			mes "to which level should I set the instance?";
+			next;
+			input .@level,0,101;
+			if(.@level == 0) close;
+			set 'ET_Floor,.@level;
+			killmonsterall has_instance("1@tower");
+			killmonsterall has_instance("2@tower");
+			killmonsterall has_instance("3@tower");
+			killmonsterall has_instance("4@tower");
+			killmonsterall has_instance("5@tower");
+			killmonsterall has_instance("6@tower");
+			for(set .@k,1; .@k < 100; set .@k,.@k + 1){
+				if(.@k < 'ET_Floor)
+					enablenpc instance_npcname("ETwarp_"+.@k);
+				else
+					disablenpc instance_npcname("ETwarp_"+.@k);
+			}
+			if('ET_Floor < 100)
+				callfunc "ET_Spawns",'ET_Floor,has_instance((('ET_Floor-1) / 25 + 1)+"@tower");
+			else if('ET_Floor == 100)
+				callfunc "ET_Spawns",'ET_Floor,has_instance("5@tower");
+			else
+				doevent instance_npcname("ET_Manager")+"::OnNaght0";
+			mes "Should I warp you there now?";
+			next;
+			if(select("Yes:No") == 2) close;
+		case 3:
+			if(!.@level){
+				mes "Input the Level you want to warp to:";
+				next;
+				input .@level,0,101;
+				if(.@level == 0) close; 
+			}
+			if(.@level == 101)
+				warp has_instance("6@tower"),31,12;
+			else if(.@level == 100)
+				warp has_instance("5@tower"),100,73;
+			else {
+				setarray .@warpx[0],50,134,222,308,392;
+				setarray .@warpy[0],355,271,183,99,13;
+				set .@x,.@warpx[((.@level-1) % 25) % 5];
+				set .@y,.@warpy[((.@level-1) % 25) / 5];
+				warp has_instance(((.@level-1) / 25 + 1)+"@tower"),.@x,.@y;
+			}
+			close;
+		case 4:
+			mes "Floor: "+'ET_Floor;
+			mes "Lasttime varibale: "+'ET_Lasttime;
+			if('ET_Leadertalk == 5)
+				mes "Naght Sieger floor reachable";
+			else
+				mes "Naght Sieger floor not reachable";
+			if('ET_Floor == 100)
+				set .@map$,has_instance("5@tower");
+			else if('ET_Floor == 101)
+				set .@map$,has_instance("6@tower");
+			else if('ET_Floor < 100)
+				set .@map$,has_instance((('ET_Floor-1) / 25 + 1)+"@tower");
+			mes "Alive mobs(variable): "+'ET_Mobs;
+			mes "Alive mobs(real): "+getmapmobs(.@map$);
+			close;
+		case 5:
+			mes "Are you sure?";
+			next;
+			if(select("Yes:No") == 2) close;
+			instance_destroy instance_id(0);
+			close;
+		default:
+			close;
+		}
+	}
+	mes "- A Message Engraved on the Brazier -";
+	mes "The one who scatters the ashes of the darkness in this place shall become one step closer to Nacht Sieger, the Hegemon King of the Darkness...";
+	next;
+	if(select("26th Level:51st Level:76th Level:Cancel") == 4) close;
+	if(countitem($ET_AshID) < @menu){
+		mes "-Warning-";
+		mes "To warp to the "+(@menu == 1 ? "26th" : (@menu == 2 ? "51st" : "76th"))+" level, you need "+@menu+" Ashes of the Darkness.";
+		close;
+	}
+	if('ET_Floor >= @menu * 25 + 1) {
+		delitem $ET_AshID,@menu;
+		if(@menu == 1) warp has_instance("2@tower"),50,355; 
+		if(@menu == 2) warp has_instance("3@tower"),50,355; 
+		if(@menu == 3) warp has_instance("4@tower"),50,355; 
+		end;
+	}
+	if(getpartyleader(getcharid(1),2) != getcharid(0)){
+		mes "-Warning-";
+		mes "Only the Partyleader can skip levels";
+		close;
+	}
+	set 'ET_Floor,@menu * 25 + 1;
+	killmonsterall has_instance("1@tower");
+	killmonsterall has_instance("2@tower");
+	killmonsterall has_instance("3@tower");
+	callfunc "ET_Spawns",'ET_Floor,has_instance((('ET_Floor-1) / 25 + 1)+"@tower");
+	for(set .@k,1; .@k < 'ET_Floor && .@k < 100; set .@k,.@k + 1)
+		enablenpc instance_npcname("ETwarp_"+.@k);
+	delitem $ET_AshID,@menu;
+	if(@menu == 1) warp has_instance("2@tower"),50,355; 
+	if(@menu == 2) warp has_instance("3@tower"),50,355; 
+	if(@menu == 3) warp has_instance("4@tower"),50,355; 
+	end;
+}
+
+// = Old Sailor - Takes you to the Misty Island =
+// ====================================================================================================
+alberta,214,77,5	script	함장 얀센::ET_init_npc	709,{
+	if(BaseLevel < $ET_Minlevel){
+		mes "[함장 얀센]";
+		mes "아아... 과연 나는 다시 바다로 나갈 수 있을까...";
+		close;
+	}
+	if(ET_Talk == 0){
+		mes "[함장 얀센]";
+		mes "거기 자네 혹시 모험가인가?";
+		next;
+		mes "[함장 얀센]";
+		mes "초면에 정말 미안하네만 이 늙은이의 부탁 하나만 들어주겠나. 아니 용건만 짧게 이야기 하겠네.";
+		next;
+		mes "[함장 얀센]";
+		mes "^0000FF10,000 z^000000 만 내게 기부하게";
+		next;
+		switch(select("단호하게 거절한다","1만제니를 기부한다")){
+		case 2:
+			mes "[함장 얀센]";
+			mes "앗. 정말 날 도와줄건가? 이런 고마울데가...";
+			next;
+			if(Zeny<10000){
+				mes "[함장 얀센]";
+				mes "... 그린데. 자네가 가진 돈으론 안되겠군, 호의는 고마웠네. 다음에 보세";
+				close;
+			}
+			mes "[" +strcharinfo(0)+ "]";
+			mes "어디다 쓰실 것인지는 모르겠지만 일단 가져가보시죠.";
+			next;
+			mes "^0000FF당신은 10000z 를 함장 얀센에게 기부했습니다^000000";
+			set Zeny,zeny-10000;
+			next;
+			mes "[함장 얀센]";
+			mes "고맙네! 자네가 없었으면 배에 넣을 식량과 자재를 살 수 없었을꺼야. 정말 인심이 후하기도 하지...";
+			set ET_Talk,1;
+			close;
+		case 1:
+			mes "[" +strcharinfo(0)+ "]";
+			mes "죄송하지만 다른 사람을 찾아보시죠";
+			next;
+			mes "[함장 얀센]";
+			mes "그렇군, 미안허이. 초면에 이런 부탁을 하는 것이 잘못된 거지.";
+			close;
+		}
+	}
+	if(ET_Talk == 1){
+		mes "^0000FF노인은 기쁜표정으로 인근의 항해용품가게로 달려가 이것저것을 주문하는듯했다. 나는 딱히 할 일이 없었기에 노인의 다급한 사정이 뭔지를 물어보기로 했다^000000";
+		next;
+		mes "^0000FF모든 주문을 끝마친 노인은 다시 내앞으로 다가왔다.^000000";
+		next;
+		mes "[함장 얀센]";
+		mes "음, 초면인 사람의 부탁을 쉽게 들어주다니 자넨 제대로 된 모험가로군. 혹시 자네도 먼 바다로 나가는 항해에 관심이 있나?";
+		next;
+		mes "[" +strcharinfo(0)+ "]";
+		mes "항해는 몇 번 떠나 본 적이 있습니다. 대륙 너머의 세상까지 가 본 적은 없지만.";
+		next;
+		mes "[함장 얀센]";
+		mes"오~ 그래도 나름 기본은 되었군. 나도 한때는 대 선단을 거느렸던 함장이었네. 지금은 겨우 배 한척만 남아있는 신세지만 말이야.";
+		next;
+		mes "[함장 얀센]";
+		mes "자네도 항해를 해 봤다니 알겠지만 저 대륙 너머의 바다는 아직까지 미지의 공간이나 마찬가지라네. 나는 그 바다에 도전했다가 쓴 맛을 본 것이고.";
+		next;
+		mes "^0000FF얀센 노안은 자신이 거쳐온 험난한 바다 여정에 대해 한참이나 떠들어 댔다. 딱히 할 일이 있는 것도 아니어서 나는 아예 자리를 잡고 앉아 그의 이야기를 경청했다.^000000";
+		next;
+		mes "^0000FF사실인지 허풍인지 알 수 없는 내용이 절반 이상이었지만 그 중에서 내 귀를 솔깃하게 만든것은 얀센이 직접 목격했다는 끝없이 하늘로 뻗어있는 바다위의 거대한 탑에 관한 이야기였다.^000000";
+		next;
+		mes "[함장 얀센]";
+		mes "그래서 난파 중 이었던 내 선박은 그 거대한 탑에 정박할 수 밖에 없었지. 단순히 폭풍우를 피해가자는 의도였지만 생각처럼 쉽게 날씨가 안정되질 않았네";
+		next;
+		mes "[함장 얀센]";
+		mes "굶주림을 참지 못했던 선원 몇 명은 먹을것을 구하기 위해 그 정체불명의 탑으로 걸어들어갔네. 물론 살아 돌아오진 않았지.";
+		next;
+		mes "[" +strcharinfo(0)+ "]";
+		mes "함장님은 들어가지 않으셨나요?";
+		next;
+		mes "[함장 얀센]";
+		mes "난 본능적으로 그 탑이 뿜어내는 위험한 기운을 감지했지. 호기심이 일어나긴 했지만 그것이 두려움을 넘어서진 못했다네. 7일째가 되는 날 폭풍우가 멎을때 까지도 탑 속으로 걸어들어갔던 선원들은 돌아오지 않았다네.";
+		next;
+		mes "[함장 얀센]";
+		mes "우린 살아남기 위해 싣고있던 화물을 모두 버리고 섬에서 구할 수 있었던 아주 약간의 물과 식용식물만을 싣고 바다로 떠났지. 그리고 육지에 도착할때쯤엔 나 혼자만 남았네.";
+		next;
+		mes "^0000FF함장이 말하지 않아도 그 배에서 일어났을 아비규환의 상황은 충분히 상상할 수 있었다. 그는 잠시 침울한 표정으로 침묵을 지키더니 결의에 찬 음성으로 말했다.^000000";
+		next;
+		mes "[함장 얀센]";
+		mes "나는 결심했다네. 탑에서 돌아오지 않은 나의 선원들. 그들의 시신만이라도 수습해서 다시 육지로 되돌려 놓기로. 이것은 내 남은 삶의 마지막 목표라네.";
+		next;
+		mes "[함장 얀센]";
+		mes "마침 자네같은 마음씨 좋은 모험가를 만나서 다행이군. 자네가 지원해 준 돈으로 다시 그 탑까지 항해할 수 있게 되었어.";
+		next;
+		mes "[" +strcharinfo(0)+ "]";
+		mes "혹시 항해사는 필요하지 않으신가요?";
+		next;
+		mes "[함장 얀센]";
+		mes "그 곳은 위험한 곳일세. 나는 내 의무를 끝내기 위해 가는 것이네만. 자네같은 젊은이가 그런 위험한 곳으로 가는건 별로 권장하고 싶지 않은걸.";
+		next;
+		mes "아니...";
+		mes ".";
+		mes ".";
+		mes "저도 그곳이 궁금해졌습니다.";
+		next;
+		mes "[함장 얀센]";
+		mes "그런가? 난 지금 바로 출항할 예정이네만. 자네도 바다로 가고싶다면 시간을 좀 더 할애해야겠군. 출항할 준비가 되면 다시 찾아오시게나.";
+		next;
+		mes "[함장 얀센]";
+		mes "아. 그리고 환영하네. 새로운 1등 항해사.";
+		set ET_Talk,3;
+		close;
+	}
+	if(ET_Talk == 3){
+		mes "[함장 얀센]";
+		mes "그럼 이제 출발해 볼까?";
+		next;
+		switch(select("바다로 출항!","잠깐. 아직 마음의 준비가...")){
+		case 1:
+			mes "[함장 얀센]";
+			mes "좋아 가보자고!";
+			set ET_Talk,4;
+			close2;
+			warp "e_tower",74,110;
+			end;
+		case 2:
+			mes "[함장 얀센]";
+			mes "출항 준비가 되면 다시 찾아오게나";
+			close;
+		}
+	}
+	if(ET_Talk == 4 || ET_Talk == 5){
+		mes "음 다시 출항하려면 약간의 자재가 필요하다네. 1만제니를 내면 내가 출항할 자재를 준비해서 출발하도록 하지";
+		next;
+		if(select("다음에 출항하겠습니다","지금 당장 떠납시다!") == 1){
+			mes "[" +strcharinfo(0)+ "]";
+			mes "음. 지금은 제가 여유가 없군요. 다음에 함께 출항하도록 하지요";
+			next;
+			mes "[함장 얀센]";
+			mes "그런가? 그럼 떠날 마음이 들때 다시 찾아오게나";
+			close;
+		}
+		if(Zeny < 10000){
+			mes "[함장 얀센]";
+			mes "미안하네! 자재가 준비되지 않으면 출항할수가 없어. 1만제니를 준비해오게...";
+			close;
+		}
+		mes "[함장 얀센]";
+		mes "좋아! 출항할 준비는 완벽하군. 그럼 지금 바로 떠나보세!";
+		close2;
+		set Zeny,zeny-10000;
+		warp "e_tower",74,110;
+		end;
+	}
+}
+
+// ====================================================================================================
+function	script	ET_Spawns	{ // callfunc "ET_Spawns",level,"map";
+	switch(getarg(0)){
+	case 1: 
+		set 'ET_Mobs,36;
+		areamonster getarg(1),7,349,37,393,"포링",1002,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,349,37,393,"마스터링",1090,1,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,349,37,393,"드롭프스",1113,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,349,37,393,"포포링",1031,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,349,37,393,"마린",1242,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,349,37,393,"메탈링",1613,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 2:
+		set 'ET_Mobs,31;
+		areamonster getarg(1),91,349,121,393,"데저트 울프",1107,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,349,121,393,"데저트 울프",1106,20,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,349,121,393,"떠돌이 늑대",1092,1,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 3:
+		set 'ET_Mobs,30;
+		areamonster getarg(1),179,349,209,393,"스켈레톤",1076,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,349,209,393,"파이어럿 스켈",1071,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,349,209,393,"솔져 스켈레톤",1028,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,349,209,393,"스켈워커",1169,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,349,209,393,"아쳐 스켈레톤",1016,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,349,209,393,"오크 스켈레톤",1152,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 4:
+		set 'ET_Mobs,36;
+		areamonster getarg(1),265,349,295,393,"호넷",1004,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,349,295,393,"로커",1052,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,349,295,393,"보컬",1088,1,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,349,295,393,"아르고스",1100,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,349,295,393,"아르지오프",1099,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,349,295,393,"맨티스",1139,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 5:
+		set 'ET_Mobs,51;
+		areamonster getarg(1),349,349,379,393,"도둑벌레 알",1048,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,349,379,393,"도둑벌레",1051,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,349,379,393,"도둑벌레",1053,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,349,379,393,"도둑벌레",1054,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,349,379,393,"황금 도둑벌레",1086,1,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 6:
+		set 'ET_Mobs,20;
+		areamonster getarg(1),7,265,37,309,"푸파",1008,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,265,37,309,"페코페코 알",1047,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,265,37,309,"도둑벌레 알",1048,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,265,37,309,"드래곤의 알",1721,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 7:
+		set 'ET_Mobs,60;
+		areamonster getarg(1),91,265,121,309,"퍼밀리어",1005,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,265,121,309,"드레인리어",1111,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,265,121,309,"익스플로젼",1383,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,265,121,309,"위레스",1627,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 8:
+		set 'ET_Mobs,30;
+		areamonster getarg(1),179,265,209,309,"크루이저",1248,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,265,209,309,"구식 조총병",1403,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 9:
+		set 'ET_Mobs,40;
+		areamonster getarg(1),265,265,295,309,"스태포",1784,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,265,295,309,"고렘",1040,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,265,295,309,"옵시디언",1615,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 10:
+		set 'ET_Mobs,46;
+		areamonster getarg(1),349,265,379,309,"호넷",1004,20,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,265,379,309,"자이언트 호넷",1303,25,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,265,379,309,"미스트레스",1059,1,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 11:
+		set 'ET_Mobs,60;
+		areamonster getarg(1),7,177,37,221,"라플레시아",1162,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,177,37,221,"신선초",1413,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,177,37,221,"패러사이트",1500,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,177,37,221,"드라이어드",1493,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 12:
+		set 'ET_Mobs,50;
+		areamonster getarg(1),91,177,121,221,"펑크",1199,25,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,177,121,221,"데몬 펑거스",1378,25,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 13:
+		set 'ET_Mobs,40;
+		areamonster getarg(1),179,177,209,221,"무낙",1026,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,177,209,221,"본건",1188,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,177,209,221,"혜군",1512,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 14:
+		set 'ET_Mobs,45;
+		areamonster getarg(1),265,177,295,221,"오크 워리어",1023,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,177,295,221,"오크 아쳐",1189,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,177,295,221,"하이 오크",1213,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,177,295,221,"오크 레이디",1273,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,177,295,221,"오크 베이비",1686,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 15:
+		set 'ET_Mobs,52;
+		areamonster getarg(1),349,177,379,221,"개미 알",1097,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,177,379,221,"앙드레",1095,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,177,379,221,"피에르",1160,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,177,379,221,"데니로",1105,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,177,379,221,"프리오니",1159,1,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,177,379,221,"마야",1147,1,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 16:
+		set 'ET_Mobs,40;
+		areamonster getarg(1),7,94,37,137,"오크 아쳐",1189,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,94,37,137,"레이드릭",1453,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,94,37,137,"가고일",1253,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,94,37,137,"아쳐 스켈레톤",1016,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 17:
+		set 'ET_Mobs,40;
+		areamonster getarg(1),91,94,121,137,"힐 윈드",1629,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,94,121,137,"스트라우프",1065,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,94,121,137,"머맨",1264,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,94,121,137,"바포메트 주니어",1101,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 18:
+		set 'ET_Mobs,40;
+		areamonster getarg(1),179,94,209,137,"타로우",1175,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,94,209,137,"크램프",1209,25,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 19:
+		set 'ET_Mobs,60;
+		areamonster getarg(1),265,94,295,137,"데비어스",1108,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,94,295,137,"메갈로돈",1064,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,94,295,137,"휀",1158,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,94,295,137,"소드피쉬",1069,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 20:
+		set 'ET_Mobs,51;
+		areamonster getarg(1),349,94,379,137,"파이어럿 스켈",1071,50,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,94,379,137,"드레이크",1112,1,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 21:
+		set 'ET_Mobs,35;
+		areamonster getarg(1),7,7,37,51,"플라즈마",1693,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,7,37,51,"플라즈마",1694,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,7,37,51,"플라즈마",1695,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,7,37,51,"플라즈마",1696,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,7,37,51,"플라즈마",1697,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 22:
+		set 'ET_Mobs,90;
+		areamonster getarg(1),91,7,121,51,"만드라고라",1020,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,7,121,51,"히드라",1068,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,7,121,51,"플로라",1118,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,7,121,51,"머스키퓰라",1780,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,7,121,51,"드로세라",1781,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,7,121,51,"라플레시아",1162,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 23:
+		set 'ET_Mobs,50;
+		areamonster getarg(1),179,7,209,51,"소드피쉬",1069,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,7,209,51,"오본느",1044,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,7,209,51,"페노메나",1216,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,7,209,51,"마르스",1144,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,7,209,51,"히드라",1068,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 24:
+		set 'ET_Mobs,40;
+		areamonster getarg(1),265,7,295,51,"잭",1130,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,7,295,51,"캐럿",1267,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,7,295,51,"조커",1131,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 25:
+		set 'ET_Mobs,31;
+		areamonster getarg(1),349,7,379,51,"구미호",1180,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,7,379,51,"캣 오 나인 테일",1307,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,7,379,51,"월야화",1150,1,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 26:
+		set 'ET_Mobs,45;
+		areamonster getarg(1),7,349,37,393,"엘더 윌로우",1033,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,349,37,393,"스톤슈터",1495,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,349,37,393,"우든골렘",1497,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,349,37,393,"생도목",1550,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,349,37,393,"지벳트",1503,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 27:
+		set 'ET_Mobs,40;
+		areamonster getarg(1),91,349,121,393,"고블린 아쳐",1258,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,349,121,393,"고블린",1122,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,349,121,393,"고블린",1124,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,349,121,393,"고블린",1123,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,349,121,393,"고블린",1125,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,349,121,393,"고블린",1126,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 28:
+		set 'ET_Mobs,70;
+		areamonster getarg(1),179,349,209,393,"쿠크레",1070,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,349,209,393,"페스트",1256,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,349,209,393,"아크라우스",1194,30,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,349,209,393,"네레이드",1255,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 29:
+		set 'ET_Mobs,50;
+		areamonster getarg(1),265,349,295,393,"하이로 조이스트",1510,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,349,295,393,"더 페이퍼",1375,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,349,295,393,"다크 프레임",1260,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,349,295,393,"위스퍼",1179,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,349,295,393,"루드",1509,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,349,295,393,"큐브",1508,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 30:
+		set 'ET_Mobs,31;
+		areamonster getarg(1),349,349,379,393,"요선녀",1416,30,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,349,379,393,"백소진",1630,1,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 31:
+		set 'ET_Mobs,50;
+		areamonster getarg(1),7,265,37,309,"스콜피온",1001,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,265,37,309,"아이언 피스트",1212,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,265,37,309,"기그",1387,20,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,265,37,309,"아르지오프",1099,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 32:
+		set 'ET_Mobs,41;
+		areamonster getarg(1),91,265,121,309,"고블린 아쳐",1258,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,265,121,309,"고블린",1122,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,265,121,309,"고블린",1124,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,265,121,309,"고블린",1123,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,265,121,309,"고블린",1125,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,265,121,309,"고블린",1126,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,265,121,309,"고블린 리더",1299,1,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 33:
+		set 'ET_Mobs,46;
+		areamonster getarg(1),179,265,209,309,"코볼트 아쳐",1282,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,265,209,309,"코볼트",1133,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,265,209,309,"코볼트",1134,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,265,209,309,"코볼트",1135,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,265,209,309,"코볼트 리더",1296,1,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 34:
+		set 'ET_Mobs,40;
+		areamonster getarg(1),265,265,295,309,"위스퍼",1179,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,265,295,309,"거대 위스퍼",1186,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,265,295,309,"플레임 스컬",1869,20,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 35:
+		set 'ET_Mobs,51;
+		areamonster getarg(1),349,265,379,309,"퍼머터",1314,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,265,379,309,"프리저",1319,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,265,379,309,"힛터",1318,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,265,379,309,"솔리더",1316,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,265,379,309,"퍼머터",1314,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,265,379,309,"터틀 제네럴",1312,1,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 36:
+		set 'ET_Mobs,50;
+		areamonster getarg(1),7,177,37,221,"엘리게이터",1271,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,177,37,221,"그로브",1687,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,177,37,221,"아놀리안",1206,30,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 37:
+		set 'ET_Mobs,50;
+		areamonster getarg(1),91,177,121,221,"알람",1193,30,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,177,121,221,"클락",1269,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,177,121,221,"시계탑 관리자",1270,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 38:
+		set 'ET_Mobs,50;
+		areamonster getarg(1),179,177,209,221,"라이드워드",1195,25,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,177,209,221,"데스워드",1698,25,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 39:
+		set 'ET_Mobs,45;
+		areamonster getarg(1),265,177,295,221,"저파룡",1514,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,177,295,221,"묘괴",1513,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,177,295,221,"요선녀",1416,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,177,295,221,"이매망량",1517,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,177,295,221,"운악선",1412,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 40:
+		set 'ET_Mobs,41;
+		areamonster getarg(1),349,177,379,221,"원령무사",1492,1,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,177,379,221,"미야비인형",1404,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,177,379,221,"시노비",1401,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,177,379,221,"천구",1405,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,177,379,221,"카라카사",1400,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,177,379,221,"구식 조총병",1403,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 41:
+		set 'ET_Mobs,50;
+		areamonster getarg(1),7,94,37,137,"크라벤",1587,50,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 42:
+		set 'ET_Mobs,50;
+		areamonster getarg(1),91,94,121,137,"호드",1127,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,94,121,137,"샌드맨",1165,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,94,121,137,"스팅",1207,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,94,121,137,"슬리퍼",1386,20,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,94,121,137,"식양",1516,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 43:
+		set 'ET_Mobs,60;
+		areamonster getarg(1),179,94,209,137,"보아",1025,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,94,209,137,"아나콘다크",1030,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,94,209,137,"사이드 와인더",1037,40,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,94,209,137,"메두사",1148,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 44:
+		set 'ET_Mobs,61;
+		areamonster getarg(1),265,94,295,137,"세비지베베",1167,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,94,295,137,"데저트 울프",1107,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,94,295,137,"하티베베",1515,20,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,94,295,137,"바포메트 주니어",1101,20,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,94,295,137,"오크 베이비",1686,1,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 45:
+		set 'ET_Mobs,46;
+		areamonster getarg(1),349,94,379,137,"베릿트",1032,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,94,379,137,"이시스",1029,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,94,379,137,"에인션트 미이라",1297,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,94,379,137,"오시리스",1038,1,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 46:
+		set 'ET_Mobs,40;
+		areamonster getarg(1),7,7,37,51,"비홀더",1633,20,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,7,37,51,"시커",1774,20,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 47:
+		set 'ET_Mobs,50;
+		areamonster getarg(1),91,7,121,51,"쁘띠",1155,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,7,121,51,"쁘띠",1156,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,7,121,51,"딜리터",1384,20,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,7,121,51,"딜리터",1385,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 48:
+		set 'ET_Mobs,30;
+		areamonster getarg(1),179,7,209,51,"에인션트 미이라",1297,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,7,209,51,"에인션트 미믹",1699,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,7,209,51,"에인션트 웜",1305,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 49:
+		set 'ET_Mobs,42;
+		areamonster getarg(1),265,7,295,51,"그리즐리",1381,20,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,7,295,51,"레이브 올마이",1306,7,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,7,295,51,"빅풋",1060,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,7,295,51,"사스콰치",1243,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,7,295,51,"지퍼베어",1417,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 50:
+		set 'ET_Mobs,32;
+		areamonster getarg(1),349,7,379,51,"마타",1146,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,7,379,51,"아누비스",1098,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,7,379,51,"마르두크",1140,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,7,379,51,"아몬 라",1511,1,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,7,379,51,"파라오",1157,1,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 51:
+		set 'ET_Mobs,50;
+		areamonster getarg(1),7,349,37,393,"데비루치",1109,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,349,37,393,"디아볼릭",1382,20,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,349,37,393,"미니 데몬",1292,20,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 52:
+		set 'ET_Mobs,60;
+		areamonster getarg(1),91,349,121,393,"힐 윈드",1680,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,349,121,393,"가고일",1253,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,349,121,393,"하피",1376,20,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,349,121,393,"그랜드 페코",1369,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,349,121,393,"혈호접",1408,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,349,121,393,"힐 윈드",1629,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 53:
+		set 'ET_Mobs,55;
+		areamonster getarg(1),179,349,209,393,"시노비",1401,30,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,349,209,393,"어절터",1315,25,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 54:
+		set 'ET_Mobs,30;
+		areamonster getarg(1),265,349,295,393,"마리오네트",1143,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,349,295,393,"체펫트",1250,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,349,295,393,"미야비인형",1404,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 55:
+		set 'ET_Mobs,56;
+		areamonster getarg(1),349,349,379,393,"흑사왕",1418,1,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,349,379,393,"메두사",1148,25,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,349,379,393,"이시스",1029,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,349,379,393,"사이드 와인더",1037,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 56:
+		set 'ET_Mobs,55;
+		areamonster getarg(1),7,265,37,309,"게에즈티",1778,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,265,37,309,"아이스 티탄",1777,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,265,37,309,"프리저",1319,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,265,37,309,"하티베베",1515,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,265,37,309,"스노이어",1775,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 57:
+		set 'ET_Mobs,45;
+		areamonster getarg(1),91,265,121,309,"마린",1242,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,265,121,309,"마스터링",1090,1,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,265,121,309,"드롭프스",1113,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,265,121,309,"포포링",1031,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,265,121,309,"고스트링",1120,1,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,265,121,309,"엔젤링",1096,1,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,265,121,309,"메탈링",1613,25,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,265,121,309,"데빌링",1582,1,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,265,121,309,"아크 엔젤링",1388,1,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 58:
+		set 'ET_Mobs,50;
+		areamonster getarg(1),179,265,209,309,"스켈 프리즈너",1196,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,265,209,309,"리비오",1201,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,265,209,309,"펜다르크",1202,20,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,265,209,309,"인저스티스",1257,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,265,209,309,"좀비 프리즈너",1197,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 59:
+		set 'ET_Mobs,60;
+		areamonster getarg(1),265,265,295,309,"미스트 케이스",1249,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,265,295,309,"미믹",1191,20,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,265,295,309,"에인션트 미믹",1699,30,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 60:
+		set 'ET_Mobs,62;
+		areamonster getarg(1),349,265,379,309,"이그니젬 세니아",1652,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,265,379,309,"이렌드 에베시",1655,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,265,379,309,"카바크 이카루스",1656,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,265,379,309,"라우렐 뷘더",1657,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,265,379,309,"휘케바인 트리스",1653,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,265,379,309,"아르마이어 딘제",1654,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,265,379,309,"도플갱어",1046,1,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,265,379,309,"이그니젬 세니아",1658,1,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 61:
+		set 'ET_Mobs,50;
+		areamonster getarg(1),7,177,37,221,"판베르크",1771,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,177,37,221,"폭력배",1313,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,177,37,221,"이실라",1772,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,177,37,221,"에키오",1770,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,177,37,221,"아가브",1769,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,177,37,221,"파사나",1154,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 62:
+		set 'ET_Mobs,35;
+		areamonster getarg(1),91,177,121,221,"배회하는 자",1208,35,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 63:
+		set 'ET_Mobs,45;
+		areamonster getarg(1),179,177,209,221,"좀비",1015,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,177,209,221,"오크 좀비",1153,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,177,209,221,"좀비 프리즈너",1197,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,177,209,221,"누더기 좀비",1865,20,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,177,209,221,"좀비 마스터",1298,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 64:
+		set 'ET_Mobs,40;
+		areamonster getarg(1),265,177,295,221,"자이언트 호넷",1303,2,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,177,295,221,"운골리안트",1618,30,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,177,295,221,"에인션트 웜",1305,2,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,177,295,221,"캐터필러",1300,2,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,177,295,221,"크리미 피어",1293,2,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,177,295,221,"킬러 맨티스",1294,2,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 65:
+		set 'ET_Mobs,21;
+		areamonster getarg(1),349,177,379,221,"갈리온",1783,20,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,177,379,221,"아트로스",1785,1,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 66:
+		set 'ET_Mobs,50;
+		areamonster getarg(1),7,94,37,137,"인저스티스",1257,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,94,37,137,"인큐버스",1374,20,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,94,37,137,"엘리엇",1736,20,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 67:
+		set 'ET_Mobs,40;
+		areamonster getarg(1),91,94,121,137,"딜리터",1385,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,94,121,137,"딜리터",1384,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,94,121,137,"어시더스",1716,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,94,121,137,"어시더스",1713,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,94,121,137,"뮤턴트 드래고노이드",1262,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 68:
+		set 'ET_Mobs,48;
+		areamonster getarg(1),179,94,209,137,"스터랙틱 골렘",1278,18,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,94,209,137,"라바 골렘",1366,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,94,209,137,"아이스 티탄",1777,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,94,209,137,"고렘",1040,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,94,209,137,"우든골렘",1497,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 69:
+		set 'ET_Mobs,60;
+		areamonster getarg(1),265,94,295,137,"페이크 엔젤",1371,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,94,295,137,"위로하는 자",1703,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,94,295,137,"신벌의 대행자",1702,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,94,295,137,"안식을주는 자",1701,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,94,295,137,"감시하는 자",1700,20,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 70:
+		set 'ET_Mobs,22;
+		areamonster getarg(1),349,94,379,137,"오크 히어로",1087,1,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,94,379,137,"오크로드",1190,1,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,94,379,137,"오크 베이비",1686,20,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 71:
+		set 'ET_Mobs,65;
+		areamonster getarg(1),7,7,37,51,"인큐버스",1374,20,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,7,37,51,"나이트메어 테러",1379,20,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,7,37,51,"서큐버스",1370,20,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,7,37,51,"나이트메어",1061,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 72:
+		set 'ET_Mobs,40;
+		areamonster getarg(1),91,7,121,51,"생도목",1410,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,7,121,51,"이렌드 에베시",1655,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,7,121,51,"퍼머터",1314,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,7,121,51,"마가레타 소린",1637,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 73:
+		set 'ET_Mobs,60;
+		areamonster getarg(1),179,7,209,51,"엘리스",1275,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,7,209,51,"로리루리",1505,20,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,7,209,51,"지르타스",1200,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,7,209,51,"서큐버스",1370,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,7,209,51,"엘리자",1737,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,7,209,51,"청이",1631,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 74:
+		set 'ET_Mobs,54;
+		areamonster getarg(1),265,7,295,51,"베나투",1676,6,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,7,295,51,"베나투",1677,6,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,7,295,51,"베나투",1678,6,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,7,295,51,"베나투",1679,6,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,7,295,51,"디미크",1670,6,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,7,295,51,"디미크",1671,6,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,7,295,51,"디미크",1672,6,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,7,295,51,"디미크",1673,6,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,7,295,51,"아크담",1668,6,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 75:
+		set 'ET_Mobs,32;
+		areamonster getarg(1),349,7,379,51,"바포메트 주니어",1101,20,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,7,379,51,"다크 일루젼",1302,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,7,379,51,"다크 로드",1272,1,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,7,379,51,"바포메트",1039,1,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 76:
+		set 'ET_Mobs,60;
+		areamonster getarg(1),7,349,37,393,"나이트메어 테러",1379,20,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,349,37,393,"나이트메어",1061,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,349,37,393,"심연의 기사",1219,30,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 77:
+		set 'ET_Mobs,70;
+		areamonster getarg(1),91,349,121,393,"이블 드루이드",1117,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,349,121,393,"레이스 데드",1291,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,349,121,393,"밴시",1867,30,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,349,121,393,"레이쓰",1192,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,349,121,393,"윈드고스트",1263,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 78:
+		set 'ET_Mobs,50;
+		areamonster getarg(1),179,349,209,393,"레이드릭",1163,20,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,349,209,393,"심연의 기사",1219,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,349,209,393,"피빛의 기사",1268,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,349,209,393,"듀라한",1504,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,349,209,393,"소드 가디안",1829,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 79:
+		set 'ET_Mobs,40;
+		areamonster getarg(1),265,349,295,393,"하이드로랜서",1720,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,349,295,393,"페러스",1714,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,349,295,393,"페러스",1717,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,349,295,393,"딜리터",1385,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,349,295,393,"쁘띠",1155,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 80:
+		set 'ET_Mobs,16;
+		areamonster getarg(1),349,349,379,393,"네크로맨서",1870,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,349,379,393,"타락한 대신관 히밤",1871,1,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 81:
+		set 'ET_Mobs,60;
+		areamonster getarg(1),7,265,37,309,"미스틸테인",1203,20,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,265,37,309,"오우거투스",1204,20,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,265,37,309,"엑서큐서너",1205,20,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 82:
+		set 'ET_Mobs,50;
+		areamonster getarg(1),91,265,121,309,"피빛의 기사",1268,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,265,121,309,"아가브",1769,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,265,121,309,"블러디 머더러",1507,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,265,121,309,"스코글",1752,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,265,121,309,"인저스티스",1257,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 83:
+		set 'ET_Mobs,40;
+		areamonster getarg(1),179,265,209,309,"그리폰",1259,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,265,209,309,"키메라",1283,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,265,209,309,"스케골트",1754,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,265,209,309,"스케골트",1755,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,265,209,309,"다크 일루젼",1302,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 84:
+		set 'ET_Mobs,70;
+		areamonster getarg(1),265,265,295,309,"다크 일루젼",1302,20,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,265,295,309,"아울 듀크",1320,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,265,295,309,"아울 바론",1295,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,265,295,309,"서큐버스",1370,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,265,295,309,"인큐버스",1374,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,265,295,309,"인큐버스",1374,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 85:
+		set 'ET_Mobs,1;
+		areamonster getarg(1),349,265,379,309,"이프리트",1832,1,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 86:
+		set 'ET_Mobs,40;
+		areamonster getarg(1),7,177,37,221,"하이드로랜서",1720,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,177,37,221,"그리폰",1259,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,177,37,221,"키메라",1283,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,177,37,221,"메이저우로스",1310,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 87:
+		set 'ET_Mobs,60;
+		areamonster getarg(1),91,177,121,221,"살라만다",1831,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,177,121,221,"카사",1833,20,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,177,121,221,"라바 골렘",1366,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,177,121,221,"가조마르트",1309,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 88:
+		set 'ET_Mobs,60;
+		areamonster getarg(1),179,177,209,221,"네크로맨서",1870,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,177,209,221,"아누비스",1098,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,177,209,221,"레이스 데드",1291,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,177,209,221,"에인션트 미이라",1297,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,177,209,221,"칼리츠버그",1132,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 89:
+		set 'ET_Mobs,24;
+		areamonster getarg(1),265,177,295,221,"타나토스의 증오",1704,6,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,177,295,221,"타나토스의 절망",1705,6,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,177,295,221,"타나토스의 슬픔",1706,6,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,177,295,221,"타나토스의 고뇌",1707,6,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 90:
+		set 'ET_Mobs,31;
+		areamonster getarg(1),349,177,379,221,"발키리 란드그리스",1751,1,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,177,379,221,"신벌의 대행자",1702,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,177,379,221,"위로하는 자",1703,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,177,379,221,"페이크 엔젤",1371,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 91:
+		set 'ET_Mobs,50;
+		areamonster getarg(1),7,94,37,137,"카바크 이카루스",1656,30,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,94,37,137,"셰실 디먼",1638,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,94,37,137,"보우 가디안",1830,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 92:
+		set 'ET_Mobs,55;
+		areamonster getarg(1),91,94,121,137,"엘더",1377,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,94,121,137,"윈드고스트",1263,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,94,121,137,"카트린느 케이론",1639,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,94,121,137,"라우렐 뷘더",1657,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,94,121,137,"마르두크",1140,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 93:
+		set 'ET_Mobs,45;
+		areamonster getarg(1),179,94,209,137,"세이렌 윈저",1634,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,94,209,137,"피빛의 기사",1268,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,94,209,137,"심연의 기사",1219,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,94,209,137,"배회하는 자",1208,10,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 94:
+		set 'ET_Mobs,30;
+		areamonster getarg(1),265,94,295,137,"소드 가디안",1829,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),265,94,295,137,"보우 가디안",1830,15,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 95:
+		set 'ET_Mobs,46;
+		areamonster getarg(1),349,94,379,137,"베르제브브",1873,1,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,94,379,137,"드래곤 플라이",1091,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,94,379,137,"스틸 촌촌",1042,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,94,379,137,"촌촌",1011,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),349,94,379,137,"헌터플라이",1035,30,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 96:
+		set 'ET_Mobs,15;
+		areamonster getarg(1),7,7,37,51,"발키리",1765,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,7,37,51,"스케골트",1754,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),7,7,37,51,"스케골트",1755,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 97:
+		set 'ET_Mobs,20;
+		areamonster getarg(1),91,7,121,51,"모로크의 현신",1920,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,7,121,51,"모로크의 현신",1919,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,7,121,51,"모로크의 현신",1918,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),91,7,121,51,"모로크의 현신",1921,5,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 98:
+		set 'ET_Mobs,12;
+		areamonster getarg(1),179,7,209,51,"세이렌 윈저",1634,2,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,7,209,51,"에레메스 가일",1635,2,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,7,209,51,"하워드 알트아이젠",1636,2,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,7,209,51,"마가레타 소린",1637,2,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,7,209,51,"셰실 디먼",1638,2,instance_npcname("ET_Manager")+"::OnMobDead";
+		areamonster getarg(1),179,7,209,51,"카트린느 케이론",1639,2,instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 99:
+		setarray .@mobs[1],1639,1634,1637,1635,1636,1638,1918,1920,1919,1921,1765,1754,1755,1634,1268,1219,1208,1829,1830,1639,1377,1657,1263,1638,1830,1656,1702,1703,1371;
+		setarray .@numb[1],2,2,2,2,2,2,5,5,5,5,5,10,10,15,10,10,10,15,10,15,10,10,10,10,10,30,10,10,10;
+		set 'ET_Mobs,.@numb[set(.@mob,rand(1,29))];
+		areamonster getarg(1),265,7,295,51,getmonsterinfo(.@mobs[.@mob],0),.@mobs[.@mob],.@numb[.@mob],instance_npcname("ET_Manager")+"::OnMobDead";
+		set 'ET_Mobs,'ET_Mobs+.@numb[set(.@mob,rand(1,29))];
+		areamonster getarg(1),265,7,295,51,getmonsterinfo(.@mobs[.@mob],0),.@mobs[.@mob],.@numb[.@mob],instance_npcname("ET_Manager")+"::OnMobDead";
+		set 'ET_Mobs,'ET_Mobs+.@numb[set(.@mob,rand(1,29))];
+		areamonster getarg(1),265,7,295,51,getmonsterinfo(.@mobs[.@mob],0),.@mobs[.@mob],.@numb[.@mob],instance_npcname("ET_Manager")+"::OnMobDead";
+		set 'ET_Mobs,'ET_Mobs+.@numb[set(.@mob,rand(1,29))];
+		areamonster getarg(1),265,7,295,51,getmonsterinfo(.@mobs[.@mob],0),.@mobs[.@mob],.@numb[.@mob],instance_npcname("ET_Manager")+"::OnMobDead";
+		set 'ET_Mobs,'ET_Mobs+.@numb[set(.@mob,rand(1,29))];
+		areamonster getarg(1),265,7,295,51,getmonsterinfo(.@mobs[.@mob],0),.@mobs[.@mob],.@numb[.@mob],instance_npcname("ET_Manager")+"::OnMobDead";
+		set 'ET_Mobs,'ET_Mobs+.@numb[set(.@mob,rand(1,29))];
+		areamonster getarg(1),265,7,295,51,getmonsterinfo(.@mobs[.@mob],0),.@mobs[.@mob],.@numb[.@mob],instance_npcname("ET_Manager")+"::OnMobDead";
+		set 'ET_Mobs,'ET_Mobs+.@numb[set(.@mob,rand(1,29))];
+		areamonster getarg(1),265,7,295,51,getmonsterinfo(.@mobs[.@mob],0),.@mobs[.@mob],.@numb[.@mob],instance_npcname("ET_Manager")+"::OnMobDead";
+		break;
+	case 100:
+		monster getarg(1),81,70,"Thorn of Bone",1958,1;
+		monster getarg(1),78,72,"Thorn of Magic",1960,1;
+		monster getarg(1),85,72,"Thorn of Magic",1960,1;
+		monster getarg(1),91,74,"Thorn of Bone",1958,1;
+		monster getarg(1),83,76,"Thorn of Bone",1958,1;
+		monster getarg(1),79,77,"Thorn of Purity",1961,1;
+		monster getarg(1),82,80,"Thorn of Recovery",1959,1;
+		monster getarg(1),70,80,"Thorn of Bone",1958,1;
+		monster getarg(1),74,81,"Thorn of Magic",1960,1;
+		monster getarg(1),90,82,"Thorn of Purity",1961,1;
+		monster getarg(1),87,83,"Thorn of Recovery",1959,1;
+		monster getarg(1),68,83,"Thorn of Purity",1961,1;
+		monster getarg(1),78,84,"Thorn of Recovery",1959,1;
+		monster getarg(1),82,85,"Thorn of ????",rand(1958,1961),1;
+		monster getarg(1),83,85,"Entweihen Knothen",1957,1,instance_npcname("ET_Manager")+"::OnEntDead";
+		monster getarg(1),84,85,"Thorn of ????",rand(1958,1961),1;
+		monster getarg(1),74,85,"Thorn of Bone",1958,1;
+		monster getarg(1),70,87,"Thorn of Magic",1960,1;
+		monster getarg(1),91,87,"Thorn of Magic",1960,1;
+		monster getarg(1),88,88,"Thorn of Bone",1958,1;
+		monster getarg(1),81,89,"Thorn of Bone",1958,1;
+		monster getarg(1),86,90,"Thorn of Recovery",1959,1;
+		monster getarg(1),80,92,"Thorn of Purity",1961,1;
+		monster getarg(1),72,93,"Thorn of Bone",1958,1;
+		monster getarg(1),84,93,"Thorn of Magic",1960,1;
+		monster getarg(1),95,94,"Thorn of Magic",1960,1;
+		monster getarg(1),91,96,"Thorn of Bone",1958,1;
+		monster getarg(1),96,98,"Thorn of Magic",1960,1;
+		break;
+	}
+	return;
+}
+
+// = Warps =
+// ====================================================================================================
+// 1@tower
+1@tower,12,393,0	script	ETwarp_1	45,1,1,{	end;	OnTouch:	warp has_instance("1@tower"),134,355;	end; }
+1@tower,96,393,0	script	ETwarp_2	45,1,1,{	end;	OnTouch:	warp has_instance("1@tower"),222,355;	end; }
+1@tower,184,393,0	script	ETwarp_3	45,1,1,{	end;	OnTouch:	warp has_instance("1@tower"),308,355;	end; }
+1@tower,270,393,0	script	ETwarp_4	45,1,1,{	end;	OnTouch:	warp has_instance("1@tower"),392,355;	end; }
+1@tower,354,393,0	script	ETwarp_5	45,1,1,{	end;	OnTouch:	warp has_instance("1@tower"),50,271;	end; }
+
+1@tower,12,309,0	script	ETwarp_6	45,1,1,{	end;	OnTouch:	warp has_instance("1@tower"),134,271;	end; }
+1@tower,96,309,0	script	ETwarp_7	45,1,1,{	end;	OnTouch:	warp has_instance("1@tower"),222,271;	end; }
+1@tower,184,309,0	script	ETwarp_8	45,1,1,{	end;	OnTouch:	warp has_instance("1@tower"),308,271;	end; }
+1@tower,270,309,0	script	ETwarp_9	45,1,1,{	end;	OnTouch:	warp has_instance("1@tower"),392,271;	end; }
+1@tower,354,309,0	script	ETwarp_10	45,1,1,{	end;	OnTouch:	warp has_instance("1@tower"),50,183;	end; }
+
+1@tower,12,221,0	script	ETwarp_11	45,1,1,{	end;	OnTouch:	warp has_instance("1@tower"),134,183;	end; }
+1@tower,96,221,0	script	ETwarp_12	45,1,1,{	end;	OnTouch:	warp has_instance("1@tower"),222,183;	end; }
+1@tower,184,221,0	script	ETwarp_13	45,1,1,{	end;	OnTouch:	warp has_instance("1@tower"),308,183;	end; }
+1@tower,270,221,0	script	ETwarp_14	45,1,1,{	end;	OnTouch:	warp has_instance("1@tower"),392,183;	end; }
+1@tower,354,221,0	script	ETwarp_15	45,1,1,{	end;	OnTouch:	warp has_instance("1@tower"),50,99;	end; }
+
+1@tower,12,137,0	script	ETwarp_16	45,1,1,{	end;	OnTouch:	warp has_instance("1@tower"),134,99;	end; }
+1@tower,96,137,0	script	ETwarp_17	45,1,1,{	end;	OnTouch:	warp has_instance("1@tower"),222,99;	end; }
+1@tower,184,137,0	script	ETwarp_18	45,1,1,{	end;	OnTouch:	warp has_instance("1@tower"),308,99;	end; }
+1@tower,270,137,0	script	ETwarp_19	45,1,1,{	end;	OnTouch:	warp has_instance("1@tower"),392,99;	end; }
+1@tower,354,137,0	script	ETwarp_20	45,1,1,{	end;	OnTouch:	warp has_instance("1@tower"),50,13;	end; }
+
+1@tower,12,51,0 	script	ETwarp_21	45,1,1,{	end;	OnTouch:	warp has_instance("1@tower"),134,13;	end; }
+1@tower,96,51,0 	script	ETwarp_22	45,1,1,{	end;	OnTouch:	warp has_instance("1@tower"),222,13;	end; }
+1@tower,184,51,0	script	ETwarp_23	45,1,1,{	end;	OnTouch:	warp has_instance("1@tower"),308,13;	end; }
+1@tower,270,51,0	script	ETwarp_24	45,1,1,{	end;	OnTouch:	warp has_instance("1@tower"),392,13;	end; }
+1@tower,354,51,0	script	ETwarp_25	45,1,1,{
+	end;
+
+OnTouch:
+	if('give_ash) getitem $ET_AshID,1;
+	warp has_instance("2@tower"),50,355;
+	end;
+
+OnEnableAshtimer:
+	set 'give_ash,1;
+	sleep 60000;
+	set 'give_ash,0;
+	end;
+}
+
+// 2@tower
+2@tower,12,393,0	script	ETwarp_26	45,1,1,{	end;	OnTouch:	warp has_instance("2@tower"),134,355;	end; }
+2@tower,96,393,0	script	ETwarp_27	45,1,1,{	end;	OnTouch:	warp has_instance("2@tower"),222,355;	end; }
+2@tower,184,393,0	script	ETwarp_28	45,1,1,{	end;	OnTouch:	warp has_instance("2@tower"),308,355;	end; }
+2@tower,270,393,0	script	ETwarp_29	45,1,1,{	end;	OnTouch:	warp has_instance("2@tower"),392,355;	end; }
+2@tower,354,393,0	script	ETwarp_30	45,1,1,{	end;	OnTouch:	warp has_instance("2@tower"),50,271;	end; }
+
+2@tower,12,309,0	script	ETwarp_31	45,1,1,{	end;	OnTouch:	warp has_instance("2@tower"),134,271;	end; }
+2@tower,96,309,0	script	ETwarp_32	45,1,1,{	end;	OnTouch:	warp has_instance("2@tower"),222,271;	end; }
+2@tower,184,309,0	script	ETwarp_33	45,1,1,{	end;	OnTouch:	warp has_instance("2@tower"),308,271;	end; }
+2@tower,270,309,0	script	ETwarp_34	45,1,1,{	end;	OnTouch:	warp has_instance("2@tower"),392,271;	end; }
+2@tower,354,309,0	script	ETwarp_35	45,1,1,{	end;	OnTouch:	warp has_instance("2@tower"),50,183;	end; }
+
+2@tower,12,221,0	script	ETwarp_36	45,1,1,{	end;	OnTouch:	warp has_instance("2@tower"),134,183;	end; }
+2@tower,96,221,0	script	ETwarp_37	45,1,1,{	end;	OnTouch:	warp has_instance("2@tower"),222,183;	end; }
+2@tower,184,221,0	script	ETwarp_38	45,1,1,{	end;	OnTouch:	warp has_instance("2@tower"),308,183;	end; }
+2@tower,270,221,0	script	ETwarp_39	45,1,1,{	end;	OnTouch:	warp has_instance("2@tower"),392,183;	end; }
+2@tower,354,221,0	script	ETwarp_40	45,1,1,{	end;	OnTouch:	warp has_instance("2@tower"),50,99;	end; }
+
+2@tower,12,137,0	script	ETwarp_41	45,1,1,{	end;	OnTouch:	warp has_instance("2@tower"),134,99;	end; }
+2@tower,96,137,0	script	ETwarp_42	45,1,1,{	end;	OnTouch:	warp has_instance("2@tower"),222,99;	end; }
+2@tower,184,137,0	script	ETwarp_43	45,1,1,{	end;	OnTouch:	warp has_instance("2@tower"),308,99;	end; }
+2@tower,270,137,0	script	ETwarp_44	45,1,1,{	end;	OnTouch:	warp has_instance("2@tower"),392,99;	end; }
+2@tower,354,137,0	script	ETwarp_45	45,1,1,{	end;	OnTouch:	warp has_instance("2@tower"),50,13;	end; }
+
+2@tower,12,51,0 	script	ETwarp_46	45,1,1,{	end;	OnTouch:	warp has_instance("2@tower"),134,13;	end; }
+2@tower,96,51,0 	script	ETwarp_47	45,1,1,{	end;	OnTouch:	warp has_instance("2@tower"),222,13;	end; }
+2@tower,184,51,0	script	ETwarp_48	45,1,1,{	end;	OnTouch:	warp has_instance("2@tower"),308,13;	end; }
+2@tower,270,51,0	script	ETwarp_49	45,1,1,{	end;	OnTouch:	warp has_instance("2@tower"),392,13;	end; }
+2@tower,354,51,0	script	ETwarp_50	45,1,1,{
+	end;
+
+OnTouch:
+	if('give_ash) getitem $ET_AshID,1;
+	warp has_instance("3@tower"),50,355;
+	end;
+
+OnEnableAshtimer:
+	set 'give_ash,1;
+	sleep 60000;
+	set 'give_ash,0;
+	end;
+}
+
+// 3@tower
+3@tower,12,393,0	script	ETwarp_51	45,1,1,{	end;	OnTouch:	warp has_instance("3@tower"),134,355;	end; }
+3@tower,96,393,0	script	ETwarp_52	45,1,1,{	end;	OnTouch:	warp has_instance("3@tower"),222,355;	end; }
+3@tower,184,393,0	script	ETwarp_53	45,1,1,{	end;	OnTouch:	warp has_instance("3@tower"),308,355;	end; }
+3@tower,270,393,0	script	ETwarp_54	45,1,1,{	end;	OnTouch:	warp has_instance("3@tower"),392,355;	end; }
+3@tower,354,393,0	script	ETwarp_55	45,1,1,{	end;	OnTouch:	warp has_instance("3@tower"),50,271;	end; }
+
+3@tower,12,309,0	script	ETwarp_56	45,1,1,{	end;	OnTouch:	warp has_instance("3@tower"),134,271;	end; }
+3@tower,96,309,0	script	ETwarp_57	45,1,1,{	end;	OnTouch:	warp has_instance("3@tower"),222,271;	end; }
+3@tower,184,309,0	script	ETwarp_58	45,1,1,{	end;	OnTouch:	warp has_instance("3@tower"),308,271;	end; }
+3@tower,270,309,0	script	ETwarp_59	45,1,1,{	end;	OnTouch:	warp has_instance("3@tower"),392,271;	end; }
+3@tower,354,309,0	script	ETwarp_60	45,1,1,{	end;	OnTouch:	warp has_instance("3@tower"),50,183;	end; }
+
+3@tower,12,221,0	script	ETwarp_61	45,1,1,{	end;	OnTouch:	warp has_instance("3@tower"),134,183;	end; }
+3@tower,96,221,0	script	ETwarp_62	45,1,1,{	end;	OnTouch:	warp has_instance("3@tower"),222,183;	end; }
+3@tower,184,221,0	script	ETwarp_63	45,1,1,{	end;	OnTouch:	warp has_instance("3@tower"),308,183;	end; }
+3@tower,270,221,0	script	ETwarp_64	45,1,1,{	end;	OnTouch:	warp has_instance("3@tower"),392,183;	end; }
+3@tower,354,221,0	script	ETwarp_65	45,1,1,{	end;	OnTouch:	warp has_instance("3@tower"),50,99;	end; }
+
+3@tower,12,137,0	script	ETwarp_66	45,1,1,{	end;	OnTouch:	warp has_instance("3@tower"),134,99;	end; }
+3@tower,96,137,0	script	ETwarp_67	45,1,1,{	end;	OnTouch:	warp has_instance("3@tower"),222,99;	end; }
+3@tower,184,137,0	script	ETwarp_68	45,1,1,{	end;	OnTouch:	warp has_instance("3@tower"),308,99;	end; }
+3@tower,270,137,0	script	ETwarp_69	45,1,1,{	end;	OnTouch:	warp has_instance("3@tower"),392,99;	end; }
+3@tower,354,137,0	script	ETwarp_70	45,1,1,{	end;	OnTouch:	warp has_instance("3@tower"),50,13;	end; }
+
+3@tower,12,51,0 	script	ETwarp_71	45,1,1,{	end;	OnTouch:	warp has_instance("3@tower"),134,13;	end; }
+3@tower,96,51,0 	script	ETwarp_72	45,1,1,{	end;	OnTouch:	warp has_instance("3@tower"),222,13;	end; }
+3@tower,184,51,0	script	ETwarp_73	45,1,1,{	end;	OnTouch:	warp has_instance("3@tower"),308,13;	end; }
+3@tower,270,51,0	script	ETwarp_74	45,1,1,{	end;	OnTouch:	warp has_instance("3@tower"),392,13;	end; }
+3@tower,354,51,0	script	ETwarp_75	45,1,1,{
+	end;
+
+OnTouch:
+	if('give_ash) getitem $ET_AshID,1;
+	warp has_instance("4@tower"),50,355;
+	end;
+
+OnEnableAshtimer:
+	set 'give_ash,1;
+	sleep 60000;
+	set 'give_ash,0;
+	end;
+}
+
+// 4@tower
+4@tower,12,393,0	script	ETwarp_76	45,1,1,{	end;	OnTouch:	warp has_instance("4@tower"),134,355;	end; }
+4@tower,96,393,0	script	ETwarp_77	45,1,1,{	end;	OnTouch:	warp has_instance("4@tower"),222,355;	end; }
+4@tower,184,393,0	script	ETwarp_78	45,1,1,{	end;	OnTouch:	warp has_instance("4@tower"),308,355;	end; }
+4@tower,270,393,0	script	ETwarp_79	45,1,1,{	end;	OnTouch:	warp has_instance("4@tower"),392,355;	end; }
+4@tower,354,393,0	script	ETwarp_80	45,1,1,{	end;	OnTouch:	warp has_instance("4@tower"),50,271;	end; }
+
+4@tower,12,309,0	script	ETwarp_81	45,1,1,{	end;	OnTouch:	warp has_instance("4@tower"),134,271;	end; }
+4@tower,96,309,0	script	ETwarp_82	45,1,1,{	end;	OnTouch:	warp has_instance("4@tower"),222,271;	end; }
+4@tower,184,309,0	script	ETwarp_83	45,1,1,{	end;	OnTouch:	warp has_instance("4@tower"),308,271;	end; }
+4@tower,270,309,0	script	ETwarp_84	45,1,1,{	end;	OnTouch:	warp has_instance("4@tower"),392,271;	end; }
+4@tower,354,309,0	script	ETwarp_85	45,1,1,{	end;	OnTouch:	warp has_instance("4@tower"),50,183;	end; }
+
+4@tower,12,221,0	script	ETwarp_86	45,1,1,{	end;	OnTouch:	warp has_instance("4@tower"),134,183;	end; }
+4@tower,96,221,0	script	ETwarp_87	45,1,1,{	end;	OnTouch:	warp has_instance("4@tower"),222,183;	end; }
+4@tower,184,221,0	script	ETwarp_88	45,1,1,{	end;	OnTouch:	warp has_instance("4@tower"),308,183;	end; }
+4@tower,270,221,0	script	ETwarp_89	45,1,1,{	end;	OnTouch:	warp has_instance("4@tower"),392,183;	end; }
+4@tower,354,221,0	script	ETwarp_90	45,1,1,{	end;	OnTouch:	warp has_instance("4@tower"),50,99;	end; }
+
+4@tower,12,137,0	script	ETwarp_91	45,1,1,{	end;	OnTouch:	warp has_instance("4@tower"),134,99;	end; }
+4@tower,96,137,0	script	ETwarp_92	45,1,1,{	end;	OnTouch:	warp has_instance("4@tower"),222,99;	end; }
+4@tower,184,137,0	script	ETwarp_93	45,1,1,{	end;	OnTouch:	warp has_instance("4@tower"),308,99;	end; }
+4@tower,270,137,0	script	ETwarp_94	45,1,1,{	end;	OnTouch:	warp has_instance("4@tower"),392,99;	end; }
+4@tower,354,137,0	script	ETwarp_95	45,1,1,{	end;	OnTouch:	warp has_instance("4@tower"),50,13;	end; }
+
+4@tower,12,51,0 	script	ETwarp_96	45,1,1,{	end;	OnTouch:	warp has_instance("4@tower"),134,13;	end; }
+4@tower,96,51,0 	script	ETwarp_97	45,1,1,{	end;	OnTouch:	warp has_instance("4@tower"),222,13;	end; }
+4@tower,184,51,0	script	ETwarp_98	45,1,1,{	end;	OnTouch:	warp has_instance("4@tower"),308,13;	end; }
+4@tower,270,51,0	script	ETwarp_99	45,1,1,{	end;	OnTouch:	warp has_instance("5@tower"),100,73;	end; }
+
+// 5@tower
+// TODO: Has a yellow "tube" effect (permanently)
+5@tower,106,109,0	script	Lucid Crystal	111,{
+	if('ET_Floor < 101)
+		end;
+	if(getgmlevel() >= $ET_GM){
+		mes "Hi, Master!";
+		mes "Your ET_Talk variable has the value "+ET_Talk;
+		mes "3 and less: You didn't made/finish the entrance quest.";
+		mes "4: This is your 1st run.";
+		mes "5: This is your 2nd run.";
+		mes "6 or more: Shouldn't happen.";
+		next;
+		switch(select("Skip GM Options:Test 1st run:Test 2nd run:close")){
+		case 1: 
+			break;
+		case 2:
+			set ET_Talk,4;
+			break;
+		case 3:
+			set ET_Talk,5;
+			break;
+		default:
+			close;
+		}
+	}
+	if(ET_Talk == 4){
+		// "bright" could also be an other word... couldn't read it :S
+		mes "^0000FFA mysterious voice echoes through the Floor, as you touch the bright crystal radiating a strong light.^000000";
+		next;
+		mes "[Mysterious Voice]";
+		mes "Welcome to my place, intruders. I've had fun watching you endure all the difficulties I've set before you.";
+		next;
+		mes "[Mysterious Voice]";
+		mes "Unfortunatelly, the time has come to end the show.";
+		next;
+		mes "[Mysterious Voice]";
+		mes "It's still to early to celebrate your victory against my right-hand man Knothen because he isn't completely destroyed!";
+		next;
+		mes "[Mysterious Voice]";
+		mes "I shall resurrect him for your next show. Defeat him again, and then I'll gladly accept your challenge.";
+		next;
+		mes "[Mysterious Voice]";
+		mes "Good-bye for now.";
+		mes "Once again, I had such a great time, humans. I look forward to seeing you again.";
+		next;
+		mes "^0000FFAs soon as the voice stopped talking, an irresistible force lifted and moved you to another space.^000000";
+		close2;
+		set ET_Talk,5;
+		set ET_Lasttime,gettimetick(2);
+		warp "alberta",223,36;
+		end;
+	} 
+	else if(ET_Talk == 5){
+		mes "[Mysterious Voice]";
+		mes "I can smell your sweat and hear, how you gasp from exhaustion.";
+		mes "Ah~ The human desire to win has always fascinated me.";
+		next;
+		mes "[Mysterious Voice]";
+		mes "Now i'll give you an audience with me. Come to me, to Nacht Sieger, the great mighty king of the darkness!";
+		warp has_instance("6@tower"),31,12; 
+		end;
+	}
+	else {
+		mes "Error! Please contact a Game Master!";
+		close2;
+		warp "alberta",223,36;
+		end;
+	}
+}
+
+// = Life Spring - Heals you =
+// ====================================================================================================
+6@tower,45,90,0	script	Life Spring	111,{
+	mes "^00BFFFYou took a sip of the spring's clear water, and you feel invigorated.";
+	percentheal 100,0;
+	close;
+}
+
+// 6@tower
+6@tower,32,100,0	script	ETwarp_x	45,1,1,{ end; OnTouch: warp has_instance("6@tower"),156,66; end; }
+
+// = Lost Soul on the last floor that makes the Violet Fear Sword =
+// ====================================================================================================
+6@tower,169,127,5	script	Lost Soul::ET_Lost_Soul	796,{
+	if(checkweight(1201,1) == 0) {
+		mes "You're carrying too much stuff. Why don't you put some of it away, and then come back?";
+		close;
+	}
+	mes "[Lost Souls]";
+	mes "It's you that have liberated us from the evil Nacht Sieger.";
+	next;
+	mes "[Lost Souls]";
+	mes "Thank you so much. Now we can escape from this cold and dark place... to heaven.";
+	next;
+	if(countitem(13412) && countitem(13413)){
+		mes "[Lost Souls]";
+		mes "Hey, you have the remnants of Nacht Sieger with you.";
+		next;
+		mes "[Lost Souls]";
+		mes "They may appear to be one-handed swords, but I can put them together to make a two-handed one if you want. That's the only way I can repay you for freeing me.";
+		next;
+		switch(select("Make a Two-Handed Sword.:No, thanks.")){
+		case 1:
+			mes "[Lost Souls]";
+			mes "Good, then I'll combine these to create a two-handed sword.";
+			next;
+			delitem 13412,1; // Twin_Edge_B 1
+			delitem 13413,1; // Twin_Edge_R 1
+			getitem 1185,1; // Violet_Fear 1
+			break;
+		case 2:
+			mes "[Lost Souls]";
+			mes "I see. I guess you aren't as greedy or ambitious as those other adventurers.";
+			next;
+		}
+		mes "[Lost Souls]";
+		mes "I'd like to talk to you more, but I've... I've got to go now.";
+		next;
+	}
+	mes "[Lost Souls]";
+	mes "Farewell, young adventurer. I wish you good luck.";
+	close2;
+	warp "alberta",223,36;
+	end;
+}
+
+// = Mapflags =
+// ====================================================================================================
+e_tower	mapflag	nowarp
+e_tower	mapflag	nowarpto
+e_tower	mapflag	noteleport
+e_tower	mapflag	nosave	SavePoint
+e_tower	mapflag	nomemo
+e_tower	mapflag	nobranch
+e_tower	mapflag	noicewall
+e_tower	mapflag	restricted	7
+e_tower	mapflag	monster_noteleport
+
+1@tower	mapflag	nowarp
+1@tower	mapflag	nowarpto
+1@tower	mapflag	noteleport
+1@tower	mapflag	nosave	SavePoint
+1@tower	mapflag	nomemo
+1@tower	mapflag	nobranch
+1@tower	mapflag	noicewall
+1@tower	mapflag	restricted	7
+1@tower	mapflag	monster_noteleport
+
+2@tower	mapflag	nowarp
+2@tower	mapflag	nowarpto
+2@tower	mapflag	noteleport
+2@tower	mapflag	nosave	SavePoint
+2@tower	mapflag	nomemo
+2@tower	mapflag	nobranch
+2@tower	mapflag	noicewall
+2@tower	mapflag	restricted	7
+2@tower	mapflag	monster_noteleport
+
+3@tower	mapflag	nowarp
+3@tower	mapflag	nowarpto
+3@tower	mapflag	noteleport
+3@tower	mapflag	nosave	SavePoint
+3@tower	mapflag	nomemo
+3@tower	mapflag	nobranch
+3@tower	mapflag	noicewall
+3@tower	mapflag	restricted	7
+3@tower	mapflag	monster_noteleport
+
+4@tower	mapflag	nowarp
+4@tower	mapflag	nowarpto
+4@tower	mapflag	noteleport
+4@tower	mapflag	nosave	SavePoint
+4@tower	mapflag	nomemo
+4@tower	mapflag	nobranch
+4@tower	mapflag	noicewall
+4@tower	mapflag	restricted	7
+4@tower	mapflag	monster_noteleport
+
+5@tower	mapflag	nowarp
+5@tower	mapflag	nowarpto
+5@tower	mapflag	noteleport
+5@tower	mapflag	nosave	SavePoint
+5@tower	mapflag	nomemo
+5@tower	mapflag	nobranch
+5@tower	mapflag	noicewall
+5@tower	mapflag	restricted	7
+5@tower	mapflag	monster_noteleport
+
+6@tower	mapflag	nowarp
+6@tower	mapflag	nowarpto
+6@tower	mapflag	noteleport
+6@tower	mapflag	nosave	SavePoint
+6@tower	mapflag	nomemo
+6@tower	mapflag	nobranch
+6@tower	mapflag	noicewall
+6@tower	mapflag	restricted	7
+6@tower	mapflag	monster_noteleport

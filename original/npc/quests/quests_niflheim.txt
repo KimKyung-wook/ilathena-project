@@ -1,0 +1,668 @@
+//===== eAthena Script ======================================= 
+//= Quest NPCs related to Niflheim
+//===== By: ================================================== 
+//= The eAthena Dev Team
+//===== Current Version: ===================================== 
+//= 1.3
+//===== Compatible With: ===================================== 
+//= eAthena 7.15 +
+//===== Description: ========================================= 
+//= [Aegis Conversion]
+//= Piano Key Ouest
+//= - Escape from Niflheim
+//= - Variables in use: nif_esc, MISC_QUEST (Bit 32)
+//= Message Delivery Quest
+//= - Deliver a message to Erious' departed wife.
+//= - Variables in use: nif_revive, MISC_QUEST (Bit 16384)
+//===== Additional Comments: ================================= 
+//= 1.0 Initial release, moved Book of Devil and Piano quest
+//=	from npc/cities/niflheim.txt [Evera]
+//= 1.1 Optimized Book of Devil quest. used bit-wise var,
+//=	Optimized Piano Quest - now uses 1 variable [Lupus]
+//= 1.2 Fixed bad NPC header data to comply with rev. 11603. [L0ne_W0lf]
+//= 1.3 Moved the Book of Devil quest to custom folder. [L0ne_W0lf]
+//=	Updated to Aegis 10.3 Standed, added Message Delivery Quest.
+//=	Rescripted Piano Quest. Prior quest progress will be lost. 
+//============================================================ 
+//==================================================================================
+// 한글화 http://www.i-luna.com  by 새로운 시작
+//==================================================================================
+// 한글화 quests_niflheim
+//==================================================================================
+//
+// 1차 마녀의 방 피아노(건반) 퀘스트 (99 % 완료)
+//==================================================================================
+
+//=============================================================
+//Piano Quest
+//=============================================================
+niflheim,224,243,3	script	알레그#nif	795,{
+	if (nif_piano) set nif_piano,0;
+	mes "[알레그]";
+	mes "고기 좋아 응허.";
+	mes "너... 맛있어 보여.";
+	next;
+	mes "[알레그]";
+	mes "너 먹을래.";
+	next;
+	mes "^FF3355-우그적-^000000";
+	if (nif_esc == 0 && (MISC_QUEST & 32) == 0) {
+		set piano_root,rand(1,2);
+		percentheal -60,0;
+		next;
+		mes "아하하, 이렇게 맛있는 고기는 처음이야!";
+		mes "전 남편..바베큐 요리사로서 내가 좋아한 고기는";
+		mes "쇠고기..가느다란 끈을 조제한 것으로 보인다.,";
+		mes "그것은 가로지르고 정말로 맛있을법하게";
+		mes "완전히 구워져 있었다... ";
+		next;
+		mes "[알레그]";
+		mes "아 이것을 가지고 가, 고마웠어";
+		mes "이걸 땅에서 발견했어~호호~";
+		set nif_esc,rand(1,2);
+		getitem 7184,1; //피아노 건반
+		close;
+	}
+	percentheal -30,0;
+	close;
+}
+
+nif_in,105,81,3	script	크레유#nif	794,{
+	mes "[크레유]";
+	mes "살아있는 인간이여..";
+	mes "언제부터인가, 누구부터인가..";
+	mes "그런 것도 모르는 시가 전해져 내려 오고 있다오.";
+	next;
+	mes "[크레유]";
+	mes "^FF0000해가 기울어 서산에 걸릴 때";
+	mes "^FF0000보라색 황혼이 깔리는 그곳";
+	mes "^FF0000아름다운 선율이 몸을 감싸면";
+	mes "^FF0000주인된 자를 피하는 열쇠가 되리^000000";
+	next;
+	if (nif_esc == 1 || nif_esc == 4) {
+		mes "[크레유]";
+		mes "그럼 여기서 테스트!";
+		switch(rand(1,4)) {
+		case 1:
+			set .@songline$,"해가 기울어 서산에 걸릴 때";
+			mes "방금 들었던 시에서 첫 행을 완벽하게 기억해서 써보도록 해주세요!";
+			break;
+		case 2:
+			set .@songline$,"보라색 황혼이 깔리는 그곳";
+			mes "방금 들었던 시에서 둘째 행을 완벽하게 기억해서 써보도록 해주세요!";
+			break;
+		case 3:
+			set .@songline$,"아름다운 선율이 몸을 감싸면";
+			mes "방금 들었던 시에서 셋째 행을 완벽하게 기억해서 써보도록 해주세요!";
+			break;
+		case 4:
+			set .@songline$,"주인된 자를 피하는 열쇠가 되리";
+			mes "방금 들었던 시에서 넷째 행을 완벽하게 기억해서 써보도록 해주세요!";
+			break;
+		}
+		next;
+		input .@input$;
+		if (.@input$ == .@songline$) {
+			mes "[크레유]";
+			mes "오오...잘 듣고 있군! 나 크레유, 음유시인으로서 가장 좋아하는 관객분이구려.";
+			mes "상으로 이것으로 주겠소.";
+			next;
+			if (nif_esc == 1) {
+				set nif_esc,3;
+			}
+			else {
+				set nif_esc,6;
+			}
+			getitem 7184,1; //피아노 건반
+			mes "[크레유]";
+			mes "그럼 다른 음유시인들에게도 예의를 갖춰주기 바라오.";
+			close;
+		}
+		else {
+			mes "[크레유]";
+			mes "에잉... 집중하고 들었으면 맞출 수 있는 쉬운것을!";
+			mes "다시 잘 생각해보고 도전 해보록 하시오!";
+			close;
+		}
+	}
+	mes "[크레유]";
+	mes "어떤 뜻이 있는건지... 어찌보면 광장히 심오해보이기도 하는데.";
+	mes "확싷히 뭐가 비밀을 내포하고 있는 것 같은 시란 말이요.";
+	close;
+}
+
+nif_in,31,20,3	script	쿠즈카히나#nif	794,{
+	if (nif_esc == 2 || nif_esc == 3) {
+		mes "[쿠즈카히나]";
+		mes "안그래도 장사가 안되는데...";
+		mes "전생에도 내 가게는 장사가 안됬단 말야!...으어어어";
+		next;
+		mes "[쿠즈카히나]";
+		mes "이봐 당신! 나갈 때 이거나 좀 버려주고 가라구";
+		set nif_esc,nif_esc+2;
+		getitem 7184,1; //피아노 건반
+		next;
+		mes "[쿠즈카히나]";
+		mes "도대체 왜 장사가 안되는 건지 원...";
+		mes "투덜투덜투덜투덜";
+		close;
+	}
+	mes "[쿠즈카히나]";
+	mes "장사가 너무 안되~!";
+	mes "전생에서 냈던 내 가게도 장사가 안됬단말야~!";
+	close;
+}
+
+niflheim,208,103,1	script	#Graveyard1	111,1,1,{
+OnTouch:
+	if ( nif_esc == 5 || nif_esc == 8 ) {
+		mes "- 당신은 무덤가 주위에 -";
+		mes "- 무엇인가가 반쯤 파묻혀 -";
+		mes "- 있는 것을 발견 햇다 -";
+                mes "- 무엇인가의 조각? 뭔가 -";
+		mes "- 잘 다듬어진듯한 모양이다 -";
+		next;
+		mes "- 줍겠습니까? -";
+		if (select("예:아니요") == 1) {
+			set nif_esc,nif_esc+2;
+			getitem 7184,1; //피아노 건반
+		}
+		close;
+	}
+	if ( nif_esc == 7 || nif_esc == 10 ) {
+		mes "- 당신은 아까 파낸 곳에서 -";
+		mes "- 흙 속에 뭔가 더 파묻혀 -";
+		mes "- 있는 것을 발견 했다 -";
+                mes "- 역시 잘 다듬어진듯한 -";
+		mes "- 조각인 것 같다 -";
+		next;
+		mes "- 줍겠습니까? -";
+		if (select("예:아니요") == 1) {
+			set nif_esc,nif_esc+2;
+			getitem 7184,1; //피아노 건반
+		}
+		close;
+	}
+	end;
+}
+
+ //nif_esc == 5 || nif_esc == 7||
+
+//
+
+niflheim,169,71,1	script	#Graveyard3	111,1,1,{
+OnTouch:
+	if (nif_esc == 6 || nif_esc == 9) {
+		mes "- 당신은 무덤가 주위에 -";
+		mes "- 무엇인가가 반쯤 파묻혀 -";
+		mes "- 있는 것을 발견 햇다 -";
+                mes "- 무엇인가의 조각? 뭔가 -";
+		mes "- 잘 다듬어진듯한 모양이다 -";
+		next;
+		mes "- 줍겠습니까? -";
+		if (select("예:아니요") == 1) {
+			set nif_esc,nif_esc+2;
+			getitem 7184,1; //피아노 건반
+		}
+		close;
+	}
+	end;
+}
+
+nif_in,115,181,0	script	#Piano	111,1,1,{
+OnTouch:
+	if (nif_esc == 0 && (MISC_QUEST & 32) == 0) {
+		mes "- 중후하고 거대한 피아노가 -";
+		mes "- 보인다. 당신은 건반을 -";
+		mes "- 누르면 그 소리에 위압될것만 -";
+		mes "- 같은 웅장함을 느낀다 -";
+		next;
+		mes "- 그러나 가운데 한 옥타브가 -";
+		mes "- 모조리 빠져있는 것을 알아 -";
+		mes "- 차렸다. 7만 더 있다면 -";
+		mes "- 훌륭한 소리를 낼 수도 -";
+		mes "- 있을텐데... -";
+		close;
+	}
+	if (nif_esc == 11) {
+		set nif_esc,12;
+		delitem 7184,6; //피아노 건반
+		mes "- 당신은 피아노의 빠진 -";
+		mes "- 부분에 건반을 하나씩 -";
+		mes "- 꼽아보았다. 그러나 -";
+		mes "- 가장 왼쪽부분의 건반이 -";
+		mes "- 하나 부족하다는 것을 -";
+		mes "- 알 수 있었다. -";
+		close;
+	}
+	end;
+}
+
+nif_in,115,152,0	script	#Piano3	111,1,1,{
+OnTouch:
+	if (nif_esc == 12 || nif_esc == 13 || MISC_QUEST & 32) {
+		mes "- 당신의 몸에서 뻗은 -";
+		mes "- 그림자가 정확히 피아노의 -";
+		mes "- 빠진 건반위에 겹쳐지는 -";
+		mes "- 순간이었다 -";
+		next;
+		soundeffect "complete.wav",0;
+		next;
+		if (nif_esc == 12) {
+			set MISC_QUEST,MISC_QUEST | 32;
+			set nif_piano, 0;
+		}
+		mes "- 몸이 가벼워지는 느낌이 -";
+		mes "- 들면서 주위의 시야가 -";
+		mes "- 흐려지기 시작한다 -";
+		close2;
+		warp "nif_in",179,163;
+		end;
+	}
+	end;
+}
+
+nif_in,188,168,3	script	마녀#nif	792,{
+	mes "[키르케나]";
+	mes "음?... 당신은 살아 있는 존재가 아닌가.";
+	mes "여기까지 오는 것도 쉽지 않았을텐데...";
+	mes "이유야 어쨌든 이곳은 살아 있는";
+	mes "존재가 올만한 곳이 아니야.";
+	next;
+	mes "[키르케나]";
+	mes "나의 힘을 이용해서 밖으로";
+	mes "내보내 줄테니 이제 다시는";
+	mes "안오는게 좋을 것이야.";
+	close2;
+	warp "umbala",138,208;
+	end;
+}
+
+//=============================================================
+// Message Delivery Quest
+//=============================================================
+prt_in,161,20,3	script	에류스#nif	92,{
+	if (MISC_QUEST & 16384) {
+		mes "[에류스]";
+		mes "당신의 여행에 행운이 있기를...";
+		close;
+	}
+	if (nif_revive == 0) {
+		mes "[에류스]";
+		mes "흑흑흑...";
+		mes "엉엉엉...";
+		mes "엘리, 날 남겨두고 먼저 떠나다니...";
+		emotion e_sob;
+		next;
+		if (select("위로한다.:내버려둔다.") == 1) {
+			mes "[에류스]";
+			mes "아, 감사합니다.";
+			mes "흑흑, 여행에서 돌아왔더니 제 아내인";
+			mes "엘리가 죽었다는군요.";
+			mes "마지막 인사를 제대로 못한데 너무나";
+			mes "가슴 아픕니다.";
+			next;
+			mes "[에류스]";
+			mes "엘리에게 꼭 전하고 싶은 말이 있는데";
+			mes "이걸 어떻게 해야 할까요.";
+			mes "여행하다 들은 말로는 어딘가에";
+			mes "죽은자의 마을이 있다는 군요";
+			mes "거기 가면 혹시 만날 수 있을지도 모른다는데,";
+			mes "아이들을 놔두고 갈 수가 없군요.";
+			next;
+			if (select("제가 전해드릴까요?:안 되셨군요.") == 1) {
+				mes "[에류스]";
+				mes "그래주시겠어요?";
+				mes "오오, 정말 감사드립니다.";
+				mes "이 은혜 절대 잊지 않겠습니다.";
+				next;
+				mes "[에류스]";
+				mes "혹시나 그녀를 만나게 되면 한달전의 그때는 오래였다고,";
+				mes "정말 미안햇따고 전해주세요.";
+				mes "그럼 부탁 드리겠습니다.";
+				set nif_revive,1;
+				close;
+			}
+			mes "[에류스]";
+			mes "하아, 어떻게 방법이 없을까요?";
+			mes "그녀에게 못다한 말들을 전해줄 수 있다는면,";
+			mes "어떠한 댓가라도 치룰수 있을텐데...";
+			close;
+		}
+		mes "[에류스]";
+		mes "흑흑, 엘리이이이~~~~!";
+		mes "그 때 싸웠던 게 마지막이었다니...";
+		mes "엉엉엉...";
+		close;
+	}
+	else if (nif_revive == 1) {
+		mes "[에류스]";
+		mes "죽은자의 마을에 관한 소문을";
+		mes "들은 곳은 마을에서 비명 소리가 끊이지 않는";
+		mes "곳이었어요";
+		mes "휴양지 근처였던거 같은데 확실하진";
+		mes "않군요.";
+		mes "그런 꼭 부탁 드리겠습니다.";
+		close;
+	}
+	else if (nif_revive == 5 || nif_revive == 6) {
+		mes "[에류스]";
+		mes "헉! 정말로 다녀오셨군요!";
+		mes "저의 부탁때문에 멀리 까지 고생하시고 정말 감사드립니다.";
+		mes "엘리는 만나봤나요?";
+		next;
+		if (select("네.:실패했어요.") == 1) {
+			if (nif_revive == 6 && countitem(934) > 0) {
+				mes "[에류스]";
+				mes "Are you serious? What did she say?";
+				mes "Did she say she will forgive me?";
+				next;
+				select("Yes. And she gave me...this.");
+				delitem 934,1; //Mementos
+				mes "[에류스]";
+				mes "Ah...In this box were the gifts";
+				mes "I gave her when we started";
+				mes "seeing each other. She had a";
+				mes "serious illness even before we";
+				mes "met, so I promised her that I";
+				mes "would cure her illness...";
+				next;
+				mes "[에류스]";
+				mes "That's why I went on that trip...";
+				mes "to find a cure or medicine";
+				mes "for her... But my efforts turned";
+				mes "out to be a good for nothing.";
+				mes "...................";
+				mes ".........";
+				next;
+				mes "[에류스]";
+				mes "Anyway, I appreciate your";
+				mes "generousity. I want to pay";
+				mes "you back for all the trouble";
+				mes "I caused you, but I only have";
+				mes "the medicine I found for her";
+				mes "illness during this trip.";
+				next;
+				mes "[에류스]";
+				mes "I hope you will take this medicine";
+				mes "as a token of my gratitute.";
+				next;
+				if (checkweight(610,26)) {
+					set MISC_QUEST,MISC_QUEST | 16384;
+					set nif_revive,0;
+					getitem 607,2; //Yggdrasilberry
+					getitem 608,2; //Seed_Of_Yggdrasil
+					getitem 610,10; //Leaf_Of_Yggdrasil
+					mes "[에류스]";
+					mes "Thank you for everything.";
+					mes "I wish you luck and safety";
+					mes "in your adventures.";
+					close;
+				}
+				mes "[에류스]";
+				//mes "뭔가 착가하신 게 아닌가요?";
+				//mes "이런 걸로 저를 속이려하다니 나쁜 사람이군요.";
+				close;
+			}
+			else if (nif_revive == 6 && countitem(934) < 1) {
+				mes "[에류스]";
+				mes "Hmm...this is odd. I'm sure she would give you something as a token of meeting her. By any chance, is there anything that you've forgetten to bring me?";
+				close;
+			}
+			mes "[에류스]";
+			mes "뭔가 착가하신 게 아닌가요?";
+			mes "이런 걸로 저를 속이려하다니 나쁜 사람이군요.";
+			close;
+		}
+		if (nif_revive == 5) {
+			mes "[에류스]";
+			mes "예... 실패하셨군요...";
+			mes "하긴, 워낙 어려운 일이었으니 제가 너무 무리한 부탁을 했네요.";
+			next;
+			mes "[에류스]";
+			mes "그래도 저를 위해 그만큼이나";
+			mes "애써주셨으니 보답으로 이런거라도 받아주세요.";
+			next;
+			if (checkweight(610,10)) {
+				set MISC_QUEST,MISC_QUEST | 16384;
+				set nif_revive,0;
+				getitem 610,10; //이그드라실의 나뭇잎
+				mes "[에류스]";
+				mes "어쩨든 이렇게라도 수고해주셔서 정말 감사드립니다.";
+				mes "당신의 여행에 행운이 있기를...";
+				close;
+			}
+			mes "[에류스]";
+			mes "I have something to give you,";
+			mes "but you're carrying too much";
+			mes "stuff for me to give it to";
+			mes "right now. Why don't you";
+			mes "store your items somewhere?";
+			close;
+		}
+		mes "[에류스]";
+		mes "I see...";
+		mes "...Wait! Doesn't that belong";
+		mes "to my wife, Elly? Why are you";
+		mes "trying to cheat a grieving man...?";
+		close;
+	}
+	end;
+}
+
+umbala,215,181,3	script	블릭	733,{
+	if (nif_revive > 1 || MISC_QUEST & 16384) {
+		mes "[블릭]";
+		mes "여어, 오랫만이군.";
+		mes "앞으로도 기회가 있으면 죽은 자의 마을에서 또 보자구. 하하하.";
+		emotion e_no1;
+		close;
+	}
+	if (nif_revive == 1) {
+		mes "[블릭]";
+		mes "죽은 자의 마을이라...";
+		mes "거긴 엄청나게 위험한 곳이라 안가는게 좋을텐데";
+		mes "거긴 왜 가려고 그러나";
+		next;
+		if (select("만나야 될 사람이 있어요.:모험의 일부죠.") == 1) {
+			mes "[블릭]";
+			mes "만나야 될 사람이라..";
+			mes "그곳에서 만날 사람이라면 죽은 사람인가...";
+			mes "힘들텐데...";
+			next;
+			mes "[블릭]";
+			mes "그곳의 페이린이라는 여자에게 내가 소개시켜줬다고 하면서 물어보게나.";
+			mes "그녀는 장미를 좋아하니까 장미라도 한 송이 사가면 좋아 할걸세.";
+			next;
+			mes "[블릭]";
+			mes "죽은 자의 마을은 여기서 북쪽으로 주욱 올라가면 있으니 조심해서 가게나.";
+			mes "고도로 숙련된 자라도 가기 위험하니 주의해야 할거야.";
+			set nif_revive,2;
+			close;
+		}
+		mes "[블릭]";
+		mes "하하. 이 친구도 나와 같이 모험을 좋아하는군.";
+		mes "위험한 곳이지만 그만한 보상이";
+		mes "있을테니 조심해서 다녀오게나.";
+		close;
+	}
+	else if (nif_revive == 0) {
+		mes "[블릭]";
+		mes "무슨 볼일인가? 특별한 용무가 없다면 저리가게!";
+		close;
+	}
+}
+
+niflheim,153,215,3	script	페이린	794,{
+	if (nif_revive == 2) {
+		mes "[페이린]";
+		mes "이렇게 이른 나이에 죽다니...";
+		mes "당신도 참 안 됐군요";
+		next;
+		mes "[페이린]";
+		mes "............";
+		mes "아니 그러고 보니 아직 죽은게 아니군요?";
+		mes "살아 있는 몸으로 여기까지 오다니 정말 대단하네요.";
+		next;
+		mes "[페이린]";
+		mes "누군가를 구하러 온 건가요? 아니면 다른 목적으로 온건가요?";
+		mes "예전에 죽은 사람을 만나고 싶어서 왔다면 잘못 짚었어요.";
+		mes "미안하지만 니플헤임 주민은 그런 능력을 가진 사람은 한 명도 없어요.";
+		next;
+		mes "[페이린]";
+		mes "여기까지 온 노력은 가상하지만 이런 곳까지 온다고 해도 아무도 구할 수 없어요.";
+		mes "괜히 험한 꼴 당하기 전에 돌아가세요.";
+		set nif_revive,3;
+		close;
+	}
+	else if (nif_revive == 3) {
+		mes "[페이린]";
+		mes "돌아가라고 했는데 끈질기군요.";
+		mes "저한테 물어봐도 저는 아무것도 아는게 없답니다.";
+		emotion e_an;
+		next;
+		if (select("그렇지만...:죄송합니다.") == 1) {
+			mes "[페이린]";
+			mes "이렇게 끈질긴 걸 보니 누군가에게 들었군요?";
+			mes "누구한테 들었는지 모르겠지만 해서는 안되는 일이 랍니다.";
+			mes "가르쳐드릴 수 없어요.";
+			set nif_revive,4;
+			close;
+		}
+		mes "[페이린]";
+		mes "조심해서 돌아가세요.";
+		mes "이런 곳에 오래 있으면 좋은 일은 없으니까.";
+		close;
+	}
+	else if (nif_revive == 4) {
+		if (countitem(748) > 0) {
+			mes "[페이린]";
+			mes "음... 빌릭씨한테 들으셨나 보군요.";
+			mes "그분께는 신세진 것도 있으니...";
+			next;
+			mes "그럼 가르쳐드리기 전에 주의 사항을 알려드리겠습니다.";
+			mes "상상했던 이상의 댓가를 요구할 수도 있습니다.";
+			mes "그 댓가를 감수할 각오를 해신다면 알려드리지요.";
+			next;
+			if (select("각오가 되었있습니다.:그럴 엄두까지는 나지 않는군요.") == 1) {
+				if (BaseLevel > 79 && BaseLevel < 100) {
+					mes "[페이린]";
+					mes "그렇게까지 말씀 하신다면 가르쳐 드리겠지만.";
+					mes "금깅의 주술이기 때문에 다른 사람에게 말씀해서는 절대 안됩니다.";
+					next;
+					mes "[페이린]";
+					mes "이 주술은 큰 희생을 필요 합니다.";
+					mes "등가교환의 법칙에 따라 죽은자를 만나려는 시도를 하려면 그에 상응 하는 재료와 희생을 필요로 합니다.";
+					next;
+					mes "때로는 실패할 확률도 있습니다.";
+					mes "재료는 이그드라실의 잎 10개가 필요합니다.";
+					mes "주술을 행할 준비가 되었습니까?";
+					next;
+					if (select("예:아니오") == 1) {
+						if (countitem(610) > 9) {
+							mes "[페이린]";
+							mes "그럼 시도하겠습니다.";
+							mes "음바소카사바하";
+							mes "움바움바훔바바!";
+							mes "예에에잇!";
+							next;
+							set .@nif_revive1,rand(1,100);
+							if (.@nif_revive1 > 0) && (.@nif_revive1 < 88) {
+								mes "[페이린]";
+								mes "으허허허헉!";
+								mes "죄송해요. 소환에 실패했습니다.";
+								mes "이렇게 고생하셨는데... 정말 죄송합니다.";
+								emotion e_omg;
+								delitem 748,1; //시들지않는장미
+								delitem 610,10; //이그드라실의나뭇잎
+								set nif_revive,5;
+								percentheal -99,0;
+								close;
+							}
+							else if (.@nif_revive1 > 87) && (.@nif_revive1 < 101) {
+								delitem 748,1; //시들지않는 장미
+								delitem 610,10; //이그드라실의나뭇잎
+								percentheal -50,0;
+								mes "[페이린]";
+								mes "..........";
+								mes "..........";
+								next;
+								mes "[Elly]";
+								mes "..........";
+								mes ".....Umm...";
+								mes "...Wasn't I just dead?";
+								mes "Um, do I know you?";
+								next;
+								select("I brought a message from your husband.");
+								mes "[Elly]";
+								mes "Oh...I see...I'm sorry that I could not meet him before I died...";
+								mes "So what is his message for me?";
+								next;
+								select("Forgive him for what happened a month ago.");
+								mes "[Elly]";
+								mes "*Sigh* He's such a nice husband...";
+								mes "He pays such attention, even to";
+								mes "the little things. Though, I";
+								mes "should be the one apologizing";
+								mes "to him...";
+								next;
+								mes "[Elly]";
+								mes "Please give him this box, and tell";
+								mes "him to forget about me. He should";
+								mes "live the rest of his life happily";
+								mes "with someone else. Oh, also let";
+								mes "him know that I forgive him.";
+								set nif_revive,6;
+								getitem 934,1; //Mementos
+								next;
+								mes "[Elly]";
+								mes "I am glad to hear from my";
+								mes "husband one more time. But I";
+								mes "think I have to go now.";
+								mes "Thank you for your trouble.";
+								mes "Farewell...";
+								next;
+								mes "[Elly]";
+								mes ".....................";
+								mes "....................";
+								next;
+								mes "[페이린]";
+								mes "I guess you have accomplished what";
+								mes "you wanted. Well then, be careful";
+								mes "when you go back...";
+								close;
+							}
+						}
+						else {
+							mes "[페이린]";
+							mes "재료가 부족하면 어쩔 수 없어요.";
+							mes "일단 필요한 재료를 가져 오세요.";
+							close;
+						}
+					}
+					mes "[페이린]";
+					mes "그럼 일단 재료부터 구해오시길 바랍니다.";
+					mes "재료를 가져온다고 해도 성공할지 못할지는 미지수이지만...";
+					close;
+				}
+				mes "[페이린]";
+				mes "죄송하지만 당신은 아직 이걸 견뎌낼만한 힘이 없어 보이네요.";
+				mes "지금 이걸 행하게 되면 당싱은 바로 죽어요. 할 수 없습니다.";
+				close;
+			}
+			mes "[페이린]";
+			mes "잘 생각하셨어요.";
+			mes "너무 위험성이 큰 주술인지라 저도 권해드리고 싶지는 않군요.";	
+			close;
+		}
+		mes "[페이린]";
+		mes "몇번을 물어 보셔도 안되는건 안되는 겁니다.";
+		mes "그냥 돌아 가세요.";
+		close;
+	}
+	mes "[페이린]";
+	mes "이런 위험한 마을에는 왜 오셨나요?";
+	mes "빨리 돌아가세요.";
+	close;
+}
+

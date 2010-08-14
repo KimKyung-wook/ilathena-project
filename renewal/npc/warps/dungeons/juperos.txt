@@ -1,0 +1,26 @@
+
+//    kk  ""tt""  "";;    """"JJ;;kkJJ  JJtt""    ""tt""  ;;tt""""tt    ""tt""   
+//   JJ  kk""tt;;JJ      ttkk    ""tt    ;;;;ttJJ;;  ""ttkk;;"";;;;ttkk;;  ;;kk  
+//  "";;  ""  kk  kk  tt  ttww    ZZ;;  ww    RR  ;;JJ  JJJJ  tt    RR  ;;JJ  JJ 
+//  JJ      """";;""  kk  ttkk  ;;kk    ZZ    ww  ;;""  kk""  ww    kk;;kk""  JJ 
+//  kk      JJ  kk    ww  ttkk  JJJJ  ;;ww  ""JJ  ;;tt""RR    ZZ  ;;ZZJJ      kk 
+//  kk  ;;  "";;JJ        JJtt  JJJJ  ""kk  JJ""  ww""""ww    ww  ""JJ  ZZ    kk 
+//  JJ  JJ  ;;JJ""  "";;  ww;;  kkJJ  JJ""  kk;;  ww  ;;ww  ""JJ  ww;;  ww  ;;tt 
+//;;""  RR    RR    ww""  kk""  ;;tt  ww    kkkk      kktt  JJ;;  ZZ;;  ;;  tt   
+//  JJkkttkkkk;;kkkk;;JJkktt""kkJJJJkkttJJkk;;  kkkkJJ  ttkkttJJkk;;ttkkJJkkJJ   
+//| I | - | L | U | N | A | A | T | H | E | N | A | P | R | O | J | E | C | T |  
+//------------------------------------------------------------------------------
+// iLAthena 워프 배치 스크립트 <http://www.i-luna.com>
+// 한글화 by 아이루나 iLAthena Project
+//------------------------------------------------------------------------------
+
+yuno_fild07,207,175,0	warp	jupwrp01	1,1,jupe_cave,143,52
+jupe_cave,148,52,0	warp	jupwrp02	1,1,yuno_fild07,212,175
+jupe_cave,26,52,0	warp	jupwrp03	1,1,juperos_01,53,247
+juperos_01,50,250,0	warp	jupwrp04	1,1,jupe_cave,29,52
+
+jupe_gate,28,145,0	warp	gate#left1	2,4,jupe_area1,100,222
+jupe_area1,103,222,0	warp	gate#left2	2,4,jupe_gate,31,145
+jupe_gate,71,145,0	warp	gate#right1	2,4,jupe_area2,63,222
+jupe_area2,60,222,0	warp	gate#right2	2,4,jupe_gate,68,145
+jupe_gate,49,55,0	warp	gate#ele	4,2,jupe_ele_r,49,30

@@ -1,0 +1,393 @@
+
+//    kk  ""tt""  "";;    """"JJ;;kkJJ  JJtt""    ""tt""  ;;tt""""tt    ""tt""   
+//   JJ  kk""tt;;JJ      ttkk    ""tt    ;;;;ttJJ;;  ""ttkk;;"";;;;ttkk;;  ;;kk  
+//  "";;  ""  kk  kk  tt  ttww    ZZ;;  ww    RR  ;;JJ  JJJJ  tt    RR  ;;JJ  JJ 
+//  JJ      """";;""  kk  ttkk  ;;kk    ZZ    ww  ;;""  kk""  ww    kk;;kk""  JJ 
+//  kk      JJ  kk    ww  ttkk  JJJJ  ;;ww  ""JJ  ;;tt""RR    ZZ  ;;ZZJJ      kk 
+//  kk  ;;  "";;JJ        JJtt  JJJJ  ""kk  JJ""  ww""""ww    ww  ""JJ  ZZ    kk 
+//  JJ  JJ  ;;JJ""  "";;  ww;;  kkJJ  JJ""  kk;;  ww  ;;ww  ""JJ  ww;;  ww  ;;tt 
+//;;""  RR    RR    ww""  kk""  ;;tt  ww    kkkk      kktt  JJ;;  ZZ;;  ;;  tt   
+//  JJkkttkkkk;;kkkk;;JJkktt""kkJJJJkkttJJkk;;  kkkkJJ  ttkkttJJkk;;ttkkJJkkJJ   
+//| I | - | L | U | N | A | A | T | H | E | N | A | P | R | O | J | E | C | T |  
+//------------------------------------------------------------------------------
+// iLAthena 모스코비아 마을 스크립트 <http://www.i-luna.com/>
+// 한글화 by 아이루나 iLAthena Project
+//------------------------------------------------------------------------------
+// 모스코비아 홍보사절#1(와백호)- 한글화 by ★orz。(미완성)
+//------------------------------------------------------------------------------
+
+// Moscovia Transportation
+//============================================================ 
+alberta,245,66,4	script	모스코비아 홍보사절#1	960,{
+	mes "[모스코비아 홍보사절]";
+	mes "모스코비아!! 모스코비아를 아십니까?";
+	mes "끝없는 바다위의 지상 낙원... ";
+	mes "끝없는 모험과 신비가 가득한 저희";
+	mes "모스코비아로 당신을 초대합니다.";
+	next;
+	switch(select("모스코비아에 대해서...:모스코비아로 간다.:취소한다.")) {
+		case 1:
+			mes "[모스코비아 홍보사절]";
+			mes "저희 모스코비아는 룬 미드가츠";
+			mes "대륙에서 북쪽 바다의 끝에 있는  ";
+			mes "아름다운 섬의 왕국입니다.";
+			next;
+			mes "[모스코비아 홍보사절]";
+			mes "자연이 만든 신비로운 절경의 광경!";
+			mes "아름답고 화려한 예배당과 왕궁의";
+			mes "모습을 보신다면 분명 모스코비아의";
+			mes "매력에 푹 빠지실 겁니다.";
+			next;
+			mes "[모스코비아 홍보사절]";
+			mes "길고 길었던 겨울이 지나고 이제야";
+			mes "모두에게 저희의 아름다운 고향을";
+			mes "소개할 수 있게되어 정말 기쁘답니다.";
+			mes "모스코비아의 겨울은 정말 길고도";
+			mes "춥기 때문이지요.";
+			next;
+			mes "[모스코비아 홍보사절]";
+			mes "자, 아름다운 모스코비아로 오시고";
+			mes "싶다면 지금이 기회입니다.";
+			mes "성심성의껏 멋진 여행이 될 수 있게";
+			mes "도와 드리겠습니다.";
+			close;
+			
+		case 2:
+			mes "[모스코비아 홍보사절]";
+			mes "그럼, 바로 출발하도록 하지요.";
+			mes "저희 모스코비아까지 가는데에 필요한";
+			mes "여비는 10000 제니입니다.";
+			mes "돌아오실 때에는 무료로 모셔다";
+			mes "드립니다.";
+			next;
+			mes "[모스코비아 홍보사절]";
+			mes "그럼, 출발해도 괜찮겠습니까?";
+			next;
+			if (select("출발!:취소.") == 2) {
+				mes "[모스코비아 홍보사절]";
+				mes "지금 바쁘시다면, 다음에 언제든";
+				mes "말씀해주세요. 여러분들께 저희";
+				mes "모스코비아를 소개할 수 있는 영광을 기다리고 있겠습니다.";
+				close;
+			}
+			if (Zeny < 10000) {
+				mes "[모스코비아 홍보사절]";
+				mes "죄송합니다만, 여행에 필요한";
+				mes "10,000 제니를 준비해주셔야";
+				mes "합니다. 소지금을 다시 한번";
+				mes "확인하시고 말씀해주세요.";
+				mes "감사합니다.";
+				close;
+			}else{
+				mes "[모스코비아 홍보사절]";
+				mes "Ok then, we're leaving now.";
+				close2;
+				set Zeny,Zeny - 10000;
+				warp "moscovia",163,55;
+				end;
+			}
+		case 3:
+			mes "[모스코비아 홍보사절]";
+			mes "지금 바쁘시다면, 다음에 언제든";
+			mes "말씀해주세요. 여러분들께 저희";
+			mes "모스코비아를 소개할 수 있는 영광을 기다리고 있겠습니다.";
+			close;
+	}
+}
+
+moscovia,166,53,4	script	모스코비아 홍보사절#2	960,{
+	mes "[모스코비아 홍보사절]";
+	mes "How was your trip?";
+	mes "Do you have good memories from Moscovia?";
+	mes "A ship is now leaving";
+	mes "for Rune Midgarts.";
+	next;
+	if (select("Return to Alberta:Cancel") == 2) {
+		mes "[모스코비아 홍보사절]";
+		mes "If you want to see more";
+		mes "please take your time.";
+		close;
+	}
+	mes "[모스코비아 홍보사절]";
+	mes "Please come and visit soon.";
+	mes "Ok then, Let's get going.";
+	close2;
+	warp "alberta",243,67;
+	end;
+}
+
+// Generic Moscovia NPCs
+//============================================================ 
+moscovia,149,112,4	script	A man#mosk1	964,{
+	mes "[Lev]";
+	mes "I was once like you.";
+	mes "with hot heart and cool reason";
+	mes "adventuring everywhere and";
+	mes "coping with all the troubles...";
+	close;
+}
+
+moscovia,167,97,4	script	A lady#mosk1	961,{
+	mes "[Roza]";
+	mes "Naughty boys are too excited in the warm days.";
+	next;
+	mes "[Roza]";
+	mes "Where is the sun?";
+	mes "Where is it hiding?";
+	close;
+}
+
+moscovia,168,135,4	script	A lady#mosk2	961,{
+	mes "[Kyra]";
+	mes "I've seen many people";
+	mes "from other provinces recently.";
+	next;
+	mes "[Kyra]";
+	mes "This is not";
+	mes "a tourist town.";
+	mes "What happened...?";
+	close;
+}
+
+moscovia,192,80,4	script	A lady#mosk3	959,{
+	mes "[Sabina]";
+	mes "Sunflowers are squeezed for oil and";
+	mes "their bodies are used for medicinal purposes";
+	mes "They are very useful.";
+	close;
+}
+
+moscovia,196,71,4	script	A young man#mosk1	968,{
+	mes "[Fredek]";
+	mes "The men here grow up";
+	mes "after going through though waves in";
+	mes "the vast sea.";
+	next;
+	mes "[Fredek]";
+	mes "Do you like";
+	mes "sailing?";
+	close;
+}
+
+moscovia,228,80,4	script	A little boy#mosk1	962,{
+	mes "[Rurik]";
+	mes "It's hard to look up at you.";
+	mes "Come lower so I can see your eyes.";
+	next;
+	mes "[Rurik]";
+	mes "Hmm, that's better.";
+	mes "Children are the future.";
+	mes "I won't have a future if I fall";
+	mes "back and hurt my neck";
+	mes "while looking up at you.";
+	close;
+}
+
+moscovia,202,102,4	script	A little boy#mosk2	962,{
+	mes "[Feliks]";
+	mes "This is the story";
+	mes "about a terrible dragon.";
+	next;
+	mes "[Feliks]";
+	mes "It is sleeping";
+	mes "in its lair,";
+	mes "but, it destroys everything";
+	mes "around it when it awakes.";
+	next;
+	mes "[Feliks]";
+	mes "This came from my grandma's";
+	mes "grandma's grandma's";
+	mes "grandma's grandma's";
+	mes "grandma's grandma.";
+	close;
+}
+
+moscovia,211,215,5	script	A young man#mosk2	967,{
+	mes "[Izlof]";
+	mes "There is a old saying,";
+	mes "'an opportunity is a chance.'";
+	next;
+	mes "[Izlof]";
+	mes "It is best time to confess";
+	mes "to ladies in the warm winter,";
+	mes "when their minds wander";
+	mes "right now!";
+	close;
+}
+
+
+moscovia,204,188,5	script	A maid#mosk1	959,{
+	mes "[Katya]";
+	mes "The spring has come~";
+	next;
+	mes "[Katya]";
+	mes "A million sunflowers are blooming~";
+	close;
+}
+
+moscovia,220,172,4	script	A young man#mosk3	968,{
+	mes "[Ilyav]";
+	mes "I am going to adventure";
+	mes "to experience new worlds";
+	mes "as you do.";
+	close;
+}
+
+moscovia,234,168,5	script	A man#mosk2	964,{
+	mes "[Gavrel]";
+	mes "Don't you think that the castle is magnificent?";
+	mes "It was built by my great great grandfather.";
+	close;
+}
+
+moscovia,219,229,5	script	A middle aged man#mosk1	964,{
+	mes "[Viktor]";
+	mes "Our people are very, very";
+	mes "proud of their strength and";
+	mes "invincible spirits.";
+	next;
+	mes "[Viktor]";
+	mes "It doesn't matter to us";
+	mes "how cold the winter is!";
+	close;
+}
+
+moscovia,233,204,4	script	A young man#mosk4	968,{
+	mes "[Fedor]";
+	mes "Finally, Winter is over.";
+	mes "Spring is coming";
+	mes "to my mind...";
+	close;
+}
+
+moscovia,253,175,4	script	A man#mosk3	964,{
+	mes "[Orek]";
+	mes "The present Csar is a bit strict and";
+	mes "terrible, but";
+	mes "he actually loves";
+	mes "his people.";
+	close;
+}
+
+moscovia,253,166,4	script	Soldier#mosk1	966,{
+	mes "[Soldier]";
+	mes "Our dear Czar Alexsay III is in the palace.";
+	mes "He rules over Moscovia.";
+	mes "Please be careful not to cause him any trouble.";
+	close;
+}
+
+moscovia,252,203,5	script	A little girl#mosk1	958,{
+	mes "[Yosefina]";
+	mes "Babayaga, the Horrible Cannibal";
+	mes "is living outside the town.";
+	next;
+	mes "[Yosefina]";
+	mes "My mom tole me.";
+	mes "that wat is real.";
+	close;
+}
+
+moscovia,255,203,4	script	A little boy#mosk3	962,{
+	mes "[Vasili]";
+	if (sex)
+		mes "Wow, he is";
+	else {
+		mes "Wow, she is";
+	}
+	mes "an adventurer, an adventurer!!";
+	next;
+	mes "[Vasili]";
+	mes "Tell me your exciting story.";
+	mes "Have you fought a dragon?";
+	mes "Where is your gold-shining";
+	mes "sword and shield...?";
+	mes "Where?";
+	close;
+}
+
+moscovia,208,182,7	script	Acorn Dealer#mosk	967,{
+	mes "[Acorn Dealer]";
+	mes "We have very fresh acorns. Everyone will like them!";
+	mes "You can buy one acorn for 100zeny!";
+	next;
+	if(select("Buy one.:What can I use them for?") == 2) {
+		mes "[Acorn Dealer]";
+		mes "Well uh...";
+		mes "You can grind them to make";
+		mes "something to eat and you can feed squirrels.";
+		next;
+		mes "[Acorn Dealer]";
+		mes "Someone can decorate their house";
+		mes "with them but I don't know how...";
+		mes "they've got to be highly talented.";
+		mes "Haha.";
+		close;
+	}
+	mes "[Acorn Dealer]";
+	mes "I'll bet you that they are very fresh!";
+	mes "How many acorns do you need?";
+	next;
+	while(.@input <= 0 || .@input > 500) {
+		input .@input;
+		if (.@input <= 0) {
+			mes "[Acorn Dealer]";
+			mes "Do you want to cancel this trade?";
+			close;
+		}
+		if (.@input > 500) {
+			mes "[Acorn Dealer]";
+			mes "You can't buy more than 500.";
+			next;
+		}
+		
+	}
+	if (!checkweight(1026, .@input)) {
+		mes "[Acorn Dealer]";
+		mes "Hello, I think you can't get acorns";
+		mes "now. You're carrying too many";
+		mes "items!";
+		mes "Please use Kafra service. I'll be";
+		mes "right here.";
+		close;
+	}
+	set .@price, .@input * 100;
+	if (Zeny < .@price) {
+		mes "[Acorn Dealer]";
+		mes "Hello? You've turned pale! Are you ok??";
+		mes "Do you have enough money?";
+		close;
+	}else{
+		mes "[Acorn Dealer]";
+		mes "Oh, thank you...";
+		mes "What do you think of them? They're fresh, aren't they?";
+		set Zeny,Zeny - .@price;
+		getitem 1026,.@input;
+		close;
+	}
+}
+
+// Inside Moscovia
+//============================================================ 
+mosk_in,141,212,4	script	Pub Owner#mosk	964,{
+	mes "[Pub Owner]";
+	mes "Welcome to our pub.";
+	mes "I'm Alexandre of ^0000FF'Stream Pub'^000000 But,";
+	mes "everyone calls me 'Sasha'.";
+	mes "It's a fine day today. I feel like";
+	mes "going out.";
+	close;
+}
+
+// Moscovia Palace
+//============================================================ 
+-	script	Soldier::MoscSoldier	966,{
+	mes "[Soldier]";
+	mes "Please be silent or the Czar will be angry.";
+	close;
+}
+
+mosk_in,118,66,5	duplicate(MoscSoldier)	Soldier#mosk02	966
+mosk_in,133,110,3	duplicate(MoscSoldier)	Soldier#mosk03	966
+mosk_in,133,73,3	duplicate(MoscSoldier)	Soldier#mosk04	966
+mosk_in,113,124,5	duplicate(MoscSoldier)	Soldier#mosk05	966

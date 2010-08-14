@@ -1,0 +1,218 @@
+
+//    kk  ""tt""  "";;    """"JJ;;kkJJ  JJtt""    ""tt""  ;;tt""""tt    ""tt""   
+//   JJ  kk""tt;;JJ      ttkk    ""tt    ;;;;ttJJ;;  ""ttkk;;"";;;;ttkk;;  ;;kk  
+//  "";;  ""  kk  kk  tt  ttww    ZZ;;  ww    RR  ;;JJ  JJJJ  tt    RR  ;;JJ  JJ 
+//  JJ      """";;""  kk  ttkk  ;;kk    ZZ    ww  ;;""  kk""  ww    kk;;kk""  JJ 
+//  kk      JJ  kk    ww  ttkk  JJJJ  ;;ww  ""JJ  ;;tt""RR    ZZ  ;;ZZJJ      kk 
+//  kk  ;;  "";;JJ        JJtt  JJJJ  ""kk  JJ""  ww""""ww    ww  ""JJ  ZZ    kk 
+//  JJ  JJ  ;;JJ""  "";;  ww;;  kkJJ  JJ""  kk;;  ww  ;;ww  ""JJ  ww;;  ww  ;;tt 
+//;;""  RR    RR    ww""  kk""  ;;tt  ww    kkkk      kktt  JJ;;  ZZ;;  ;;  tt   
+//  JJkkttkkkk;;kkkk;;JJkktt""kkJJJJkkttJJkk;;  kkkkJJ  ttkkttJJkk;;ttkkJJkkJJ   
+//| I | - | L | U | N | A | A | T | H | E | N | A | P | R | O | J | E | C | T |  
+//------------------------------------------------------------------------------
+// iLAthena 캐시 아이템 기능 스크립트 - http://www.i-luna.com
+// 한글화 by 아이루나 iLAthena Project
+//------------------------------------------------------------------------------
+// 한글화 by 아이루나(사이버짱)
+// 2차 한글화 by 사이버짱(올드리치 님 자료인용)
+//------------------------------------------------------------------------------
+
+// 카프라 명함
+//============================================================ 
+function	script	F_CashStore	{
+	cutin "kafra_01",2;
+	mes "[카프라 직원]";
+	mes "카프라 서비스는 언제나 여러분 곁에 있습니다.";
+	mes "창고를 열겠습니다.";
+	close2;
+	openstorage;
+	cutin "",255;
+	return;
+}
+
+
+// 거대한 파리의 날개
+//============================================================ 
+function	script	F_CashPartyCall	{
+	warp "Random",0,0;
+	if(getpartyleader(getcharid(1),2) == getcharid(0)) {
+		getmapxy .@mapl$, .@xl, .@yl, 0;
+		getpartymember getcharid(1);
+		set .@partymembercount, $@partymembercount;
+		copyarray .@partymembername$[0], $@partymembername$[0], .@partymembercount;
+		for(set .@i, 0; .@i < .@partymembercount; set .@i, .@i + 1)
+		if(!(getmapxy(.@mapm$, .@xm, .@ym, 0, .@partymembername$[.@i])) && (.@mapm$ == .@mapl$))
+		warpchar .@mapl$, .@xl, .@yl, getcharid(0, .@partymembername$[.@i]);
+	}
+	return;
+}
+
+// 섬광막대
+//============================================================ 
+function	script	F_CashReset	{
+	if (Class != Job_Novice) {
+		if (Weight < 1) { 
+			if (checkriding() || checkfalcon() || checkcart()) return;
+			else {
+				resetskill;
+				sc_end SC_ALL;
+			}
+		}
+	}
+	return;
+}
+
+// 던전 이동 스크롤 II
+//============================================================ 
+function	script	F_CashDungeon	{
+	switch(select("노그로드:묘르닐 폐광:나무속의 이계통로:광산 던전:지하 폐가촌:장난감 공장 창고:글레스트헤임 지하감옥 1층:센양궁:신선의 바둑판:해저동굴 던전:거북이섬 던전:시계탑 지하던전 3층:알데바란 시계탑 지상 3층:글레스트헤임 지하수로:스핑크스 던전:피라미드 던전:프론테라 지하수로:다다미 미궁:생체실험 연구소:고대신전내부"))
+	{
+	case 1: warp "mag_dun01",125,71; end;
+	case 2: warp "mjo_dun02",80,297; end;
+	case 3: warp "um_dun02",125,122; end;
+	case 4: warp "ein_dun01",261,262; end;
+	case 5: warp "pay_dun03",155,150; end;
+	case 6: warp "xmas_dun01",133,130; end;
+	case 7: warp "gl_prison",140,15;end;
+	case 8: warp "lou_dun03",165,38; end;
+	case 9: warp "gon_dun02",251,263; end;
+	case 10: warp "iz_dun02",350,335; end;
+	case 11: warp "tur_dun02",165,30; end;
+	case 12: warp "alde_dun03",275,180; end;
+	case 13: warp "c_tower3",34,42; end;
+	case 14: warp "gl_sew02",292,295; end;
+	case 15: warp "in_sphinx4",120,120; end;
+	case 16: warp "moc_pryd04",195,4; end;
+	case 17: warp "prt_sewb3",20,175; end;
+	case 18: warp "ama_dun01",222,144; end;
+	case 19: warp "lhz_dun01",19,153; end;
+	case 20: warp "ayo_dun02",70,240; end;
+	}
+	return;
+}
+
+// 거대 나비의 날개
+//============================================================ 
+function	script	F_CashCity	{
+	switch(getarg(0))
+	{
+		// 노랑나비의 날개
+		case 1: switch(select("룬미드가츠왕국 수도 프론테라:마법도시 게펜:산악도시 페이욘:사막도시 모로크:국경도시 알데바란:항구도시 알베르타")) {
+			case 1: warp "prontera",0,0; end;
+			case 2: warp "geffen",0,0; end;
+			case 3: warp "payon",0,0; end;
+			case 4: warp "morocc",0,0; end;
+			case 5: warp "aldebaran",0,0; end;
+			case 6: warp "alberta",0,0; end;
+			}
+		break;
+		// 초록나비의 날개
+		case 2: switch(select("슈발츠 공화국 수도 유노:기업도시 리히타르젠:강철도시 아인브로크:전원도시 휘겔")) {
+			case 1: warp "yuno",0,0; end;
+			case 2: warp "lighthalzen",0,0; end;
+			case 3: warp "einbroch",0,0; end;
+			case 4: warp "hugel",0,0; end;
+			}
+		break;
+		// 빨간나비의 날개
+		case 3: switch(select("아루나펠츠 교국 수도 라헬:협곡마을 베인스")) {
+			case 1: warp "rachel",0,0; end;
+			case 2: warp "veins",0,0; end;
+			}
+		break;
+		// 파란나비의 날개
+		case 4: switch(select("아요타야:천수의 나라 아마쯔:고도 용지성:신선의 섬 쿤룬")) {
+			case 1: warp "ayothaya",0,0; end;
+			case 2: warp "amatsu",0,0; end;
+			case 3: warp "louyang",0,0; end;
+			case 4: warp "gonryun",0,0; end;
+			}
+		break;
+	}
+	return;
+}
+
+// 공간이동 스크롤
+//============================================================ 
+// - Warp player to save point or City acording to the Scroll
+// - Arg(0) = type of scroll.
+function	script	F_CashTele	{
+	switch(getarg(0)) {
+	case 1:
+		switch(select("저장지점:룬미드가츠왕국 수도 프론테라:마법도시 게펜:국경도시 알데바란:위성도시 이즈루드")) {
+		case 1: warp "SavePoint",0,0; end;
+		case 2: warp "prontera",167,68; end;
+		case 3: warp "geffen",121,147; end;
+		case 4: warp "aldebaran",168,112; end;
+		case 5: warp "izlude",128,105; end;
+		}
+	case 2:
+		switch(select("저장지점:산악도시 페이욘:항구도시 알베르타:사막도시 모로크:해변도시 코모도")) {
+		case 1: warp "SavePoint",0,0; end;
+		case 2: warp "payon",172,101; end;
+		case 3: warp "alberta",117,56; end;
+		case 4: warp "morocc",165,255; end;
+		case 5: warp "comodo",193,148; end;
+		}
+	case 3:
+		switch(select("저장지점:고도 용지성:천수의 나라 아마쯔:쿤룬필드:아요타야")) {
+		case 1: warp "SavePoint",0,0; end;
+		case 2: warp "louyang",216,40; end;
+		case 3: warp "amatsu",197,83; end;
+		case 4: warp "gon_fild01",258,82; end;
+		case 5:warp "ayothaya",149,71; end;
+		}
+	case 4:
+		switch(select("저장지점:루티에 필드:우탄족마을 움발라:죽은자의나라 니플헤임")) {
+		case 1: warp "SavePoint",0,0; end;
+		case 2: warp "xmas_fild01",78,68; end;
+		case 3: warp "umbala",100,154; end;
+		case 4: warp "niflheim",49,146; end;
+		}
+	case 5:
+		switch(select("저장지점:슈발츠 공화국 수도 유노:강철도시 아인브로크:기업도시 리히타르젠:전원도시 휘겔")) {
+		case 1: warp "SavePoint",0,0; end;
+		case 2: warp "yuno",158,39; end;
+		case 3: warp "einbroch",240,200; end;
+		case 4: warp "lighthalzen",214,311; end;
+		case 5: warp "hugel",95,43; end;
+		}
+	case 6:
+		switch(select("저장지점:아루나펠츠 교국 수도 라헬:협곡마을 베인스")) {
+		case 1: warp "SavePoint",0,0; end;
+		case 2: warp "rachel",115,125; end;
+		case 3: warp "veins",205,102; end;
+		}
+	}
+	return;
+}
+
+// 공성맵 텔레포트 스크롤
+//============================================================ 
+
+function	script	F_CashSeigeTele	{
+	switch(select("노이슈반스타인 (알데바란 7시):호헨슈반가우 (알데바란 11시):눼렌베르크 (알데바란 6시):뷔르츠부르크 (알데바란 1시):로텐부르크 (알데바란 5시):레프리온 (게펜 7시):욜브리거 (게펜 1시):이스넬프 (게펜 9시):베르겔 (게펜 12시):멜세스데츠 (게펜 5시):명정 (페이욘 11시):불영 (페이욘 5시):천단 (페이욘 1시):홍루 (페이욘 7시):죽림현 (페이욘 12시):크림힐트 (프론테라 7시):스반힐트 (프론테라 5시):라즈리그스 (프론테라 중앙):스괴굴 (프론테라 11시):괸들 (프론테라 1시)")) {
+	case 1: warp "alde_gld",48,91; end;
+	case 2: warp "alde_gld",103,245; end;
+	case 3: warp "alde_gld",142,87; end;
+	case 4: warp "alde_gld",236,243; end;
+	case 5: warp "alde_gld",269,90; end;
+	case 6: warp "gef_fild13",217,75; end;
+	case 7: warp "gef_fild13",307,237; end;
+	case 8: warp "gef_fild13",77,297; end;
+	case 9: warp "gef_fild13",190,276; end;
+	case 10: warp "gef_fild13",312,91; end;
+	case 11: warp "pay_gld",121,232; end;
+	case 12: warp "pay_gld",297,116; end;
+	case 13: warp "pay_gld",318,293; end;
+	case 14: warp "pay_gld",140,164; end;
+	case 15: warp "pay_gld",202,264; end;
+	case 16: warp "prt_gld",141,64; end;
+	case 17: warp "prt_gld",240,131; end;
+	case 18: warp "prt_gld",153,133; end;
+	case 19: warp "prt_gld",126,240; end;
+	case 20: warp "prt_gld",195,240; end;
+	}
+	return;
+}
+

@@ -1,0 +1,56 @@
+
+//    kk  ""tt""  "";;    """"JJ;;kkJJ  JJtt""    ""tt""  ;;tt""""tt    ""tt""   
+//   JJ  kk""tt;;JJ      ttkk    ""tt    ;;;;ttJJ;;  ""ttkk;;"";;;;ttkk;;  ;;kk  
+//  "";;  ""  kk  kk  tt  ttww    ZZ;;  ww    RR  ;;JJ  JJJJ  tt    RR  ;;JJ  JJ 
+//  JJ      """";;""  kk  ttkk  ;;kk    ZZ    ww  ;;""  kk""  ww    kk;;kk""  JJ 
+//  kk      JJ  kk    ww  ttkk  JJJJ  ;;ww  ""JJ  ;;tt""RR    ZZ  ;;ZZJJ      kk 
+//  kk  ;;  "";;JJ        JJtt  JJJJ  ""kk  JJ""  ww""""ww    ww  ""JJ  ZZ    kk 
+//  JJ  JJ  ;;JJ""  "";;  ww;;  kkJJ  JJ""  kk;;  ww  ;;ww  ""JJ  ww;;  ww  ;;tt 
+//;;""  RR    RR    ww""  kk""  ;;tt  ww    kkkk      kktt  JJ;;  ZZ;;  ;;  tt   
+//  JJkkttkkkk;;kkkk;;JJkktt""kkJJJJkkttJJkk;;  kkkkJJ  ttkkttJJkk;;ttkkJJkkJJ   
+//| I | - | L | U | N | A | A | T | H | E | N | A | P | R | O | J | E | C | T |  
+//------------------------------------------------------------------------------
+// iLAthena 몬스터 배치 스크립트 <http://www.i-luna.com>
+// 한글화 by 아이루나 iLAthena Project
+//------------------------------------------------------------------------------
+
+//==================================================
+// prt_sewb1 - 프론테라 지하수로
+//==================================================
+prt_sewb1,0,0,0,0	monster	도둑벌레 알	1048,80,0,0,0
+prt_sewb1,0,0,0,0	monster	도둑벌레	1051,30,0,0,0
+prt_sewb1,0,0,0,0	monster	퍼밀리어	1005,10,0,0,0
+prt_sewb1,0,0,0,0	monster	타로우	1175,10,0,0,0
+
+//==================================================
+// prt_sewb2 - 프론테라 지하수로
+//==================================================
+prt_sewb2,0,0,0,0	monster	도둑벌레 알	1048,20,0,0,0
+prt_sewb2,0,0,0,0	monster	도둑벌레	1051,70,0,0,0
+prt_sewb2,0,0,0,0	monster	퍼밀리어	1005,10,0,0,0
+prt_sewb2,0,0,0,0	monster	스포아	1014,20,0,0,0
+prt_sewb2,0,0,0,0	monster	플랑크톤	1161,30,0,0,0
+prt_sewb2,0,0,0,0	monster	도둑벌레	1053,10,0,0,0
+prt_sewb2,0,0,0,0	monster	타로우	1175,60,0,0,0
+
+//==================================================
+// prt_sewb3 - 프론테라 지하수로
+//==================================================
+prt_sewb3,0,0,0,0	monster	도둑벌레 알	1048,10,0,0,0
+prt_sewb3,0,0,0,0	monster	도둑벌레	1051,20,0,0,0
+prt_sewb3,0,0,0,0	monster	도둑벌레	1053,65,0,0,0
+prt_sewb3,0,0,0,0	monster	도둑벌레	1054,65,0,0,0
+prt_sewb3,0,0,0,0	monster	타로우	1175,15,0,0,0
+prt_sewb3,0,0,0,0	monster	포이즌 스포아	1077,15,0,0,0
+prt_sewb3,0,0,0,0	monster	퍼밀리어	1005,20,0,0,0
+
+//==================================================
+// prt_sewb4 - 프론테라 지하수로
+//==================================================
+prt_sewb4,0,0,0,0	monster	도둑벌레 알	1048,10,0,0,0
+prt_sewb4,0,0,0,0	monster	도둑벌레	1051,20,0,0,0
+prt_sewb4,0,0,0,0	monster	도둑벌레	1053,20,0,0,0
+prt_sewb4,0,0,0,0	monster	도둑벌레	1054,70,0,0,0
+prt_sewb4,0,0,0,0	monster	드레인리어	1111,20,0,0,0
+prt_sewb4,0,0,0,0	monster	크램프	1209,5,0,0,0
+prt_sewb4,0,0,0,0	boss_monster	황금 도둑벌레	1086,1,3600000,600000,1

@@ -1,0 +1,478 @@
+//////////////////////////////////////////////////////////
+//							//
+// 만든이 : 狂犬	v0.2				//
+//							//
+// msn : snow-_-man@hanmail.net				//
+//							//
+// 아이루나와 엠펠리움 포럼 외 재배포를 금지합니다.	//
+//							//
+//////////////////////////////////////////////////////////
+// v0.2 - 도작 레벨에 따라 도작 스킬레벨 설정           //
+// v0.1 - 스크립트 생성                                 //
+//////////////////////////////////////////////////////////
+lighthalzen,171,106,4	script	도작 도우미	934,{
+	if (getskilllv(225) < 1) {
+		mes "[도작 도우미]";
+		mes "도작 스킬이 없거나 도작을 할수 없는 직업입니다.";
+		close;
+	}
+	setarray .@zeny[0], 10000, 40000;
+	mes "[도작 도우미]";
+	mes "도작 도우미입니다.";
+	mes "비전승자의 수수료는 " + .@zeny[0] + "제니.";
+	mes "전승자의 수수료는 " + .@zeny[1] + "제니.";
+	next;
+	menu "- 1차 직업 도작",T_A,"- 2-1차 직업 도작",T_B,"- 2-2차 직업 도작",T_C,"- 퀘스트 도작",T_F,"- 그만둔다.",T_E;
+T_A:
+	mes "[도작 도우미]";
+	mes "1차 직업 도작 도우미입니다.";
+	next;
+	menu "- 검사",T_A1,"- 궁수",T_B1,"- 복사",T_C1,"- 법사",T_D1,"- 상인",T_E1,"- 도둑",T_F1,"- 그만둔다",T_E;
+T_A1:
+	mes "[도작 도우미]";
+	mes "검사 도작 도우미입니다.";
+	next;
+	menu "- 배쉬",T_A2,"- 매그넘 브레이크",T_A3,"- 그만둔다",T_E;
+T_A2:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 5,getskilllv(225);
+	close;
+T_A3:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 7,getskilllv(225);
+	close;
+T_B1:
+	mes "[도작 도우미]";
+	mes "궁수 도작 도우미입니다.";
+	next;
+	menu "- 더블 스트레이핑",T_B2,"- 애로우 샤워",T_B3,"- 그만둔다",T_E;
+T_B2:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 46,getskilllv(225);
+	close;
+T_B3:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 47,getskilllv(225);
+	close;
+T_C1:
+	mes "[도작 도우미]";
+	mes "복사 도작 도우미입니다.";
+	next;
+	menu "- 루아흐",T_C2,"- 힐",T_C3,"- 그만둔다",T_E;
+T_C2:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 24,1;
+	close;
+T_C3:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 28,getskilllv(225);
+	close;
+T_D1:
+	mes "[도작 도우미]";
+	mes "법사 도작 도우미입니다.";
+	next;
+	menu "- 네이팜 비트",T_D2,"- 소울 스트라이크",T_D3,"- 콜드 볼트",T_D4,"- 프로스트 다이버",T_D5,"- 화이어 볼트",T_D6,"- 화이어 볼",T_D7,"- 화이어 월",T_D8,"- 라이트닝 볼트",T_D9,"- 썬더 스톰",T_D10,"- 그만둔다",T_E;
+T_D2:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 11,getskilllv(225);
+	close;
+T_D3:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 13,getskilllv(225);
+	close;
+T_D4:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 14,getskilllv(225);
+	close;
+T_D5:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 15,getskilllv(225);
+	close;
+T_D6:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 19,getskilllv(225);
+	close;
+T_D7:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 17,getskilllv(225);
+	close;
+T_D8:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 18,getskilllv(225);
+	close;
+T_D9:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 20,getskilllv(225);
+	close;
+T_D10:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 21,getskilllv(225);
+	close;
+T_E1:
+	mes "[도작 도우미]";
+	mes "상인 도작 도우미입니다.";
+	next;
+	menu "- 매머나이트",T_E2,"- 그만둔다",T_E;
+T_E2:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 42,getskilllv(225);
+	close;
+T_F1:
+	mes "[도작 도우미]";
+	mes "도둑 도작 도우미입니다.";
+	next;
+	menu "- 인배넘",T_F2,"- 그만둔다",T_E;
+T_F2:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 52,getskilllv(225);
+	close;
+T_B:
+	mes "[도작 도우미]";
+	mes "2-1차 직업 도작 도우미입니다.";
+	next;
+	menu "- 기사",T_A4,"- 헌터",T_B4,"- 프리스트",T_C4,"- 위저드",T_D11,"- 블랙스미스",T_E3,"- 어새신",T_F3,"- 그만둔다",T_E;
+T_A4:
+	mes "[도작 도우미]";
+	mes "기사 도작 도우미입니다.";
+	next;
+	menu "- 피어스",T_A5,"- 스피어 스탭",T_A6,"- 스피어 부메랑",T_A7,"- 브랜디쉬 스피어",T_A8,"- 오토 카운터",T_A9,"- 볼링 배쉬",T_A10,"- 그만둔다",T_E;
+T_A5:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 56,getskilllv(225);
+	close;
+T_A6:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 58,getskilllv(225);
+	close;
+T_A7:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	if (getskilllv(225) <= 5) plagiarism 59,getskilllv(225);
+	if (getskilllv(225) > 5) plagiarism 59,5;
+	close;
+T_A8:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 57,getskilllv(225);
+	close;
+T_A9:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	if (getskilllv(225) <= 5) plagiarism 61,getskilllv(225);
+	if (getskilllv(225) > 5) plagiarism 61,5;
+	close;
+T_A10:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 62,getskilllv(225);
+	close;
+T_B4:
+	mes "[도작 도우미]";
+	mes "헌터 도작 도우미입니다.";
+	next;
+	menu "- 랜드 마인",T_B5,"- 프리징 트랩",T_B6,"- 블래스트 마인",T_B7,"- 크레모어 트랩",T_B8,"- 블릿츠 비트",T_B9,"- 스프링 트랩",T_B10,"- 그만둔다",T_E;
+T_B5:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	if (getskilllv(225) <= 5) plagiarism 116,getskilllv(225);
+	if (getskilllv(225) > 5) plagiarism 116,5;
+	close;
+T_B6:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	if (getskilllv(225) <= 5) plagiarism 121,getskilllv(225);
+	if (getskilllv(225) > 5) plagiarism 121,5;
+	close;
+T_B7:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	if (getskilllv(225) <= 5) plagiarism 122,getskilllv(225);
+	if (getskilllv(225) > 5) plagiarism 122,5;
+	close;
+T_B8:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	if (getskilllv(225) <= 5) plagiarism 123,getskilllv(225);
+	if (getskilllv(225) > 5) plagiarism 123,5;
+	close;
+T_B9:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	if (getskilllv(225) <= 5) plagiarism 129,getskilllv(225);
+	if (getskilllv(225) > 5) plagiarism 129,5;
+	close;
+T_B10:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	if (getskilllv(225) <= 5) plagiarism 131,getskilllv(225);
+	if (getskilllv(225) > 5) plagiarism 131,5;
+	close;
+T_C4:
+	mes "[도작 도우미]";
+	mes "프리스트 도작 도우미입니다.";
+	next;
+	menu "- 힐",T_nC1,"- 리저렉션",T_nC2,"- 아스페르시오",T_C5,"- 생츄어리",T_C6,"- 마그누스 엑소르시스무스",T_C7,"- 턴 언데드",T_nC3,"- 그만둔다",T_E;
+T_nC1:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 28,getskilllv(225);
+	close;
+T_nC2:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	if (getskilllv(225) <= 5) plagiarism 54,getskilllv(225);
+	if (getskilllv(225) > 5) plagiarism 54,5;
+	close;
+T_C5:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	if (getskilllv(225) <= 5) plagiarism 68,getskilllv(225);
+	if (getskilllv(225) > 5) plagiarism 68,5;
+	close;
+T_C6:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 70,getskilllv(225);
+	close;
+T_C7:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 79,getskilllv(225);
+	close;
+T_nC3:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 77,getskilllv(225);
+	close;
+T_D11:
+	mes "[도작 도우미]";
+	mes "위저드 도작 도우미입니다.";
+	next;
+	menu "- 사이트래셔",T_D12,"- 메테오 스톰",T_D13,"- 로드 오브 버밀리온",T_D14,"- 스톰 가스트",T_D15,"- 유피텔 선더",T_D16,"- 워터볼",T_D17,"- 프로스트 노바",T_D18,"- 어스 스파이크",T_D19,"- 헤븐즈 드라이브",T_D20,"- 화이어 필라",T_D21,"- 그만둔다",T_E;
+T_D12:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 81,getskilllv(225);
+	close;
+T_D13:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 83,getskilllv(225);
+	close;
+T_D14:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 85,getskilllv(225);
+	close;
+T_D15:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 89,getskilllv(225);
+	close;
+T_D16:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 84,getskilllv(225);
+	close;
+T_D17:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 86,getskilllv(225);
+	close;
+T_D18:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 88,getskilllv(225);
+	close;
+T_D19:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	if (getskilllv(225) <= 5) plagiarism 90,getskilllv(225);
+	if (getskilllv(225) > 5) plagiarism 90,5;
+	close;
+T_D20:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	if (getskilllv(225) <= 5) plagiarism 91,getskilllv(225);
+	if (getskilllv(225) > 5) plagiarism 91,5;
+	close;
+T_D21:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 80,getskilllv(225);
+	close;
+T_E3:
+	mes "[도작 도우미]";
+	mes "블랙스미스 도작 도우미입니다. [없음]";
+	close;
+T_F3:
+	mes "[도작 도우미]";
+	mes "어새신 도작 도우미입니다.";
+	next;
+	menu "- 소닉 블로우",T_F4,"- 그림투스",T_F5,"- 베넘 스플래셔",T_F6,"- 그만둔다",T_E;
+T_F4:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 136,getskilllv(225);
+	close;
+T_F5:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	if (getskilllv(225) <= 5) plagiarism 137,getskilllv(225);
+	if (getskilllv(225) > 5) plagiarism 137,5;
+	close;
+T_F6:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 141,getskilllv(225);
+	close;
+T_C:
+	mes "[도작 도우미]";
+	mes "2-2차 직업 도작 도우미입니다.";
+	next;
+	menu "- 크루세이더",T_A11,"- 댄서/바드",T_B11,"- 몽크",T_C8,"- 세이지",T_D22,"- 알캐미스트",T_E4,"- 그만둔다",T_E;
+T_A11:
+	mes "[도작 도우미]";
+	mes "크루세이더 도작 도우미입니다.";
+	next;
+	menu "- 쉴드 챠지",T_A12,"- 쉴드 부메랑",T_A13,"- 홀리 크로스",T_A14,"- 그랜드 크로스",T_A15,"- 그만둔다",T_E;
+T_A12:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	if (getskilllv(225) <= 5) plagiarism 250,getskilllv(225);
+	if (getskilllv(225) > 5) plagiarism 250,5;
+	close;
+T_A13:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	if (getskilllv(225) <= 5) plagiarism 251,getskilllv(225);
+	if (getskilllv(225) > 5) plagiarism 251,5;
+	close;
+T_A14:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 253,getskilllv(225);
+	close;
+T_A15:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 254,getskilllv(225);
+	close;
+T_B11:
+	mes "[도작 도우미]";
+	mes "댄서/바드 도작 도우미입니다.";
+	next;
+	menu "- 뮤지컬 스트라이크",T_B12,"- 화살 감아 던지기",T_B13,"- 불협화음",T_B14,"- 막춤",T_B15,"- 그만둔다",T_E;
+T_B12:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	if (getskilllv(225) <= 5) plagiarism 316,getskilllv(225);
+	if (getskilllv(225) > 5) plagiarism 316,5;
+	close;
+T_B13:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	if (getskilllv(225) <= 5) plagiarism 324,getskilllv(225);
+	if (getskilllv(225) > 5) plagiarism 324,5;
+	close;
+T_B14:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	if (getskilllv(225) <= 5) plagiarism 317,getskilllv(225);
+	if (getskilllv(225) > 5) plagiarism 317,5;
+	close;
+T_B15:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	if (getskilllv(225) <= 5) plagiarism 325,getskilllv(225);
+	if (getskilllv(225) > 5) plagiarism 325,5;
+	close;
+T_C8:
+	mes "[도작 도우미]";
+	mes "몽크 도작 도우미입니다.";
+	next;
+	menu "- 육합권(六合拳)",T_C9,"- 침투경(浸透勁)",T_C10,"- 탄지신통(彈指神通)",T_C11,"- 연환전신장(連環全身掌)",T_C12,"- 맹룡과강(猛龍誇强)",T_C13,"- 아수라_패황권(阿修羅覇凰拳)",T_C14,"- 그만둔다",T_E;
+T_C9:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 263,getskilllv(225);
+	close;
+T_C10:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	if (getskilllv(225) <= 5) plagiarism 266,getskilllv(225);
+	if (getskilllv(225) > 5) plagiarism 266,5;
+	close;
+T_C11:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	if (getskilllv(225) <= 5) plagiarism 267,getskilllv(225);
+	if (getskilllv(225) > 5) plagiarism 267,5;
+	close;
+T_C12:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	if (getskilllv(225) <= 5) plagiarism 272,getskilllv(225);
+	if (getskilllv(225) > 5) plagiarism 272,5;
+	close;
+T_C13:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	if (getskilllv(225) <= 5) plagiarism 273,getskilllv(225);
+	if (getskilllv(225) > 5) plagiarism 273,5;
+	close;
+T_C14:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	if (getskilllv(225) <= 5) plagiarism 271,getskilllv(225);
+	if (getskilllv(225) > 5) plagiarism 271,5;
+	close;
+T_D22:
+	mes "[도작 도우미]";
+	mes "세이지 도작 도우미입니다. [없음]";
+	next;
+	menu "- 어스 파이크",T_D23,"- 헤븐즈 드라이브",T_D24,"- 그만둔다",T_E;
+T_D23:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	if (getskilllv(225) <= 5) plagiarism 90,getskilllv(225);
+	if (getskilllv(225) > 5) plagiarism 90,5;
+	close;
+T_D24:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	if (getskilllv(225) <= 5) plagiarism 91,getskilllv(225);
+	if (getskilllv(225) > 5) plagiarism 91,5;
+	close;
+T_E4:
+	mes "[도작 도우미]";
+	mes "알캐미스트 도작 도우미입니다.";
+	next;
+	menu "- 애시드 테러",T_E5,"- 데몬스트레이션",T_E6,"- 그만둔다",T_E;
+T_E5:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	if (getskilllv(225) <= 5) plagiarism 230,getskilllv(225);
+	if (getskilllv(225) > 5) plagiarism 230,5;
+	close;
+T_E6:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	if (getskilllv(225) <= 5) plagiarism 229,getskilllv(225);
+	if (getskilllv(225) > 5) plagiarism 229,5;
+	close;
+T_F:
+	mes "[도작 도우미]";
+	mes "퀘스트 스킬 도작 도우미입니다.";
+	next;
+	menu "- 차지 애로우",T_G1,"- 모래 뿌리기",T_G2,"- 돌 던지기",T_G3,"- 카트 레볼루션",T_G4,"- 홀리 라이트",T_G5,"- 차지 어택",T_G6,"- 베넘 나이프",T_G7,"- 사이트 블래스터",T_G8,"- 판타즈믹 애로우",T_G9,"- 발경(發勁)",T_G10,"- 그만둔다",T_E;
+T_G1:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 148,1;
+	close;
+T_G2:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 149,1;
+	close;
+T_G3:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 152,1;
+	close;
+T_G4:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 153,1;
+	close;
+T_G5:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 156,1;
+	close;
+T_G6:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 1001,1;
+	close;
+T_G7:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 1004,1;
+	close;
+T_G8:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 1006,1;
+	close;
+T_G9:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 1009,1;
+	close;
+T_G10:
+	callfunc "lib.fzenyp", .@zeny[Upper];
+	plagiarism 1016,1;
+	close;
+T_E:
+	close;
+T_N:
+	close;
+}
+
+function	script	lib.fzenyp	{
+	if (Zeny < getarg(0)) {
+		mes "[도작 도우미]";
+		mes "돈이 부족합니다.";
+		close;
+	}
+	set Zeny,Zeny-getarg(0);
+	mes "[도작 도우미]";
+	mes "도작 되었습니다.";
+	return;
+}

@@ -1,0 +1,960 @@
+//////////////////////////////////////////////////////////
+//							//
+// 만든이 : 狂犬	v0.7				//
+//							//
+// 아이루나 외 재배포를 금지합니다.			//
+//							//
+//////////////////////////////////////////////////////////
+// v0.1 - 스크립트 생성                                 //
+//////////////////////////////////////////////////////////
+
+/* SQL 테이블입니다. 주석 안에 있는 내용을 MySQL Sever에 삽입해주세요. (수동 설치용)
+
+DROP TABLE IF EXISTS `bank`;
+CREATE TABLE `bank` (
+  `acc_id` int(11) NOT NULL default '0',
+  `credit` int(11) NOT NULL default '0',
+  `last_time` datetime NOT NULL,
+  `zeny` int(11) NOT NULL default '0',
+  `debt` int(11) NOT NULL default '0',
+  `due_time` datetime NOT NULL,
+  `state` tinyint(2) NOT NULL default '0',
+  PRIMARY KEY  (`acc_id`)
+) TYPE=MyISAM;
+
+DROP TABLE IF EXISTS `bank_tr`;
+CREATE TABLE `bank_tr` (
+  `sacc_id` int(11) NOT NULL default '0',
+  `hacc_id` int(11) NOT NULL default '0',
+  `zeny` int(11) NOT NULL default '0',
+  `state` tinyint(2) NOT NULL default '0'
+) TYPE=MyISAM;
+
+*/
+
+prontera.gat,147,171,6	script	은행원	894,{
+	if (!$start_bank) {
+		npcwhisper strcharinfo(0),"-----------은행 스크립트 by 狂犬-----------";
+		npcwhisper strcharinfo(0),"은행 스크립트 설치를 시작합니다.";
+		query_sql "INSERT INTO `bank` ( `acc_id`, `credit`, `last_time`, `zeny`, `debt`, `due_time`, `state`) VALUES ( " + getcharid(3) + ", 0, now(), 0, 0, 0, 2)";
+		query_sql "SELECT state FROM `bank` WHERE `acc_id` = " + getcharid(3) + "", .@state1;
+		npcwhisper strcharinfo(0),"은행 스크립트에 필요한 테이블 검색 중‥‥";
+		if (.@state1 != 2) {
+			query_sql "CREATE TABLE `bank` ( `acc_id` int(11) NOT NULL default '0', `credit` int(11) NOT NULL default '0', `last_time` datetime NOT NULL, `zeny` int(11) NOT NULL default '0', `debt` int(11) NOT NULL default '0', `due_time` datetime NOT NULL, `state` tinyint(2) NOT NULL default '0', PRIMARY KEY  (`acc_id`)) TYPE=MyISAM";
+			query_sql "INSERT INTO `bank` ( `acc_id`, `credit`, `last_time`, `zeny`, `debt`, `due_time`, `state`) VALUES ( " + getcharid(3) + ", 0, now(), 0, 0, 0, 2)";
+			query_sql "SELECT state FROM `bank` WHERE `acc_id` = " + getcharid(3) + "", .@state1;
+			if (.@state1 == 2) {
+				npcwhisper strcharinfo(0),"'bank' 테이블 설치 완료.";
+			} else {
+				npcwhisper strcharinfo(0),"'bank' 테이블 설치 실패. (수동으로 설치해주세요.)";
+			}
+		}
+		query_sql "INSERT INTO `bank_tr` ( `sacc_id`, `hacc_id`, `zeny`, `state`) VALUES ( " + getcharid(3) + ", 0, 0, 2)";
+		query_sql "SELECT state FROM `bank_tr` WHERE `acc_id` = " + getcharid(3) + "", .@state2;
+		if (.@state2 != 2) {
+			query_sql "CREATE TABLE `bank_tr` ( `sacc_id` int(11) NOT NULL default '0', `hacc_id` int(11) NOT NULL default '0', `zeny` int(11) NOT NULL default '0', `state` tinyint(2) NOT NULL default '0') TYPE=MyISAM";
+			query_sql "INSERT INTO `bank_tr` ( `sacc_id`, `hacc_id`, `zeny`, `state`) VALUES ( " + getcharid(3) + ", 0, 0, 2)";
+			query_sql "SELECT state FROM `bank_tr` WHERE `acc_id` = " + getcharid(3) + "", .@state2;
+			if (.@state2 == 2) {
+				npcwhisper strcharinfo(0),"'bank_tr' 테이블 설치 완료.";
+			} else {
+				npcwhisper strcharinfo(0),"'bank_tr' 테이블 설치 실패. (수동으로 설치해주세요.)";
+			}
+		}
+		query_sql "DELETE `bank` WHERE `state` = 2";
+		query_sql "DELETE `bank_tr` WHERE `state` = 2";
+		npcwhisper strcharinfo(0),"은행 스크립트에 필요한 테이블 검색 완료. (2)";
+		npcwhisper strcharinfo(0),"은행 스크립트에 필요한 변수 검색 중‥‥";
+		set $pr_1,75;
+		npcwhisper strcharinfo(0),"입금 수수료 '" + ($pr_1/10000) + "'% 설정.";
+		set $pr_2,325;
+		npcwhisper strcharinfo(0),"입금 이자율 '" + ($pr_2/10000) + "'% 설정.";
+		set $pr_3,5000;
+		npcwhisper strcharinfo(0),"출금 한도율 '" + ($pr_3/10000) + "'% 설정.";
+		set $pr_4,900;
+		npcwhisper strcharinfo(0),"대출 이자율 '" + ($pr_4/10000) + "'% 설정.";
+		set $pr_5,95;
+		npcwhisper strcharinfo(0),"송금 수수료 '" + ($pr_5/10000) + "'% 설정.";
+		set $pr,0;
+		npcwhisper strcharinfo(0),"수수료저장변수 초기화.";
+		set $dl_t,30;
+		npcwhisper strcharinfo(0),"딜레이시간 '" + $dl_t + "' 설정.";
+		set $dl_u$,"second";
+		npcwhisper strcharinfo(0),"딜레이단위 '" + $dl_u$ + "' 설정.";
+		set $deb_day,7;
+		npcwhisper strcharinfo(0),"대출기간 '" + $deb_day + "'일 설정.";
+		set $power,1;
+		npcwhisper strcharinfo(0),"관리자 메뉴 권한레벨 '" + $power + "' 설정";
+		set $start_bank,1;
+		npcwhisper strcharinfo(0),"은행 스크립트에 필요한 변수 검색 완료. (10)";
+		npcwhisper strcharinfo(0),"은행 스크립트 설치를 완료하였습니다. 스크립트를 종료합니다.";
+		npcwhisper strcharinfo(0),"-----------은행 스크립트 by 狂犬-----------";
+		end;
+	}
+	cutin "kh_ellisia",2;
+	callfunc "lib.fReName", "은행원", "마탈리아";
+	if (getgmlevel() > $power) {
+	T_gm:
+		callfunc "lib.fName";
+		mes "관리자 메뉴";
+		next;
+		menu "- Skip",T_main,"- 율 조정",-,"- 딜레이 조정",-,"- 대출일 조정",-,"- 권한 조정",-,"- 은행 초기화",-,"- UnloadScript",-;
+		if (@menu == 2) {
+			callfunc "lib.fName";
+			mes "조정하실 율을 선택해주세요.";
+			next;
+			menu "- 입금 수수료(" + ($pr_1/10000) + "%)",-,"- 입금 이자율(" + ($pr_2/10000) + "%)",-,"- 출금 한도율(" + ($pr_3/10000) + "%)",-,"- 대출 이자율(" + ($pr_4/10000) + "%)",-,"- 송금 수수료(" + ($pr_5/10000) + "%)",-;
+			if (@menu == 1) callfunc "lib.fBoat",1,"입금 수수료";
+			if (@menu == 2) callfunc "lib.fBoat",2,"입금 이자율";
+			if (@menu == 3) callfunc "lib.fBoat",3,"출금 한도율";
+			if (@menu == 4) callfunc "lib.fBoat",4,"대출 이자율";
+			if (@menu == 5) callfunc "lib.fBoat",5,"송금 수수료";
+			goto T_gm;
+		}
+		if (@menu == 3) {
+			callfunc "lib.fName";
+			mes "조정하실 항목을 선택해주세요.";
+			mes "(현재 딜레이: " + $dl_t + " " + $dl_u$ + ")";
+			next;
+			menu "- 딜레이 시간",-,"- 딜레이 단위",-;
+			if (@menu == 1) {
+				callfunc "lib.fName";
+				mes "조정하실 시간을 입력해주세요.";
+				mes "(현재 시간: " + $dl_t + " " + $dl_u$ + ")";
+				next;
+				input .@time;
+				callfunc "lib.fName";
+				mes "" + $dl_t + "에서 " + .@time + "로 조정하였습니다.";
+				set $dl_t,.@time;
+				next;
+				goto T_gm;
+			}
+			if (@menu == 2) {
+				callfunc "lib.fName";
+				mes "조정하실 단위를 선택해주세요.";
+				mes "(현재 단위: " + $dl_t + " " + $dl_u$ + ")";
+				next;
+				menu "- second",-,"- minute",-,"- hour",-;
+				if (@menu == 1) callfunc "lib.fTime","second";
+				if (@menu == 2) callfunc "lib.fTime","minute";
+				if (@menu == 3) callfunc "lib.fTime","hour";
+				goto T_gm;
+			}
+		}
+		if (@menu == 4) {
+			callfunc "lib.fName";
+			mes "조정하실 일을 입력해주세요.";
+			mes "(현재 대출기간: " + $deb_day + "일)";
+			next;
+			input .@day;
+			callfunc "lib.fName";
+			mes "" + $deb_day + "일에서 " + .@day + "일로 조정하였습니다.";
+			set $deb_day,.@day;
+			next;
+			goto T_gm;
+		}
+		if (@menu == 5) {
+			callfunc "lib.fName";
+			mes "관리 권한 레벨을 설정해주세요.";
+			mes "(권한 레벨: " + $power + ")";
+			next;
+			input .@power;
+			if (getgmlevel() > .@power) {
+				callfunc "lib.fName";
+				mes "자신의 레벨보다 높은 레벨은";
+				mes "설정하실 수 없습니다.";
+				next;
+				goto T_gm;
+			}
+			if (.@power <= 0) {
+				callfunc "lib.fName";
+				mes "입력하신 값은 일반인에게도";
+				mes "관리 권한을 부여합니다.";
+				mes "조정 하시겠습니까?";
+				next;
+			} else {
+				callfunc "lib.fName";
+				mes "관리 권한 레벨을 " + $power + "로 조정 하시겠습니까?";
+				next;
+			}
+			menu "- 설정하지 않는다.",T_gm,"설정한다.",-;
+			callfunc "lib.fName";
+			mes "" + $power + "에서 " + .@power + "로 조정하였습니다.";
+			set $power,.@power;
+			next;
+			goto T_gm;
+		}
+		if (@menu == 6) {
+			callfunc "lib.fName";
+			mes "초기화 종류를 선택해주십시요.";
+			next;
+			menu "- 설정값 초기화",-,"- 모두 초기화",-;
+			if (@menu == 1) {
+				callfunc "lib.fName";
+				mes "은행의 모든 설정값을 초기화하시겠습니까?";
+				mes "(초기화 전 한번더 묻습니다.)";
+				next;
+				menu "- 초기화하지 않는다.",-,"- 초기화 한다.",-;
+				if (@menu == 2) {
+					callfunc "lib.fName";
+					mes "초기화를 진행하실려면 A를 입력해주세요.";
+					next;
+					input .@reset$;
+					if (.@reset$ == "A") {
+						set $start_bank,0;
+						callfunc "lib.fName";
+						mes "설정값 초기화 완료.";
+						next;
+						callfunc "lib.fName";
+						mes "창이 닫힌 후 다시 Npc를 클릭해 주세요.";
+						close;
+					} else {
+						callfunc "lib.fName";
+						mes "초기화 진행을 취소합니다.";
+						next;
+					}
+				}
+			}
+			if (@menu == 2) {
+				callfunc "lib.fName";
+				mes "은행의 모든 설정값과 테이블을 초기화하시겠습니까?";
+				mes "(초기화 전 한번더 묻습니다.)";
+				next;
+				menu "- 초기화하지 않는다.",-,"- 초기화 한다.",-;
+				if (@menu == 2) {
+					callfunc "lib.fName";
+					mes "초기화를 진행하실려면 A를 입력해주세요.";
+					next;
+					input .@reset$;
+					if (.@reset$ == "A") {
+						set $start_bank,0;
+						query_sql "DELETE FROM `bank`";
+						query_sql "DELETE FROM `bank_tr`";
+						query_sql "DELETE FROM `global_reg_value` WHERE `str` = '#account'";
+						callfunc "lib.fName";
+						mes "모두 초기화 완료.";
+						next;
+						callfunc "lib.fName";
+						mes "창이 닫힌 후 다시 Npc를 클릭해 주세요.";
+						close;
+					} else {
+						callfunc "lib.fName";
+						mes "초기화 진행을 취소합니다.";
+						next;
+					}
+				}
+			}
+			goto T_gm;
+		}
+		if (@menu == 7) {
+			callfunc "lib.fName";
+			mes "UnloadScript하시겠습니까?";
+			mes "(UnloadScript 전 한번더 묻습니다.)";
+			next;
+			menu "- N",-,"- Y",-;
+			if (@menu == 2) {
+				callfunc "lib.fName";
+				mes "UnloadScript를 하실려면 Y를 입력해주세요.";
+				mes "주의! 유저가 Npc를 사용할때 UnloadScript를 진행 할 경우 하자가 발생할 수 있습니다.";
+				next;
+				input .@unload$;
+				if (.@unload$ == "Y") {
+					callfunc "lib.fName";
+					mes "'닫기'를 누르시면 UnloadScript됩니다.";
+					next;
+					close2;
+					atcommand strcharinfo(0) + ":@언로드 은행원";
+					atcommand strcharinfo(0) + ":@unload 은행원";
+					atcommand strcharinfo(0) + ":@unloadscript 은행원";
+					end;
+				}
+			}
+			goto T_gm;
+		}
+	}
+T_main:
+	callfunc "lib.fName";
+	if (#account) {
+		query_sql "SELECT credit,zeny,unix_timestamp(last_time),unix_timestamp(due_time),state FROM `bank` WHERE `acc_id` = " + getcharid(3) + "", .@cre,.@zeny,.@t1,.@t3,.@state;
+		query_sql "SELECT unix_timestamp(now())", .@t2;
+		if (.@t1 > .@t2) {
+			mes "잠시 후에 이용이 가능합니다.";
+			close2;
+			cutin "kh_ellisia",255;
+			end;
+		}
+		if (.@t3 > 0 && .@t3 > .@t2) {
+			set .@tl,.@t3-.@t2;
+			query_sql "SELECT sec_to_time(" + .@tl + ")", .@time$;
+			query_sql "SELECT right('" + .@time$ + "',2), mid('" + .@time$ + "',len('" + .@time$ + "')-4,2), left('" + .@time$ + "',len('" + .@time$ + "')-6)", .@s$, .@m$, .@h$;
+		}
+		if (.@t3 > 0 && .@t3 < .@t2) {
+			callfunc "lib.fCredit",25;
+			query_sql "UPDATE `bank` SET `zeny` = 0 WHERE `acc_id` = " + getcharid(3) + "";
+			query_sql "UPDATE `login` SET `state` = 4 WHERE `account_id` = " + getcharid(3) + "";
+			mes "대금 납부일이 만료 되었습니다. 대출 규율에 따라 계정 정지 및 재산 몰수 집행이 있겠습니다. 이의사항이나 해제문의는 관리자에게 문의해주세요.";
+			close2;
+			cutin "kh_ellisia",255;
+			end;
+		}
+		mes "무엇을 도와드릴까요?";
+		mes "계좌 잔액: " + .@zeny + "z / 신용등급: " + .@cre + "";
+		if (.@t3 > 0 && .@h$ != "0") mes "대금납부일까지 " + .@h$ + "시간 " + .@m$ + "분 " + .@s$ + "초.";
+		if (.@t3 > 0 && .@m$ != "0") mes "대금납부일까지 " + .@m$ + "분 " + .@s$ + "초.";
+		if (.@t3 > 0 && .@m$ == "0") mes "대금납부일까지 " + .@s$ + "초.";
+		next;
+		menu "- 입금 서비스",-,"- 출금 서비스",-,"- 대출 서비스",-,"- 송금 서비스",-,"- 보조금 서비스",-;
+		if (@menu == 1) goto T_pay;
+		if (@menu == 2) goto T_rec;
+		if (.@state == 2) {
+			callfunc "lib.fName";
+			mes "신용불량자는 해당 서비스를 이용하실 수 없습니다.";
+			close2;
+			cutin "kh_ellisia",255;
+			end;
+		}
+		if (@menu == 3) goto T_deb;
+		if (@menu == 4) goto T_tre;
+		if (@menu == 5) goto T_sup;
+		if (@menu == 6) goto T_trd;
+	} else {
+		mes "은행 서비스를 이용하실려면 신규 계좌를 개설 하셔야합니다.";
+		next;
+		menu "- 신규 계좌 개설",-,"- 아 예...",T_main;
+			callfunc "lib.fName";
+			mes "다음 약관을 읽어주세요.";
+			next;
+			callfunc "lib.fName";
+			mes "- 신규 계좌 약관";
+			mes "1. 약관의 비필독에 대한 불이익은 당사자 본인 책임입니다.";
+			mes "2. 은행 서비스의 어떤 장애로 인한 피해에 대한 보상은 없습니다.";
+			mes "3. 은행 서비스의 어떤 장애에 따른 부당이익의 보존은 없습니다.";
+			mes "4. 신용등급이 마이너스가 될 경우 은행 서비스를 이용할 수 없습니다.";
+			mes "5. 신용불량이 된 경우 관리자에게 문의하셔야 신용 회복이 가능합니다.";
+			mes "6. 약관에 기재되지 않은 사항은 관리자의 소견에 따릅니다.";
+			mes " ";
+			mes "위 약관을 숙지하셨으며, 동의하십니까?";
+			next;
+			menu "- 동의합니다.",-,"- 동의하지 않습니다.",-;
+				if (@menu == 1) {
+					set #account,1;
+					query_sql "INSERT INTO `bank` ( `acc_id`, `credit`, `last_time`, `zeny`, `debt`, `due_time`, `state`) VALUES ( " + getcharid(3) + ", 0, now(), 0, 0, 0, 1)";
+					callfunc "lib.fName";
+					mes "신규 계좌 개설 중입니다.";
+					next;
+					query_sql "SELECT credit,zeny FROM `bank` WHERE `acc_id` = " + getcharid(3) + "", .@cre,.@zeny;
+					callfunc "lib.fName";
+					mes "신규 계좌 개설이 완료 되었습니다.";
+					next;
+					goto T_end;
+				}
+				if (@menu == 2) {
+					callfunc "lib.fName";
+					mes "약관에 동의를 하셔야 개설이 가능합니다.";
+					next;
+					goto T_end;
+				}
+	}
+	close2;
+	cutin "kh_ellisia",255;
+	end;
+T_pay:
+			set .@temp_1,0;
+			set .@temp_2,0;
+			set .@pr,0;
+			callfunc "lib.fName";
+			mes "- 입금 안내";
+			mes "1. 금액의 " + ($pr_1/10000) + "%는 수수료로 받습니다.";
+			mes "2. 금액의 최소액과 최대액은 각각 1,000z / 10,000,000z입니다.";
+			mes "3. 입금액에 대한 이자율은 매일 " + ($pr_2/10000) + "%입니다.";
+			mes "4. 서비스 이용 후에는 일정 시간이 지나야 다시 이용하실 수 있습니다.";
+			next;
+		T_pay_1:
+			callfunc "lib.fName";
+			mes "입금하실 금액을 입력해주세요.";
+			mes " ";
+			callfunc "lib.fSymbol",0,Zeny,"현재 보유액";
+			callfunc "lib.fSymbol",0,.@Zeny,"계좌 잔  액";
+			mes "[취소는 0을 입력]";
+			next;
+			input .@temp_1;
+			if (.@temp_1 == 0) goto T_end;
+			if (.@temp_1 < 1000 || .@temp_1 > 10000000) {
+				callfunc "lib.fName";
+				mes "금액은 최소 1,000z 이상 최대 10,000,000z 이하여야합니다.";
+				next;
+				goto T_pay_1;
+			}
+			if (Zeny < .@temp_1) {
+				callfunc "lib.fName";
+				mes "소지액이 입력하신 금액보다 적습니다.";
+				next;
+				goto T_pay_1;
+			}
+			if (2147483648 <= (.@temp_1+.@zeny)) {
+				callfunc "lib.fName";
+				mes "더 이상 입금하실 수 없습니다. (입금액초과)";
+				next;
+				goto T_pay_1;
+			}
+			set .@pr,.@temp_1*$pr_1/10000;
+			set .@temp_2,.@zeny+.@temp_1-.@pr;
+			callfunc "lib.fName";
+			mes "입금을 하시겠습니까?";
+			mes " ";
+			callfunc "lib.fSymbol",0,Zeny,"현재 보 유 액";
+			callfunc "lib.fSymbol",0,Zeny-.@temp_1,"입금후 보유액";
+			callfunc "lib.fSymbol",0,.@pr,"입  금 수수료";
+			callfunc "lib.fSymbol",0,.@zeny,"계  좌 잔  액";
+			callfunc "lib.fSymbol",0,.@temp_2,"입금후 잔  액";
+			next;
+			menu "- 입금 완료",-,"- 금액 재설정",T_pay_1;
+			set Zeny,Zeny-.@temp_1;
+			set $pr,$pr+.@pr;
+			set .@zeny,.@temp_2;
+			callfunc "lib.fCredit",1;
+			query_sql "UPDATE `bank` SET `zeny` = " + .@zeny + ", `last_time` = date_add(now(),interval " + $dl_t + " " + $dl_u$ + ") WHERE `acc_id` = " + getcharid(3) + "";
+			callfunc "lib.fName";
+			mes "입금이 완료 되었습니다.";
+			mes " ";
+			callfunc "lib.fSymbol",0,Zeny,"현재 보유액";
+			callfunc "lib.fSymbol",0,.@pr,"입금 수수료";
+			callfunc "lib.fSymbol",0,.@zeny,"계좌 잔  액";
+			next;
+			goto T_end;
+T_rec:
+			if (.@zeny <= 0) {
+				callfunc "lib.fName";
+				mes "고객님의 계좌에는 잔액이 없습니다.";
+				next;
+				goto T_main;
+			}
+			set .@temp_1,0;
+			set .@bg,0;
+			callfunc "lib.fName";
+			mes "- 출금 안내";
+			mes "1. 1회 출금 한도액은 계좌 잔액의 " + ($pr_3/10000) + "%입니다.";
+			mes "2. 출금 한도액은 계좌 잔액이 100,000z 이하일 경우 무시됩니다.";
+			mes "3. 서비스 이용 후에는 일정 시간이 지나야 다시 이용하실 수 있습니다.";
+			next;
+		T_rec_1:
+			callfunc "lib.fName";
+			mes "출금하실 금액을 입력해주세요.";
+			mes " ";
+			callfunc "lib.fSymbol",0,Zeny,"현재 보유액";
+			callfunc "lib.fSymbol",0,.@zeny,"계좌 잔  액";
+			mes "[취소는 0을 입력]";
+			next;
+			input .@temp_1;
+			if (.@temp_1 == 0) goto T_end;
+			set .@bg,.@zeny*$pr_3/10000;
+			if (.@temp_1 > .@bg && .@zeny > 100000) {
+				callfunc "lib.fName";
+				mes "1회 출금 한도액은 " + .@bg + "z입니다.";
+				next;
+				goto T_rec_1;
+			}
+			if (.@temp_1 <= 1) {
+				callfunc "lib.fName";
+				mes "1z 이상 입력해주세요.";
+				next;
+				goto T_rec_1;
+			}
+			if (.@zeny < .@temp_1) {
+				callfunc "lib.fName";
+				mes "계좌 잔액이 입력하신 금액보다 적습니다.";
+				next;
+				goto T_rec_1;
+			}
+			callfunc "lib.fName";
+			mes "출금을 하시겠습니까?";
+			mes " ";
+			callfunc "lib.fSymbol",0,Zeny,"현재 보 유 액";
+			callfunc "lib.fSymbol",0,(Zeny+.@temp_1),"출금후 보유액";
+			callfunc "lib.fSymbol",0,.@zeny,"계  좌 잔  액";
+			callfunc "lib.fSymbol",0,(.@zeny-.@temp_1),"출금후 잔  액";
+			next;
+			menu "- 출금 완료",-,"- 금액 재설정",T_rec_1;
+			set .@zeny,.@zeny-.@temp_1;
+			set Zeny,Zeny+.@temp_1;
+			callfunc "lib.fCredit",1;
+			query_sql "UPDATE `bank` SET `zeny` = " + .@zeny + ", `last_time` = date_add(now(),interval " + $dl_t + " " + $dl_u$ + ") WHERE `acc_id` = " + getcharid(3) + "";
+			callfunc "lib.fName";
+			mes "출금이 완료 되었습니다.";
+			mes " ";
+			callfunc "lib.fSymbol",0,Zeny,"현재 보유액";
+			callfunc "lib.fSymbol",0,.@zeny,"계좌 잔  액";
+			next;
+			goto T_end;
+T_deb:
+			if (.@cre < 4) {
+				callfunc "lib.fName";
+				mes "대출 서비스는 신용등급 4이상 부터 가능합니다.";
+				next;
+				goto T_main;
+			}
+			set .@temp_1,0;
+			set .@temp_2,0;
+			set .@temp_3,0;
+			set .@debt,0;
+			set .@max,500000*(.@cre-3);
+			query_sql "SELECT debt FROM `bank` WHERE `acc_id` = " + getcharid(3) + "", .@debt;
+			if (.@debt > 0) goto T_deb_2;
+			callfunc "lib.fName";
+			mes "- 대출 안내";
+			mes "1. 대출 후 대금 납부기간은 대출 후 7일입니다. [표준시간 기준]";
+			mes "2. 대금 납부방법은 대출 후 '대출 서비스' 메뉴를 눌러주시면 됩니다. [부분납부 없음]";
+			mes "3. 대금 납부기간까지 납부하지 않을 경우 계정 정지 및 재산 몰수 등의 조취가 이루어집니다.";
+			mes "4. 대출의 이자율은 대출금의 " + ($pr_4/10000) + "%이며, 대금 납부시 이자를 포함한 금액을 내셔야합니다.";
+			mes "5. 대출 한도액은 신용등급에 따라 다릅니다. [500,000z * (신용등급-3)]";
+			mes "6. 대출 서비스 이용시 보조금 서비스를 대금 완납 전에는 이용하실 수 없습니다.";
+			mes "7. 서비스 이용 후에는 일정 시간이 지나야 다시 이용하실 수 있습니다.";
+			next;
+			callfunc "lib.fName";
+			mes "대출을 받으시겠습니까?";
+			mes " ";
+			callfunc "lib.fSymbol",0,.@max,"대출한도액";
+			mes "이  자  율: " + ($pr_4/10000) + "%";
+			mes "납부  기한: 7일";
+			next;
+			menu "- 받지 않는다",T_main,"- 받는다",-;
+		T_deb_1:
+			callfunc "lib.fName";
+			mes "대출하실 금액을 입력해주세요.";
+			mes " ";
+			callfunc "lib.fSymbol",0,.@max,"대출한도액";
+			mes "이  자  율: " + ($pr_4/10000) + "%";
+			mes "납부  기한: 7일";
+			mes "[취소는 0을 입력]";
+			next;
+			input .@temp_1;
+			if (.@temp_1 == 0) goto T_end;
+			if (.@temp_1 < 500000) {
+				callfunc "lib.fName";
+				mes "최소 500,000z 이상 입력해주세요.";
+				next;
+				goto T_deb_1;
+			}
+			if (.@temp_1 > .@max) {
+				callfunc "lib.fName";
+				mes "대출 한도액 초과입니다.";
+				next;
+				goto T_deb_1;
+			}
+			set .@temp_2,.@temp_1*$pr_4/10000;
+			set .@temp_3,.@temp_1+.@temp_2;
+			query_sql "SELECT date_add(now(),interval 7 day)", .@dd$;
+			callfunc "lib.fName";
+			mes "대출을 하시겠습니까?";
+			mes " ";
+			callfunc "lib.fSymbol",0,.@temp_1,"대  출  액";
+			callfunc "lib.fSymbol",0,.@temp_2,"대출  이자";
+			callfunc "lib.fSymbol",0,.@temp_3,"대금납부액";
+			mes "대금납부일: " + .@dd$ + "까지";
+			next;
+			menu "- 대출 완료",-,"- 금액 재설정",T_deb_1;
+			set Zeny,Zeny+.@temp_1;
+			callfunc "lib.fCredit",-1;
+			query_sql "UPDATE `bank` SET `debt` = " + .@temp_1 + ", `due_time` = date_add(now(),interval " + $deb_day + " day), `last_time` = date_add(now(),interval " + $dl_t + " " + $dl_u$ + ") WHERE `acc_id` = " + getcharid(3) + "";
+			callfunc "lib.fName";
+			mes "대출이 완료 되었습니다.";
+			mes " ";
+			callfunc "lib.fSymbol",0,.@temp_1,"대  출  액";
+			callfunc "lib.fSymbol",0,.@temp_2,"대출  이자";
+			callfunc "lib.fSymbol",0,.@temp_3,"대금납부액";
+			mes "대금납부일: " + .@dd$ + "까지";
+			next;
+			goto T_end;
+		T_deb_2:
+			query_sql "SELECT unix_timestamp(due_time) FROM `bank` WHERE `acc_id` = " + getcharid(3) + "", .@t3;
+			query_sql "SELECT unix_timestamp(now())", .@t4;
+			set .@tl,.@t3-.@t4;
+			query_sql "SELECT sec_to_time(" + .@tl + ")", .@time$;
+			query_sql "SELECT right('" + .@time$ + "',2), mid('" + .@time$ + "',len('" + .@time$ + "')-4,2), left('" + .@time$ + "',len('" + .@time$ + "')-6)", .@s$, .@m$, .@h$;
+			callfunc "lib.fName";
+			mes "대금 납부를 하시겠습니까?";
+			mes " ";
+			callfunc "lib.fSymbol",0,.@debt,"대  출  액";
+			callfunc "lib.fSymbol",0,(.@debt*$pr_4/10000),"이  자  액";
+			callfunc "lib.fSymbol",0,(.@debt+(.@debt*($pr_4/10000))),"대  금  액";
+			if (.@h$ != "0") mes "대금납부일까지 " + .@h$ + "시간 " + .@m$ + "분 " + .@s$ + "초.";
+			if (.@m$ != "0") mes "대금납부일까지 " + .@m$ + "분 " + .@s$ + "초.";
+			if (.@m$ == "0") mes "대금납부일까지 " + .@s$ + "초.";
+			next;
+			menu "- 다음에 납부한다.",T_main,"- 납부한다.",-;
+			set .@temp_3,.@debt+(.@debt*($pr_4/10000));
+			if (Zeny < .@temp_3) {
+				callfunc "lib.fName";
+				mes "소지액이 부족합니다.";
+				next;
+				goto T_end;
+			}
+			set Zeny,Zeny-.@temp_3;
+			set $pr,$pr+.@temp_3-.@debt;
+			callfunc "lib.fCredit",3;
+			query_sql "UPDATE `bank` SET `debt` = 0, `due_time` = 0, `last_time` = date_add(now(),interval " + $dl_t + " " + $dl_u$ + ") WHERE `acc_id` = " + getcharid(3) + "";
+			callfunc "lib.fName";
+			mes "대금 납부가 완료 되었습니다.";
+			mes " ";
+			callfunc "lib.fSymbol",0,.@temp_3 ,"대  금  액";
+			next;
+			goto T_end;
+T_tre:
+			set .@temp_1$,"";
+			set .@temp_2,0;
+			set .@temp_3,0;
+			callfunc "lib.fName";
+			mes "- 송금 안내";
+			mes "1. 송금은 타인에게 돈을 붙이는 것을 말합니다.";
+			mes "2. 송금시 송금액의 " + ($pr_5/10000) + "%는 수수료로 차감합니다.";
+			mes "3. 송금의 최소액은 1,000z이며, 최대액은 10,000,000z입니다.";
+			mes "4. 서비스 이용 후에는 일정 시간이 지나야 다시 이용하실 수 있습니다.";
+			next;
+		T_tre_1:
+			callfunc "lib.fName";
+			mes "수취인을 입력해주세요.";
+			mes " ";
+			mes "[취소는 0을 입력]";
+			next;
+			input .@temp_1$;
+			if (.@temp_1$ == "0") goto T_end;
+			query_sql "SELECT account_id FROM `char` WHERE `name` = '" + .@temp_1$ + "'", .@acc;
+			if (!.@acc) {
+				callfunc "lib.fName";
+				mes "서버에 존재하지 않는 케릭터입니다. 다시 입력해주세요.";
+				next;
+				goto T_tre_1;
+			}
+			query_sql "SELECT acc_id FROM `bank` WHERE `acc_id` = " + .@acc + "", .@acc1;
+			if (!.@acc1) {
+				callfunc "lib.fName";
+				mes "'" + .@temp_1$ + "'님께서는 은행 계좌가 없습니다.";
+				next;
+				goto T_tre_1;
+			}
+		T_tre_2:
+			callfunc "lib.fName";
+			mes "송금하실 액수를 입력해주세요.";
+			mes " ";
+			mes "[취소는 0을 입력]";
+			next;
+			input .@temp_2;
+			if (.@temp_2 == 0) goto T_end;
+			if (.@temp_2 < 1000 || .@temp_2 > 10000000) {
+				callfunc "lib.fName";
+				mes "송금액은 최소 1,000z 최대 10,000,000z입니다.";
+				next;
+				goto T_tre_2;
+			}
+			if (Zeny < .@temp_2) {
+				callfunc "lib.fName";
+				mes "소지하신 액수보다 큽니다.";
+				next;
+				goto T_tre_2;
+			}
+			set .@temp_3,.@temp_2+(.@temp_2*($pr_5/10000));
+			if (Zeny < .@temp_3) {
+				callfunc "lib.fName";
+				mes "수수료를 지불하실 소지액이 부족합니다.";
+				next;
+				goto T_tre_2;
+			}
+			callfunc "lib.fName";
+			mes "송금하시겠습니까?";
+			mes " ";
+			callfunc "lib.fSymbol",0,0,"";
+			callfunc "lib.fSymbol",0,0,"";
+			mes "수 취 인: " + .@temp_1$ + " 귀하";
+			mes "송 금 액: " + .@temp_2 + "z";
+			mes "수 수 료: " + (.@temp_3-.@temp_2) + "z";
+			next;
+			menu "- 송금 완료",-,"- 재설정",T_tre_1;
+			set Zeny,Zeny-.@temp_3;
+			set $pr,$pr+.@temp_3-.@temp_2;
+			callfunc "lib.fCredit",1;
+			query_sql "INSERT INTO `bank_tr` ( `sacc_id`, `hacc_id`, `zeny`, `state`) VALUES ( " + getcharid(3) + ", " + .@acc + ", " + .@temp_2 + ", 0)";
+			query_sql "UPDATE `bank` SET `last_time` = date_add(now(),interval " + $dl_t + " " + $dl_u$ + ") WHERE `acc_id` = " + getcharid(3) + "";
+			callfunc "lib.fName";
+			mes "송금이 완료 되었습니다.";
+			mes " ";
+			callfunc "lib.fSymbol",0,0,"";
+			callfunc "lib.fSymbol",0,0,"";
+			mes "수 취 인: " + .@temp_1$ + " 귀하";
+			mes "송 금 액: " + .@temp_2 + "z";
+			mes "수 수 료: " + (.@temp_3-.@temp_2) + "z";
+			next;
+			goto T_end;
+T_sup:
+			if (.@cre < 1) {
+				callfunc "lib.fName";
+				mes "보조금 서비스는 신용등급 1이상 부터 가능합니다.";
+				next;
+				goto T_main;
+			}
+			if (.@zeny < 0) {
+				callfunc "lib.fName";
+				mes "보조금을 이미 받으셨습니다.";
+				next;
+				goto T_main;
+			}
+			query_sql "SELECT debt FROM `bank` WHERE `acc_id` = " + getcharid(3) + "", .@debt;
+			if (.@debt > 0) {
+				callfunc "lib.fName";
+				mes "대출 서비스의 대금 완납전까지는 이용하실수 없습니다.";
+				next;
+				goto T_main;
+			}
+			set .@temp_1,0;
+			callfunc "lib.fName";
+			mes "- 보조금 안내";
+			mes "1. 보조금은 이자 없는 대출입니다.";
+			mes "2. 보조금은 보조금을 받을시 계좌 잔액을 보조금 만큼 감산시킵니다.";
+			mes "3. 보조금을 받게되면 계좌 잔액은 마이너스 잔액으로 바뀌게 되고 무기한 무이자로 갚으시게됩니다.";
+			mes "4. 보조금 사용후 마이너스 잔액을 회복하기 전까진 보조금을 이용하실 수 없습니다.";
+			mes "5. 보조금은 신용등급에 따라 보조금액이 다릅니다. [100,000z * 신용등급]";
+			mes "6. 보조금을 받을시 신용등급 조금씩 내려갈 위험이 있습니다.";
+			mes "7. 대출 서비스를 이용 중인 경우 대급 납부 완납이 될때까지 보조금을 이용 하실수 없습니다.";
+			mes "8. 서비스 이용 후에는 일정 시간이 지나야 다시 이용하실 수 있습니다.";
+			next;
+			set .@sup,100000*.@cre;
+			set .@temp_1,.@zeny-.@sup;
+			callfunc "lib.fName";
+			mes "보조금을 받으시겠습니까?";
+			mes " ";
+			callfunc "lib.fSymbol",0,0,"";
+			callfunc "lib.fSymbol",0,0,"";
+			callfunc "lib.fSymbol",0,0,"";
+			mes "보  조  금: " + .@sup + "z";
+			mes "계좌  잔액: " + .@zeny + "z";
+			mes "보조후잔액: " + .@temp_1 + "z";
+			next;
+			menu "- 받지 않는다",T_main,"- 받는다",-;
+			set .@zeny,.@zeny-.@sup;
+			set Zeny,Zeny+.@sup;
+			callfunc "lib.fCredit",-1;
+			query_sql "UPDATE `bank` SET `zeny` = " + .@zeny + ", `last_time` = date_add(now(),interval " + $dl_t + " " + $dl_u$ + ") WHERE `acc_id` = " + getcharid(3) + "";
+			callfunc "lib.fName";
+			mes "보조금 지급이 완료 되었습니다.";
+			mes " ";
+			callfunc "lib.fSymbol",0,0,"";
+			callfunc "lib.fSymbol",0,0,"";
+			mes "현재 보유액: " + Zeny + "z";
+			mes "계좌 잔  액: " + .@zeny + "z";
+			next;
+			goto T_end;
+T_trd:
+			callfunc "lib.fName";
+			mes "- 안심거래 안내";
+			mes "1. 안심거래란 시간상 만날수 없는 유저간의 거래를 안정적으로 성사시키는 중계 서비스입니다.";
+			mes "2. 제니, 아이템 등을 안심거래를 통하여 유저간의 거래를 성사시킬 수 있습니다.";
+			mes "3. 중계시 서로 거레할 품목이나 제니가 충당할 경우에만 거래가 성사됩니다.";
+			mes "4. 안심거래는 다음과 같은 과정을 진행합니다. [거래자 지정]->[상호 거래목록 확인]->[상호 거래목록 충당]->[상호 거래 승인]->[완료]";
+			mes "5. 모든 과정에서는 상호간의 동의 및 비동의 의사가 있어야 거래가 성사됩니다.";
+			next;
+	/* 안심거래 서비스 - 준비 중
+	T_ret:
+			callfunc "lib.fName";
+			mes "안심거래를 진행할 상대방 케릭터명을 입력해주세요.";
+			next;
+			input .@char$;
+			query_sql "SELECT account_id FROM `char` WHERE `name` = '" + .@char$ + "'", .@accid;
+			if (.@accid == 0) {
+				callfunc "lib.fName";
+				mes "존재하지 않는 케릭터명입니다.";
+				next;
+				goto T_ret;
+			}
+			callfunc "lib.fName";
+			mes "거래하실분이 '" + .@char$ + "'님이 맞습니까?";
+			next;
+			menu "- 아닙니다.",T_ret,"- 맞습니다.",-;
+			callfunc "lib.fName";
+			mes "거래 품목을 지정해주십시요.";
+			next;
+			menu "- 제니",-,"- 아이템",-,"- 제니&아이템",-;
+			close;
+	*/
+T_end:
+	callfunc "lib.fName";
+	mes "이용해주셔서 감사합니다.";
+	close2;
+	cutin "kh_ellisia",255;
+	end;
+OnPCLoginEvent:
+	if (#account) {
+		query_sql "SELECT sacc_id FROM `bank_tr` WHERE `hacc_id` = " + getcharid(3) + " and `state` = 0", .@sacc;
+		if (!.@sacc) {
+			query_sql "SELECT name FROM `char` WHERE `account_id` = " + .@sacc + "", .@name$;
+			query_sql "SELECT zeny FROM `bank_tr` WHERE `hacc_id` = " + getcharid(3) + " and `state` = 0", .@zeny;
+			query_sql "UPDATE `bank_tr` SET `state` = 1 WHERE `hacc_id` = " + getcharid(3) + " and `state` = 0";
+			query_sql "UPDATE `bank` SET `zeny` = `zeny`+" + .@zeny + " WHERE `acc_id` = " + getcharid(3) + "";
+			npcwhisper strcharinfo(0),"※ '" + .@name$ + "'님께서 '" + strcharinfo(0) + "'님께 " + .@zeny + "z를 송금하셨습니다.";
+			npcwhisper strcharinfo(0),"　송금액은 전액 '" + strcharinfo(0) + "'님의 계좌로 입금 되었습니다.";
+		}
+		query_sql "SELECT debt FROM `bank` WHERE `acc_id` = " + getcharid(3) + "", .@debt;
+		if (.@debt == 0) end;
+		query_sql "SELECT unix_timestamp(now())", .@t4;
+		query_sql "SELECT unix_timestamp(due_time) FROM `bank` WHERE `acc_id` = " + getcharid(3) + "", .@t3;
+		cutin "kh_ellisia",2;
+		callfunc "lib.fReName", "은행원", "마탈리아";
+		callfunc "lib.fName";
+		if (.@t3 < .@t4) {
+			set .@tl,.@t3-.@t4;
+			query_sql "SELECT sec_to_time(" + .@tl + ")", .@time$;
+			query_sql "SELECT right('" + .@time$ + "',2), mid('" + .@time$ + "',len('" + .@time$ + "')-4,2), left('" + .@time$ + "',len('" + .@time$ + "')-6)", .@s$, .@m$, .@h$;
+		} else {
+			callfunc "lib.fCredit",-25;
+			query_sql "UPDATE `bank` SET `zeny` = 0 WHERE `acc_id` = " + getcharid(3) + "";
+			query_sql "UPDATE `login` SET `state` = 4 WHERE `account_id` = " + getcharid(3) + "";
+			mes "대금 납부일이 만료 되었습니다. 대출 규율에 따라 계정 정지 및 재산 몰수 집행이 있겠습니다. 이의사항이나 해제문의는 관리자에게 해주십시요.";
+			close2;
+			cutin "kh_ellisia",255;
+			end;
+		}
+		if (.@h$ != "0") mes "대금납부일까지 " + .@h$ + "시간 " + .@m$ + "분 " + .@s$ + "초.";
+		if (.@m$ != "0") mes "대금납부일까지 " + .@m$ + "분 " + .@s$ + "초.";
+		if (.@m$ == "0") mes "대금납부일까지 " + .@s$ + "초.";
+		close2;
+		cutin "kh_ellisia",255;
+		end;
+	}
+	end;
+OnHour00:
+	query_sql "UPDATE `bank` SET `zeny` = `zeny`*(" + $pr_2 + "/10000)";
+	end;
+}
+
+// ================================
+// = 스크립트 이름 표시 지정 함수
+// =
+// = arg(0): NPC 분류
+// = arg(1): NPC 이름
+// ================================
+function	script	lib.fReName	{
+	set @name$[1], getarg(0);
+	set @name$[2], getarg(1);
+	return;
+}
+
+// ================================
+// = 스크립트 이름 표시 함수
+// ================================
+function	script	lib.fName	{
+	mes "[^CC3300"+@name$[1]+"^000000] "+@name$[2];
+	mes " ";
+	return;
+}
+
+// ================================
+// = 스크립트 신용등급 갱신 함수
+// ================================
+function	script	lib.fCredit	{
+	set #cre,#cre+getarg(0);
+	if (#cre <= -10) {
+		query_sql "UPDATE `bank` SET `state` = 2 WHERE `acc_id` = " + getcharid(3) + "";
+		return;
+	}
+	if (#cre > 1) set .@cre,0;
+	if (#cre > 2) set .@cre,1;
+	if (#cre > 3) set .@cre,2;
+	if (#cre > 6) set .@cre,3;
+	if (#cre > 9) set .@cre,4;
+	if (#cre > 15) set .@cre,5;
+	if (#cre > 24) set .@cre,6;
+	if (#cre > 39) set .@cre,7;
+	if (#cre > 63) set .@cre,8;
+	if (#cre > 102) set .@cre,9;
+	if (#cre > 165) set .@cre,10;
+	query_sql "UPDATE `bank` SET `credit` = " + .@cre + " WHERE `acc_id` = " + getcharid(3) + "";
+	return;
+}
+
+// ================================
+// = 스크립트 율 조정 메뉴 함수
+// ================================
+function	script	lib.fBoat	{
+	callfunc "lib.fName";
+	mes "조정할 수치를 입력해주세요.";
+	mes "(현재 " + getarg(1) + ": " + ($pr_ + getarg(0)/10000) + "%)";
+	mes "[0~10000사이 입력]";
+	next;
+	input .@boat;
+	if (.@boat < 0 || .@boat > 10000) {
+		callfunc "lib.fName";
+		mes "0~10000사이 숫자를 입력해주세요.";
+		next;
+		callfunc "lib.fBoat",getarg(0),getarg(1);
+		donpcevent "은행원::T_gm";
+		close2;
+		end;
+	}
+	callfunc "lib.fName";
+	mes "" + ($pr_ + getarg(0)/10000) + "%에서 " + (.@boat/10000) + "%로 조정하시겠습니까?";
+	next;
+	menu "- 재조정",-,"- 조정한다.",-;
+	if (@menu == 1) {
+		callfunc "lib.fBoat",getarg(0),getarg(1);
+		donpcevent "은행원::T_gm";
+		close2;
+		end;
+	}
+	if (@menu == 2) {
+		set .@temp1,$pr_ + getarg(0);
+		setd $pr_ + getarg(0),.@boat;
+		Announce "[은행] " + getarg(1) + "(을)를 " + (.@temp1/10000) + "%에서 " + (.@boat/10000) + "%로 조정하였습니다.", bc_all, 0xFFCC66;
+		callfunc "lib.fName";
+		mes "" + getarg(1) + "(을)를 " + (.@boat/10000) + "%로 조정하였습니다.";
+		next;
+	}
+	return;
+}
+
+// ================================
+// = 스크립트 딜레이 조정 함수
+// ================================
+function	script	lib.fTime	{
+	callfunc "lib.fName";
+	mes "조정하실 단위를 선택해주세요.";
+	mes "단위가 " + $dl_u$ + "에서 " + getarg(0) + "로 변경 되었습니다.";
+	next;
+	set $dl_u$,getarg(0);
+	return;
+}
+
+// ================================
+// = 천단위 기호 표시 함수
+// ================================
+function	script	lib.fSymbol	{
+	if (!getarg(0)) {
+		set @mun$,getarg(2);
+		set @amu,getarg(1);
+		query_sql "SELECT length(" + @amu + ")", @l;
+		if (.@l < 4) mes "" + @mun$ + ": " + @amu + "z";
+		if (4 <= .@l && .@l < 7) {
+			callfunc "lib.fSymbol_",2,@amu;
+			mes "" + @mun$ + ": " +@al$[1] + "," +@al$[2] + "z";
+		}
+		if (7 <= .@l && .@l < 10) {
+			callfunc "lib.fSymbol_",3,@amu;
+			mes "" + @mun$ + ": " +@al$[1] + "," +@al$[2] + "," +@al$[3] + "z";
+		}
+		if (10 <= .@l && .@l < 13) {
+			callfunc "lib.fSymbol_",4,@amu;
+			mes "" + @mun$ + ": " +@al$[1] + "," +@al$[2] + "," +@al$[3] + "," +@al$[4] + "z";
+		}
+		set @mun$,"";
+		set @amu,0;
+		set @l,0;
+	}
+	return;
+}
+function	script	lib.fSymbol_	{
+	for (set .@i,getarg(0); .@i == 1; set .@i,.@i-1) {
+		for (set .@j,1; .@j > getarg(0)*3; set .@j,.@j+3) {
+			query_sql "SELECT mid(reverse('" + getarg(1) + "')," + .@j + ",3)", @al$[.@i];
+			query_sql "SELECT reverse('" + @al[.@i] + "')", @al$[.@i];
+		}
+	}
+	return @al$[4], @al$[3], @al$[2], @al$[1];
+}
+

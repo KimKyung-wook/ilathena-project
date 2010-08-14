@@ -1,0 +1,76 @@
+
+//    kk  ""tt""  "";;    """"JJ;;kkJJ  JJtt""    ""tt""  ;;tt""""tt    ""tt""   
+//   JJ  kk""tt;;JJ      ttkk    ""tt    ;;;;ttJJ;;  ""ttkk;;"";;;;ttkk;;  ;;kk  
+//  "";;  ""  kk  kk  tt  ttww    ZZ;;  ww    RR  ;;JJ  JJJJ  tt    RR  ;;JJ  JJ 
+//  JJ      """";;""  kk  ttkk  ;;kk    ZZ    ww  ;;""  kk""  ww    kk;;kk""  JJ 
+//  kk      JJ  kk    ww  ttkk  JJJJ  ;;ww  ""JJ  ;;tt""RR    ZZ  ;;ZZJJ      kk 
+//  kk  ;;  "";;JJ        JJtt  JJJJ  ""kk  JJ""  ww""""ww    ww  ""JJ  ZZ    kk 
+//  JJ  JJ  ;;JJ""  "";;  ww;;  kkJJ  JJ""  kk;;  ww  ;;ww  ""JJ  ww;;  ww  ;;tt 
+//;;""  RR    RR    ww""  kk""  ;;tt  ww    kkkk      kktt  JJ;;  ZZ;;  ;;  tt   
+//  JJkkttkkkk;;kkkk;;JJkktt""kkJJJJkkttJJkk;;  kkkkJJ  ttkkttJJkk;;ttkkJJkkJJ   
+//| I | - | L | U | N | A | A | T | H | E | N | A | P | R | O | J | E | C | T |  
+//------------------------------------------------------------------------------
+// iLAthena 아인브로크 비공정 공항 스크립트 <http://www.i-luna.com>
+// 한글화 by 아이루나 iLAthena Project
+//------------------------------------------------------------------------------
+// 한글화 by 아이루나(사이버짱)
+//------------------------------------------------------------------------------
+
+airport,126,43,4	script	공항 직원#01::AirportE	90,{
+	mes "[공항 직원]";
+	mes "안녕하세요. 저희 항공은 항상 고객님의 편안한 여행을 위해 최선을 다하고 있습니다. 무엇을 도와드릴까요?";
+	next;
+	if (select("공항 내부로 들어간다:취소") == 1) {
+		mes "[공항 직원]";
+		mes "비공정의 이용 요금은 1200 z 입니다. 비공정 무료이용권을 갖고 계시면 무료로 들어가실 수 있습니다. 공항 내부로 들어 가시겠습니까?";
+		next;
+		if (select("예:아니오") == 1) {
+			if(countitem(7311) > 0) {
+				delitem 7311,1;
+				warp "airport",148,51;
+				close;
+			}
+			if(Zeny >= 1200) {
+				set Zeny, Zeny - 1200;
+				warp "airport",148,51;
+				close;
+			}
+			mes "[공항 직원]";
+			mes "지불하실 요금이 부족합니다.";
+			close;
+		}
+	}
+	mes "[공항 직원]";
+	mes "다음에 또 이용해주세요. 감사합니다.";
+	close;
+}
+
+airport,143,43,4	duplicate(AirportE)	공항 직원#02	90
+airport,156,43,4	duplicate(AirportE)	공항 직원#03	90
+
+airport,126,51,4	script	공항 직원#04::AirportE2	90,{
+	mes "[공항 직원]";
+	mes "안녕하세요. 저희 항공은 항상 고객님의 편안한 여행을 위해 최선을 다하고 있습니다. 무엇을 도와드릴까요?";
+	next;
+	if (select("공항 내부에서 나간다:취소") == 1) {
+		mes "[공항 직원]";
+		mes "내부에서 나갔다가 들어오시려면 요금을 지불하셔야 합니다. 나가시겠습니까?";
+		next;
+		if (select("예:아니오") == 1) {
+			warp "airport",142,40;
+			close;
+		}
+	}
+	mes "[공항 직원]";
+	mes "다음에 또 이용해주세요. 감사합니다.";
+	close;
+}
+
+airport,143,51,4	duplicate(AirportE2)	공항 직원#05	90
+airport,156,51,4	duplicate(AirportE2)	공항 직원#06	90
+
+einbroch,94,267,4	script	비공정 직원#07	91,{
+	mes "[비공정 직원]";
+	mes "안녕하세요. 저희 비공정에선 항상 고객님의 편안한 여행을 위해 최선을 다하고 있습니다. 비공정을 타시려면 이쪽 문을 통해 들어가시고, 공항으로 나가시려면 계단을 통해 내려가시면 됩니다.";
+	close;
+}

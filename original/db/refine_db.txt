@@ -1,0 +1,25 @@
+
+//    kk  ""tt""  "";;    """"JJ;;kkJJ  JJtt""    ""tt""  ;;tt""""tt    ""tt""   
+//   JJ  kk""tt;;JJ      ttkk    ""tt    ;;;;ttJJ;;  ""ttkk;;"";;;;ttkk;;  ;;kk  
+//  "";;  ""  kk  kk  tt  ttww    ZZ;;  ww    RR  ;;JJ  JJJJ  tt    RR  ;;JJ  JJ 
+//  JJ      """";;""  kk  ttkk  ;;kk    ZZ    ww  ;;""  kk""  ww    kk;;kk""  JJ 
+//  kk      JJ  kk    ww  ttkk  JJJJ  ;;ww  ""JJ  ;;tt""RR    ZZ  ;;ZZJJ      kk 
+//  kk  ;;  "";;JJ        JJtt  JJJJ  ""kk  JJ""  ww""""ww    ww  ""JJ  ZZ    kk 
+//  JJ  JJ  ;;JJ""  "";;  ww;;  kkJJ  JJ""  kk;;  ww  ;;ww  ""JJ  ww;;  ww  ;;tt 
+//;;""  RR    RR    ww""  kk""  ;;tt  ww    kkkk      kktt  JJ;;  ZZ;;  ;;  tt   
+//  JJkkttkkkk;;kkkk;;JJkktt""kkJJJJkkttJJkk;;  kkkkJJ  ttkkttJJkk;;ttkkJJkkJJ   
+//| I | - | L | U | N | A | A | T | H | E | N | A | P | R | O | J | E | C | T |  
+//------------------------------------------------------------------------------
+// iLAthena 장비 아이템 제련 데이터베이스 <http://www.i-luna.com>
+// 한글화 by 아이루나 iLAthena Project
+//------------------------------------------------------------------------------
+
+// 안전 수준의 업그레이드에 대한 테이블, Stats per level after safe limit, Safe level limit, Lv.1 %, Lv 2 %, Lv.3%, 기타...
+// 갑옷 방어 비율(ie 70 = 0.7 방어력)
+// 무기 전체 비율 (ie 3 = 3 공격력)
+
+ 70, 4,4, 100,100,100,100, 60, 40, 40, 20, 20, 10,	// 갑옷
+  2, 3,7, 100,100,100,100,100,100,100, 60, 40, 20,	// 렙1 무기
+  3, 5,6, 100,100,100,100,100,100, 60, 40, 20, 20,	// 렙2 무기
+  5, 8,5, 100,100,100,100,100, 60, 50, 20, 20, 20,	// 렙3 무기
+  7,13,4, 100,100,100,100, 60, 40, 40, 20, 20, 10,	// 렙4 무기

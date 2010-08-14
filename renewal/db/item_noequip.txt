@@ -1,0 +1,58 @@
+
+//    kk  ""tt""  "";;    """"JJ;;kkJJ  JJtt""    ""tt""  ;;tt""""tt    ""tt""   
+//   JJ  kk""tt;;JJ      ttkk    ""tt    ;;;;ttJJ;;  ""ttkk;;"";;;;ttkk;;  ;;kk  
+//  "";;  ""  kk  kk  tt  ttww    ZZ;;  ww    RR  ;;JJ  JJJJ  tt    RR  ;;JJ  JJ 
+//  JJ      """";;""  kk  ttkk  ;;kk    ZZ    ww  ;;""  kk""  ww    kk;;kk""  JJ 
+//  kk      JJ  kk    ww  ttkk  JJJJ  ;;ww  ""JJ  ;;tt""RR    ZZ  ;;ZZJJ      kk 
+//  kk  ;;  "";;JJ        JJtt  JJJJ  ""kk  JJ""  ww""""ww    ww  ""JJ  ZZ    kk 
+//  JJ  JJ  ;;JJ""  "";;  ww;;  kkJJ  JJ""  kk;;  ww  ;;ww  ""JJ  ww;;  ww  ;;tt 
+//;;""  RR    RR    ww""  kk""  ;;tt  ww    kkkk      kktt  JJ;;  ZZ;;  ;;  tt   
+//  JJkkttkkkk;;kkkk;;JJkktt""kkJJJJkkttJJkk;;  kkkkJJ  ttkkttJJkk;;ttkkJJkkJJ   
+//| I | - | L | U | N | A | A | T | H | E | N | A | P | R | O | J | E | C | T |  
+//------------------------------------------------------------------------------
+// iLAthena 아이템 사용 및 착용 제한 설정 데이터베이스 <http://www.i-luna.com>
+// 한글화 by 아이루나 iLAthena Project
+//------------------------------------------------------------------------------
+// 한글화 by 아이루나(사이버짱)
+//------------------------------------------------------------------------------
+// 아이템ID,플래그
+// 플래그
+// 1- PvP 에서 제한
+// 2- GvG 에서 제한
+// 3- PvP 및 GvG 제한
+// 제한 지역 <conf/mapflag/restricted.txt 맵플래그>
+// 4   - restricted zone 1 <conf/mapflag/restricted.txt 맵플래그 에서 설정 지역>
+// 8   - restricted zone 2 <conf/mapflag/restricted.txt 맵플래그 에서 설정 지역>
+// 16  - restricted zone 3 <conf/mapflag/restricted.txt 맵플래그 에서 설정 지역>
+// 32  - restricted zone 4 <conf/mapflag/restricted.txt 맵플래그 에서 설정 지역>
+// 64 -  restricted zone 5 <conf/mapflag/restricted.txt 맵플래그 에서 설정 지역>
+// 128 - restricted zone 6 <conf/mapflag/restricted.txt 맵플래그 에서 설정 지역>
+// 256 - restricted zone 7 <conf/mapflag/restricted.txt 맵플래그 에서 설정 지역>
+
+// <설정 설명서>
+// 1201,1 - PvP 지역에서 나이프 착용 불가
+// 608,3 - PvP 지역 및 GvG 지역 모두에서 이그드라실의 씨앗 아이템 사용 불가
+// 4174,3 - PvP 지역 및 GvG 지역 모두에서 데빌링 카드 옵션 적용 불가
+// 501,4 - restricted.txt 맵플래그 파일에서 1번으로 설정한 지역에서 빨간포션 아이템 사용 불가
+// 502,8 - restricted.txt 맵플래그 파일에서 2번으로 설정한 지역에서 주홍포션 아이템 사용 불가
+// 503,16 - restricted.txt 맵플래그 파일에서 3번으로 설정한 지역에서 노란포션 아이템 사용 불가
+// 플래그 부분 숫자를 더하여 사용 가능
+// 519,41 (32+8+1) - restricted.txt 맵플래그 파일에서 2번 4번으로 설정한 지역및 PvP 지역에서 우유 아이템 사용 불가
+
+
+//Zone 1 - Aldebaran Turbo Track
+601,4   // 파리의 날개
+506,4   // 초록포션
+525,4   // 만능약
+
+//Zone 2 - Jail
+601,8   // 파리의 날개
+602,8   // 나비의 날개
+12212,8   // 거대한 파리의 날개
+14582,8  // 노랑나비의 날개
+14583,8  // 초록나비의 날개
+14584,8  // 빨간나비의 날개
+14585,8  // 파란나비의 날개
+
+//Zone 3 - Izlude Battle Arena
+601,16   // 파리의 날개

@@ -1,0 +1,120 @@
+
+//    kk  ""tt""  "";;    """"JJ;;kkJJ  JJtt""    ""tt""  ;;tt""""tt    ""tt""   
+//   JJ  kk""tt;;JJ      ttkk    ""tt    ;;;;ttJJ;;  ""ttkk;;"";;;;ttkk;;  ;;kk  
+//  "";;  ""  kk  kk  tt  ttww    ZZ;;  ww    RR  ;;JJ  JJJJ  tt    RR  ;;JJ  JJ 
+//  JJ      """";;""  kk  ttkk  ;;kk    ZZ    ww  ;;""  kk""  ww    kk;;kk""  JJ 
+//  kk      JJ  kk    ww  ttkk  JJJJ  ;;ww  ""JJ  ;;tt""RR    ZZ  ;;ZZJJ      kk 
+//  kk  ;;  "";;JJ        JJtt  JJJJ  ""kk  JJ""  ww""""ww    ww  ""JJ  ZZ    kk 
+//  JJ  JJ  ;;JJ""  "";;  ww;;  kkJJ  JJ""  kk;;  ww  ;;ww  ""JJ  ww;;  ww  ;;tt 
+//;;""  RR    RR    ww""  kk""  ;;tt  ww    kkkk      kktt  JJ;;  ZZ;;  ;;  tt   
+//  JJkkttkkkk;;kkkk;;JJkktt""kkJJJJkkttJJkk;;  kkkkJJ  ttkkttJJkk;;ttkkJJkkJJ   
+//| I | - | L | U | N | A | A | T | H | E | N | A | P | R | O | J | E | C | T |  
+//------------------------------------------------------------------------------
+// iLAthena 아마쯔 안내요원 스크립트 <http://www.i-luna.com>
+// 한글화 by 아이루나 iLAthena Project
+//------------------------------------------------------------------------------
+// 한글화 by RUSH
+//------------------------------------------------------------------------------
+
+amatsu,207,89,3	script	아마쯔 가이드#ama	758,{
+	mes "[야마짱]";
+	mes "언제나 만개한 아름다운 벛꽃이,";
+	mes "살갑게 다가오는 고요한 마을";
+	mes "아마쯔에 오신걸 환영합니다.";
+	next;
+	mes "[야마짱]";
+	mes "전 <제 13대 미스 아마쯔> 진";
+	mes "아마짱이라고 합니다.";
+	mes "아마쯔진으로서 책임지고";
+	mes "마을 안내를 해드리고 있으니";
+	mes "궁금한 점이 있으면";
+	mes "저에게 말씀해주세요.";
+	next;
+	switch(select("성:도구점:무기점:주점")) {
+	case 1:
+		viewpoint 1,85,235,0,0xFF3355;
+		mes "[야마짱]";
+		mes "미니맵의";
+		mes "^FF3355+^000000 부분으로 가시면";
+		mes "성이 나옵니다.";
+		mes "그럼 부디 아마쯔에서";
+		mes "즐거운 시간 보내시길 바랍니다.";
+		close;
+	case 2:
+		viewpoint 1,96,118,1,0xCE6300;
+		mes "[야마짱]";
+		mes "미니맵의";
+		mes "^CE6300+^000000 부분이";
+		mes "도구점이 되겠습니다.";
+		mes "그럼 부디 아마쯔에서";
+		mes "즐거운 시간 보내시길 바랍니다.";
+		close;
+	case 3:
+		viewpoint 1,132,117,2,0x55FF33;
+		mes "[야마짱]";
+		mes "미니맵의";
+		mes "^55FF33+^000000 부분이";
+		mes "무기점이 되겠습니다.";
+		mes "그럼 부디 아마쯔에서";
+		mes "즐거운 시간 보내시길 바랍니다.";
+		close;
+	case 4:
+		viewpoint 1,217,116,3,0x3355FF;
+		mes "[야마짱]";
+		mes "미니맵의";
+		mes "^3355FF+^000000 부분이";
+		mes "주점입니다.";
+		mes "그럼 부디 아마쯔에서";
+		mes "즐거운 시간 보내시길 바랍니다.";
+		close;
+	}
+}
+	
+amatsu,251,283,4	script	가이드맨#2ama	767,{
+	mes "[가이드맨]";
+	mes "어서오십시요. 외지의 여행자시여.";
+	mes "전 이 곳 아름다운 마을,";
+	mes "아마쯔의 가이드를 맡고 있습니다.";
+	next;
+	mes "[가이드맨]";
+	mes "어딜 찾고 계십니까?";
+	next;
+	switch(select("성:도구점:무기점:주점")) {
+	case 1:
+		viewpoint 1,85,235,0,0xFF3355;
+		mes "[가이드맨]";
+		mes "미니맵의";
+		mes "^FF3355+^000000 부분으로 가시면";
+		mes "성이 나옵니다.";
+		mes "그럼 부디 아마쯔에서";
+		mes "즐거운 시간 보내시길 바랍니다.";
+		close;
+	case 2:
+		viewpoint 1,96,118,1,0xCE6300;
+		mes "[가이드맨]";
+		mes "미니맵의";
+		mes "^CE6300+^000000 부분이";
+		mes "도구점이 되겠습니다.";
+		mes "그럼 부디 아마쯔에서";
+		mes "즐거운 시간 보내시길 바랍니다.";
+		close;
+	case 3:
+		viewpoint 1,132,117,2,0x55FF33;
+		mes "[가이드맨]";
+		mes "미니맵의";
+		mes "^55FF33+^000000 부분이";
+		mes "무기점이 되겠습니다.";
+		mes "그럼 부디 아마쯔에서";
+		mes "즐거운 시간 보내시길 바랍니다.";
+		close;
+	case 4:
+		viewpoint 1,217,116,3,0x3355FF;
+		mes "[가이드맨]";
+		mes "미니맵의";
+		mes "^3355FF+^000000 부분이";
+		mes "주점입니다.";
+		mes "그럼 부디 아마쯔에서";
+		mes "즐거운 시간 보내시길 바랍니다.";
+		close;
+	}
+}

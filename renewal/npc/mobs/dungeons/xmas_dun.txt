@@ -1,0 +1,39 @@
+
+//    kk  ""tt""  "";;    """"JJ;;kkJJ  JJtt""    ""tt""  ;;tt""""tt    ""tt""   
+//   JJ  kk""tt;;JJ      ttkk    ""tt    ;;;;ttJJ;;  ""ttkk;;"";;;;ttkk;;  ;;kk  
+//  "";;  ""  kk  kk  tt  ttww    ZZ;;  ww    RR  ;;JJ  JJJJ  tt    RR  ;;JJ  JJ 
+//  JJ      """";;""  kk  ttkk  ;;kk    ZZ    ww  ;;""  kk""  ww    kk;;kk""  JJ 
+//  kk      JJ  kk    ww  ttkk  JJJJ  ;;ww  ""JJ  ;;tt""RR    ZZ  ;;ZZJJ      kk 
+//  kk  ;;  "";;JJ        JJtt  JJJJ  ""kk  JJ""  ww""""ww    ww  ""JJ  ZZ    kk 
+//  JJ  JJ  ;;JJ""  "";;  ww;;  kkJJ  JJ""  kk;;  ww  ;;ww  ""JJ  ww;;  ww  ;;tt 
+//;;""  RR    RR    ww""  kk""  ;;tt  ww    kkkk      kktt  JJ;;  ZZ;;  ;;  tt   
+//  JJkkttkkkk;;kkkk;;JJkktt""kkJJJJkkttJJkk;;  kkkkJJ  ttkkttJJkk;;ttkkJJkkJJ   
+//| I | - | L | U | N | A | A | T | H | E | N | A | P | R | O | J | E | C | T |  
+//------------------------------------------------------------------------------
+// iLAthena 몬스터 배치 스크립트 <http://www.i-luna.com>
+// 한글화 by 아이루나 iLAthena Project
+//------------------------------------------------------------------------------
+
+//==================================================
+// xmas_dun01 - 장난감 공장 창고
+//==================================================
+xmas_dun01,0,0,0,0	monster	마린	1242,20,0,0,0
+xmas_dun01,0,0,0,0	monster	포링	1002,10,0,0,0
+xmas_dun01,0,0,0,0	monster	드롭프스	1113,10,0,0,0
+xmas_dun01,0,0,0,0	monster	포포링	1031,20,0,0,0
+xmas_dun01,0,0,0,0	monster	쿠키	1265,40,0,0,0
+xmas_dun01,0,0,0,0	monster	쿠키	1246,40,0,0,0
+xmas_dun01,0,0,0,0	monster	미스트 케이스	1249,5,0,0,0
+xmas_dun01,0,0,0,0	monster	체펫트	1250,1,1200000,900000,0
+xmas_dun01,0,0,0,0	monster	마스터링	1090,1,1800000,900000,0
+xmas_dun01,0,0,0,0	monster	엔젤링	1096,1,3600000,1800000,0
+
+//==================================================
+// xmas_dun02 - 장난감 분류소
+//==================================================
+xmas_dun02,0,0,0,0	monster	쿠키	1246,20,0,0,0
+xmas_dun02,0,0,0,0	monster	쿠키	1265,20,0,0,0
+xmas_dun02,0,0,0,0	monster	크루이저	1248,35,0,0,0
+xmas_dun02,0,0,0,0	monster	미스트 케이스	1249,50,0,0,0
+xmas_dun02,0,0,0,0	monster	하티베베	1515,1,1800000,0,0
+xmas_dun02,0,0,0,0	monster	폭풍의 기사	1251,1,3600000,600000,0

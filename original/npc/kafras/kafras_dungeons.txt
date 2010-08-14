@@ -1,0 +1,94 @@
+
+//    kk  ""tt""  "";;    """"JJ;;kkJJ  JJtt""    ""tt""  ;;tt""""tt    ""tt""   
+//   JJ  kk""tt;;JJ      ttkk    ""tt    ;;;;ttJJ;;  ""ttkk;;"";;;;ttkk;;  ;;kk  
+//  "";;  ""  kk  kk  tt  ttww    ZZ;;  ww    RR  ;;JJ  JJJJ  tt    RR  ;;JJ  JJ 
+//  JJ      """";;""  kk  ttkk  ;;kk    ZZ    ww  ;;""  kk""  ww    kk;;kk""  JJ 
+//  kk      JJ  kk    ww  ttkk  JJJJ  ;;ww  ""JJ  ;;tt""RR    ZZ  ;;ZZJJ      kk 
+//  kk  ;;  "";;JJ        JJtt  JJJJ  ""kk  JJ""  ww""""ww    ww  ""JJ  ZZ    kk 
+//  JJ  JJ  ;;JJ""  "";;  ww;;  kkJJ  JJ""  kk;;  ww  ;;ww  ""JJ  ww;;  ww  ;;tt 
+//;;""  RR    RR    ww""  kk""  ;;tt  ww    kkkk      kktt  JJ;;  ZZ;;  ;;  tt   
+//  JJkkttkkkk;;kkkk;;JJkktt""kkJJJJkkttJJkk;;  kkkkJJ  ttkkttJJkk;;ttkkJJkkJJ   
+//| I | - | L | U | N | A | A | T | H | E | N | A | P | R | O | J | E | C | T |  
+//------------------------------------------------------------------------------
+// iLAthena 던전 카프라 직원 스크립트 <http://www.i-luna.com>
+// 한글화 by 아이루나 iLAthena Project
+//------------------------------------------------------------------------------
+// 한글화 by 아이루나(사이버짱)
+//------------------------------------------------------------------------------
+
+//<============================= 바이아란 섬 ============================>
+izlu2dun,106,58,8	script	카프라 직원::kaf_izlu2dun	115,{
+	cutin "kafra_03",2;
+	if(BaseJob==Job_Novice && job_merchant_q2>0) callfunc "F_MercKafra";
+	mes "[카프라 직원]";
+	mes "어서오십시오. 카프라 서비스는 언제나 여러분 곁에 있습니다. 무엇을 도와드릴까요?";
+	callfunc "F_Kafra",5,2,1,120,1200;
+
+	M_Save:
+		savepoint "izlu2dun",87,170;
+		callfunc "F_KafEnd",0,1,"바이아란";
+}
+
+
+//<============================ 지하수로 ============================>
+prt_fild05,290,224,3	script	카프라 직원::prt_fild05	114,{
+	cutin "kafra_04",2;
+	mes "[카프라 직원]";
+	mes "어서오십시오. 카프라 서비스는 언제나 여러분 곁에 있습니다. 무엇을 도와드릴까요?";
+	callfunc "F_Kafra",5,1,1,40,0;
+
+	M_Save:
+		savepoint "prt_fild05",274,243;
+		callfunc "F_KafEnd",0,1, "지하수로";
+}
+
+
+//<=========================== 묘르닐 폐광 =======================>
+mjolnir_02,83,362,4	script	카프라 직원::kaf_mjolnir_02	116,{
+	cutin "kafra_02",2;
+	mes "[카프라 직원]";
+	mes "어서오십시오. 카프라 서비스는 언제나 여러분 곁에 있습니다. 무엇을 도와드릴까요?";
+	callfunc "F_Kafra",5,6,1,100,0;
+
+	M_Save:
+		savepoint "mjolnir_02",98,352;
+		callfunc "F_KafEnd",0,1,"묘르닐 폐광";
+}
+
+
+//<=============================== 피라미드 ============================>
+moc_ruins,59,157,5	script	카프라 직원::moc_ruins	114,{
+	cutin "kafra_04",2;
+	mes "[카프라 직원]";
+	mes "어서오십시오. 카프라 서비스는 언제나 여러분 곁에 있습니다. 무엇을 도와드릴까요?";
+	callfunc "F_Kafra",5,2,1,90,1200;
+
+	M_Save:
+		savepoint "moc_ruins",41,141;
+		callfunc "F_KafEnd",0,1,"피라미드";
+}
+
+
+//<================================ 오크 던전 ============================>
+gef_fild10,73,340,5	script	카프라 직원::kaf_gef_fild10	116,{
+	cutin "kafra_02",2;
+	mes "[카프라 직원]";
+	mes "어서오십시오. 카프라 서비스는 언제나 여러분 곁에 있습니다. 무엇을 도와드릴까요?";
+	callfunc "F_Kafra",5,6,1,130,0;
+
+	M_Save:
+		savepoint "gef_fild10",54,326;
+		callfunc "F_KafEnd",0,1,"오크 던전";
+}
+
+//<============================== 거북이 섬 ==========================>
+alb2trea,59,69,5	script	카프라 직원::kaf_alb2trea	117,{
+	cutin "kafra_01",2;
+	mes "[카프라 직원]";
+	mes "어서오십시오. 카프라 서비스는 언제나 여러분 곁에 있습니다. 무엇을 도와드릴까요?";
+	callfunc "F_Kafra",5,2,1,50,0;
+
+	M_Save:
+		savepoint "alb2trea",92,64;
+		callfunc "F_KafEnd",0,1,0,"거북이섬";
+}

@@ -1,0 +1,107 @@
+
+//    kk  ""tt""  "";;    """"JJ;;kkJJ  JJtt""    ""tt""  ;;tt""""tt    ""tt""   
+//   JJ  kk""tt;;JJ      ttkk    ""tt    ;;;;ttJJ;;  ""ttkk;;"";;;;ttkk;;  ;;kk  
+//  "";;  ""  kk  kk  tt  ttww    ZZ;;  ww    RR  ;;JJ  JJJJ  tt    RR  ;;JJ  JJ 
+//  JJ      """";;""  kk  ttkk  ;;kk    ZZ    ww  ;;""  kk""  ww    kk;;kk""  JJ 
+//  kk      JJ  kk    ww  ttkk  JJJJ  ;;ww  ""JJ  ;;tt""RR    ZZ  ;;ZZJJ      kk 
+//  kk  ;;  "";;JJ        JJtt  JJJJ  ""kk  JJ""  ww""""ww    ww  ""JJ  ZZ    kk 
+//  JJ  JJ  ;;JJ""  "";;  ww;;  kkJJ  JJ""  kk;;  ww  ;;ww  ""JJ  ww;;  ww  ;;tt 
+//;;""  RR    RR    ww""  kk""  ;;tt  ww    kkkk      kktt  JJ;;  ZZ;;  ;;  tt   
+//  JJkkttkkkk;;kkkk;;JJkktt""kkJJJJkkttJJkk;;  kkkkJJ  ttkkttJJkk;;ttkkJJkkJJ   
+//| I | - | L | U | N | A | A | T | H | E | N | A | P | R | O | J | E | C | T |  
+//------------------------------------------------------------------------------
+// iLAthena pvp mapflag 설정 파일 <http://www.i-luna.com>
+// 한글화 by 아이루나 iLAthena Project
+//------------------------------------------------------------------------------
+// 한글화 by Nark
+//------------------------------------------------------------------------------
+
+// PvP맵 설정
+
+// PvP ========================
+pvp_y_1-1	mapflag	pvp
+pvp_y_1-2	mapflag	pvp
+pvp_y_1-3	mapflag	pvp
+pvp_y_1-4	mapflag	pvp
+pvp_y_1-5	mapflag	pvp
+pvp_y_2-1	mapflag	pvp
+pvp_y_2-2	mapflag	pvp
+pvp_y_2-3	mapflag	pvp
+pvp_y_2-4	mapflag	pvp
+pvp_y_2-5	mapflag	pvp
+pvp_y_3-1	mapflag	pvp
+pvp_y_3-2	mapflag	pvp
+pvp_y_3-3	mapflag	pvp
+pvp_y_3-4	mapflag	pvp
+pvp_y_3-5	mapflag	pvp
+pvp_y_4-1	mapflag	pvp
+pvp_y_4-2	mapflag	pvp
+pvp_y_4-3	mapflag	pvp
+pvp_y_4-4	mapflag	pvp
+pvp_y_4-5	mapflag	pvp
+pvp_y_5-1	mapflag	pvp
+pvp_y_5-2	mapflag	pvp
+pvp_y_5-3	mapflag	pvp
+pvp_y_5-4	mapflag	pvp
+pvp_y_5-5	mapflag	pvp
+pvp_y_6-1	mapflag	pvp
+pvp_y_6-2	mapflag	pvp
+pvp_y_6-3	mapflag	pvp
+pvp_y_6-4	mapflag	pvp
+pvp_y_6-5	mapflag	pvp
+pvp_y_7-1	mapflag	pvp
+pvp_y_7-2	mapflag	pvp
+pvp_y_7-3	mapflag	pvp
+pvp_y_7-4	mapflag	pvp
+pvp_y_7-5	mapflag	pvp
+pvp_y_8-1	mapflag	pvp
+pvp_y_8-2	mapflag	pvp
+pvp_y_8-3	mapflag	pvp
+pvp_y_8-4	mapflag	pvp
+pvp_y_8-5	mapflag	pvp
+pvp_n_1-1	mapflag	pvp
+pvp_n_1-2	mapflag	pvp
+pvp_n_1-3	mapflag	pvp
+pvp_n_1-4	mapflag	pvp
+pvp_n_1-5	mapflag	pvp
+pvp_n_2-1	mapflag	pvp
+pvp_n_2-2	mapflag	pvp
+pvp_n_2-3	mapflag	pvp
+pvp_n_2-4	mapflag	pvp
+pvp_n_2-5	mapflag	pvp
+pvp_n_3-1	mapflag	pvp
+pvp_n_3-2	mapflag	pvp
+pvp_n_3-3	mapflag	pvp
+pvp_n_3-4	mapflag	pvp
+pvp_n_3-5	mapflag	pvp
+pvp_n_4-1	mapflag	pvp
+pvp_n_4-2	mapflag	pvp
+pvp_n_4-3	mapflag	pvp
+pvp_n_4-4	mapflag	pvp
+pvp_n_4-5	mapflag	pvp
+pvp_n_5-1	mapflag	pvp
+pvp_n_5-2	mapflag	pvp
+pvp_n_5-3	mapflag	pvp
+pvp_n_5-4	mapflag	pvp
+pvp_n_5-5	mapflag	pvp
+pvp_n_6-1	mapflag	pvp
+pvp_n_6-2	mapflag	pvp
+pvp_n_6-3	mapflag	pvp
+pvp_n_6-4	mapflag	pvp
+pvp_n_6-5	mapflag	pvp
+pvp_n_7-1	mapflag	pvp
+pvp_n_7-2	mapflag	pvp
+pvp_n_7-3	mapflag	pvp
+pvp_n_7-4	mapflag	pvp
+pvp_n_7-5	mapflag	pvp
+pvp_n_8-1	mapflag	pvp
+pvp_n_8-2	mapflag	pvp
+pvp_n_8-3	mapflag	pvp
+pvp_n_8-4	mapflag	pvp
+pvp_n_8-5	mapflag	pvp
+pvp_2vs2	mapflag	pvp
+
+// 터보 트랙
+turbo_e_4	mapflag	pvp
+turbo_e_8	mapflag	pvp
+turbo_e_16	mapflag	pvp

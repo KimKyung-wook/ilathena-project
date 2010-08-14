@@ -1,0 +1,40 @@
+
+//    kk  ""tt""  "";;    """"JJ;;kkJJ  JJtt""    ""tt""  ;;tt""""tt    ""tt""   
+//   JJ  kk""tt;;JJ      ttkk    ""tt    ;;;;ttJJ;;  ""ttkk;;"";;;;ttkk;;  ;;kk  
+//  "";;  ""  kk  kk  tt  ttww    ZZ;;  ww    RR  ;;JJ  JJJJ  tt    RR  ;;JJ  JJ 
+//  JJ      """";;""  kk  ttkk  ;;kk    ZZ    ww  ;;""  kk""  ww    kk;;kk""  JJ 
+//  kk      JJ  kk    ww  ttkk  JJJJ  ;;ww  ""JJ  ;;tt""RR    ZZ  ;;ZZJJ      kk 
+//  kk  ;;  "";;JJ        JJtt  JJJJ  ""kk  JJ""  ww""""ww    ww  ""JJ  ZZ    kk 
+//  JJ  JJ  ;;JJ""  "";;  ww;;  kkJJ  JJ""  kk;;  ww  ;;ww  ""JJ  ww;;  ww  ;;tt 
+//;;""  RR    RR    ww""  kk""  ;;tt  ww    kkkk      kktt  JJ;;  ZZ;;  ;;  tt   
+//  JJkkttkkkk;;kkkk;;JJkktt""kkJJJJkkttJJkk;;  kkkkJJ  ttkkttJJkk;;ttkkJJkkJJ   
+//| I | - | L | U | N | A | A | T | H | E | N | A | P | R | O | J | E | C | T |  
+//------------------------------------------------------------------------------
+// iLAthena 몬스터 배치 스크립트 <http://www.i-luna.com>
+// 한글화 by 아이루나 iLAthena Project
+//------------------------------------------------------------------------------
+
+//==================================================
+// mjo_dun01 - 묘르닐 폐광
+//==================================================
+mjo_dun01,0,0,0,0	monster	퍼밀리어	1005,30,0,0,0
+mjo_dun01,0,0,0,0	monster	타로우	1175,60,0,0,0
+mjo_dun01,0,0,0,0	monster	마르틴	1145,20,0,0,0
+
+//==================================================
+// mjo_dun02 - 묘르닐 폐광
+//==================================================
+mjo_dun02,0,0,0,0	monster	마르틴	1145,60,0,0,0
+mjo_dun02,0,0,0,0	monster	드레인리어	1111,20,0,0,0
+mjo_dun02,0,0,0,0	monster	스켈워커	1169,20,0,0,0
+mjo_dun02,0,0,0,0	monster	가이아스	1121,35,30000,10000,0
+
+//==================================================
+// mjo_dun03 - 묘르닐 폐광
+//==================================================
+mjo_dun03,0,0,0,0	monster	마르틴	1145,5,0,0,0
+mjo_dun03,0,0,0,0	monster	스켈워커	1169,70,0,0,0
+mjo_dun03,0,0,0,0	monster	가이아스	1121,5,0,0,0
+mjo_dun03,0,0,0,0	monster	미스트	1151,35,0,0,0
+mjo_dun03,0,0,0,0	monster	크램프	1209,2,300000,150000,0
+mjo_dun03,0,0,0,0	monster	크램프	1209,1,50000,25000,0

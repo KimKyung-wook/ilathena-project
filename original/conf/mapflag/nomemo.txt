@@ -1,0 +1,680 @@
+
+//    kk  ""tt""  "";;    """"JJ;;kkJJ  JJtt""    ""tt""  ;;tt""""tt    ""tt""   
+//   JJ  kk""tt;;JJ      ttkk    ""tt    ;;;;ttJJ;;  ""ttkk;;"";;;;ttkk;;  ;;kk  
+//  "";;  ""  kk  kk  tt  ttww    ZZ;;  ww    RR  ;;JJ  JJJJ  tt    RR  ;;JJ  JJ 
+//  JJ      """";;""  kk  ttkk  ;;kk    ZZ    ww  ;;""  kk""  ww    kk;;kk""  JJ 
+//  kk      JJ  kk    ww  ttkk  JJJJ  ;;ww  ""JJ  ;;tt""RR    ZZ  ;;ZZJJ      kk 
+//  kk  ;;  "";;JJ        JJtt  JJJJ  ""kk  JJ""  ww""""ww    ww  ""JJ  ZZ    kk 
+//  JJ  JJ  ;;JJ""  "";;  ww;;  kkJJ  JJ""  kk;;  ww  ;;ww  ""JJ  ww;;  ww  ;;tt 
+//;;""  RR    RR    ww""  kk""  ;;tt  ww    kkkk      kktt  JJ;;  ZZ;;  ;;  tt   
+//  JJkkttkkkk;;kkkk;;JJkktt""kkJJJJkkttJJkk;;  kkkkJJ  ttkkttJJkk;;ttkkJJkkJJ   
+//| I | - | L | U | N | A | A | T | H | E | N | A | P | R | O | J | E | C | T |  
+//------------------------------------------------------------------------------
+// iLAthena nomemo mapflag 설정 파일 <http://www.i-luna.com>
+// 한글화 by 아이루나 iLAthena Project
+//------------------------------------------------------------------------------
+// 한글화 by Nark
+//------------------------------------------------------------------------------
+
+// 기억 명령어가 불가능한 맵 설정
+
+// 마을 내부  ====================
+ayo_in01	mapflag	nomemo
+ayo_in02	mapflag	nomemo
+alb_ship	mapflag	nomemo
+alberta_in	mapflag	nomemo
+aldeba_in	mapflag	nomemo
+ama_in01	mapflag	nomemo
+ama_in02	mapflag	nomemo
+ama_test	mapflag	nomemo
+cmd_in01	mapflag	nomemo
+cmd_in02	mapflag	nomemo
+gef_tower	mapflag	nomemo
+geffen_in	mapflag	nomemo
+gon_test	mapflag	nomemo
+gon_in	mapflag	nomemo
+in_orcs01	mapflag	nomemo
+izlude_in	mapflag	nomemo
+jawaii_in	mapflag	nomemo
+lou_in01	mapflag	nomemo
+lou_in02	mapflag	nomemo
+moc_castle	mapflag	nomemo
+morocc_in	mapflag	nomemo
+mosk_in	mapflag	nomemo
+mosk_ship	mapflag	nomemo
+mosk_fild01	mapflag	nomemo
+mosk_fild02	mapflag	nomemo
+mosk_dun01	mapflag	nomemo
+mosk_dun02	mapflag	nomemo
+mosk_dun03	mapflag	nomemo
+nameless_in	mapflag	nomemo
+niflheim	mapflag	nomemo
+nif_in	mapflag	nomemo
+new_zone01	mapflag	nomemo
+new_zone02	mapflag	nomemo
+new_zone03	mapflag	nomemo
+new_zone04	mapflag	nomemo
+new_1-1	mapflag	nomemo
+new_1-2	mapflag	nomemo
+new_1-3	mapflag	nomemo
+new_1-4	mapflag	nomemo
+new_2-1	mapflag	nomemo
+new_2-2	mapflag	nomemo
+new_2-3	mapflag	nomemo
+new_2-4	mapflag	nomemo
+new_3-1	mapflag	nomemo
+new_3-2	mapflag	nomemo
+new_3-3	mapflag	nomemo
+new_3-4	mapflag	nomemo
+new_4-1	mapflag	nomemo
+new_4-2	mapflag	nomemo
+new_4-3	mapflag	nomemo
+new_4-4	mapflag	nomemo
+new_5-1	mapflag	nomemo
+new_5-2	mapflag	nomemo
+new_5-3	mapflag	nomemo
+new_5-4	mapflag	nomemo
+pay_arche	mapflag	nomemo
+payon_in01	mapflag	nomemo
+payon_in02	mapflag	nomemo
+payon_in03	mapflag	nomemo
+prt_castle	mapflag	nomemo
+prt_church	mapflag	nomemo
+prt_in	mapflag	nomemo
+um_in	mapflag	nomemo
+xmas_in	mapflag	nomemo
+valkyrie	mapflag	nomemo
+yuno_in01	mapflag	nomemo
+yuno_in02	mapflag	nomemo
+yuno_in03	mapflag	nomemo
+yuno_in04	mapflag	nomemo
+yuno_in05	mapflag	nomemo
+yuno	mapflag	nomemo
+ein_in01	mapflag	nomemo
+airport	mapflag	nomemo
+airplane	mapflag	nomemo
+airplane_01	mapflag	nomemo
+lighthalzen	mapflag	nomemo
+yuno_pre	mapflag	nomemo
+y_airport	mapflag	nomemo
+lhz_airport	mapflag	nomemo
+einbroch	mapflag	nomemo
+einbech	mapflag	nomemo
+lhz_cube	mapflag	nomemo
+lhz_in01	mapflag	nomemo
+lhz_in02	mapflag	nomemo
+lhz_in03	mapflag	nomemo
+hu_in01	mapflag	nomemo
+auction_01	mapflag	nomemo
+auction_02	mapflag	nomemo
+p_track01	mapflag	nomemo
+p_track02	mapflag	nomemo
+ra_in01	mapflag	nomemo
+ra_temin	mapflag	nomemo
+ra_temsky	mapflag	nomemo
+ve_in	mapflag	nomemo
+ve_in02	mapflag	nomemo
+thor_camp	mapflag	nomemo
+
+// 필드  ===================
+alb2trea	mapflag	nomemo
+ayo_fild02	mapflag	nomemo
+cmd_fild01	mapflag	nomemo
+cmd_fild02	mapflag	nomemo
+cmd_fild03	mapflag	nomemo
+cmd_fild04	mapflag	nomemo
+cmd_fild05	mapflag	nomemo
+cmd_fild06	mapflag	nomemo
+cmd_fild07	mapflag	nomemo
+cmd_fild08	mapflag	nomemo
+cmd_fild09	mapflag	nomemo
+gef_fild02	mapflag	nomemo
+gef_fild03	mapflag	nomemo
+gef_fild06	mapflag	nomemo
+gef_fild08	mapflag	nomemo
+gef_fild10	mapflag	nomemo
+gef_fild11	mapflag	nomemo
+gef_fild12	mapflag	nomemo
+gef_fild14	mapflag	nomemo
+glast_01	mapflag	nomemo
+hu_fild01	mapflag	nomemo
+hu_fild05	mapflag	nomemo
+izlu2dun	mapflag	nomemo
+mjolnir_01	mapflag	nomemo
+mjolnir_02	mapflag	nomemo
+mjolnir_03	mapflag	nomemo
+mjolnir_04	mapflag	nomemo
+mjolnir_05	mapflag	nomemo
+mjolnir_07	mapflag	nomemo
+mjolnir_08	mapflag	nomemo
+mjolnir_10	mapflag	nomemo
+mjolnir_11	mapflag	nomemo
+moc_fild01	mapflag	nomemo
+moc_fild02	mapflag	nomemo
+moc_fild03	mapflag	nomemo
+//moc_fild04	mapflag	nomemo
+//moc_fild05	mapflag	nomemo
+//moc_fild08	mapflag	nomemo
+moc_fild09	mapflag	nomemo
+//moc_fild13	mapflag	nomemo
+//moc_fild14	mapflag	nomemo
+moc_fild15	mapflag	nomemo
+moc_fild16	mapflag	nomemo
+moc_fild17	mapflag	nomemo
+moc_fild18	mapflag	nomemo
+moc_fild20	mapflag	nomemo
+moc_fild21	mapflag	nomemo
+moc_fild22	mapflag	nomemo
+nif_fild01	mapflag	nomemo
+nif_fild02	mapflag	nomemo
+pay_fild02	mapflag	nomemo
+pay_fild04	mapflag	nomemo
+pay_fild05	mapflag	nomemo
+pay_fild09	mapflag	nomemo
+pay_fild10	mapflag	nomemo
+pay_fild11	mapflag	nomemo
+prt_fild00	mapflag	nomemo
+prt_fild03	mapflag	nomemo
+prt_fild04	mapflag	nomemo
+prt_fild09	mapflag	nomemo
+prt_fild10	mapflag	nomemo
+prt_fild11	mapflag	nomemo
+prt_monk	mapflag	nomemo
+um_fild01	mapflag	nomemo
+um_fild02	mapflag	nomemo
+um_fild03	mapflag	nomemo
+yuno_fild02	mapflag	nomemo
+yuno_fild03	mapflag	nomemo
+yuno_fild04	mapflag	nomemo
+yuno_fild05	mapflag	nomemo
+yuno_fild07	mapflag	nomemo
+yuno_fild08	mapflag	nomemo
+yuno_fild09	mapflag	nomemo
+yuno_fild10	mapflag	nomemo
+ra_fild01	mapflag	nomemo
+ra_fild02	mapflag	nomemo
+ra_fild03	mapflag	nomemo
+ra_fild04	mapflag	nomemo
+ra_fild05	mapflag	nomemo
+ra_fild06	mapflag	nomemo
+ra_fild10	mapflag	nomemo
+ve_fild01	mapflag	nomemo
+ve_fild02	mapflag	nomemo
+ve_fild03	mapflag	nomemo
+ve_fild04	mapflag	nomemo
+ve_fild06	mapflag	nomemo
+
+// 직업 퀘스트 ================
+// 1차
+job_sword1	mapflag	nomemo
+job_thief1	mapflag	nomemo
+job_star	mapflag	nomemo
+// 2-1차
+job_knt	mapflag	nomemo
+job_prist	mapflag	nomemo
+job_wiz	mapflag	nomemo
+job_hunte	mapflag	nomemo
+in_hunter	mapflag	nomemo
+in_moc_16	mapflag	nomemo
+// 2-2차
+alde_alche	mapflag	nomemo
+job_cru	mapflag	nomemo
+job_duncer	mapflag	nomemo
+job_monk	mapflag	nomemo
+monk_test	mapflag	nomemo
+monk_in	mapflag	nomemo
+in_rogue	mapflag	nomemo
+job_sage	mapflag	nomemo
+job_soul	mapflag	nomemo
+que_ng	mapflag	nomemo
+
+// 특별 퀘스트 =====
+que_god01	mapflag	nomemo
+que_god02	mapflag	nomemo
+que_bingo	mapflag	nomemo
+que_sign01	mapflag	nomemo
+que_hugel	mapflag	nomemo
+que_rachel	mapflag	nomemo
+que_san04	mapflag	nomemo
+que_thor	mapflag	nomemo
+poring_c01	mapflag	nomemo
+poring_c02	mapflag	nomemo
+// 던전 =================
+alde_dun01	mapflag	nomemo
+alde_dun02	mapflag	nomemo
+alde_dun03	mapflag	nomemo
+alde_dun04	mapflag	nomemo
+// 개미지옥 -------------------
+anthell01	mapflag	nomemo
+anthell02	mapflag	nomemo
+// 아마쯔 던전 ------------
+ama_dun01	mapflag	nomemo
+ama_dun02	mapflag	nomemo
+ama_dun03	mapflag	nomemo
+// 아욭야 ------------------
+ayo_dun01	mapflag	nomemo
+ayo_dun02	mapflag	nomemo
+// 코모도 동굴 --------------
+beach_dun	mapflag	nomemo
+beach_dun2	mapflag	nomemo
+beach_dun3	mapflag	nomemo
+// 시계탑 ---------------
+c_tower1	mapflag	nomemo
+c_tower2	mapflag	nomemo
+c_tower3	mapflag	nomemo
+c_tower4	mapflag	nomemo
+// 아인베흐 지하수로 -------------
+ein_dun01	mapflag	nomemo
+ein_dun02	mapflag	nomemo
+// 게펜 던전 ----------------
+gef_dun00	mapflag	nomemo
+gef_dun01	mapflag	nomemo
+gef_dun02	mapflag	nomemo
+gef_dun03	mapflag	nomemo
+// 글레스트 헤임 ----------------
+gl_cas01	mapflag	nomemo
+gl_cas02	mapflag	nomemo
+gl_church	mapflag	nomemo
+gl_chyard	mapflag	nomemo
+gl_dun01	mapflag	nomemo
+gl_dun02	mapflag	nomemo
+gl_in01	mapflag	nomemo
+gl_knt01	mapflag	nomemo
+gl_knt02	mapflag	nomemo
+gl_prison	mapflag	nomemo
+gl_prison1	mapflag	nomemo
+gl_sew01	mapflag	nomemo
+gl_sew02	mapflag	nomemo
+gl_sew03	mapflag	nomemo
+gl_sew04	mapflag	nomemo
+gl_step	mapflag	nomemo
+// 길드 던전 -----------------
+gld_dun01	mapflag	nomemo
+gld_dun02	mapflag	nomemo
+gld_dun03	mapflag	nomemo
+gld_dun04	mapflag	nomemo
+// 이즈루드 던전 ------------
+iz_dun00	mapflag	nomemo
+iz_dun01	mapflag	nomemo
+iz_dun02	mapflag	nomemo
+iz_dun03	mapflag	nomemo
+iz_dun04	mapflag	nomemo
+// 스핑크스 --------------------
+in_sphinx1	mapflag	nomemo
+in_sphinx2	mapflag	nomemo
+in_sphinx3	mapflag	nomemo
+in_sphinx4	mapflag	nomemo
+in_sphinx5	mapflag	nomemo
+// 뤄양 던전 --------------
+lou_dun03	mapflag	nomemo
+lou_dun02	mapflag	nomemo
+lou_dun01	mapflag	nomemo
+// 마그마 던전 -----------------
+mag_dun01	mapflag	nomemo
+mag_dun02	mapflag	nomemo
+// 피라미드 ------------------
+moc_pryd01	mapflag	nomemo
+moc_pryd02	mapflag	nomemo
+moc_pryd03	mapflag	nomemo
+moc_pryd04	mapflag	nomemo
+moc_pryd05	mapflag	nomemo
+moc_pryd06	mapflag	nomemo
+moc_prydb1	mapflag	nomemo
+// 묘르닐 폐광 (Dead Pit) ------
+mjo_dun01	mapflag	nomemo
+mjo_dun02	mapflag	nomemo
+mjo_dun03	mapflag	nomemo
+// 오크 던전 -------------------
+orcsdun01	mapflag	nomemo
+orcsdun02	mapflag	nomemo
+// 페이욘 동굴 ----------------
+pay_dun00	mapflag	nomemo
+pay_dun01	mapflag	nomemo
+pay_dun02	mapflag	nomemo
+pay_dun03	mapflag	nomemo
+pay_dun04	mapflag	nomemo
+// 미궁 숲  ------------
+prt_maze01	mapflag	nomemo
+prt_maze02	mapflag	nomemo
+prt_maze03	mapflag	nomemo
+// 지하 수로 ------------
+prt_sewb1	mapflag	nomemo
+prt_sewb2	mapflag	nomemo
+prt_sewb3	mapflag	nomemo
+prt_sewb4	mapflag	nomemo
+// 곤륜 던전 ---------------
+gon_dun01	mapflag	nomemo
+gon_dun02	mapflag	nomemo
+gon_dun03	mapflag	nomemo
+// 침몰선 ---------------
+treasure01	mapflag	nomemo
+treasure02	mapflag	nomemo
+// 거북이 섬 던전 -------------
+tur_dun01	mapflag	nomemo
+tur_dun02	mapflag	nomemo
+tur_dun03	mapflag	nomemo
+tur_dun04	mapflag	nomemo
+tur_dun05	mapflag	nomemo
+tur_dun06	mapflag	nomemo
+// 움발라 던전 ----------------
+um_dun01	mapflag	nomemo
+um_dun02	mapflag	nomemo
+// 장난감 던전 ---------------
+xmas_dun01	mapflag	nomemo
+xmas_dun02	mapflag	nomemo
+// 이그드라실의 줄기 --------
+yggdrasil01	mapflag	nomemo
+// 게페니아 --------------
+gefenia01	mapflag	nomemo
+gefenia02	mapflag	nomemo
+gefenia03	mapflag	nomemo
+gefenia04	mapflag	nomemo
+// 생체 던전 -----------
+lhz_dun01	mapflag	nomemo
+lhz_dun02	mapflag	nomemo
+lhz_dun03	mapflag	nomemo
+// 유페로스 던전 -----------
+juperos_01	mapflag	nomemo
+juperos_02	mapflag	nomemo
+jupe_area1	mapflag	nomemo
+jupe_area2	mapflag	nomemo
+jupe_core	mapflag	nomemo
+jupe_ele	mapflag	nomemo
+jupe_ele_r	mapflag	nomemo
+jupe_gate	mapflag	nomemo
+jupe_cave	mapflag	nomemo
+// 타나토스 타워 ------------
+thana_boss	mapflag	nomemo
+tha_scene01	mapflag	nomemo
+tha_t01	mapflag	nomemo
+tha_t02	mapflag	nomemo
+tha_t03	mapflag	nomemo
+tha_t04	mapflag	nomemo
+tha_t05	mapflag	nomemo
+tha_t06	mapflag	nomemo
+tha_t07	mapflag	nomemo
+tha_t08	mapflag	nomemo
+tha_t09	mapflag	nomemo
+tha_t10	mapflag	nomemo
+tha_t11	mapflag	nomemo
+tha_t12	mapflag	nomemo
+thana_step	mapflag	nomemo
+// 어비스 레이크 던전 --------
+abyss_01	mapflag	nomemo
+abyss_02	mapflag	nomemo
+abyss_03	mapflag	nomemo
+// 오딘 신전, 킬 하이르 저택
+odin_tem01	mapflag	nomemo
+odin_tem02	mapflag	nomemo
+odin_tem03	mapflag	nomemo
+kh_kiehl02	mapflag	nomemo
+kh_kiehl01	mapflag	nomemo
+kh_dun02	mapflag	nomemo
+kh_dun01	mapflag	nomemo
+kh_mansion	mapflag	nomemo
+kh_rossi	mapflag	nomemo
+kh_school	mapflag	nomemo
+kh_vila	mapflag	nomemo
+// 얼음 던전
+ice_dun01	mapflag	nomemo
+ice_dun02	mapflag	nomemo
+ice_dun03	mapflag	nomemo
+ice_dun04	mapflag	nomemo
+// 라헬 신전
+ra_san01	mapflag	nomemo
+ra_san02	mapflag	nomemo
+ra_san03	mapflag	nomemo
+ra_san04	mapflag	nomemo
+ra_san05	mapflag	nomemo
+// 토르 화산
+thor_v01	mapflag	nomemo
+thor_v02	mapflag	nomemo
+thor_v03	mapflag	nomemo
+// 무명섬
+nameless_i	mapflag	nomemo
+nameless_n	mapflag	nomemo
+abbey01	mapflag	nomemo
+abbey02	mapflag	nomemo
+abbey03	mapflag	nomemo
+
+// 길드 성 =============
+//alde_gld	mapflag	nomemo
+aldeg_cas01	mapflag	nomemo
+aldeg_cas02	mapflag	nomemo
+aldeg_cas03	mapflag	nomemo
+aldeg_cas04	mapflag	nomemo
+aldeg_cas05	mapflag	nomemo
+gefg_cas01	mapflag	nomemo
+gefg_cas02	mapflag	nomemo
+gefg_cas03	mapflag	nomemo
+gefg_cas04	mapflag	nomemo
+gefg_cas05	mapflag	nomemo
+//pay_gld	mapflag	nomemo
+payg_cas01	mapflag	nomemo
+payg_cas02	mapflag	nomemo
+payg_cas03	mapflag	nomemo
+payg_cas04	mapflag	nomemo
+payg_cas05	mapflag	nomemo
+//prt_gld	mapflag	nomemo
+prtg_cas01	mapflag	nomemo
+prtg_cas02	mapflag	nomemo
+prtg_cas03	mapflag	nomemo
+prtg_cas04	mapflag	nomemo
+prtg_cas05	mapflag	nomemo
+nguild_alde	mapflag	nomemo
+nguild_gef	mapflag	nomemo
+nguild_pay	mapflag	nomemo
+nguild_prt	mapflag	nomemo
+schg_cas01	mapflag	nomemo
+schg_cas02	mapflag	nomemo
+schg_cas03	mapflag	nomemo
+schg_cas04	mapflag	nomemo
+schg_cas05	mapflag	nomemo
+arug_cas01	mapflag	nomemo
+arug_cas02	mapflag	nomemo
+arug_cas03	mapflag	nomemo
+arug_cas04	mapflag	nomemo
+arug_cas05	mapflag	nomemo
+//To Protect Novices Guilds from level abusers
+n_castle	mapflag	nomemo
+
+// GvG 아레나 ================
+guild_vs1	mapflag	nomemo
+guild_vs2	mapflag	nomemo
+guild_vs3	mapflag	nomemo
+guild_vs4	mapflag	nomemo
+guild_vs5	mapflag	nomemo
+
+// 아레나 ====================
+arena_room	mapflag	nomemo
+force_1-1	mapflag	nomemo
+force_1-2	mapflag	nomemo
+force_1-3	mapflag	nomemo
+force_2-1	mapflag	nomemo
+force_3-1	mapflag	nomemo
+force_4-1	mapflag	nomemo
+force_5-1	mapflag	nomemo
+ordeal_1-1	mapflag	nomemo
+ordeal_1-2	mapflag	nomemo
+ordeal_1-3	mapflag	nomemo
+ordeal_2-1	mapflag	nomemo
+ordeal_2-2	mapflag	nomemo
+ordeal_2-3	mapflag	nomemo
+ordeal_3-1	mapflag	nomemo
+ordeal_3-2	mapflag	nomemo
+ordeal_3-3	mapflag	nomemo
+pvp_c_room	mapflag	nomemo
+quiz_00	mapflag	nomemo
+quiz_01	mapflag	nomemo
+sec_in01	mapflag	nomemo
+sec_in02	mapflag	nomemo
+//hunter_1-1	mapflag	nomemo
+//hunter_2-1	mapflag	nomemo
+//hunter_3-1	mapflag	nomemo
+//knight_1-1	mapflag	nomemo
+//knight_2-1	mapflag	nomemo
+//knight_3-1	mapflag	nomemo
+//priest_1-1	mapflag	nomemo
+//priest_2-1	mapflag	nomemo
+//priest_3-1	mapflag	nomemo
+prt_are_in	mapflag	nomemo
+prt_are01	mapflag	nomemo
+//wizard_1-1	mapflag	nomemo
+//wizard_2-1	mapflag	nomemo
+//wizard_3-1	mapflag	nomemo
+
+// PvP 아레나 ================
+pvp_y_room	mapflag	nomemo
+pvp_y_1-1	mapflag	nomemo
+pvp_y_1-2	mapflag	nomemo
+pvp_y_1-3	mapflag	nomemo
+pvp_y_1-4	mapflag	nomemo
+pvp_y_1-5	mapflag	nomemo
+pvp_y_2-1	mapflag	nomemo
+pvp_y_2-2	mapflag	nomemo
+pvp_y_2-3	mapflag	nomemo
+pvp_y_2-4	mapflag	nomemo
+pvp_y_2-5	mapflag	nomemo
+pvp_y_3-1	mapflag	nomemo
+pvp_y_3-2	mapflag	nomemo
+pvp_y_3-3	mapflag	nomemo
+pvp_y_3-4	mapflag	nomemo
+pvp_y_3-5	mapflag	nomemo
+pvp_y_4-1	mapflag	nomemo
+pvp_y_4-2	mapflag	nomemo
+pvp_y_4-3	mapflag	nomemo
+pvp_y_4-4	mapflag	nomemo
+pvp_y_4-5	mapflag	nomemo
+pvp_y_5-1	mapflag	nomemo
+pvp_y_5-2	mapflag	nomemo
+pvp_y_5-3	mapflag	nomemo
+pvp_y_5-4	mapflag	nomemo
+pvp_y_5-5	mapflag	nomemo
+pvp_y_6-1	mapflag	nomemo
+pvp_y_6-2	mapflag	nomemo
+pvp_y_6-3	mapflag	nomemo
+pvp_y_6-4	mapflag	nomemo
+pvp_y_6-5	mapflag	nomemo
+pvp_y_7-1	mapflag	nomemo
+pvp_y_7-2	mapflag	nomemo
+pvp_y_7-3	mapflag	nomemo
+pvp_y_7-4	mapflag	nomemo
+pvp_y_7-5	mapflag	nomemo
+pvp_y_8-1	mapflag	nomemo
+pvp_y_8-2	mapflag	nomemo
+pvp_y_8-3	mapflag	nomemo
+pvp_y_8-4	mapflag	nomemo
+pvp_y_8-5	mapflag	nomemo
+pvp_n_room	mapflag	nomemo
+pvp_n_1-1	mapflag	nomemo
+pvp_n_1-2	mapflag	nomemo
+pvp_n_1-3	mapflag	nomemo
+pvp_n_1-4	mapflag	nomemo
+pvp_n_1-5	mapflag	nomemo
+pvp_n_2-1	mapflag	nomemo
+pvp_n_2-2	mapflag	nomemo
+pvp_n_2-3	mapflag	nomemo
+pvp_n_2-4	mapflag	nomemo
+pvp_n_2-5	mapflag	nomemo
+pvp_n_3-1	mapflag	nomemo
+pvp_n_3-2	mapflag	nomemo
+pvp_n_3-3	mapflag	nomemo
+pvp_n_3-4	mapflag	nomemo
+pvp_n_3-5	mapflag	nomemo
+pvp_n_4-1	mapflag	nomemo
+pvp_n_4-2	mapflag	nomemo
+pvp_n_4-3	mapflag	nomemo
+pvp_n_4-4	mapflag	nomemo
+pvp_n_4-5	mapflag	nomemo
+pvp_n_5-1	mapflag	nomemo
+pvp_n_5-2	mapflag	nomemo
+pvp_n_5-3	mapflag	nomemo
+pvp_n_5-4	mapflag	nomemo
+pvp_n_5-5	mapflag	nomemo
+pvp_n_6-1	mapflag	nomemo
+pvp_n_6-2	mapflag	nomemo
+pvp_n_6-3	mapflag	nomemo
+pvp_n_6-4	mapflag	nomemo
+pvp_n_6-5	mapflag	nomemo
+pvp_n_7-1	mapflag	nomemo
+pvp_n_7-2	mapflag	nomemo
+pvp_n_7-3	mapflag	nomemo
+pvp_n_7-4	mapflag	nomemo
+pvp_n_7-5	mapflag	nomemo
+pvp_n_8-1	mapflag	nomemo
+pvp_n_8-2	mapflag	nomemo
+pvp_n_8-3	mapflag	nomemo
+pvp_n_8-4	mapflag	nomemo
+pvp_n_8-5	mapflag	nomemo
+pvp_2vs2	mapflag	nomemo
+
+// 터보 트랙
+turbo_room	mapflag	nomemo
+turbo_n_1	mapflag	nomemo
+turbo_n_4	mapflag	nomemo
+turbo_n_8	mapflag	nomemo
+turbo_n_16	mapflag	nomemo
+turbo_e_4	mapflag	nomemo
+turbo_e_8	mapflag	nomemo
+turbo_e_16	mapflag	nomemo
+
+// 몬스터 레이스 ================
+p_track01	mapflag	nomemo
+p_track02	mapflag	nomemo
+
+// 허상의 오콜니르 ==========
+que_qsch01	mapflag	nomemo
+que_qsch02	mapflag	nomemo
+que_qsch03	mapflag	nomemo
+que_qsch04	mapflag	nomemo
+que_qsch05	mapflag	nomemo
+que_qaru01	mapflag	nomemo
+que_qaru02	mapflag	nomemo
+que_qaru03	mapflag	nomemo
+que_qaru04	mapflag	nomemo
+que_qaru05	mapflag	nomemo
+
+//Sealed Shrine ==================
+1@cata	mapflag	nomemo
+2@cata	mapflag	nomemo
+
+//Endless Tower ==================
+1@tower	mapflag	nomemo
+2@tower	mapflag	nomemo
+3@tower	mapflag	nomemo
+4@tower	mapflag	nomemo
+5@tower	mapflag	nomemo
+6@tower	mapflag	nomemo
+
+// Episode 13 ====================
+mid_campin	mapflag	nomemo
+man_fild01	mapflag	nomemo
+man_fild03	mapflag	nomemo
+spl_fild02	mapflag	nomemo
+spl_fild03	mapflag	nomemo
+moc_fild22b	mapflag	nomemo
+que_dan01	mapflag	nomemo
+que_dan02	mapflag	nomemo
+schg_que01	mapflag	nomemo
+schg_dun01	mapflag	nomemo
+arug_que01	mapflag	nomemo
+arug_dun01	mapflag	nomemo
+nyd_dun01	mapflag	nomemo
+nyd_dun02	mapflag	nomemo
+manuk	mapflag	nomemo
+man_fild02	mapflag	nomemo
+man_in01	mapflag	nomemo
+splendide	mapflag	nomemo
+spl_fild01	mapflag	nomemo
+spl_in01	mapflag	nomemo
+
+//Orc's Memory ===================
+1@orcs	mapflag	nomemo
+2@orcs	mapflag	nomemo
+
+// Nidhoggr's Instance ===========
+1@nyd	mapflag	nomemo
+2@nyd	mapflag	nomemo
+
+arug_dun01	mapflag	nomemo
+schg_dun01	mapflag	nomemo

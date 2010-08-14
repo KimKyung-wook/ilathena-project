@@ -1,0 +1,57 @@
+
+//    kk  ""tt""  "";;    """"JJ;;kkJJ  JJtt""    ""tt""  ;;tt""""tt    ""tt""   
+//   JJ  kk""tt;;JJ      ttkk    ""tt    ;;;;ttJJ;;  ""ttkk;;"";;;;ttkk;;  ;;kk  
+//  "";;  ""  kk  kk  tt  ttww    ZZ;;  ww    RR  ;;JJ  JJJJ  tt    RR  ;;JJ  JJ 
+//  JJ      """";;""  kk  ttkk  ;;kk    ZZ    ww  ;;""  kk""  ww    kk;;kk""  JJ 
+//  kk      JJ  kk    ww  ttkk  JJJJ  ;;ww  ""JJ  ;;tt""RR    ZZ  ;;ZZJJ      kk 
+//  kk  ;;  "";;JJ        JJtt  JJJJ  ""kk  JJ""  ww""""ww    ww  ""JJ  ZZ    kk 
+//  JJ  JJ  ;;JJ""  "";;  ww;;  kkJJ  JJ""  kk;;  ww  ;;ww  ""JJ  ww;;  ww  ;;tt 
+//;;""  RR    RR    ww""  kk""  ;;tt  ww    kkkk      kktt  JJ;;  ZZ;;  ;;  tt   
+//  JJkkttkkkk;;kkkk;;JJkktt""kkJJJJkkttJJkk;;  kkkkJJ  ttkkttJJkk;;ttkkJJkkJJ   
+//| I | - | L | U | N | A | A | T | H | E | N | A | P | R | O | J | E | C | T |  
+//------------------------------------------------------------------------------
+// iLAthena 몬스터 배치 스크립트 <http://www.i-luna.com>
+// 한글화 by 아이루나 iLAthena Project
+//------------------------------------------------------------------------------
+
+//==================================================
+// In_sphinx1 - 스핑크스 던전
+//==================================================
+in_sphinx1,0,0,0,0	monster	드레인리어	1111,40,0,0,0
+in_sphinx1,0,0,0,0	monster	레퀴엠	1164,20,0,0,0
+in_sphinx1,0,0,0,0	monster	제롬	1178,20,0,0,0
+in_sphinx1,0,0,0,0	monster	마타	1146,10,0,0,0
+
+//==================================================
+// In_sphinx2 - 스핑크스 던전
+//==================================================
+in_sphinx2,0,0,0,0	monster	드레인리어	1111,15,0,0,0
+in_sphinx2,0,0,0,0	monster	레퀴엠	1164,50,0,0,0
+in_sphinx2,0,0,0,0	monster	제롬	1178,50,0,0,0
+in_sphinx2,0,0,0,0	monster	마타	1146,20,0,0,0
+
+//==================================================
+// In_sphinx3 - 스핑크스 던전
+//==================================================
+in_sphinx3,0,0,0,0	monster	마타	1146,15,0,0,0
+in_sphinx3,0,0,0,0	monster	파사나	1154,5,0,0,0
+in_sphinx3,0,0,0,0	monster	마르두크	1140,65,0,0,0
+in_sphinx3,0,0,0,0	monster	미믹	1191,5,600000,300000,1
+
+//==================================================
+// In_sphinx4 - 스핑크스 던전
+//==================================================
+in_sphinx4,0,0,0,0	monster	마이너우로스	1149,50,0,0,0
+in_sphinx4,0,0,0,0	monster	야누비스	1098,15,0,0,0
+in_sphinx4,0,0,0,0	monster	미믹	1191,4,600000,300000,1
+in_sphinx4,0,0,0,0	monster	파사나	1154,20,0,0,0
+
+//==================================================
+// In_sphinx5 - 스핑크스 던전
+//==================================================
+in_sphinx5,0,0,0,0	monster	파사나	1154,70,0,0,0
+in_sphinx5,0,0,0,0	monster	마타	1146,10,0,0,0
+in_sphinx5,0,0,0,0	monster	사이드 와인더	1037,20,0,0,0
+in_sphinx5,0,0,0,0	monster	야누비스	1098,10,0,0,0
+in_sphinx5,0,0,0,0	monster	미믹	1191,7,600000,300000,1
+in_sphinx5,0,0,0,0	boss_monster	파라오	1157,1,3600000,1800000,1

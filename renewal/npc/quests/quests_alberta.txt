@@ -1,0 +1,2424 @@
+
+//    kk  ""tt""  "";;    """"JJ;;kkJJ  JJtt""    ""tt""  ;;tt""""tt    ""tt""   
+//   JJ  kk""tt;;JJ      ttkk    ""tt    ;;;;ttJJ;;  ""ttkk;;"";;;;ttkk;;  ;;kk  
+//  "";;  ""  kk  kk  tt  ttww    ZZ;;  ww    RR  ;;JJ  JJJJ  tt    RR  ;;JJ  JJ 
+//  JJ      """";;""  kk  ttkk  ;;kk    ZZ    ww  ;;""  kk""  ww    kk;;kk""  JJ 
+//  kk      JJ  kk    ww  ttkk  JJJJ  ;;ww  ""JJ  ;;tt""RR    ZZ  ;;ZZJJ      kk 
+//  kk  ;;  "";;JJ        JJtt  JJJJ  ""kk  JJ""  ww""""ww    ww  ""JJ  ZZ    kk 
+//  JJ  JJ  ;;JJ""  "";;  ww;;  kkJJ  JJ""  kk;;  ww  ;;ww  ""JJ  ww;;  ww  ;;tt 
+//;;""  RR    RR    ww""  kk""  ;;tt  ww    kkkk      kktt  JJ;;  ZZ;;  ;;  tt   
+//  JJkkttkkkk;;kkkk;;JJkktt""kkJJJJkkttJJkk;;  kkkkJJ  ttkkttJJkk;;ttkkJJkkJJ   
+//| I | - | L | U | N | A | A | T | H | E | N | A | P | R | O | J | E | C | T |  
+//------------------------------------------------------------------------------
+// iLAthena 알베르타 퀘스트 스크립트 <http://www.i-luna.com/>
+// 한글화 by 아이루나 iLAthena Project
+//------------------------------------------------------------------------------
+// 거북이섬학자(조나단닐리리아)- 한글화 by ★orz。
+// 뱃사공(고텐부르)- 한글화 by ★orz。(미완성)
+// 항해일지- 한글화 by ★orz。(미완성)
+// 꼬마아이- 한글화 by ★orz。(미완성)
+// 불량식품청년(소다맨)- 한글화 by ★orz。
+// 멋쟁이 상인(지크)- 한글화 by ★orz。(미완성)
+// 거북이영감(거북할배)- 한글화 by ★orz。(성별에 따라 대사차이 확인필요)
+//------------------------------------------------------------------------------
+
+
+//=======================================================================================================//
+//						Doll Quest
+//=======================================================================================================//
+alberta,117,135,0	script	꼬마아이#albe	96,{
+	set .@weight,MaxWeight-Weight;
+	if ((.@weight) < 10000) {
+		mes "[꼬마아이]";
+		mes "Wait a moment!!";
+		mes "You have brought too many things!";
+		mes "You cannot accept any more items!";
+		mes "Please reduce the amount of items,";
+		mes "then come see me again";
+		close;
+	}
+	mes "[꼬마아이]";
+	if (Sex == 1) {
+		mes "안녕 오빠? 히이... 오빤 남자니까";
+		mes "인형 안 좋아하겠찌? 난 인형 아주";
+		mes "많~이 좋은데!";
+	} else {
+		mes "Hi hi~! Oh, oh, do you like dolls?";
+		mes "I really really like dolls... Hee";
+		mes "Hee~!";
+	}
+	next;
+	mes "[꼬마아이]";
+	mes "있잖아~ 나, 새 인형이 가지고";
+	mes "싶은데~ 돌아오는 생일엔 분명히 우리";
+	mes "아빠가 인형을 사다주실꺼야.";
+	switch(select("좋겠구나...","내가 인형 하나 줄까?")) {
+		case 1:
+			next;
+			mes "[꼬마아이]";
+			mes "어떤 인형이 좋을까....음 이번엔";
+			mes "원숭이 요요 인형이 가지고 싶어.";
+			mes "헤헤~ 이뻐. 요요 인형. 이뻐 이뻐.";
+			close;
+		case 2:
+			next;
+			set .@weight,MaxWeight-Weight;
+			if ((.@weight) < 10000) {
+				mes "[꼬마아이]";
+				mes "Your weight is too heavy!";
+				mes "I will accept your doll if";
+				mes "you lighten your load.";
+				close;
+			}
+			mes "[꼬마아이]";
+			if (Sex == 1) {
+				mes "어? 정말정말? 오빠가 나한테 인형";
+				mes "줄꺼야? 와아아~ 인형 좋아!";
+			} else {
+				mes "Will you really?";
+				mes "You're gonna give";
+				mes "me a doll? Yaaaay~";
+			}
+			mes "무슨 인형을 줄꺼야? 정말로";
+			mes "주는거지?";
+			switch(select("포링인형","촌촌인형","봉제인형","메뚜기인형","스포아인형","오시리스인형","바포메트인형","너구리인형","원숭이인형","내가 인형이야.")) {
+				case 1:
+					next;
+					if (countitem(741) >= 1) {
+						mes "[꼬마아이]";
+						mes "Yay, it's a poring doll!";
+						next;
+						delitem 741,1;
+						getitem 529,1;
+						mes "[꼬마아이]";
+						mes "Thank you for the doll!";
+						close;
+					}
+				case 2:
+					next;
+					if (countitem(742) >= 1) {
+						mes "[꼬마아이]";
+						mes "Eh .... Chonchon ... doll ...";
+						next;
+						mes "[꼬마아이]";
+						mes "Oh well, since you're giving it to me, I have to treasure it ....";
+						next;
+						delitem 742,1;
+						getitem 530,1;
+						mes "[꼬마아이]";
+						mes "If I ate too much of it, I'll get cavities anyway.";
+						if (Sex == 1) {
+							mes "You too, mister.";
+						} else {
+							mes "You too, lady.";
+						}
+						mes "Don't eat too much, ok?";
+						mes "And thanks, by the way ...";
+						next;
+						mes "[꼬마아이]";
+						mes "(Chonchon ... *mumble mumble*)";
+						close;
+					}
+				case 3:
+					next;
+					if (countitem(740) >= 1) {
+						mes "[꼬마아이]";
+						mes "Wow--! It's a rabbit!";
+						mes "It's so cute!!";
+						if (Sex == 1) {
+							mes "Thank you so much, mister!";
+						} else {
+							mes "Thank you so much, lady!";
+						}
+						next;
+						mes "[꼬마아이]";
+						mes "So fluffy~";
+						mes "Oh yeah! Let me give you a present too!";
+						mes "Ummm ... found it!";
+						mes "Take this!";
+						next;
+						delitem 740,1;
+						getitem 530,1;
+						mes "[꼬마아이]";
+						mes "I got this from Santa. It's a candy cane~";
+						if (Sex == 1) {
+							mes "Eat it too, mister.";
+						} else {
+							mes "Eat it too, lady.";
+						}
+						mes "Thank you for the rabbit doll!";
+						mes "I'm gonna hug this to sleep every night~";
+						close;
+					}
+				case 4:
+					next;
+					if (countitem(752) >= 1) {
+						mes "[꼬마아이]";
+						mes "Ah, a Rocker doll.";
+						mes "I hate hopping things but the doll's kinda cute.";
+						next;
+						mes "[꼬마아이]";
+						mes "Thank you~";
+						mes "I'll have to give you something too.";
+						mes "Hmm, didn't I get some stuff from my uncle ...";
+						next;
+						delitem 752,1;
+						getitem 532,7;
+						mes "[꼬마아이]";
+						mes "We've got tons of them at home.";
+						mes "So I'll share some with you~";
+						mes "Thank you for the doll!";
+						close;
+					}
+				case 5:
+					next;
+					if (countitem(743) >= 1) {
+						mes "[꼬마아이]";
+						mes "Blehh ....";
+						mes "It's a mushroom...";
+						mes "Mom's always scolding me for not eating mushrooms ...";
+						next;
+						mes "[꼬마아이]";
+						mes "I'll take it anyway, since the doll looks cute.";
+						mes "But I still won't eat mushrooms though ...";
+						mes "Hmm, I'll need to give you a present too.";
+						next;
+						delitem 743,1;
+						getitem 538,5;
+						mes "[꼬마아이]";
+						mes "Mom made this.";
+						if (Sex == 1) {
+							mes "Take it, mister!";
+						} else {
+							mes "Take it, lady!";
+						}
+						next;
+						mes "[Litte Kid]";
+						mes "Thank you for the doll~";
+						close;
+					}
+				case 6:
+					next;
+					if (countitem(751) >= 1) {
+						mes "[꼬마아이]";
+						mes "Yay! It's an Osiris doll!";
+						next;
+						delitem 751,1;
+						getitem 522,2;
+						mes "[꼬마아이]";
+						mes "Thank you for the doll!";
+						close;
+					}
+				case 7:
+					next;
+					if (countitem(750) >= 1) {
+						mes "[꼬마아이]";
+						mes "Yay! It's a Baphomet doll!";
+						next;
+						delitem 750,1;
+						getitem 525,5;
+						mes "[꼬마아이]";
+						mes "Thank you for the doll!";
+						close;
+					}
+				case 8:
+					next;
+					if (countitem(754) >= 1) {
+						mes "[꼬마아이]";
+						mes "Ah, it's a racoon doll~";
+						mes "I hate Smokies, but the doll's really cute!";
+						next;
+						mes "[꼬마아이]";
+						mes "It's really cute~";
+						if (Sex == 1) {
+							mes "Thank you very much, mister!";
+						} else {
+							mes "Thank you very much, lady!";
+						}
+						next;
+						delitem 754,1;
+						getitem 539,3;
+						mes "[꼬마아이]";
+						mes "Let me give you some of Grandma's home-made cakes!";
+						if (Sex == 1) {
+							mes "Do you like sweet things, mister?";
+						} else {
+							mes "Do you like sweet things, lady?";
+						}
+						mes "This is really good, so eat it~";
+						next;
+						mes "[꼬마아이]";
+						mes "Thank you for this cute doll!";
+						close;
+					}
+				case 9:
+					next;
+					if (countitem(753) >= 1) {
+						mes "[꼬마아이]";
+						mes "Wow--!!!";
+						mes "It's a monkey! So cute~";
+						if (Sex == 1) {
+							mes "Thank you very much, mister!";
+						} else {
+							mes "Thank you very much, lady!";
+						}
+						mes "I really wanted it~";
+						next;
+						mes "[꼬마아이]";
+						mes "It's so cute~";
+						mes "That's right!";
+						mes "As a thank you, I'll give you this.";
+						next;
+						delitem 753,1;
+						getitem 608,1;
+						mes "[꼬마아이]";
+						mes "Dad picked them up during his travels.";
+						mes "It's a seed of some kind.";
+						mes "We tried planting them at home, but it doesn't seem to grow.";
+						if (Sex == 1) {
+							mes "I'll give it to you, mister!";
+						} else {
+							mes "I'll give it to you, lady!";
+						}
+						next;
+						mes "[꼬마아이]";
+						mes "Thank you so much for the doll!";
+						close;
+					}
+				case 10:
+					next;
+					mes "[꼬마아이]";
+					mes "흥~ 흥이다~ 어리다고 놀리지 마~";
+					mes "바~보. 메롱~";
+					close;
+			}
+			mes "[꼬마아이]";
+			if (Sex == 1) {
+				mes "엥... 오빠, 나 놀리는거지? 인형도";
+				mes "없으면서 준다고 놀리는거지?";
+				mes "우에... 후에... 후에에에에에...";
+			} else {
+				mes "Aww...";
+				mes "You're not making fun of me are";
+				mes "you?";
+			}
+			next;
+			mes "[꼬마아이]";
+			mes "우에에에에엥~ 우에엥~";
+			close;
+	}
+}
+
+
+//=======================================================================================================//
+//						Boy's Cap' Quest
+//=======================================================================================================//
+alberta_in,28,145,4	script	Grampa	120,{
+	mes "[Grampa]";
+	mes "*Gasp*...";
+	mes "....*Gasp!*";
+	mes "Oh...";
+	mes "Some may say I've lived a full life on wine, women and song...";
+	next;
+	mes "[Grampa]";
+	mes "But my soul still burns with youthful vigor! It's just... This old body can't keep up anymore... *Hack! Wheeeeze~*";
+	next;
+	if (countitem(1030) > 9) {
+		switch(select("Show him Tiger's Footskin.:Exchange it with Boys Cap.:Cancel")) {
+		case 1:
+			mes "[Grampa]";
+			mes "Ohhh~ !!";
+			mes "Is that...?";
+			mes "It is! ";
+			mes "That's Tiger's Footskin!! Even from here I can feel its powers!";
+			next;
+			mes "[Grampa]";
+			mes "One glance at it can restore your strength, one sniff and your blood boils with vigorous pleasure...";
+			next;
+			mes "[Grampa]";
+			mes "Just one bite...";
+			mes "Will revive my virility!!!! The Tiger's Footskin~!! Ohhhh! Ohh My God !! Please!!! Please give me that... Please...";
+			close;
+		case 2:
+			delitem 1030,10;  //Tiger_Footskin
+			getitem 5016,1; //Boy's_Cap
+			mes "[Grampa]";
+			mes "T... Thank you !!";
+			mes "With this I can revive my youthful splendor!! I must eat this thing right away !";
+			next;
+			mes "[Grampa]";
+			mes "...";
+			mes "Nope. Still feel OLD.";
+			mes "If anything, I feel even worse. Th-there's this buzzing in my head...";
+			close;
+		case 3:
+			mes "[Grampa]";
+			mes "He...Hey, kid !! W-Wait !";
+			close;
+		}
+	} 
+	else {
+		switch(select("Talk:Cancel")) {
+		case 1:
+			mes "[Grampa]";
+			mes "Listen well...";
+			mes "You've got to take care of yourself as well as your can. Without your health, one cannot enjoy the pleasures of this mortal realm.";
+			next;
+			mes "[Grampa]";
+			mes "In order to restore my youth, I tried all sorts of things, mostly by hearsay, but nothing worked. In the end, I spent so much zeny on miracle cures, I ended up broke.";
+			next;
+			mes "[Grampa]";
+			mes "I've mostly given up on restoring my youth. But there is one hope left... Eating ^3355FFTiger's Footskin^000000, The King of Invigorators!!";
+			next;
+			mes "[Grampa]";
+			mes "Haven't you heard?! One glance would restore the color in my white hair, one sniff, even just one touch, and an 80 year-old would have another chance at youth... It's The King of Invigorators !";
+			next;
+			mes "[Grampa]";
+			mes "Before I die...";
+			mes "I wish I could eat 10 Tiger's Footskin. Then, I wouldn't have to die!";
+			next;
+			mes "[Grampa]";
+			mes "If someone helped me get them, I would give that person my precious item, ^3355FFBoys Cap^000000 without regret...";
+			close;
+		case 2:
+			mes "[Grampa]";
+			mes "Cough Cough !!";
+			mes "Tiger ....Tiger's ..... Foot ..... skin .....Cough Cough !!";
+			close;
+		}
+	}
+}
+
+//=======================================================================================================//
+//						Antlers Quest 
+//=======================================================================================================//
+alberta_in,122,53,4	script	Cherokee	47,{
+	mes "[Cherokee]";
+	mes "Hey there~!";
+	next;
+	mes "[Cherokee]";
+	mes "What do you think about animal horns? Oh man, I think they're great! Don't you? I love animal horns so much I became a ^3355FFHorn Collector^000000.";
+	next;
+	mes "[Cherokee]";
+	mes "I mean, there's so many things you can do with horns. You can wear them on your head, you can wear them on, um... your house? All sorts of things!";
+	next;
+	mes "[Cherokee]";
+	mes "I've collected almost every sort of horn except for one kind, and that's ^FF3355Evil Horn^000000. Some people say Evil Horn doesn't even come from an animal, but from a demon. But even so, I still want it.";
+	next;
+	mes "[Cherokee]";
+	mes "Do you...";
+	mes "Do you have ^FF3355Evil Horn^000000?";
+	mes "If you offer me 20 Evil Horns, I will give you an ^3355FFAntler^000000 from my precious collection. So, deal?";
+	next;
+	switch(select("Okay, let's deal.:Shut up, Dumbo.")) {
+	case 1:
+		if (countitem(923) > 19) {
+			delitem 923,20;  //Evil_Horn
+			mes "[Cherokee]";
+			mes "Whoah~! This is the first time I've ever seen a real ^FF3355Evil Horn^000000!!";
+			mes "Thank you! Here, this is my Antler for you!";
+			getitem 2284,1; // Antler
+			next;
+			mes "[Cherokee]";
+			mes "With your great help, I can make my wish come true this time. Finally, I'll be recognized as a serious horn collector. I appreciate this~!";
+			close;
+		}
+		else {
+			mes "[Cherokee]";
+			mes "Hmm...";
+			mes "You don't seem to have enough. I need ^FF335520 Evil Horns^000000 for my collection.";
+			close;
+		}
+	case 2:
+		mes "[Cherokee]";
+		mes "Well that's fine. Although you're a rude prick, I will forgive you. We'll probably speak again...";
+		close;
+	}
+}
+
+//=======================================================================================================//
+//			Bao Bao, Cresent Hairpin, Fashionbale Glasses, Heart Hairpin
+//=======================================================================================================//
+alberta,120,53,1	script	멋쟁이 상인#new30	51,{
+	if ((countitem(10007) > 0) && (countitem(968) > 49)) {
+		mes "[지크]";
+		mes "I know I know, you just want to get a Bao Bao of your own. But I can't concentrate on my work if you keep rushing me like this.";
+		next;
+		mes "^3355FF*Thud! Thud!*";
+		mes "*Ah! Kek! Smash!*";
+		mes "*Boom Boom!*^000000";
+		next;
+		delitem 10007,1;  //Silk_Ribbon
+		delitem 968,50;  //Voucher_Of_Orcish_Hero
+		mes "[지크]";
+		mes "Phew!";
+		mes "There you go~!";
+		mes "Now make good use of it!!";
+		getitem 5042,1; // Hair_Protector
+		close;
+	}
+	else if((countitem(5041) > 0) && (countitem(999) > 9)) {
+		mes "[지크]";
+		mes "Alright alright! Gosh, your Crescent Hairpin will be ready in a bit, but I can't concentrate my work if you keep rushing me like this!";
+		next;
+		mes "^3355FF*Thud! Thud!*";
+		mes "*Ah! Kek! Smash!*";
+		mes "*Boom Boom!*^000000";
+		next;
+		delitem 5041,1;  //Heart_Hair_Pin
+		delitem 999,10;  //Steel
+		mes "[지크]";
+		mes "Phew!";
+		mes "It's done~!";
+		mes "Now wear it and";
+		mes "look pretty or";
+		mes "something, yeah?";
+		getitem 5048,1; // First_Moon_Hair_Pin
+		close;
+	}
+	else if((countitem(2271) > 0) && (countitem(975) > 0)) {
+		mes "[지크]";
+		mes "Yeah yeah, you came for your Fashionable Glasses. Just don't rush me, or I won't be able to concentrate on my work, alright?";
+		next;
+		mes "^3355FF*Thud! Thud!*";
+		mes "*Ah! Kek! Smash!*";
+		mes "*Boom Boom!*^000000";
+		next;
+		delitem 2271,1;  //Jack_A_Dandy
+		delitem 975,1;  //Scarlet_Dyestuffs
+		mes "[지크]";
+		mes "Phew, it's done!";
+		mes "Now go wear these and look, well, as fashionable as these glasses, I guess.";
+		getitem 5047,1; // Fashion_Sunglass
+		close;
+	}
+	else if(countitem(7013) > 1199){
+		mes "[지크]";
+		mes "Okay okay, you want your Heart hairpin, I'm working on it. Yeesh, I can't concentrate at all if you try to rush me, you know?";
+		next;
+		mes "^3355FF*Thud! Thud!*";
+		mes "*Ah! Kek! Smash!*";
+		mes "*Boom Boom!*^000000";
+		next;
+		delitem 7013,1200;  //Coral_Reef
+		mes "[지크]";
+		mes "Phew~!";
+		mes "Finally, it's done!";
+		mes "Make me happy and";
+		mes "wear it with pride~";
+		getitem 5041,1; // Heart_Hair_Pin
+		close;
+	}
+	else {
+		mes "[지크]";
+		mes "얏호~ 역시 바다내음이란!! 너무너무 좋아!";
+		mes "음?...무슨 볼일이라도 있어요?";
+		mes "내가 상인이란 거 알고 온거죠??";
+		next;
+		mes "[지크]";
+		mes "에이..역시 유명한 상인은 어딜 가도 고생이라니까~~";
+		mes "알았어요 알았어...에이~~~ 너무 유명해도 쉬고싶을때 못쉬는 법이라니까...";
+		next;
+		mes "[지크]";
+		mes "뭐가 갖고 싶어요? 또?";
+		mes "말해봐요~ 말해봐~~ 뻔 하지 뭐....괜히 말걸고 그럴때 알아봤지~~!!";
+		next;
+		switch(select("머리포자기:초승달머리핀:패션선글래스:하트머리핀")) {
+		case 1:
+			mes "[지크]";
+			mes "내가 다루는 품목까지 딱딱 알고있잖아!! 하핫!!";
+			mes "거봐~~ 역시 뻔하다니까!! 또 누구한테 듣고 왔어요?";
+			next;
+			mes "[지크]";
+			mes "머리포자기는~~";
+			next;
+			mes "[지크]";
+			mes "^0000FF실크리본^000000 1개에다가";
+			mes "^0000FF오크용자의 증표^000000 50 개만 있으면 되요.";
+			break;
+		case 2:
+			mes "[지크]";
+			mes "내가 다루는 품목까지 딱딱 알고있잖아!! 하핫!!";
+			mes "거봐~~ 역시 뻔하다니까!! 또 누구한테 듣고 왔어요?";
+			next;
+			mes "[지크]";
+			mes "초승달 머리핀은~";
+			next;
+			mes "[지크]";
+			mes "^0000FF하트머리핀^000000 1개에다가";
+			mes "^0000FF강철^000000 10 개만 있으면 되요.";
+			break;
+		case 3:
+			mes "[지크]";
+			mes "내가 다루는 품목까지 딱딱 알고있잖아!! 하핫!!";
+			mes "거봐~~ 역시 뻔하다니까!! 또 누구한테 듣고 왔어요?";
+			next;
+			mes "[지크]";
+			mes "패션성글래스는!";
+			next;
+			mes "[지크]";
+			mes "^0000FF머리안경^000000 1개에다가";
+			mes "^0000FF빨간색 염료^000000 1 개만 있으면 되요.";
+			break;
+		case 4:
+			mes "[지크]";
+			mes "내가 다루는 품목까지 딱딱 알고있잖아!! 하핫!!";
+			mes "거봐~~ 역시 뻔하다니까!! 또 누구한테 듣고 왔어요?";
+			next;
+			mes "[지크]";
+			mes "하트머리핀은!";
+			next;
+			mes "[지크]";
+			mes "단순! 무식하게!(이런게 좋죠? 뻔하지~~)";
+			mes "^0000FF산호초^000000 1200 개만 있으면 되요.";
+			break;
+		}
+		mes "...이것도 알고있던 사실 아녔어요? 한번 듣기는 했는데 까먹어서 물어보는 거죠?";
+		close;
+	}
+}
+
+//=======================================================================================================//
+//				Hat of Sun God, Sunday Hat, Mage Hat, Magician Hat
+//=======================================================================================================//
+alberta,136,79,1	script	Hat store girl#new30	71,{
+	mes "[Tempestra]";
+	mes "Ah, such a cool breeze. It's good to visit the seashore. I think it was the right choice to come here to take a break from my business.";
+	next;
+	mes "[Tempestra]";
+	mes "Ooh, the sun is too strong today. I'm glad that I brought my hat. I'm going to get a sunburn if my skin is exposed to the sun like this everyday.";
+	next;
+	mes "[Tempestra]";
+	mes "Oh, I'm sooo thirsty! A nice, chilled Yellow Potion would be perfect right about now~";
+	next;
+	switch(select("Let me treat you to a Yellow Potion.:What, you expect me to give you one?!")) {
+	case 1:
+		if (countitem(503) > 0){
+			mes "[Tempestra]";
+			mes "Ah, thank you so much. I'm so glad to have met a friendly person like yourself.";
+			next;
+			mes "^3355FF*Gulp, gulp*^000000";
+			delitem 503,1;  //Yellow_Potion
+			next;
+			mes "[Tempestra]";
+			mes "Hyaaaaaa~~!!!";
+			mes "It's so cold!! Thank you~~~";
+			next;
+			switch(select("It's really hot, isn't it~?:You should wear your hat...")) {
+			case 1:
+				mes "[Tempestra]";
+				mes "Yeah~ it's really hot....";
+				next;
+				mes "[Tempestra]";
+				mes "I have";
+				mes "^0000FFSunday Hat^000000,";
+				mes "^0000FFMage Hat^000000 and...";
+				mes "^0000FFMagician Hat^000000 and more in my room.";
+				next;
+				mes "[Tempestra]";
+				mes "I brought these hats so I can sell them and use the money for my vacation here, but now it looks like I have to wear one~";
+				next;
+				switch(select("Sunday Hat!!?:Mage Hat?!?:Magician Hat??!??")) {
+				case 1:
+					mes "[Tempestra]";
+					mes "Oh? Didn't you know? I'm a hat merchant. Didn't I tell you that before?";
+					next;
+					mes "[Tempestra]";
+					mes "Hmm, I guess I didn't. I apologize. Ooh! You know what, I could make you a Sunday Hat~!";
+					next;
+					mes "[Tempestra]";
+					mes "I'd need...";
+					mes "^0000FF250 Fabric^000000";
+					mes "^0000FF1 Slotted Hat^000000";
+					mes "^0000FF1 Slotted Cap^000000";
+					mes "^0000FF600 Soft feather^000000";
+					next;
+					if ((countitem(1059) > 249) && (countitem(2221) > 0) && (countitem(2227) > 0) && (countitem(7063) > 599)) {
+						mes "[Tempestra]";
+						mes "What?!? ";
+						mes "You have all the items already? If there are forged items or slotted items with monster cards, then put them into your storage.";
+						next;
+						mes "[Tempestra]";
+						mes "I just want to make something for the Yellow Potion, so I won't charge you any zeny for my hat making service.";
+						switch(select("Oh, please do.:No thanks.")) {
+						case 1:
+							next;
+							mes "[Tempestra]";
+							mes "Alrighty. Just give me a moment...";
+							next;
+							mes "^3355FF*Thud! Boot!*";
+							mes "*Thic-Tac!*^000000";
+							next;
+							mes "^3355FF*Beeeeeeeh~~~*^000000";
+							next;
+							delitem 1059,250;  //Transparent_Cloth
+							delitem 2221,1;  //Hat_
+							delitem 2227,1;  //Cap_
+							delitem 7063,600;  //Soft_Feather
+							mes "[Tempestra]";
+							mes "Here it is, tee hee~";
+							mes "How about that? Do you like it?";
+							getitem 5032,1; // Picnic_Hat
+							next;
+							mes "[Tempestra]";
+							mes "Once again, thank you for your favour. I'll see you later~";
+							close;
+						case 2:
+							next;
+							mes "[Tempestra]";
+							mes "Oh alright~";
+							next;
+							mes "[Tempestra]";
+							mes "If by any chance you visit me later, I'd be more than happy to make a hat for you~";
+							next;
+							mes "[Tempestra]";
+							mes "Well then, see you later~";
+							close;
+						}
+					}
+					else {
+						mes "[Tempestra]";
+						mes "I will tell you a secret, beause you gave me the Yellow Potion~";
+						next;
+						mes "[Tempestra]";
+						mes "I'm looking forward seeing you again~~";
+						close;
+					}
+				case 2:
+					mes "[Tempestra]";
+					mes "Oh? Didn't you know? I'm a hat merchant. Didn't I tell you that before?";
+					next;
+					mes "[Tempestra]";
+					mes "Hmm, I guess I didn't. I apologize. Ooh! You know what, I could make you a Mage Hat!";
+					next;
+					mes "[Tempestra]";
+					mes "^0000FF1 Wizard Hat^000000";
+					mes "^0000FF400 Dragon Scale^000000";
+					mes "^0000FF50 Mould Powder^000000";
+					mes "^0000FF1 Elder Wilow Card^000000";
+					next;
+					if ((countitem(2252) > 0) && (countitem(1036) > 399) && (countitem(4052) > 0) && (countitem(7001) > 49)) {
+						mes "[Tempestra]";
+						mes "What?!? ";
+						mes "You have all the items already? If there are forged items or slotted items with monster cards, then put them into your storage.";
+						next;
+						mes "[Tempestra]";
+						mes "I just want to make something nice for you, so I won't charge you any zeny for my hat making service.";
+						switch(select("Oh, please do.:No thanks.")) {
+						case 1:
+							next;
+							mes "[Tempestra]";
+							mes "Alrighty. Just give me a moment...";
+							next;
+							mes "^3355FF*Thud! Boot!*";
+							mes "*Thic-Tac!*^000000";
+							next;
+							mes "^3355FF*Beeeeeeeh~~~*^000000";
+							next;
+							delitem 2252,1;  //Star_Sparkling
+							delitem 1036,400;  //Dragon_Scale
+							delitem 4052,1;  //Elder_Wilow_Card
+							delitem 7001,50;  //Mould_Powder
+							mes "[Tempestra]";
+							mes "Here it is, tee hee~";
+							mes "How about that?";
+							mes "Do you like it?";
+							getitem 5027,1; // Wizardry_Hat
+							next;
+							mes "[Tempestra]";
+							mes "Once again, thank you for your favour. I'll see you later~";
+							close;
+						case 2:
+							next;
+							mes "[Tempestra]";
+							mes "Oh alright~";
+							next;
+							mes "[Tempestra]";
+							mes "If by any chance you visit me later, I'd be more than happy to make a hat for you~";
+							next;
+							mes "[Tempestra]";
+							mes "Well then, see you later~";
+							close;
+						}
+					}
+					else {
+						mes "[Tempestra]";
+						mes "I will tell you a secret, beause you gave me the Yellow Potion~";
+						next;
+						mes "[Tempestra]";
+						mes "I'm looking forward seeing you again~~";
+						close;
+					}
+				case 3:
+					mes "[Tempestra]";
+					mes "Oh? Didn't you know? I'm a hat merchant. Didn't I tell you that before?";
+					next;
+					mes "[Tempestra]";
+					mes "Hmm, I guess I didn't. I apologize. Ooh! You know what, I could make you a Magician Hat!";
+					next;
+					mes "[Tempestra]";
+					mes "^0000FF1 Wizard Hat^000000";
+					mes "^0000FF450 Ancient Lips^000000";
+					mes "^0000FF1200 Solid Shell^000000";
+					next;
+					if ((countitem(2252) > 0) && (countitem(1054) > 449) && (countitem(943) > 1199)) {
+						mes "[Tempestra]";
+						mes "What?!? ";
+						mes "You have all the items already?";
+						mes "If there are forged items or slotted items with monster cards, then put them into your storage.";
+						next;
+						mes "[Tempestra]";
+						mes "I just want to make something nice for you, so I won't charge you any zeny for my hat making service.";
+						switch(select("Please do:No thanks")) {
+						case 1:
+							next;
+							mes "[Tempestra]";
+							mes "Alrighty. Just give me a moment...";
+							next;
+							mes "^3355FF*Thud! Boot!*";
+							mes "*Thic-Tac!*^000000";
+							next;
+							mes "^3355FF*Beeeeeeeh~~~*^000000";
+							next;
+							delitem 2252,1;  //Star_Sparkling
+							delitem 1054,450;  //Lip_Of_Ancient_Fish
+							delitem 943,1200;  //Solid_Shell
+							mes "[Tempestra]";
+							mes "Here it is, tee hee~";
+							mes "How about that?";
+							mes "Do you like it?";
+							getitem 5045,1; // Magician_Hat
+							next;
+							mes "[Tempestra]";
+							mes "Once again, thank you for your favour. I'll see you later~";
+							close;
+						case 2:
+							next;
+							mes "[Tempestra]";
+							mes "Oh alright~";
+							next;
+							mes "[Tempestra]";
+							mes "If by any chance you visit me later, I'd be more than happy to make a hat for you~";
+							next;
+							mes "[Tempestra]";
+							mes "Well then, see you later~";
+							close;
+						}
+					}
+					else {
+						mes "[Tempestra]";
+						mes "I will tell you a secret, beause you gave me the Yellow Potion~";
+						next;
+						mes "[Tempestra]";
+						mes "I'm looking forward seeing you again~~";
+						close;
+					}
+				}
+			case 2:
+				mes "[Tempestra]";
+				mes "Well, the hats I have with me are for my customers. If I use them for myself, I'll have nothing to sell...";
+				next;
+				mes "[Tempestra]";
+				mes "I want to make something special for you because you showed me such kindness, but I don't have anything like that right now.";
+				next;
+				if ((countitem(7086) > 0) && (countitem(969) > 9) && (countitem(999) > 39) && (countitem(1003) > 49) && (countitem(984) > 1)) {
+					mes "[Tempestra]";
+					mes "Hmm...";
+					mes "I think I can make a special item from the items you already have.";
+					next;
+					mes "[Tempestra]";
+					mes "If there are any forged items or slotted items with monster cards, then put them into your Kafra storage.";
+					next;
+					mes "[Tempestra]";
+					mes "Heh heh...";
+					mes "I think I'll make you a Hat of the Sun God~";
+					next;
+					delitem 7086,1;  //Symbol_Of_Sun
+					delitem 969,10;  //Gold
+					delitem 999,40;  //Steel
+					delitem 1003,50;  //Coal
+					delitem 984,2;  //Oridecon
+					mes "[Tempestra]";
+					mes "See! Here it is!!";
+					mes "Haha, I made this quicker than the speed of light!";
+					next;
+					mes "[Tempestra]";
+					mes "...Or maybe I just gave you the one I already had, and took your items. Hee hee!";
+					getitem 5022,1; // Helm_Of_Sun
+					next;
+					mes "[Tempestra]";
+					mes "Anyway, I justed want to give something really nice to you...";
+					close;
+				}
+				else {
+					mes "[Tempestra]";
+					mes "Hmm...";
+					mes "^0000FF1 Emblem of the Sun God^000000";
+					mes "^0000FF10 Gold^000000";
+					mes "^0000FF40 Steel^000000";
+					mes "^0000FF50 Coal^000000";
+					mes "^0000FF2 Oridecon^000000";
+					next;
+					mes "[Tempestra]";
+					mes "If you have these, I can make you my fantastic 'Hat of the Sun God!'";
+					next;
+					mes "[Tempestra]";
+					mes "I just want to make something really special for you, so I won't charge you any zeny to make this hat.";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[Tempestra]";
+			mes "Umm, I appreciate it but, I guess you just ran out of Yellow Potions?";
+			close;
+		}
+	case 2:
+		mes "[Tempestra]";
+		mes "....How rude!";
+		close;
+	}
+}
+
+//=======================================================================================================//
+//						Turtle Quest
+//=======================================================================================================//
+alberta,91,70,4	script	불량식품청년#tur	89,{
+	mes "^3333FF- 지글지글 모락모락 -^000000";
+	next;
+	mes "[소다맨]";
+	mes "아아 ~ 말시키지마 !";
+	mes "내가 지금 무얼 하고 있느냐고 ?";
+	mes "뻔히 다 알면서 그래 ~";
+	mes "자 . 이 조그만 국자에 설탕과";
+	mes "소다를 적당히 섞어서 ..";
+	mes "고체연료 위에 두고 열을 가해";
+	next;
+	mes "[소다맨]";
+	mes "조금씩 조금씩 녹여 가는거야";
+	mes "어느정도의 점도와 빛깔을";
+	mes "갖추게 되면 . 우와악 !! 하고";
+	mes "철판위에 붓는거지 -";
+	mes "꾸욱꾸욱 눌러서 뽑기도 만들고";
+	mes "그대로 먹을 수 도 있어 -";
+	next;
+	mes "[소다맨]";
+	mes "내가 지금 무엇에 대해";
+	mes "말하고 있는지 알겠지 ?";
+	mes ". . . . . 시시 콜콜 하다고 ?";
+	mes "우큭 . 그 . 그렇다면";
+	mes "거북이 섬을 정복할 뻔 했던";
+	mes "어느 영감님의 이야기는 어때 ?";
+	next;
+	mes "[소다맨]";
+	mes "이 곳 알베르타의 여관을";
+	mes "찾아가보아 . 술에 쪄들어 있는";
+	mes "한 영감님을 만날 수 있을거야";
+	mes "술에 취해 하시는 소리지만";
+	mes "횡설수설  하는 것 같지만은";
+	mes "않아 . 직접 들어보라구";
+	next;
+	mes "[소다맨]";
+	mes "앗 참 그리고";
+	mes "그 영감님 방에 있는";
+	mes "탁자 위에 자세히보면";
+	mes "거북이 섬에 관련된";
+	mes "무서운 편지가 있어";
+	mes "한번 읽어보라구 ~";
+	close;
+}
+
+alberta_in,23,104,4	script	거북이영감#tur	120,{
+	mes "[거북할배]";
+	mes "딸꾹 ..";
+	mes "세계 무역의 중심지라는";
+	mes "알베르타라고 하는 곳이";
+	mes "변변찮은 주점도 없어서";
+	mes "내가 이런 곳에서 술을";
+	mes "마셔야 겠어 ?";
+	next;
+	switch(select("` 거북이 섬 ' 에 대하여:거북이 섬 으로 가는 방법:대화를 그만둔다")) {
+	case 1:
+		mes "[거북할배]";
+		mes "평생을 통 털어서";
+		mes "구경조차 해보지 못 할";
+		mes "만큼 엄청난 양의 보물이";
+		mes "숨어있다느니 ..";
+		mes "수명을 비약적으로";
+		mes "늘릴 수 있는";
+		next;
+		mes "[거북할배]";
+		mes "자네가 . 진정한";
+		mes "바다의 사나이이고 . 또";
+		mes "올바른 마음가짐을 가진";
+		mes "트레져헌터 ( 모험가 ) 라면";
+		mes "자네를 위해 정보를";
+		mes "줄 수 도 있네만 ..";
+		next;
+		mes "[거북할배]";
+		mes "진귀한 명약이 있다느니 !";
+		mes "수많은 소문을 뒤로한채";
+		mes "실제로 존재하는지 . 그렇지";
+		mes "않은지 조차 확실치 않은";
+		mes "환상의 섬 !";
+		mes "하지만 나는 알고있지";
+		next;
+		switch(select("+ + 빤짝 + +:오오오 ! 정보 ! 정보 ! 헤헤 !")) {
+		case 1:
+			mes "[거북할배]";
+			mes "헐헐헐 눈빛이 맘에드는구만";
+			mes "좋오오앗 . 써어어 !";
+			mes "지금으로부터 십수년 전";
+			mes "그 때 당시 세계에서 가장";
+			mes "유명했던 모험가 중";
+			mes "한사람 이었던";
+//			if (Sex)
+//				mes "I like the shine in your eye, my boy! I can see a little bit of myself in those eyes. Yes...";
+//			else
+//				mes "No use hiding the glint in your eyes, my dear! It's adventure you wish for, that much I can tell...";
+			next;
+			mes "[거북할배]";
+			mes "^3355FF` 조나단 닐리리야 '^000000 와";
+			mes "그 의 이름에 걸맞는";
+			mes "동료 열명은 -";
+			mes "이른바 환상의 섬 이라";
+			mes "불리우는 ` 거북이 섬 ' 을 찾는";
+			mes "여행을 떠났었단다 ..";
+			next;
+			mes "[거북할배]";
+			mes "이 드넓은 세계 그 어느 곳 에";
+			mes "있는지도 모를 . 환상의 섬 ..";
+			mes "어리숙한건지";
+			mes "패기가 넘치는건지 그들은";
+			mes "밑도 끝도 없이";
+			mes "찾아내기 시작했지만";
+			next;
+			mes "[거북할배]";
+			mes "좀 처럼 발견하기가 힘들었지";
+			mes "소문에 소문을 더하고";
+			mes "조금씩 조금씩 단서를 모아";
+			mes "거북이 섬으로 한걸음씩";
+			mes "전진했던거야";
+			mes "그 들은 가능했지";
+			next;
+			mes "[거북할배]";
+			mes "다른 동료들이야 어쨌든";
+			mes "리더인 ^3355FF` 조나단 닐리리야 '^000000 가";
+			mes "상당한 실력가였어 !";
+			mes "그 의 일화를 들어보자면";
+			mes "단순한 발차기와 같은";
+			mes "공격으로 레벨 10 의";
+			next;
+			mes "[거북할배]";
+			mes "` 배쉬 ' 에 버금가는 힘을";
+			mes "내기도 했고 . 한손으로는";
+			mes "날아오는 화살을";
+			mes "잡아채면서 . 다른 한손으로는";
+			mes "동료에게 ` 힐 ' 을 외웠다고";
+			mes "할 정도였다나 뭐라나 -";
+			next;
+			mes "[거북할배]";
+			mes "뭐 . 소문이 소문인만큼";
+			mes "믿기 힘든 이야기가 대부분";
+			mes "이지만 . 어찌되었거나";
+			mes "` 거북이 섬 ' 을 발견했다고";
+			mes "하는 몇 안되는 모험가 중";
+			mes "한사람 이었다는 데에는";
+			next;
+			mes "[거북할배]";
+			mes "모두들 할말이 없었지 ..";
+			mes "이런저런 고난을 겪기도";
+			mes "하면서 그 들은 결국 도착했어";
+			mes "^3355FF` 거북이 섬 '^000000 에 !!";
+			next;
+			mes "[거북할배]";
+			mes "하지만 거북이 섬에서";
+			mes "있었던 어떤 사건에 의해";
+			mes "그 들은 그 곳에서";
+			mes "남은 여생을 마쳐야 했다고 해";
+			mes ". . . . . 뭐 정확히는 모르겠어";
+			mes "이 보다 더 자세한";
+			next;
+			mes "[거북할배]";
+			mes "이야기를 듣고 싶다면";
+			mes "이 알베르타 동쪽 항구 끝 쪽";
+			mes "어딘가에서 헤메이고 있을";
+			mes "거북섬 학자 에게";
+			mes "말을 건네보오 ..";
+			mes "조금 더 구체적이고";
+			next;
+			mes "[거북할배]";
+			mes "확실한 내용을";
+			mes "알고 있을 터이니 ..";
+			next;
+			mes "[거북할배]";
+			mes "아 참 그리고 . 학자의";
+			mes "주변을 잘 살펴보면";
+			mes "언제나 지니고 다니는";
+			mes "^3355FF` 일지 '^000000 가 있어";
+			mes "읽어보면 꽤 흥미로울거야";
+			mes "한번 잘 찾아 보아 -";
+			close;
+		}
+		mes "[거북할배]";
+		mes "이런 ! 썩은 !";
+		mes "동태눈깔을 한";
+		mes "네 놈 에게는 아무것도";
+		mes "가르쳐 줄 수 없다 !!";
+		mes "돌아가거라 ~";
+		next;
+		mes "[거북할배]";
+		mes "잉 . 아직도 안가고 있었네 ?!";
+		mes "가 !";
+		mes "가시오 - - - - -";
+		close;
+	case 2:
+		if ((MISC_QUEST & 65536) || TURTLE) {
+			if(MISC_QUEST & 65536) set TURTLE,0; //now clear the var
+			mes "[거북할배]";
+			mes "거북이 섬?!";
+			mes "알베르타 동쪽항구";
+			mes "어딘가에 . 나이든";
+			mes "통통배 선원 아저씨가";
+			mes "있을 거야 ..";
+			next;
+			mes "[거북할배]";
+			mes "이름은 ^3355FF' 고텐부루 '^000000";
+			mes "아마 이것저것 이야기를";
+			mes "해주면서 거북이 섬에";
+			mes "갈 방법을 설명해 줄거야 ..";
+			mes "딸꾹";
+			mes "그럼 . 행운을 ~";
+			close;
+		}
+		mes "[거북할배]";
+		mes "찾기도 힘들고";
+		mes "도달하기는 더더욱 힘들고";
+		mes "돌아올 가능성은";
+		mes "아예 희박하다는";
+		mes "거북이 섬에";
+		mes "가고 싶다는 거야 지금 ?";
+		next;
+		mes "[거북할배]";
+		mes "딸꾹 !";
+		mes "헤헤 . 이 할배가";
+		mes "자네에게 뼈가 되고 살이 될";
+		mes "따끔따끔한 충고를";
+		mes "몇십분이고 늘어놓아주고";
+		mes "싶지만 ..";
+		next;
+		mes "[거북할배]";
+		mes "술기운에 정신이 없어서";
+		mes "그만두겠어 . 어차피";
+		mes "아무나 가는 곳 이";
+		mes "아니니까 말이지 ..";
+		mes "알베르타 동쪽항구";
+		mes "어딘가에 . 나이든";
+		next;
+		mes "[거북할배]";
+		mes "통통배 선원 아저씨가";
+		mes "있을 거야 ..";
+		mes "이름은 ^3355FF` 고텐부루 '^000000";
+		mes "그 녀석에게";
+		mes "거북할배로부터 이야기를";
+		next;
+		mes "[거북할배]";
+		mes "듣고서 찾아왔다고해";
+		mes "아마 이것저것 이야기를";
+		mes "해주면서 거북이 섬에";
+		mes "갈 방법을 설명해 줄거야 ..";
+		mes "딸꾹";
+		mes "그럼 . 행운을 -";
+		set TURTLE,1;
+		close;
+	case 3:
+		mes "[거북할배]";
+		mes "히이익 . . . . .";
+		mes "이거이거 ..";
+		mes "너무 취한 것 같네 그랴";
+		mes "자 . 오늘은 이쯤에서";
+		mes "그만 마셔볼까 ..";
+		mes "딸꾹";
+		close;
+	}
+}
+
+alberta,247,122,4	script	뱃사공#tur	709,{
+	if (TURTLE || (MISC_QUEST & 65536)) {
+		mes "[Gotanblue]";
+		mes "Heh...";
+		mes "Your eyes...";
+		mes "I can tell you're curious about Turtle Island. I guess you must have been talking to that drunken old man!";
+		next;
+		switch(select("Do you know about Turtle Island?:How can I get there?:Stop talking.")) {
+		case 1:
+			mes "[Gotanblue]";
+			mes "Turtle Island...?";
+			mes "Well, first I think it's fair to warn you that Turtle Island took the lives of my buddies. That's right, I was part of ^3355FFJornadan Niliria^000000's crew.";
+			next;
+			mes "[Gotanblue]";
+			mes "We wanted to find out if the legends about that island were true, so we left everything behind to learn the truth.";
+			next;
+			mes "[Gotanblue]";
+			mes "Jornadan Niliria was one of the greatest treasure hunters ever, and he gathered men for his crew from around the globe. I'm proud to say that each member of our crew was the best in his field.";
+			next;
+			mes "[Gotanblue]";
+			mes "I happened to be the best at navigating. I was only twenty, but I was still invited to his team. It was such an honor to be accepted as an equal amongst these great men.";
+			next;
+			mes "[Gotanblue]";
+			mes "Anyway, our biggest clue about Turtle Island's location hinted that it was near Alberta, so our voyage began from here.";
+			next;
+			mes "[Gotanblue]";
+			mes "We sailed day and night, drifting for weeks, until one day, we were surrounded by an incredibly thick fog. We had no idea of which direction we were going and the mist wouldn't clear.";
+			next;
+			mes "[Gotanblue]";
+			mes "But none of us had any regrets and we just kept moving onward. There would be no turning back!";
+			next;
+			mes "[Gotanblue]";
+			mes "Finally, a coral reef sudden appeared and we couldn't steer away from it. Our ship was critically damaged. But when the fog cleared, we saw that we had finally arrived at Turtle Island! It was real!";
+			next;
+			mes "[Gotanblue]";
+			mes "After we made camp on shore and explored the island, we learned something quite remarkable.";
+			next;
+			mes "[Gotanblue]";
+			mes "There was a man who had actually made it to Turtle Island before us. His records, however, never reached Rune-Midgard. He was a great swordmaster known simply as ^3355FFOne^000000.";
+			next;
+			mes "[Gotanblue]";
+			mes "According to his records, he had traveled alone to find Turtle Island and made it by himself. But we couldn't find any sign of him anywhere...";
+			next;
+			mes "[Gotanblue]";
+			mes "As we explored Turtle Island further, we learned that not only was it abundant with treasure, but that it also held an item of great interest.";
+			next;
+			mes "[Gotanblue]";
+			mes "From the first explorer's record, some kind of amazing ^3355FFjewel fragment^000000 was mentioned.";
+			next;
+			mes "[Gotanblue]";
+			mes "He had traveled to Turtle Island with the purpose of discovering secrets to the sword arts, and stumbled upon a jewel he claimed was the most beautiful in the world.";
+			next;
+			mes "[Gotanblue]";
+			mes "By the ^3355FFOne^000000's records, we were able to thoroughly explore all to be seen on Turtle Island. However...";
+			next;
+			mes "[Gotanblue]";
+			mes "Even after months of searching, we could never find a trace of the jewel fragment. Eventually, we had to give up on our search.";
+			next;
+			mes "[Gotanblue]";
+			mes "Finally, we packed our things to leave the island. But then, as we were trav꼬마아이g at sea, we encountered a thick, blinding fog once again.";
+			next;
+			mes "[Gotanblue]";
+			mes "We spent a month trying to steer through that mist. When we finally sailed out of that mist, we saw that we had arrived at the other side of Turtle Island!";
+			next;
+			mes "[Gotanblue]";
+			mes "Our spirits were crushed!! We tried again and again to leave that place, and spent nearly a year trying to leave but we kept winding up at Turtle Island's shores.";
+			next;
+			mes "[Gotanblue]";
+			mes "As we struggled with the fog, we lost our comrades one by one. In the end, Jornadan, the drunken old man you met, and myself were the only ones who were able to return home to Alberta.";
+			next;
+			mes "[Gotanblue]";
+			mes "We were the only ones who did not give in to despair, and doggedly held onto our hopes. Still, it was by pure luck that we found a way back to Rune-Midgard.";
+			next;
+			mes "[Gotanblue]";
+			mes "Well, that's my story. You know, if you want to learn more about Turtle Island, why don't you speak to the scholar on the eastern port of Alberta?";
+			next;
+			mes "[Gotanblue]";
+			mes "Heh heh...";
+			mes "I'm sure he can tell give you details that even I wouldn't be able to provide...";
+			close;
+		case 2:
+			mes "[Gotanblue]";
+			mes "After my story of Turtle Island, you're still not afraid of going? I'm impressed! Alright then...";
+			next;
+			mes "[Gotanblue]";
+			mes "If you wish for me to guide you there, I will charge you 10,000 zeny. I'm the only navigator that can guide you there and back safely.";
+			next;
+			if (select("Turtle island -> 10000 zeny:Cancel") == 1) {
+				if (Zeny > 9999) {
+					mes "[Gotanblue]";
+					mes "Alright!!";
+					mes "You've made your choice! With my experience, we will arrive without fail! I appreciate your spirit!";
+					next;
+					mes "^3355FF*Choo Choo*^000000";
+					set zeny,zeny-10000;
+					warp "tur_dun01",157,39;
+					close;
+				}
+				mes "[Gotanblue]";
+				mes "Hmmm...";
+				mes "Sorry, but you don't have enough zeny. I hope you understand that I can let my expertise and experience be undervalued...";
+				close;
+			}
+			mes "[Gotanblue]";
+			mes "Alright then...";
+			mes "Well, if the spirit of adventure should happen to grab you, I will be here waiting.";
+			close;
+		case 3:
+			mes "[Gotanblue]";
+			mes "Heh...";
+			next;
+			mes "[Gotanblue]";
+			mes "Come back whenever you feel you're ready to hear my story, will you?";
+			close;
+		}
+	}
+	mes "[고텐부루]";
+	mes "동료라든가 친구라든가";
+	mes "있을 때 잘해주라고";
+	mes "갑작스런 일 때문에";
+	mes "헤어지거나 하는 경우가";
+	mes "생길지도 모르니까";
+	mes "말이야 ..";
+	next;
+	mes "[고텐부루]";
+	mes "아아 ~ 바다는 넓어";
+	mes "육지에서 보이는 일부분";
+	mes "만으로는 바다의";
+	mes "거대한 그릇을 잴 수 없지 !";
+	mes "내 말 뜻 알겠어 ?";
+	close;
+}
+
+tur_dun01,165,29,4	script	Sailor#tur2	709,{
+	mes "[Gotanblue]";
+	mes "Do you want";
+	mes "to return";
+	mes "to Alberta?";
+	next;
+	if (select("Go to Alberta:Stop talking") == 1) {
+		mes "[Gotanblue]";
+		mes "Heh heh...";
+		mes "I certainly hope you've found what you were looking for. Alright, I guess there's always a time for an adventurer to return home...";
+		next;
+		mes "^3355FF* Choo Choo *^000000";
+		warp "alberta",241,115;
+	}
+	close;
+}
+
+alberta,248,89,4	script	거북이섬학자	121,{
+	mes "[조나단닐리리야]";
+	mes "저 하늘아래 라고 해도";
+	mes "모두가 같은 땅은";
+	mes "아니란 이야기가";
+	mes "있지 .. 마치 알베르타와";
+	mes "거북이 섬의 차이처럼";
+	mes "핫 핫 핫 -";
+	next;
+	switch(select("' 거북이 섬 ' 에 대하여:알데바란이랑 알베르타랑 헛갈리죠 ?:대화를 그만둔다")) {
+	case 1:
+		mes "[조나단닐리리야]";
+		mes "거북이 섬 .. 거북이 섬이";
+		mes "어째서 거북이 섬이라고";
+		mes "불리우는지 궁금하지 ";
+		mes "않습니까 ?";
+		mes "후훗";
+		mes "사실을 알고보면";
+		next;
+		mes "[조나단닐리리야]";
+		mes "허탈하기 그지없죠";
+		mes "섬의 형상이 마치";
+		mes "거북이가 고개를";
+		mes "쳐든것과같은 모습을";
+		mes "하고 있다해서";
+		mes "' 거북이 섬 ' 입니다";
+		next;
+		mes "[조나단닐리리야]";
+		mes "거북이 섬 주변의";
+		mes "안개에 대하여서도";
+		mes "이런저런 이야기가";
+		mes "많은 줄 압니다만 ..";
+		mes "거북이 섬 근처에있는";
+		mes "공동 ( 해변 동굴의 일종 )";
+		next;
+		mes "[조나단닐리리야]";
+		mes "내부에 있는 거대폭포에";
+		mes "의해 생겨난 물방울이";
+		mes "만들어낸 자연현상의";
+		mes "일부일 뿐이라고";
+		mes "할 수 있겠습니다";
+		next;
+		mes "[조나단닐리리야]";
+		mes "진실은 이토록";
+		mes "허무한 것 입니다";
+		mes "그렇기 때문에";
+		mes "사람들은 그 본질을";
+		mes "깨닫기 위해 탐구하는";
+		mes "지도 모르겠습니다";
+		mes "허무하기 위해서가 아닌";
+		next;
+		mes "[조나단닐리리야]";
+		mes "정체를 알 수 없는";
+		mes "무언가에 대한 두려움을";
+		mes "떨쳐내기 위해서죠 ..";
+		mes ". . . . . 저는";
+		mes "거북이 섬을 매우";
+		mes "두려워 했으나";
+		next;
+		mes "[조나단닐리리야]";
+		mes "지금은 아주 편안합니다";
+		mes "거의 모든것을";
+		mes "알아버렸으니까요";
+		mes "음 . 하지만 단 한가지";
+		mes "그 무언가의 조각이라고";
+		mes "하는 . 보석의 정체만은";
+		next;
+		mes "[조나단닐리리야]";
+		mes "아직도 불분명하군요";
+		mes "그것을 알아내기";
+		mes "전까지는 거북이 섬";
+		mes "에 대한 연구를";
+		mes "계속 해야겠지요";
+		mes "훗훗 ..";
+		close;
+	case 2:
+		mes "[조나단닐리리야]";
+		mes "헉 !";
+		mes "그 . 그런가 ?!";
+		mes "그러고보니";
+		mes "그런것 같기도 ?!";
+		mes "우오오오오오오오오오 !!";
+		close;
+	case 3:
+		mes "[조나단닐리리야]";
+		mes "진실을 파헤치고자";
+		mes "노력하면 . 언제가는";
+		mes "해답이 나오게 마련이오";
+		mes ". . . . .";
+		next;
+		mes "[조나단닐리리야]";
+		mes "그나저나 출출하군";
+		mes "알베르타에서는";
+		mes "어째서 고기만두";
+		mes "같은걸 팔지 않는거냐";
+		mes "줘 줘 줘 . 팔아줘";
+		mes "고기만두 팔아줘";
+		close;
+	}
+}
+
+alberta_in,18,102,4	script	Letter#tur	111,{
+	mes "[Explorer's Letter]";
+	mes "- O / X / XOVX -";
+	mes "If you find this letter, please don't disregard what you have read.";
+	next;
+	mes "[Explorer's Letter]";
+	mes "Although we have found Turtle Island, it seems our expedition will fail.";
+	next;
+	mes "[Explorer's Letter]";
+	mes "Only half of our crew is left, and we only have enough food for ten more days. Our condition is truly grave.";
+	next;
+	mes "[Explorer's Letter]";
+	mes "This damn island must be cursed. There's nothing to eat and we're so close to starving!";
+	next;
+	mes "[Explorer's Letter]";
+	mes "If we don't get help or find Alberta soon...";
+	mes "We'll...";
+	close;
+}
+
+alberta,248,93,4	script	항해일지#tur	111,{
+	if (rand(2)) {
+		mes "[항해일지]";
+		mes "= 03 시 20 분 =";
+		mes "달빛은 어둡고 바로 앞 100 M";
+		mes "전방도 보이질 않는다";
+		mes "왠지 불길한 느낌이 들고";
+		mes "있다는건 나뿐만의";
+		mes "생각은 아닌 것 같다";
+		next;
+		mes "[항해일지]";
+		mes "탐험대원들의 얼굴표정이";
+		mes "어둡다 . 모두들 잠을";
+		mes "이루지 못하는 것 같다";
+		mes "어서 해가 뜨면";
+		mes "좋으련만 -";
+		next;
+		mes "[항해일지]";
+		mes "= 04 시 10 분 =";
+		mes "5 분전 쯤 갑판의 타르통을";
+		mes "옮기러간 조리장이";
+		mes "알 수 없는 충격에 부러져";
+		mes "쓰러진 선상깃대에";
+		mes "머리를 부딪혀 숨졌다";
+		next;
+		mes "[항해일지]";
+		mes "사망 시각은 04 시 07 분";
+		mes "선상깃대를 부러뜨리게";
+		mes "한 충격의 범인은 암초로";
+		mes "알려졌고 배밑바닥";
+		mes "좌측 타일에 심한 상처를";
+		mes "냈다 . 서둘러 갑판장을";
+		next;
+		mes "[항해일지]";
+		mes "불러 수리를 지시했다";
+		next;
+		mes "[항해일지]";
+		mes "= 04 시 45 분 =";
+		mes "배밑바닥의 타일을";
+		mes "안쪽에서 수리하던";
+		mes "갑판장과 갑판원 두명이";
+		mes "타일이 깨졌을 때";
+		mes "스며들어온 수중";
+		next;
+		mes "[항해일지]";
+		mes "몬스터의 습격을 받아";
+		mes "전원 사망";
+		mes "사망시각 04 시 32 분";
+		mes "적당한 조치로";
+		mes "타일은 수리했으나";
+		mes "서둘러 뭍에 닿지 않으면";
+		next;
+		mes "[항해일지]";
+		mes "악화될 가능성 농후";
+		mes "타일사이로 들어온";
+		mes "바닷물에 의해";
+		mes "식료품의 3 할이";
+		mes "젖어 못쓰게 됨";
+		next;
+		mes "[항해일지]";
+		mes "= 05 시 23 분 =";
+		mes "암초의 수가 늘어만 가고";
+		mes "그 간격이 점점 좁아져만";
+		mes "간다 . 우리는 언제쯤이면";
+		mes "육지에 도달할 수";
+		mes "있게 될까";
+		next;
+		mes "[항해일지]";
+		mes "- 탐험선장 -";
+		mes "- 조나단 닐리리야 -";
+		close;
+	}
+	else {
+		if (TURTLE == 1) {
+			mes "^3355FFThe paper is torn and seaweed and mold are stuck to the paper. It seems this log is in very poor condition...^000000";
+			next;
+			switch(rand(1,3)) {
+			case 1:
+				mes "^3355FFThere is a banana leaf between some of the pages. Here is what is written.^000000";
+				next;
+				mes "[Voyage Log]";
+				mes "O / X date";
+				mes "Just after we arrived on Turtle Island, we frantically searched all over for food.";
+				next;
+				mes "[Voyage Log]";
+				mes "It was so bad, that you could see the bones through our skin.";
+				next;
+				mes "[Voyage Log]";
+				mes "X / X date";
+				mes "We found some kind of fruit to eat! It's covered in some sort of yellow skin and looks like a banana!";
+				next;
+				mes "[Voyage Log]";
+				mes "XO / X date";
+				mes "Well, it wasn't exactly like the bananas we have in Rune-Midgard, but it was very similar.";
+				next;
+				mes "[Voyage Log]";
+				mes "O / O date";
+				mes "In the middle of the night, one of the men reported that he felt sick after eating the food.";
+				next;
+				mes "[Voyage Log]";
+				mes "OO / O date";
+				mes "Another crew member, Berot Berot, was also found to have severe indigestion.";
+				next;
+				mes "[Voyage Log]";
+				mes "It's now becoming very clear that the food we have been eating contains some kind of poison.";
+				next;
+				mes "[Voyage Log]";
+				mes "XO / O date";
+				mes "The third person to experience indigestion passed away today. We are all very worried.";
+				next;
+				mes "[Voyage Log]";
+				mes "Our suspicions were confirmed when we found that the animals on Turtle Island wouldn't eat the bananas we found.";
+				next;
+				mes "[Voyage Log]";
+				mes "OX / O date";
+				mes "We decided to seal away this poisonous fruit, but learned that it didn't rot, not even after we removed the skin.";
+				next;
+				mes "[Voyage Log]";
+				mes "We have no idea why it's harmful to eat, or why it never perishes, but it be of some medical or scientific interest.";
+				next;
+				mes "[Voyage Log]";
+				mes "In the meantime, we've decided to bury this fruit until we can get back to Alberta.";
+				next;
+				mes "[Voyage Log]";
+				mes "^FF3355tur_dun01^000000";
+				mes "^FF3355X : 160 , Y : 81^000000";
+				next;
+				mes "^3355FFIn the Voyage log is a thin key marked with a skull. You've taken this Skull key, as it may be of some use later.^000000";
+				set TURTLE,2;
+				close;
+			case 2:
+				mes "^3355FFYou notice a page with a stamp shaped like a bird's foot. The black ink smells sort of like fruit.^000000";
+				next;
+				mes "[Voyage Log]";
+				mes "X / OO date";
+				mes "We've found evidence that other people were here, and that we are not the first to find Turtle Island.";
+				next;
+				mes "[Voyage Log]";
+				mes "There was at least one person who made it here before us. Hopefully, his records are on the island somewhere.";
+				next;
+				mes "[Voyage Log]";
+				mes "Starting tomorrow, we will begin searching for these hidden records.";
+				next;
+				mes "[Voyage Log]";
+				mes "O / OO date";
+				mes "We are having difficulty trying to find any records. Is it possible that the first people here wrote nothing of their journey?";
+				next;
+				mes "[Voyage Log]";
+				mes "XO / OO date";
+				mes "We finally found the records we have been searching for.";
+				next;
+				mes "[Voyage Log]";
+				mes "His notes were so hard to find because only one man, rather than a whole team, came to Turtle Island before us!";
+				next;
+				mes "[Voyage Log]";
+				mes "This man was a swordsman simply known as 'One.' His records tell much about what can be found on Turtle Island.";
+				next;
+				mes "[Voyage Log]";
+				mes "His records were written on animals skin, but they were durable and still easy to read after all this time.";
+				next;
+				mes "[Voyage Log]";
+				mes "According to his notes, Turtle Island consists of 4 levels. Although there are no people here, but there are many traps and devices which operate through a mysterious force.";
+				next;
+				mes "[Voyage Log]";
+				mes "Still, it is certain that something has some control over Turtle Island.";
+				next;
+				mes "[Voyage Log]";
+				mes "To keep this record safe, our crew has decided to hide this valuable record on the second level of Turtle Island.";
+				next;
+				mes "[Voyage Log]";
+				mes "Search here...";
+				mes "^FF3355tur_dun02^000000";
+				mes "^FF3355X : 132 , Y : 251^000000";
+				next;
+				mes "^3355FFThere is a picture of a tree in which there is a small keyhole clearly shown under the roots.^000000";
+				next;
+				mes "^3355FFYou've gained^000000";
+				mes "^3355FFthe Roots key.^000000";
+				set TURTLE,3;
+				close;
+			case 3:
+				mes "^3355FFThese pages of this log are soiled with mud, and some of them are missing.^000000";
+				next;
+				mes "[Voyage Log]";
+				mes "O / XX date";
+				mes "The greatest treasure of Turtle Island, the likes of which have never been seen, is hidden, sealed in some secret place...";
+				next;
+				mes "[Voyage Log]";
+				mes "We have spent many days searching for it, but found not one trace.";
+				next;
+				mes "[Voyage Log]";
+				mes "In the meantime, we've collected many precious treasures. We've decided to take only some of it back home, and to leave the rest here.";
+				next;
+				mes "[Voyage Log]";
+				mes "XO / XX date";
+				mes "We have hidden the treasure we have left behind to keep it from getting stolen.";
+				next;
+				mes "[Voyage Log]";
+				mes "It is somewhere on the fourth level, the bottom of the island. The treasure is sealed in a box that is a relic from an ancient culture.";
+				next;
+				mes "[Voyage Log]";
+				mes "However, the technology of this treasure box is very sophisticated, and it won't be easy to open by force.";
+				next;
+				mes "[Voyage Log]";
+				mes "Here...";
+				mes "^FF3355tur_dun01^000000";
+				mes "^FF3355X : 203 , Y : 155^000000";
+				next;
+				mes "^3355FFYou find three small holes under the turtle stone. Within one of these holes is a thin key.^000000";
+				next;
+				mes "^3355FFYou've gained ^000000";
+				mes "^3355FFthe Security key^000000";
+				set TURTLE,4;
+				close;
+			}
+		}
+		mes "^3355FF- 일지를 덮었다 -^000000";
+		close;
+	}
+}
+
+tur_dun01,160,81,4	script	Skull Stone#tur	111,{
+	if (TURTLE == 2) {
+		mes "^3355FFUnder the stone^000000";
+		mes "^3355FFis a tiny key hole^000000";
+		mes "^3355FFwith a skull mark.^000000";
+		mes "";
+		mes "^3355FFYou used the Skull key^000000";
+		mes "^3355FFin that key hole.^000000";
+		next;
+		mes "^3355FF*Click! Click!*^000000";
+		next;
+		mes "^3355FFSuddenly, the top of^000000";
+		mes "^3355FFthe stone opened and^000000";
+		mes "^3355FFsome items popped out!!^000000";
+		next;
+		set MISC_QUEST,MISC_QUEST | 65536;
+		set TURTLE,0;
+		switch(rand(1,3)) {
+		case 1:
+			getitem 532,5; //Banana_Juice
+			mes "^3355FFYou've gained^000000";
+			mes "^3355FF5 Banana Juice^000000";
+			close;
+		case 2:
+			getitem 513,5; //Banana
+			mes "^3355FFYou've gained^000000";
+			mes "^3355FF5 Banana^000000";
+			close;
+		case 3:
+			getitem 513,5; //Banana
+			getitem 532,5; //Banana_Juice
+			mes "^3355FFYou've gained^000000";
+			mes "^3355FF5 Banana and^000000";
+			mes "^3355FF5 Banana Juice^000000";
+			close;
+		}
+	}
+	mes "^3355FFIt is a frightening^000000";
+	mes "^3355FFstone tomb with a^000000";
+	mes "^3355FFhorrible skull on it.^000000";
+	close;
+}
+
+tur_dun02,132,251,4	script	Turtle Tree Roots#tur	111,{
+	if (TURTLE == 3) {
+		mes "^3355FFUnder the tree roots^000000";
+		mes "^3355FFis a tiny key hole^000000";
+		mes "^3355FFmarked with a root insignia.^000000";
+		mes "";
+		mes "^3355FFYou used the Roots key^000000";
+		mes "^3355FFin that key hole.^000000";
+		next;
+		mes "^3355FF*Swishy swashy!*^000000";
+		next;
+		mes "^3355FFBetween the roots^000000";
+		mes "^3355FFa little door opens,^000000";
+		mes "^3355FFrevealing an^000000";
+		mes "^3355FFold scroll.^000000";
+		next;
+		mes "[Old scroll]";
+		mes "^FF3355Following the^000000";
+		mes "^FF3355legend from^000000";
+		mes "^FF3355my village,^000000";
+		mes "^FF3355I've come^000000";
+		mes "^FF3355to improve my^000000";
+		mes "^FF3355swordmanship...^000000";
+		next;
+		mes "[Old scroll]";
+		mes "^FF3355Only one who^000000";
+		mes "^FF3355cuts the shell^000000";
+		mes "^FF3355of a turtle^000000";
+		mes "^FF3355can become a^000000";
+		mes "^FF3355grand master^000000";
+		mes "^FF3355of the sword...^000000";
+		next;
+		mes "[Old scroll]";
+		mes "^FF3355To fufill this^000000";
+		mes "^FF3355legend, I have^000000";
+		mes "^FF3355come. I, 'One,'^000000";
+		mes "^FF3355will cut the^000000";
+		mes "^FF3355turtle's shell!!^000000";
+		next;
+		mes "[Old scroll]";
+		mes "^FF3355Go...^000000";
+		mes "^FF3355tur_dun02^000000";
+		mes "^FF3355X : 46 , Y : 125^000000";
+		next;
+		mes "^3355FFInside the pile of turtle^000000";
+		mes "^3355FFcrystals, a scroll is hidden.^000000";
+		mes "";
+		set TURTLE,7;
+		mes "^3355FFYou've gained a^000000";
+		mes "^3355FFTurtle Crystal key.^000000";
+		close;
+	}
+	mes "^3355FFThere are old,^000000";
+	mes "^3355FFthick tree roots^000000";
+	mes "^3355FFanchored into^000000";
+	mes "^3355FFthe ground here.^000000";
+	close;
+}
+
+tur_dun02,46,125,4	script	A pile of turtle crystal	111,{
+	if (TURTLE == 7) {
+		mes "^3355FFAmong the Turtle Crystals,^000000";
+		mes "^3355FFyou find a strange key hole.^000000";
+		next;
+		mes "";
+		mes "^3355FFYou use the";
+		mes "Turtle crystal key";
+		mes "in the key hole.^000000";
+		next;
+		mes "^3355FF*Click! Click!*^000000";
+		next;
+		mes "^3355FFBetween the crystals,000000";
+		mes "^3355FFa small crystal plate^000000";
+		mes "^3355FFin which a message^000000";
+		mes "^3355FFin engraved.^000000";
+		next;
+		mes "[Crystal Plate]";
+		mes "^3355AAI, the swordsman,^000000";
+		mes "^3355AA'One,' has succeeded.^000000";
+		mes "^3355AAI've cut the turtle's shell.^000000";
+		mes "^3355AANow I shall try to^000000";
+		mes "^3355AAcut turtle crystal.^000000";
+		next;
+		mes "[Crystal Plate]";
+		mes "^3355AAThe surface of turtle^000000";
+		mes "^3355AAcrystal is so rough and^000000";
+		mes "^3355AAirregular. I'll need^000000";
+		mes "^3355AAto sharpen my skills.^000000";
+		next;
+		mes "[Crystal Plate]";
+		mes "^3355AAIt's going to be tough,^000000";
+		mes "^3355AAbut I will succeed...^000000";
+		next;
+		mes "[Crystal plate]";
+		mes "^3355AAGo 5 steps east,^000000";
+		mes "^3355AA30 steps south^000000";
+		mes "^3355AAand 5 steps around^000000";
+		mes "^3355AAthe turtle pillar.^000000";
+		mes "^3355AAThere you will find^000000";
+		mes "^3355AAthe end of sword art.^000000";
+		next;
+		mes "^3355FFAt the edge of the crystal^000000";
+		mes "^3355FFplate, is a long key.^000000";
+		mes "";
+		set TURTLE,8;
+		mes "^3355FFYou've gained the^000000";
+		mes "^3355FFTurtle Pillar key.^000000";
+		close;
+	}
+	mes "^3355FFThere are so many Turtle^000000";
+	mes "^3355FFCrystals that can only be^000000";
+	mes "^3355FFfound on Turtle island.^000000";
+	close;
+}
+
+tur_dun02,49,158,4	script	Turtle Pillar#tur	111,{
+	if (TURTLE == 8) {
+		mes "^3355FFAt the base of the pillar^000000";
+		mes "^3355FFis a tiny key hole with^000000";
+		mes "^3355FFa turtle shaped mark.^000000";
+		mes "";
+		mes "^3355FFYou used the";
+		mes "Turtle Pillar key";
+		mes "in that key hole.^000000";
+		next;
+		mes "^3355FF*Click! Crack!*^000000";
+		next;
+		mes "^3355FFAt the base of the pillar,^000000";
+		mes "^3355FFa little door appears, and^000000";
+		mes "^3355FFfrom that door an engraved^000000";
+		mes "^3355FFstone bead rolls out.^000000";
+		next;
+		mes "[Turtle Stone Bead]";
+		mes "This turtle pillar is made of the strongest material on this island.";
+		next;
+		mes "[Turtle Stone Bead]";
+		mes "Cutting it is impossible for even someone with legendary skills. Even if I managed to cut it, all of Turtle Island would collapse upon me.";
+		next;
+		mes "[Turtle Stone Bead]";
+		mes "I've developed my mental skills, and trained using materials on this island. Sharpening my mind, I now know that I can cut this pillar in two.";
+		next;
+		mes "[Turtle Stone Bead]";
+		mes "Can this be the pinnacle of swordsmanship? Of the sword arts?";
+		next;
+		mes "[Turtle Stone Bead]";
+		mes "For this final accomplishment, I leave behind an offering.";
+		next;
+		mes "[Turtle Stone Bead]";
+		mes "I intend to offer my gratitude to the blood of the monsters I have killed, and the materials I have used in my training.";
+		next;
+		mes "^3355FFThere are many items^000000";
+		mes "^3355FFunder the pillar...^000000";
+		set MISC_QUEST,MISC_QUEST | 65536;
+		set TURTLE,0;
+		switch(rand(1,10)) {
+		case 1:
+			getitem 702,1; //Animal_Blood
+			mes "^3355FFYou've gained ^000000";
+			mes "^3355FFAnimal Gore.^000000";
+			close;
+		case 2:
+			getitem 716,1; //Red_Gemstone
+			mes "^3355FFYou've gained^000000";
+			mes "^3355FFa Red Gemstone.^000000";
+			close;
+		case 3:
+			getitem 734,1; //Red_Frame
+			mes "^3355FFYou've gained^000000";
+			mes "^3355FFa Red Frame^000000";
+			close;
+		case 4:
+			getitem 10019,1; //Red_Muffler
+			mes "^3355FFYou've gained^000000";
+			mes "^3355FFRed Scarf.^000000";
+			close;
+		case 5:
+			getitem 725,1; //Red_Jewel
+			mes "^3355FFYou've gained^000000";
+			mes "^3355FFa Sardonyx.^000000";
+			close;
+		case 6:
+			getitem 716,1; //Red_Gemstone
+			mes "^3355FFYou've gained^000000";
+			mes "^3355FFa Red Gemstone.^000000";
+			close;
+		case 7:
+			getitem 716,1; //Red_Gemstone
+			mes "^3355FFYou've gained^000000";
+			mes "^3355FFa Red Gemstone.^000000";
+			close;
+		case 8:
+			getitem 716,1; //Red_Gemstone
+			mes "^3355FFYou've gained^000000";
+			mes "^3355FFa Red Gemstone.^000000";
+			close;
+		case 9:
+			getitem 716,1; //Red_Gemstone
+			mes "^3355FFYou've gained^000000";
+			mes "^3355FFa Red Gemstone.^000000";
+			close;
+		case 10:
+			getitem 725,1; //Red_Jewel
+			mes "^3355FFYou've gained^000000";
+			mes "^3355FFa Sardonyx.^000000";
+			close;
+		}
+	}
+	mes "^3355FFThis Turtle Pillar^000000";
+	mes "^3355FFis just one of^000000";
+	mes "^3355FFmany pillars.^000000";
+	next;
+	mes "^3355FFOr is it...?^000000";
+	close;
+}
+
+tur_dun01,203,155,4	script	Turtle stone#tur	111,{
+	if (TURTLE == 4) {
+		mes "^3355FFOn top of the stone";
+		mes "is a small key hole";
+		mes "with the turtle mark.^000000";
+		next;
+		mes "^3355FFYou used the";
+		mes "Security Key";
+		mes "in that hole.^000000";
+		next;
+		mes "^3355FF*Tat tat tat tat*^000000";
+		next;
+		mes "^3355FFThe back of the stone";
+		mes "split into two parts";
+		mes "revealing some hidden";
+		mes "words engraved inside.^000000";
+		next;
+		mes "[Turtle Stone]";
+		mes "The one who dreams to be a star of serenity must first hold the comet and three rays of light as one.";
+		next;
+		mes "[Turtle Stone]";
+		mes "You already possess the comet, so I grant you the first light...";
+		next;
+		mes "[Turtle Stone]";
+		mes "- Light of the second stage -";
+		mes "^FF3355B2 , X : 75 , Y : 249^000000";
+		next;
+		mes "^3355FFAt the bottom of the stone";
+		mes "beneath the line of words,";
+		mes "rests a brilliant red bead.^000000";
+		next;
+		set TURTLE,10;
+		mes "^3355FFYou set the red bead to the";
+		mes "Security key, fitting it";
+		mes "within one of three tiny holes.^000000";
+		close;
+	}
+	mes "^3355FFIt is just a";
+	mes "normal turtle";
+	mes "stone. But";
+	mes "on the top";
+	mes "is written";
+	mes "the words,";
+	mes "'1st stage.'^000000";
+	close;
+}
+
+tur_dun02,75,249,4	script	Turtle stone#tur2	111,{
+	if (TURTLE == 10) {
+		mes "^3355FFOn top of the stone";
+		mes "is a small keyhole";
+		mes "with the turtle mark.^000000";
+		next;
+		mes "^3355FFYou used the";
+		mes "Security Key";
+		mes "in the keyhole.^000000";
+		next;
+		mes "^3355FF*Click! Click!*^000000";
+		next;
+		mes "^3355FFThe back of the stone";
+		mes "split into two parts";
+		mes "revealing some hidden";
+		mes "words along the inside.^000000";
+		next;
+		mes "[Turtle Stone]";
+		mes "The one who dreams to be a star of serenity must first hold the comet and three rays of light as one.";
+		next;
+		mes "[Turtle Stone]";
+		mes "You already possess the comet and the first light, so I now grant you the second light.";
+		next;
+		mes "[Turtle stone]";
+		mes "- Light of the third stage -";
+		mes "^FF3355B3 . X : 118 . Y : 233^000000";
+		next;
+		mes "At the bottom of the stone";
+		mes "beneath the line of words,";
+		mes "rests a brilliant yellow bead.";
+		next;
+		set TURTLE,11;
+		mes "^3355FFYou set the yellow bead";
+		mes "into the Security key, fitting it";
+		mes "within one of three tiny holes.^000000";
+		close;
+	}
+	mes "^3355FFIt is just a";
+	mes "normal turtle";
+	mes "stone. But";
+	mes "on the top,";
+	mes "the words";
+	mes "'2nd stage'";
+	mes "are written.^000000";
+	close;
+}
+
+tur_dun03,118,233,4	script	Turtle Stone#tur3	111,{
+	if (TURTLE == 11) {
+		mes "^3355FFOn top of the stone";
+		mes "is a small key hole";
+		mes "with the turtle mark.^000000";
+		next;
+		mes "^3355FFYou used the";
+		mes "Security Key";
+		mes "in the keyhole.^000000";
+		next;
+		mes "^3355FF*Click! Click!*^000000";
+		next;
+		mes "^3355FFThe back of the stone";
+		mes "split into two parts";
+		mes "revealing some hidden";
+		mes "words along the inside.^000000";
+		next;
+		mes "[Turtle Stone]";
+		mes "The one who dreams to be a star of serenity must first hold the comet and three rays of light as one.";
+		next;
+		mes "[Turtle Stone]";
+		mes "You already possess the comet, and the first two lights. The final light is now yours.";
+		next;
+		mes "[Turtle Stone]";
+		mes "- Star of Serenity -";
+		mes "^FF3355B4 . X : 113 . Y : 178^000000";
+		next;
+		mes "^3355FFAt the bottom of the stone";
+		mes "beneath the line of words,";
+		mes "rests a brilliant blue bead.^000000";
+		next;
+		set TURTLE,12;
+		mes "^3355FFYou set the blue bead to the";
+		mes "into the Security Key, fitting it";
+		mes "within one of three tiny holes.^000000";
+		close;
+	}
+	mes "^3355FFIt is just a";
+	mes "normal turtle";
+	mes "stone. But";
+	mes "on the top,";
+	mes "the words,";
+	mes "'3rd stage,'";
+	mes "are written.^000000";
+	close;
+}
+
+tur_dun04,113,178,4	script	Turtle Statue#tur	111,{
+	if (TURTLE == 12) {
+		mes "^3355FFOn top of the statue";
+		mes "is a small key hole";
+		mes "with the turtle mark.^000000";
+		mes "";
+		mes "^3355FFYou used the";
+		mes "Security Key";
+		mes "in the keyhole.^000000";
+		next;
+		mes "^3355FF*Click! Click!*^000000";
+		next;
+		mes "^3355FFThe statue split into";
+		mes "two parts revealing a";
+		mes "metal plate underneath.^000000";
+		next;
+		mes "[Metal Plate]";
+		mes "To the one who dreams to be a star of serenity among the people: You know hold the comet and three rays of light as one.";
+		next;
+		mes "^3355FFYou find a small lever";
+		mes "at the bottom of the";
+		mes "metal plate. You pull";
+		mes "it open like a drawer.^000000";
+		next;
+		set MISC_QUEST,MISC_QUEST | 65536;
+		set TURTLE,0;
+		if (rand(1,20) == 7) {
+			switch(rand(1,4)) {
+			case 1:
+				getitem 644,1; //Gift_Box
+				mes "^3355FFInside the drawer,";
+				mes "is a Gift Box. This";
+				mes "Gift Box is now yours.^000000";
+				close;
+			case 2:
+				getitem 616,1; //Old_Card_Album
+				mes "^3355FFInside the drawer,";
+				mes "is an Old Card Album.";
+				mes "It is now yours to keep.^000000";
+				close;
+			case 3:
+				getitem 617,1; //Old_Violet_Box
+				mes "^3355FFInside the drawer,";
+				mes "is an Old Purple Box.";
+				mes "It is now yours to keep.^000000";
+				close;
+			case 4:
+				getitem 617,1; //Old_Violet_Box
+				mes "^3355FFInside the drawer,";
+				mes "is an Old Purple Box.";
+				mes "It is now yours to keep.^000000";
+				close;
+			}
+		}
+		getitem 604,1; //Branch_Of_Dead_Tree
+		mes "^3355FFInside the drawer,";
+		mes "is a Dead Branch.";
+		mes "It is now yours to keep.^000000";
+		close;
+	}
+	mes "^3355FFIt is a turtle statue";
+	mes "made of ordinary turtle";
+	mes "stone. On top of it is";
+	mes "the word 'Security.'^000000";
+	close;
+}
+
+tur_dun03,105,76,4	script	Knight Leader#tur	110,5,5,{
+	mes "[Takuyaka]";
+	mes "Where did all my men go?!";
+	mes "This is horrible~!";
+	next;
+	mes "[Takuyaka]";
+	mes "Oh...";
+	mes "*Whew!*";
+	mes "Finally, another person.";
+	mes "Tell me who you are!";
+	next;
+	switch(select("Who are you to ask?:"+ strcharinfo(0) +"!:What are you doing here?:First, tell me who you are.")) {
+	case 1:
+		mes "[Takuyaka]";
+		mes "How dare you speak to me in that tone! Don't you know who I am?! I'm Takuyaka, leader of the Security Knights of Alberta! Kobolds and Porings quiver in fear when they hear my name...";
+		next;
+		mes "[Takuyaka]";
+		mes "So tell me the truth! You came here for treasure, didn't you?! You want it all for yourself! You bastard! Now get off this island! Go, shoo!";
+		close;
+	case 2:
+		mes "[Takuyaka]";
+		mes "" + strcharinfo(0) + "?";
+		mes "Well, your name sounds better than mine. And you have more hair on your head as well. Hmmm...";
+		next;
+		mes "[Takuyaka]";
+		mes "Do you have anything to give me? You know, some food or zeny? It's not like I really need it, it's just... Oh bother. Never mind. Perhaps we'll meet later.";
+		close;
+	case 3:
+		mes "[Takuyaka]";
+		mes "I've heard that many treasures can be found on Turtle Island. If I can take enough home, I'll be rich! Well, we're supposed to rescue lost adventurers too, but whatever. As leader, I can do whatever I want!";
+		next;
+		mes "[Takuyaka]";
+		mes "However, we're totally lost. Meaning we can't find any treasure or even rescue any people. Grrr...! Where are my useless soldiers! I've probably spoiled them with too much food!";
+		next;
+		mes "[Takuyaka]";
+		mes "If you see any of them, tell them they must assemble here! Alright?!";
+		close;
+	case 4:
+		mes "[Takuyaka]";
+		mes "Me? I'm Takuyaka. A tall, dark, handsome, and dashing leader, as well as a fearsome knight! I have come to save the foolish people of Alberta that have come seeking treasure on Turtle Island.";
+		next;
+		mes "[Mudasamu]";
+		mes "Really, now?";
+		next;
+		mes "[Takuyaka]";
+		mes "Quiet!";
+		next;
+		mes "[Takuyaka]";
+		mes "Anyway, we came here with the purest of intents. But right when we arrived, we were attacked by monsters! Because of the confusion from all the fighting, my soldiers were scattered.";
+		next;
+		mes "[Takuyaka]";
+		mes "Mudasamu!";
+		mes "Why is this";
+		mes "happening to me!!!!";
+		next;
+		mes "[Mudasamu]";
+		mes "Huh...!";
+		mes "Why should you";
+		mes "be surprised,";
+		mes "you chubby dwarf?";
+		close;
+	}
+
+OnTouch:
+	mes "[Scared Voice]";
+	mes "Wh-wh-whaat?!";
+	next;
+	mes "[Terrified Voice]";
+	mes "What's that noise?!";
+	mes "M-M-Mudasamu!";
+	mes "Protect me!";
+	next;
+	mes "[Mudasamu]";
+	mes "No.";
+	mes "And shut up.";
+	close;
+}
+
+tur_dun03,105,74,4	script	Mudasamu#tur	119,{
+	mes "[Mudasamu]";
+	mes "My name is Mudasamu...";
+	mes "Second in command of the";
+	mes "Alberta Security Knights.";
+	next;
+	mes "[Mudasamu]";
+	mes "We've come here to rescue treasure hunters that might be in trouble. However, our leader is this porky specimen right next to me. So I guess I foresaw that this mission would fail.";
+	next;
+	mes "[Mudasamu]";
+	mes "Basically, our leader was so distracted by the idea of finding treasure himself that we've lost our men. It's bad enough that he's a fat slob, but he's a greedy slob too!";
+	next;
+	emotion e_ag;
+	mes "[Takuyaka]";
+	mes "Hey, Mudasamu!";
+	mes "Are you talking";
+	mes "about me?!";
+	next;
+	mes "[Mudasamu]";
+	mes "No, fat one,";
+	mes "we're not";
+	mes "talking about you.";
+	next;
+	mes "[Mudasamu]";
+	mes "*Sigh...*";
+	mes "I better be paid";
+	mes "overtime for";
+	mes "putting up with this.";
+	close;
+}
+
+tur_dun01,190,115,4	script	Knight#tur	105,{
+	mes "[?]";
+	mes "Where are they?";
+	mes "Oh hey! You're an adventurer, aren't you? Do you know where my comrades are?";
+	next;
+	switch(select("Who are you?:Sorry, I don't.:Why did you come here?:How did you get here?")) {
+	case 1:
+		mes "[Passats]";
+		mes "My name is Passats, a proud Security Knight of Alberta. We've obtained some information that some people came here to seek treasure.";
+		next;
+		mes "[Passats]";
+		mes "Our task here is to save people, but when we arrived on Turtle Island, we were attacked by a mob of monsters! So we all got scattered.";
+		next;
+		mes "[Passats]";
+		mes "Now I'm all alone. If you find anyone else in my unit, would you let them know?";
+		close;
+	case 2:
+		mes "[Passats]";
+		mes "Ah well...";
+		mes "Well, if you happen to find anyone else in my unit, would you let them know where I am?";
+		next;
+		mes "[Passat]";
+		mes "Oh, and if you find our leader, kick his butt, will you? It's so fat, there's no way you can miss.";
+		next;
+		if (BaseLevel <= 10)
+			percentheal 40,0;
+		mes "[Passats]";
+		mes "Oh...";
+		mes "And, um...";
+		mes "Cheer up!";
+		close;
+	case 3:
+		mes "[Passats]";
+		mes "There are a lot of stories about the amazing wealth that can be found on this island. However, everyone assumed that it was impossible to find Turtle Island.";
+		next;
+		mes "[Passats]";
+		mes "But then, the problem began when some navigator actually knew the way to Turtle Island. I think he'll take just about anybody for 10,000 zeny!";
+		next;
+		mes "[Passats]";
+		mes "So anyway, some of the people of Alberta have been foolishly coming here, hoping to find treasure. But of course, they can't fight monsters.";
+		next;
+		mes "[Passats]";
+		mes "So now we're here in order to seek out towners in trouble, and send them safely back home. Of course, now it seems that we also need rescuing...";
+		close;
+	case 4:
+		mes "[Passats]";
+		mes "Hmmm...";
+		next;
+		mes "[Passats]";
+		mes "No clue.";
+		next;
+		select("How can that be?!");
+		mes "[Passats]";
+		mes "Oh, don't be angry. I just drank too much vodka! Before we arrived I was still unconscious and when I finally sobered up, I was here. I'm so embarrassed~";
+		next;
+		mes "[Passats]";
+		mes "I...";
+		mes "I'm a victim too~";
+		close;
+	}
+}
+
+tur_dun03,189,126,4	script	Knight#tur2	105,{
+	mes "[Jayprocat]";
+	mes "Oh? Are you a civilian? Nice to meet you. I'm a mighty Security Knight of Alberta, Jayprocat.";
+	next;
+	if (select("What is that, exactly?:I'm not impressed.") == 1) {
+		mes "[Jayprocat]";
+		mes "Well...";
+		mes "We're supposed to protect the people of Alberta. That's our job as proud Security Knights.";
+		next;
+		mes "[Jayprocat]";
+		mes "So when a bunch of them caught treasure fever and started coming here, we came to rescue them. Anyway, that was the plan.";
+		next;
+		mes "[Jayprocat]";
+		mes "It turns out that by some joke by fate, our leader is this pudgy guy who attracted a mob on monsters to us by noisily digging up treasure, instead of doing what we were supposed to do.";
+		next;
+		mes "[Jayprocat]";
+		mes "*Sigh...*";
+		mes "Why wasn't Mudasamu in charge? With him as leader, I would've been home for dinner...";
+		close;
+	}
+	mes "[Jayprocat]";
+	mes "Well...";
+	mes "It's true that we pretty much messed up our current mission to save anyone here seeking for treasure, since we need rescuing now as well.";
+	next;
+	mes "[Jayprocat]";
+	mes "*Sniff*";
+	mes "Why did we have to be attacked by so many monsters on my first mission? I'm... I'm just a new recruit...";
+	next;
+	if (select("Why did you run away?:I don't care.") == 1) {
+		mes "[Jayprocat]";
+		mes "No, I didn't just run away! The monsters were too stong and there were so many of them! Plus, it's our damn leader's fault.";
+		next;
+		mes "[Jayprocat]";
+		mes "The monsters are all highly evolved turtles. And this island even looks like a turtle! But I guess you knew that already.";
+		next;
+		mes "[Jayprocat]";
+		mes "I had no idea that this island's monsters were so much stronger than the ones that live near Alberta.";
+		next;
+		mes "[Jayprocat]";
+		mes "Their shells are so tough, and we can't seem to find any sort of weak point! I have no idea how to fight these turtles!";
+		close;
+	}
+	mes "[Jayprocat]";
+	mes "You're so mean...";
+	mes "I mean, I'm really new at this!";
+	close;
+}
+
+tur_dun03,104,171,4	script	Knight#tur3	105,{
+	mes "[Squall]";
+	mes "Am I the only one left? Where are all my comrades?! I... I'm about to go crazy!";
+	next;
+	switch(select("Maybe they ran away?:What happened?")) {
+		mes "[Squall]";
+		mes "No, we would never run away from the face of danger.";
+		next;
+		mes "[Squall]";
+		mes "Well, we sort of did, but that was because it was a direct order from our leader! If a knight is loyal and proud, he will accept his leader's orders without question!";
+		next;
+		mes "[Squall]";
+		mes "Even if that leader is a little greedy, with hair that might be thinning...";
+		next;
+		mes "[Squall]";
+		mes "^FF0000And has the body";
+		mes "of a pregnant whale^000000.";
+		next;
+		mes "[Squall]";
+		mes "Oh wait!";
+		mes "I shouldn't";
+		mes "have said that!";
+		mes "What I meant";
+		mes "to say was...";
+		next;
+		mes "[Squall]";
+		mes "^CC0000And has the";
+		mes "body of a whale";
+		mes "pregnant with twins^000000.";
+		next;
+		mes "[Squall]";
+		mes "Grrrr...!";
+		mes "I'm so angry!";
+		mes "Why can't Mudasamu";
+		mes "be our leader?!";
+		close;
+	}
+	mes "[Squall]";
+	mes "We had good plans for this mission, made by our second in command, Mudasamu. However, they were executely poorly by the first in command.";
+	next;
+	mes "[Squall]";
+	mes "Whenever Takuyaka leads a mission, he always manages to mess it up! Why do the leaders in Alberta like him anyway?!";
+	next;
+	mes "[Squall]";
+	mes "*Sniff*";
+	mes "I sweat and I bleed for the Alberta Security Knights, and still I'm tortured by the fact that Sir Porky commands us. I hate it!";
+	next;
+	mes "[Squall]";
+	mes "Our weapon and armor budget is always gone after Takuyaka visits a buffet... Why do we have to be so miserable?!";
+	close;
+}
+
+tur_dun03,67,130,4	script	Knight#tur4	105,{
+	mes "[Nysurea]";
+	mes "Hm? I'm surprised that someone around here is still alive.";
+	next;
+	mes "[Nysurea]";
+	mes "I'm beginning to think all my comrades have been killed by the monsters here...";
+	next;
+	if (BaseLevel <= 40) {
+		mes "[Nysurea]";
+		mes "Having a";
+		mes "tough time?";
+		next;
+		if (Zeny <= 3000) {
+			mes "[Nysurea]";
+			mes "Even though you're pretty strong, sooner or later you might need a reprieve. I can send you back to Alberta right now if you want.";
+			next;
+			if (select("Yes, Help me.:No, thanks.") == 1) {
+				mes "[Nysurea]";
+				mes "Okay then, let me activate this teleport thingee donated to us by Kafra Corporation...";
+				close2;
+				warp "alberta",241,115;
+				end;
+			}
+			mes "[Nysurea]";
+			mes "Ah, that's the spirit! You should be careful though. And if you see any other of my comrades, let them know I'm here, would you?";
+			next;
+			mes "[Nysurea]";
+			mes "Well, good luck!";
+			close;
+		}
+		mes "[Nysurea]";
+		mes "You look lost! If you stick around here, well, the monsters will probably get the best of you sooner or later.";
+		next;
+		mes "[Nyusurea]";
+		mes "Anyway...";
+		mes "Good luck!";
+		mes "You'll need it!";
+		close;
+	}
+	mes "[Nysurea]";
+	mes "Huh...";
+	mes "You look calm and collected. If all our soldiers were as strong as you, we probably would not have been scattered.";
+	next;
+	mes "[Nysurea]";
+	mes "I have dreams of becoming a great knight, but since our 'leader' is all plump and no brains, we're stuck in this predicament.";
+	next;
+	mes "[Nysurea]";
+	mes "Anyway, be careful in this third level of Turtle Island. A lot of our men were annihilated when they went to explore the East and North sides, so be careful!";
+	close;
+}

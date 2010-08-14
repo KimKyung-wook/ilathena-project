@@ -1,0 +1,1770 @@
+
+//    kk  ""tt""  "";;    """"JJ;;kkJJ  JJtt""    ""tt""  ;;tt""""tt    ""tt""   
+//   JJ  kk""tt;;JJ      ttkk    ""tt    ;;;;ttJJ;;  ""ttkk;;"";;;;ttkk;;  ;;kk  
+//  "";;  ""  kk  kk  tt  ttww    ZZ;;  ww    RR  ;;JJ  JJJJ  tt    RR  ;;JJ  JJ 
+//  JJ      """";;""  kk  ttkk  ;;kk    ZZ    ww  ;;""  kk""  ww    kk;;kk""  JJ 
+//  kk      JJ  kk    ww  ttkk  JJJJ  ;;ww  ""JJ  ;;tt""RR    ZZ  ;;ZZJJ      kk 
+//  kk  ;;  "";;JJ        JJtt  JJJJ  ""kk  JJ""  ww""""ww    ww  ""JJ  ZZ    kk 
+//  JJ  JJ  ;;JJ""  "";;  ww;;  kkJJ  JJ""  kk;;  ww  ;;ww  ""JJ  ww;;  ww  ;;tt 
+//;;""  RR    RR    ww""  kk""  ;;tt  ww    kkkk      kktt  JJ;;  ZZ;;  ;;  tt   
+//  JJkkttkkkk;;kkkk;;JJkktt""kkJJJJkkttJJkk;;  kkkkJJ  ttkkttJJkk;;ttkkJJkkJJ   
+//| I | - | L | U | N | A | A | T | H | E | N | A | P | R | O | J | E | C | T |  
+//------------------------------------------------------------------------------
+// iLAthena 알베르타 마을 스크립트 <http://www.i-luna.com/>
+// 한글화 by 아이루나 iLAthena Project
+//------------------------------------------------------------------------------
+// 한글화 by 아이루나(사이버짱)
+// 카프라 본사 아이템 이벤트 제외
+//------------------------------------------------------------------------------
+
+// 알데바란
+//============================================================
+aldebaran,113,70,4	script	제련공먼스터#alde	48,{
+	mes "[먼스터]";
+	mes "저희 집은 본래 게펜이었는데";
+	mes "작년 겨울 이 곳 알데바란으로";
+	mes "이사 왔답니다 ..";
+	next;
+	if (select("^3355FF' 제련 '^000000 에 관하여 ..:대화를 그만둔다") == 1) {
+		mes "[먼스터]";
+		mes "아버지께서는";
+		mes "블랙스미스의 마을 게펜에서도";
+		mes "꽤 이름이 나셨던 블랙스미스셨죠";
+		mes "어머니의 고향으로 이사왔거든요";
+		next;
+		mes "[먼스터]";
+		mes "저도 가끔 아버지의 일을 도와요";
+		mes "최근에 배우고 있는 일은";
+		mes "무기의 레벨에 따른";
+		mes "제련확률에 관련된 거랍니다";
+		next;
+		mes "[먼스터]";
+		mes "1 레벨의 무기는";
+		mes "+ 7 까지 제련할수 있으며";
+		mes "2 레벨의 무기는 6";
+		mes "그리고 3 레벨의 무기는";
+		mes "5 까지 제련이 가능해요";
+		mes "4 레벨의 경우에는";
+		next;
+		mes "[먼스터]";
+		mes "보통 4 까지 가능하죠 ..";
+		mes "방어구의 경우에는";
+		mes "일반적으로 4 까지래요";
+		mes "제련이 실패할 경우에는";
+		mes "강도를 견뎌내지 못한 장비가";
+		mes "파괴되고 만데요 !!";
+		close;
+	}
+	mes "[먼스터]";
+	mes "아직 아버지의";
+	mes "제련소가 어디 있는지";
+	mes "모르는 사람이 더 많지만";
+	mes "이 알데바란에서도";
+	mes "아버지가 유명해 졌으면 좋겠어요";
+	close;
+}
+
+aldebaran,64,104,4	script	제련아저씨#alde	55,{
+	mes "[쿼트로]";
+	mes "이 알데바란에";
+	mes "게펜에서 꽤 유명한";
+	mes "대장장이가 왔다고 하는데 ..";
+	next;
+	if (select("유명한 대장장이에 대해:대화를 그만둔다") == 1) {
+		mes "[쿼트로]";
+		mes "그런데 말이야 듣기로는";
+		mes "무기레벨에 따라";
+		mes "추가되는 공격력의 세기가";
+		mes "달라진다던데 ..";
+		next;
+		mes "[쿼트로]";
+		mes "1 레벨일 경우에는 2";
+		mes "2 레벨의 경우 3 씩";
+		mes "3 레벨은 무려 5 !";
+		mes "4 레벨은 7 이나 한다더군!!";
+		close;
+	}
+	mes "[쿼트로]";
+	mes "아내가 몸이 약해서";
+	mes "알데바란 주변에서 자라나는 약초를";
+	mes "꾸준히 복용해야 한다더군";
+	mes "아들 녀석도 효자라고";
+	mes "아버지 일을 아주 잘 도와준다네 ..";
+	mes "녀석 괜찮은 블랙스미스가 될걸세";
+	close;
+}
+
+aldebaran,49,93,4	script	무기레벨청년#alde	83,{
+	mes "[밀레알]";
+	mes "그거 아세요 ? 무기 중에서는";
+	mes "3 레벨 뿐만이 아닌 ..";
+	mes "4 레벨의 무기라는게 존재한다는것을 !!";
+	next;
+	mes "[밀레알]";
+	mes "시중에서는 구하기 힘든";
+	mes "이 4 레벨 무기들은";
+	mes "보스 몬스터들을 해치웠을 경우에";
+	mes "아주 낮은 확률로";
+	mes "나올 때 가 있답니다";
+	close;
+}
+
+aldebaran,81,61,4	script	조개잡이아가씨#ald	101,{
+	mes "[조세]";
+	mes "바닷가 또는 갯벌 등지에서";
+	mes "조개를 잡는 일은 정말 재미있어요";
+	next;
+	if (select("조개잡이에 대하여:대화를 그만둔다") == 1) {
+		mes "[조세]";
+		mes "모래사장 .. 물웅덩이 등지에서";
+		mes "물방울이 뽀글뽀글";
+		mes "올라오는것이 보이면";
+		mes "바닥을 조금 파내는거예요";
+		mes "대부분 조개가 땅속을";
+		mes "헤집고 들어가 있거든요 !";
+		next;
+		mes "[조세]";
+		mes "그런데 말이죠";
+		mes "껍질이 너무나도 단단하고";
+		mes "습성이 고약해서";
+		mes "건드리지도 못하는";
+		mes "녀석이 있다니까요 !";
+		next;
+		mes "[조세]";
+		mes "녀석은 앰버나이트라고하여";
+		mes "프론테라 서부 지방의";
+		mes "바닷가 근방에서 볼수 있는데 ..";
+		mes "잘못 건드리면 그 날 조개는";
+		mes "다 잡은거나 마찬가지가 되요";
+		next;
+		mes "[조세]";
+		mes "어찌나 무서운지 ..";
+		close;
+	}
+	mes "[조세]";
+	mes "언젠가 그 유명하다는";
+	mes "동굴 조개를 맛볼거예요 !";
+	mes "조금 위험하겠지만 ..";
+	mes "감수 할 만한 가치는 충분하겠죠 ?";
+	close;
+}
+
+aldebaran,46,129,4	script	운하청년#alde	97,{
+	mes "[파나마]";
+	mes "알데바란은 미드가르드 어디에서도";
+	mes "이 곳의 이야기를";
+	mes "들을수 있을만큼";
+	mes "유명한 운하의 도시 입니다";
+	next;
+	switch(select("운하의 도시에 대하여:대화를 그만둔다")) {
+	case 1:
+		mes "[파나마]";
+		mes "운하란 ..";
+		mes "내륙에 선박의 항행이나";
+		mes "농지의 관개 ..";
+		mes "배수 또는 용수를 위하여";
+		mes "인공적으로 만든 수로 (水路) 이지요";
+		next;
+		mes "[파나마]";
+		mes "운하란 . 일반적으로 볼때에";
+		mes "교통기관의 일부분 입니다";
+		mes "운하의 대부분은 육지를 굴착하여 만드나";
+		mes "매립 (埋立) 을 할 때 남겨둔 수로 ..";
+		next;
+		mes "[파나마]";
+		mes "하천에 손질을 하여 만든";
+		mes "인공수로도 운하라고";
+		mes "부르기도 하지요";
+		close;
+		break;
+	case 2:
+		mes "[파나마]";
+		mes "물도 참 맑지요 ?";
+		mes "산골마을이라고 하면";
+		mes "산골마을이라서리 ..";
+		mes ". . . . .";
+		mes "편히 쉬었다 가세요";
+		close;
+		break;
+	}
+}
+
+aldebaran,67,154,4	script	산길청년#alde	98,{
+	mes "[아이젠버그]";
+	mes "묘르닐 산맥 . 페이욘의 숲";
+	mes "모두 험하디 험한";
+	mes "지형으로 유명하지요";
+	next;
+	switch(select("묘르닐 산맥에 대하여:페이욘 숲에 대하여:대화를 그만둔다")) {
+	case 1:
+		mes "[아이젠버그]";
+		mes "룬-미드가츠왕국의 수도";
+		mes "프론테라와 마법도시 게펜으로부터";
+		mes "이 곳 알데바란까지";
+		mes "오려면 반드시 거쳐야 하는 산맥 ..";
+		mes "묘 르 닐 !";
+		next;
+		mes "[아이젠버그]";
+		mes "기사 길드와 룬-미드가츠 왕국의";
+		mes "수도 프론테라 ..";
+		mes "마술사 (Magician) 와";
+		mes "대장장이 (Black Smith) 의";
+		mes "마을 게펜";
+		next;
+		mes "[아이젠버그]";
+		mes "그리고 몽크의 사원으로부터";
+		mes "이 알데바란으로 도착하려면";
+		mes "반드시 묘르닐을";
+		mes "거쳐야만 하지요 ..";
+		mes "묘르닐 산맥은";
+		mes "산세가 가파르고 험한데다가 ..";
+		next;
+		mes "[아이젠버그]";
+		mes "사납고 강력한";
+		mes "선제공격 몬스터가 대부분이므로";
+		mes "지나오기가 힘든데";
+		mes "오시느라 고생하셨습니다";
+		close;
+	case 2:
+		mes "[아이젠버그]";
+		mes "모로코의 사막으로부터";
+		mes "알베르타 . 그리고";
+		mes "페이욘으로 가기 까지에는";
+		mes "반드시 페이욘의 숲을";
+		mes "지나서 가야만 합니다";
+		next;
+		mes "[아이젠버그]";
+		mes "알베르타와 페이욘의 사이에";
+		mes "위치한 이 숲의 지형은";
+		mes "상당히 복잡한 미로와도";
+		mes "같이 구성되어있기 때문에";
+		mes "왠만한 집중력을 쏟아붓지 않고서는";
+		mes "헤매다가 지쳐버리고 말지요";
+		next;
+		mes "[아이젠버그]";
+		mes "알베르타의 숲";
+		mes "이라고 하지 않고";
+		mes "페이욘의 숲";
+		mes "이라고 하는 이유에는 ..";
+		next;
+		mes "[아이젠버그]";
+		mes "궁수마을 페이욘의 경우";
+		mes "외세의 침략을 받지 않기 위해";
+		mes "주거지를 . 외부 국가로부터";
+		mes "간섭받지 않는";
+		mes "깊고 험한 산속을 택했으므로";
+		next;
+		mes "[아이젠버그]";
+		mes "이 이유에서 외국인들의 왕래가 잦은";
+		mes "알베르타 보다는 페이욘 쪽의 이름을";
+		mes "따온것이 아닌가 생각합니다";
+		close;
+	case 3:
+		mes "[아이젠버그]";
+		mes "10 블럭도 넘는 엄청난 규모의 산맥이";
+		mes "타 지방으로부터의 여행객들을";
+		mes "곤란하게 만들기도 하지요";
+		mes "덕분에 운하와 연금술등의";
+		mes "개성어린 신비로운 분위기를";
+		mes "지킬수 있게 되었습니다만 ..";
+		close;
+	}
+}
+
+aldebaran,90,170,4	script	슬롯청년#alde	47,{
+	mes "[엡티얼]";
+	mes "무기 또는 방어구중에는";
+	mes "슬롯 (Slot) 이라는것이 있어서";
+	mes "몬스터를 쓰러뜨렸을 때";
+	mes "얻어낸 몬스터 카드를 끼워넣는";
+	mes "구멍이 있는 경우가 있답니다";
+	next;
+	switch(select("슬롯수에 대해 ..:몬스터 카드와 슬롯의 관계:대화를 그만둔다")) {
+	case 1:
+		mes "[엡티얼]";
+		mes "일반 상점에서 팔고있는";
+		mes "정품 무기와 방어구의 슬롯수 보다";
+		mes "몬스터로부터 전리품으로 얻은";
+		mes "아이템일 경우에 슬롯수가 더 많아요";
+		next;
+		mes "[엡티얼]";
+		mes "이러한 아이템에는 카드가";
+		mes "두장이상 들어가는 경우가 있어";
+		mes "아이템의 가치를";
+		mes "더더욱 빛낼수가 있지요";
+		close;
+	case 2:
+		mes "[엡티얼]";
+		mes "슬롯에 한번 끼워넣은 카드는";
+		mes "다시는 뺄수가 없게 되므로";
+		mes "주의해서 사용하시기 바랍니다";
+		mes "끼우기 전에 다시한번";
+		mes "곰곰히 생각해 보세요";
+		close;
+	case 3:
+		mes "[엡티얼]";
+		mes "몬스터로부터 얻은 카드를";
+		mes "가지고 계신가요 ?";
+		close;
+	}
+}
+
+aldebaran,117,181,4	script	프라콘청년#alde	48,{
+	mes "[쥬얼리]";
+	mes "장비 아이템중";
+	mes "가장 낮은 등급 ( Level 1 ) 의";
+	mes "무기를 제련하는데에는";
+	mes "' 프라콘 ' 이라는";
+	mes "금속이 필요합니다";
+	next;
+	switch(select("프라콘에 대하여:프라콘에 대한 담백한 조언:대화를 그만둔다")) {
+	case 1:
+		mes "[쥬얼리]";
+		mes "프라콘이란 .. 오래전부터";
+		mes "미드가르드 전역에 걸쳐";
+		mes "수많은 사람들이 사용해 왔던";
+		mes "가장 보편적인 제련용";
+		mes "금속이라 할수 있겠습니다";
+		next;
+		mes "[쥬얼리]";
+		mes "비록 강철이나";
+		mes "여러가지 희귀한 광석들과";
+		mes "비교해서 높은 강도를";
+		mes "가지고 있지는 않지만 ..";
+		next;
+		mes "[쥬얼리]";
+		mes "일반인들도 간단히";
+		mes "손에 넣을수 있다는 범용성에서";
+		mes "적잖은 인기를 누리고 있지요";
+		next;
+		mes "[쥬얼리]";
+		mes "이 프라콘은";
+		mes "몬스터로부터 전리품으로 얻거나";
+		mes "대장장이들이 모여있는 제련소에서";
+		mes "금속판매를";
+		mes "전문적으로 도맡아 하는";
+		next;
+		mes "[쥬얼리]";
+		mes "제련공으로부터 구입 하여";
+		mes "획득할수 있습니다";
+		mes "어느정도 레벨이 오른뒤에 ..";
+		mes "고급 레벨의 무기를";
+		mes "사용할수 있게 될 경우";
+		next;
+		mes "[쥬얼리]";
+		mes "프라콘을 손에 넣었어도 ..";
+		mes "어디에 쓸까 -";
+		mes "막막할 경우가 있는데요 ..";
+		mes "그럴땐 팔아버리세요 !!";
+		mes "무려 100 제니의 현금을";
+		mes "거머쥘수 있답니다 ♪";
+		close;
+	case 2:
+		mes "[쥬얼리]";
+		mes "프라콘을 가지고 있는";
+		mes "몬스터는 꽤 많다고 들었는데요";
+		mes "의외로 손쉽게 가질수 있는";
+		mes "금속이니 한번";
+		mes "찾아보시는건 어떨까요 ?";
+		next;
+		mes "[쥬얼리]";
+		mes "얼마전 휴일 에는";
+		mes "옆집 주점 마스터 아저씨와 함께";
+		mes "사냥을 나간적이 있었는데 ..";
+		mes "멧돼지의 새끼로부터";
+		mes "얻은적도 있습니다";
+		close;
+	case 3:
+		mes "[쥬얼리]";
+		mes "좋은 프라콘 구하세요 -";
+		close;
+	}
+}
+
+aldebaran,121,231,4	script	연금술청년#alde	49,{
+	mes "[케미얼]";
+	mes "연금술사 (alchemist) 란 고대 알데바란에서";
+	mes "비금속 (卑金屬) 을 인공적 수단으로";
+	mes "귀금속으로 전환하는 것을 목표로 삼았던";
+	mes "화학 . 과학자들을 일컫는";
+	mes "2 차 직업명이지";
+	next;
+	switch(select("페이욘 연금술에 대하여:연금술사의 의미:. . . . .:대화를 그만둔다")) {
+	case 1:
+		mes "[케미얼]";
+		mes "거의 같은 무렵";
+		mes "페이욘 에서는";
+		mes "도교 (道敎) 에서 나와";
+		mes "복용에 의하여 사람이 장수하고";
+		mes "신선 (神仙) 으로";
+		mes "화할 수 있는 ' 단 ( 丹 ) '";
+		next;
+		mes "[케미얼]";
+		mes "즉 금의 제출을 추구하는";
+		mes "주술과 사상이 있어서";
+		mes "과학사상 연금술과 대비하여";
+		mes "페이욘 연금술이라고 했다네";
+		next;
+		mes "[케미얼]";
+		mes "허나 페이욘 지방에서의";
+		mes "화학은 발달하지 못했던것이";
+		mes "알데바란과는 다르게";
+		mes "자연환경이 너무나도 척박해서";
+		mes "연금술 연구에 필요한";
+		mes "좋은 재료가 부족했다네";
+		next;
+		mes "[케미얼]";
+		mes "그리하여 지금";
+		mes "미드가르드 전역을 통틀어서";
+		mes "' 연금술 ' 하면";
+		mes "이 알데바란의 연금술길드 밖에";
+		mes "떠오르는 것이 없게 된거지 ..";
+		close;
+	case 2:
+		mes "[케미얼]";
+		mes "연금술사라 함은";
+		mes "화학방면에 능통하여";
+		mes "여러가지 물질을 혼합하여";
+		mes "기능적인 아이템을 조합해 내는";
+		mes "능력을 가지고 있다네";
+		close;
+	case 3:
+		mes "[케미얼]";
+		mes "따분한가 보구만 그렇다면";
+		mes "몬스터 카드와 슬롯에 관련된";
+		mes "이야기를 늘어 놓아 주지 ..";
+		mes "몬스터 카드를 한장이라도";
+		mes "갖고 있다면 이미 눈치 챘겠지만";
+		next;
+		mes "[케미얼]";
+		mes "해당 카드에는 장비 위치에";
+		mes "관련된 슬롯 속성이 있어서 ..";
+		mes "반드시 그 종류의 아이템에만";
+		mes "장착이 가능하게끔 되어있지";
+		mes "예를들어 포링카드를 얻었다고 하자 ..";
+		next;
+		mes "[케미얼]";
+		mes "포링카드의 앞면에는";
+		mes "LUK + 2 / 완전회피 + 1 이라는";
+		mes "효능에 대한 수치와";
+		mes "장착부위가 ' 갑옷 '";
+		mes "이라고 표기 되어있는데";
+		next;
+		mes "[케미얼]";
+		mes "이 카드를 아무리 슬롯이 많은";
+		mes "단검류에 끼우려고해도";
+		mes "끼워지지 않음이야 -";
+		mes "라는 이야기지";
+		next;
+		mes "[케미얼]";
+		mes "또 . 대부분 마을 상점에서";
+		mes "판매하고있는 갑옷류는";
+		mes "슬롯을 포함하고 있지 않은";
+		mes "경우가 더러 있으므로";
+		mes "몬스터로부터의";
+		mes "전리품 따위에나 조합이";
+		mes "가능하니 기억해 두라구";
+		next;
+		mes "[케미얼]";
+		mes "아 . 그리고 몬스터 카드를";
+		mes "장비에 끼워넣는 방법은";
+		mes "장비를 해제시켜";
+		mes "아이템 리스트에 띄워놓은후";
+		mes "해당 카드를 더블클릭하여";
+		mes "사용하면";
+		next;
+		mes "[케미얼]";
+		mes "어떤 장비와 조합할것인가에";
+		mes "대한 리스트가 나오니";
+		mes "손쉽게 끼워넣을수 있지";
+		close;
+	case 4:
+		mes "[케미얼]";
+		mes "미드가르드 연금술 하면 -";
+		mes "알데바란 연금술사 길드 !!";
+		mes "연금술사여 영원하라 !!";
+		close;
+	}
+}
+
+aldebaran,86,228,4	script	꼬마아이#alde	62,{
+	mes "[베베]";
+	mes "얼마전 저희집에서";
+	mes "키우는 새끼돼지";
+	mes "' 베베벵 ' 을 데리고";
+	mes "묘르닐 산맥 쪽으로";
+	mes "산책을 나갔었더랬어요 ..";
+	mes "베베벵은 멧돼지 새끼의";
+	mes "일종으로서 . 아주 귀여운";
+	mes "핑크빛 꼬마 돼지 였답니다";
+	next;
+	switch(select("베베벵 이야기:묘르닐 산맥의 분위기에 대하여:대화를 그만둔다")) {
+	case 1:
+		mes "[베베]";
+		mes "산길을 따라";
+		mes "주욱 올라가고 있었는데";
+		mes "예쁜 꽃이라 생각되었던";
+		mes "커다란 괴식물이 저와 베베벵을";
+		mes "못살게 구는 것이었어요";
+		next;
+		mes "[베베]";
+		mes "너무 놀래서 멀찌감치 떨어져서";
+		mes "길가에 떨어진 돌을";
+		mes "던져 보았지만 ( 매우 비겁하게도 )";
+		mes "녀석은 끄떡도 안했어요";
+		mes "엄청 단단한 녀석인가봐요 !";
+		next;
+		mes "[베베]";
+		mes "더욱 놀라운것은";
+		mes "사람의 얼굴을 닮은 꽃";
+		mes "이었다는 사실이예요 !";
+		mes "가까이 다가서면";
+		mes "이빨로 물어 뜯는다니까요 !";
+		close;
+	case 2:
+		mes "[베베]";
+		mes "묘르닐 산맥은 . 각종 화려한 식물과";
+		mes "예쁘게 생겼지만 무서운 곤충";
+		mes "동물들이 가득하답니다";
+		mes "꽃 . 벌레 .. 특히 벌과 나비";
+		mes "나방등을 함부로 건드리면 안되요";
+		next;
+		mes "[베베]";
+		mes "대부분의 짐승 . 벌레들은";
+		mes "우리가 공격하지만 않는다면";
+		mes "짜증섞인 해를 끼치지";
+		mes "않을테니까요 ..";
+		close;
+	case 3:
+		mes "[베베]";
+		mes "그런데 베베벵은 어디간거지 .. ?";
+		mes "베베벵아 ! 이리 나오련 !";
+		close;
+	}
+}
+
+aldebaran,159,242,4	script	곤충아저씨#alde	119,{
+	mes "[스트롱]";
+	mes "묘르닐 산맥 ..";
+	mes "산길을 걸어보면";
+	mes "누구라도 알수있는 사실 !";
+	mes "바로 곤충의 습성에 따라";
+	mes "강하기가 나뉜다는것을 ..";
+	mes "그대는 알고 있느뇨 ?";
+	next;
+	if (select("곤충에 대하여:대화를 그만둔다") == 1) {
+		mes "[스트롱]";
+		mes "꿀벌이나 . 나비 .. 나방등은";
+		mes "꽃 과 꽃 사이를 날아다니며";
+		mes "꿀을 빨아먹고 살지";
+		mes "꽃들에게 꽃가루를 묻히며";
+		mes "다니기 때문에";
+		mes "꽃의 수분을 돕기도 하는";
+		mes "고맙고도 귀여운것들 ..";
+		next;
+		mes "[스트롱]";
+		mes "아 . 물론 그렇다고 해서";
+		mes "녀석들을 얕잡아 보면";
+		mes "안된다는 사실을 잊지말아줘";
+		mes "생존하기 위해서";
+		mes "나름대로의 전투력을";
+		mes "갖추도록 진화했으니 말야";
+		next;
+		mes "[스트롱]";
+		mes "그리고 . 이러한 곤충들을";
+		mes "잡아먹는 육식 곤충이 있어";
+		mes "사마귀라든가 거미";
+		mes "그리고 지네등이";
+		mes "그 대표적인 녀석들인데";
+		next;
+		mes "[스트롱]";
+		mes "몬스터로 탈바꿈한 녀석들은";
+		mes "왠만한 레벨로는 한마리";
+		mes "상대하기 벅찰정도로 강력하지";
+		mes "특히 지네인지 거머리인지";
+		mes "굼벵이인지 알수 없는 녀석 !";
+		next;
+		mes "[스트롱]";
+		mes "조심하라구 !";
+		mes "단 한방에 요단강을 건너버려 !";
+		mes "불행중 다행인 점은";
+		mes "이 지네녀석의";
+		mes "시력이 무진장 안좋아서";
+		next;
+		mes "[스트롱]";
+		mes "멀리 돌아가면";
+		mes "눈치채지 못한다는 사실 ..";
+		close;
+	}
+	mes "[스트롱]";
+	mes "아무리 예쁘고 나약해";
+	mes "보이는 무당벌레 같은 곤충도";
+	mes "함부로 대했다가는";
+	mes "큰 코 다쳐요 -";
+	mes "묘르닐 산맥의 대자연을";
+	mes "우습게 보면 안된단다 ..";
+	close;
+}
+
+aldebaran,60,70,4	script	아가씨#alde	69,{
+	mes "[세뇨리타실비아]";
+	mes "이 알데바란 마을 어딘가에";
+	mes "카프라서비스 본사가";
+	mes "있다고해서 프론테라에서 이곳";
+	mes "알데바란까지 먼길을 왔답니다";
+	mes "그 .. 그런데 .. 히잉";
+	next;
+	mes "[세뇨리타실비아]";
+	mes "카프라서비스 본사를";
+	mes "찾기 시작한지 5 시간이나";
+	mes "지났는데 .. 도대체 어딘지 ..";
+	mes "우아앙 - 저는 .. 이렇게";
+	mes "똑똑해 보여두 길치랍니다";
+	next;
+	mes "[세뇨리타실비아]";
+	mes "아 그리구 제가 알고있는";
+	mes "유용한 정보가 하나 있는데";
+	mes "알려드릴까요 ?";
+	next;
+	if (select("대화를 진행한다:그만둔다") == 1) {
+		mes "[세뇨리타실비아]";
+		mes "장비 아이템의 경우";
+		mes "갓 구입했거나";
+		mes "각종 몬스터들에게서";
+		mes "전리품으로";
+		mes "받았을 경우에";
+		next;
+		mes "[세뇨리타실비아]";
+		mes "장비 아이템인데도 불구하고";
+		mes "장비가 불가능할때가 있습니다";
+		mes "이런 때 에는 .. 쟈안 !!";
+		mes "^3355FF돋 보 기 !!^000000";
+		next;
+		mes "[세뇨리타실비아]";
+		mes "돋보기를 사용하시면";
+		mes "파티 내에";
+		mes "블랙스미스가 없어도";
+		mes "간단히 아이템 감정을";
+		mes "할수가 있지롱요";
+		close;
+	}
+	mes "[세뇨리타실비아]";
+	mes "치이 .....";
+	close;
+}
+
+aldebaran,93,80,4	script	긴다리청년#alde	48,{
+	mes "[듀카티]";
+	mes "이 곳 알데바란은 도시 곳곳에 수로가 파여있어";
+	mes "여기저기 맑은 물이 흐르는 덕택에 수려한 경관을 자랑하죠";
+	mes "그 . 러 . 나";
+	next;
+	mes "[듀카티]";
+	mes "어젯밤 . 가족들 몰래 여자친구를 만나러 나가던도중";
+	mes "저 수로에 발이 빠져서";
+	mes "한밤의 데이트를 깔끔하게 즐기지 못했어요";
+	next;
+	if (select("저런저런 안됐군요:참 . 네 . 그래서요 ?") == 1) {
+		mes "[듀카티]";
+		mes "어제 방어구점 막내딸인";
+		mes "제 여자친구에게 들은 이야기인데";
+		mes "무기점 방어구점 도구점 등에서 파는";
+		mes "정품 아이템 보다";
+		next;
+		mes "[듀카티]";
+		mes "각 종 몬스터들로부터 얻은 전리품";
+		mes "아이템 쪽이 성능이 좋은 경우가";
+		mes "많다고 하더군요";
+		next;
+		mes "[듀카티]";
+		mes "전문 용어로";
+		mes "' 슬롯이 많다 ' 라고 한다나요 ?";
+		mes "저는 무슨 뜻인지";
+		mes "정확히는 모르겠습니다만 ..";
+		close;
+	}
+	mes "[듀카티]";
+	mes "우우우 ..";
+	mes "절 어리버리한 녀석이라고";
+	mes "생각 하시는 거죠 ?";
+	close;
+}
+
+aldebaran,180,46,4	script	동양인#alde	88,{
+	mes "[하주작]";
+	mes "저는 페이욘이라는 숲속의 나라로부터 온 관광객입니다 .";
+	mes "이곳은 .. 수로에 물이 흐르고있어";
+	mes "매우 시원하군요";
+	next;
+	mes "[하주작]";
+	mes "그런데 .. 이 물 ..";
+	mes "마셔도 되는걸까요 ?";
+	mes "저 ..... 이미 마셔버렸습니다만 ..";
+	next;
+	if (select("대화를 진행한다:그만둔다") == 1) {
+		mes "[하주작]";
+		mes "미드가르드 곳곳을 여행하고 있는 중입니다";
+		mes "알데바란까지 오는 도중에";
+		mes "어떤 고급 마법사분께 전해들은 이야기 인데요";
+		next;
+		mes "[하주작]";
+		mes "실체가 없는 ^3355FF염속성^000000 몬스터의 경우";
+		mes "무속성 공격 또는 마법으로는";
+		mes "데미지를 주기가 매우 힘들다고 하더라구요";
+		next;
+		mes "[하주작]";
+		mes "도움이 되셨기를 빕니다";
+		mes "그럼 ..";
+		close;
+	}
+	mes "[하주작]";
+	mes "이 곳 알데바란은";
+	mes "주변 환경이 깨끗해서인지";
+	mes "물맛이 아주 좋군요";
+	mes "뱃속의 물은 걱정하지 않아도 괜찮을 것 같습니다";
+	close;
+}
+
+aldebaran,212,122,4	script	알데바란시민#alde	97,{
+	mes "[실린더]";
+	mes "어서옵쇼 ! 알데바란입니다 !";
+	mes "저희 알데바란 시민은 당신을 환영합니다";
+	mes ". . . . .";
+	next;
+	mes "[실린더]";
+	mes "너무 거창하지요 ? 시민대표라니 ..";
+	mes "으음 . 저 혼자 뿐이지만 .. 열렬히 ..";
+	next;
+	mes "[실린더]";
+	mes "당신을 환영합니다 !";
+	next;
+	if (select("대화를 진행한다:그만둔다") == 1) {
+		mes "[실린더]";
+		mes "아 그러고보니 재미있는 녀석을";
+		mes "발견했지 뭐예요";
+		mes "바로 몇일 전 일이었답니다";
+		mes "이 알데바란 주변을 둘러 싸고있는";
+		next;
+		mes "[실린더]";
+		mes "묘르닐 산맥 . 묘르닐 숲 부근에서";
+		mes "천사의 날개를 가진 포링을 보았어요 !";
+		mes "정말이라니까요 !";
+		next;
+		mes "[실린더]";
+		mes "여러마리의 평범한 포링들과";
+		mes "뛰어놀고 있었어요";
+		mes "천사 포링이라 ..";
+		mes "도대체 어떤 녀석일까요 ?";
+		close;
+	}
+	mes "[실린더]";
+	mes "알데바란은 깨끗하고 아름다운 묘르닐 산맥에";
+	mes "둘러싸여져있는 멋진 운하의 도시입니다";
+	mes "알데바란으로 오신 당신을";
+	mes "환영합니다";
+	close;
+}
+
+aldebaran,146,124,4	script	마을소녀#alde	101,{
+	mes "[캠샤프트]";
+	mes "이 세계 어딘가에는 ^3355FF' 어쌔신길드 '^000000 라는 곳이 있어서";
+	mes "사람을 기척없이 살해하는 기술을 가르쳐 준다고 하네요";
+	mes "그 곳 ..";
+	next;
+	mes "[캠샤프트]";
+	mes "불법이겠죠 ?";
+	mes ". . . . .";
+	mes "불법인데 . 기술수료를 하는데 비용이 들까요 ?";
+	next;
+	if (select("대화를 진행한다:그만둔다") == 1) {
+		mes "[캠샤프트]";
+		mes "날개가 달려있어 비행능력이 있는";
+		mes "몬스터들은 대부분";
+		mes "이동 . 공격속도가 매우빨라";
+		mes "이쪽에서의 공격을 성공시키기가";
+		mes "매우 힘들답니다";
+		next;
+		mes "[캠샤프트]";
+		mes "녀석들을 상대하기 위해서는";
+		mes "더욱 정교한 손놀림 (DEX) 이";
+		mes "필요하겠지요 ?";
+		close;
+	}
+	mes "[캠샤프트]";
+	mes "세상에 공짜가 없다는 말 처럼";
+	mes "물론 무료로 교육을 받을수 있거나";
+	mes "하지는 않을것같네요";
+	mes "우우웅 ..";
+	close;
+}
+
+aldebaran,143,136,4	script	종지기#A	89,{
+	mes "[벤자민 홀]";
+	mes "나는 알데바란의 시계탑을 관리하는 종지기라네.";
+	mes "자네 이 시계탑에 관심이 많은 모양이군? 어떤가 좋은 정보 하나를 알려주도록 할까?";
+	next;
+	if (select("시계탑에 대하여 듣는다.:그만둔다.") == 1) {
+		mes "[벤자민 홀]";
+		mes "이 시계탑안은 모종의 장치를 통해 여러층들이 하나로 묶여있다고 할 수 있지.";
+		mes "바로 '층간 연동 워프 시스템'이라고 하는 장치라네.";
+		next;
+		mes "[벤자민 홀]";
+		mes "시계탑 곳곳에 존재하는 워프들은 서로 연동되는 곳도 있지만 어디에 떨어질지 모르는 '랜덤워프'라는 장치도 존재한다네.";
+		mes "동료와 함께 이 시계탑안에 들어갈 작정이라면 이 랜덤워프를 조심하는 것이 좋을것이야.. ";
+		next;
+		mes "[벤자민 홀]";
+		mes "힌트를 알려주자면 랜덤워프는 미니맵상에 초록색으로 표시된다네. 그러니 미니맵을 주의해서 보는 것이 좋을 것이야.";
+		mes "시계들과 좋은 시간 보내길 바라네. 후후후...";
+		close;
+	}
+	mes "[벤자민 홀]";
+	mes "조심하게... 시계탑은 무서운 곳이야.";
+	mes "지금은 어떻게 돌아가는지 나조차도 모른다네...";
+	close;
+}
+
+// 알데바란 건물 내부 91,234
+//============================================================
+aldeba_in,232,241,4	script	알데바란소시민#alde	48,{
+	mes "[RS125]";
+	mes "제 이름이 비인간적이고 제 말투가 건조 하다고 하여";
+	mes "절 두려워 마세요 . 마음만은 따뜻한 녀석 이랍니다 ..";
+	next;
+	mes "[RS125]";
+	mes "비록 제 가슴 속 에는 평범한 사람과는 다르게 ..";
+	mes "미천한 2 행정 심장이 뛰고있고";
+	mes "그 시끄러운 심장음이 귀에 거슬린다 할지라도 ..";
+	mes "전 알데바란의 미래를 위해 달릴겁니다 .";
+	next;
+	if (select("사정을 듣는다:대화를 그만둔다") == 1) {
+		mes "[RS125]";
+		mes ".. 벌써 3 년이 지났군요 ..";
+		mes "제 형이었던 996 은 알데바란 대표 단거리 육상선수로서 ..";
+		mes "한때 ' 알데바란의 페코페코 ' 라 불리울정도로";
+		mes "빠른 다리를 자랑했었지요 ..";
+		next;
+		mes "[RS125]";
+		mes "4 년마다 한번씩 알데바란에서 열리는 ' 알데바란 터보트랙 ' 에서는";
+		mes "형의 모습을 잠깐이라도 보려고 모여드는 세계 각지의 팬들 성화에 ..";
+		mes "매니져였던 제가 노이로제에 걸릴 지경이었으니까";
+		mes "그 인기는 정말 대단했지요 ..";
+		next;
+		mes "[RS125]";
+		mes "하지만 . 영원한 것은 없는법 ..";
+		mes "페이욘이라는 울창한 숲속 마을의 어느 산골소녀가 .";
+		mes "제 형의 독주를 막아내었습니다 .";
+		next;
+		mes "[RS125]";
+		mes "형은 그 뒤로 과도하게 무리한 훈련에 따른 심장이상으로";
+		mes "지금 병상에서 제 모습을 바라보고 있답니다 .";
+		next;
+		mes "[RS125]";
+		mes "전 . 이 알데바란의 미래이자 형의 희망이예요 !";
+		mes "지켜봐주세요 . 반드시 페이욘의 ' 산들바람 하바나 ' 를 꺾고야 말겠습니다 !";
+		close;
+	}
+	mes "[RS125]";
+	mes "언젠가는 세계일주를 하고 싶어요 .";
+	mes "항구도시 알베르타에서 바라보는 바다는 얼마나 멋질까요 ..";
+	mes "내년의 육상대회가 끝나면 제 형과 세계일주를 시도할거예요 .";
+	close;
+}
+
+// 116,63
+aldeba_in,223,121,4	script	험상궂은아저씨	63,{
+	mes "[험상궂은아저씨]";
+	mes "어이 . 남의 집에 함부로 들어오는것이 아니야 .";
+	mes "자네 되게 황당하구만 ";
+	mes "뭘 믿고 성큼성큼 들어와 내게 떡 하니 말을 거나 ?";
+	next;
+	mes "[험상궂은아저씨]";
+	mes "훗훗훗 .. 알고있네 알고있어 .";
+	mes "내가 잠시 현실세계와 착각을 했구만 그래 ..";
+	next;
+	if (select("대화를 지속한다:그만둔다") == 1) {
+		mes "[험상궂은아저씨]";
+		mes "자네 . 이미 알고있는지 모르겠지만";
+		mes "이 세계에는 용병 시스템이란게 존재하네";
+		mes "그리고 나 또한 그 용병이란 녀석들 중 하나이지 ..";
+		next;
+		mes "[험상궂은아저씨]";
+		mes "용병의 의미와 시스템은 정말 단순하지";
+		mes "돈으로 같이 싸워줄 놈을 찾는거야 ..";
+		mes "실력이 있는만큼 값이 나가겠지 ..";
+		next;
+		mes "[험상궂은아저씨]";
+		mes "따분한 이야기는 그만두고";
+		mes "좋은 용병을 고르는 선별법을";
+		mes "간단하게 이야기 해주겠네";
+		next;
+		mes "[험상궂은아저씨]";
+		mes "먼저 콧잔등이 깨끗한가 보게나";
+		mes "좋은 용병은 건강상태에 따라 콧잔등이";
+		mes "언제나 촉촉하게 젖어있어야 하네 . 코가 말라있으면";
+		mes "감기에 걸려 있다는 이야기가 되지 ..";
+		next;
+		mes "[험상궂은아저씨]";
+		mes "그리고 발목이 가늘어야 하네";
+		mes "역시 용병이라고 하면 가느다란 발목과 새하얀 목덜미라네 !";
+		mes "긴 생머리 또는 돈 좀 퍼부은 셋팅 퍼머라면 금상첨화 겠지 ?!";
+		next;
+		mes "[험상궂은아저씨]";
+		mes "마지막으로 용병이라함은 .. 서비스라네 !";
+		mes "소비자가 마지막 한방울 까지 짜내드실수 있도록";
+		mes "곁에서 보조 . 조언을 아끼지 않는것이 진정한 용병이라네 !";
+		mes "물수건 제때 갈아드리는것 잊지말고 !";
+		close;
+	}
+	mes "[험상궂은아저씨]";
+	mes "얼른 나가지 못해 ?";
+	mes "경찰이라면 수색영장 ..";
+	mes "우리 집안 사람이라면 엉덩이의 몽고반점을 보여봐 !";
+	close;
+}
+
+aldeba_in,219,61,4	script	인상좋은아저씨#ald	109,{
+	mes "[인상좋은아저씨]";
+	mes "옆방의 험상궂은 아저씨 이야기를 귀담아 듣지 말게나 ..";
+	mes "제작년 사설 용병 훈련소에서 나무열매를 노리다가";
+	mes "나무에서 머리부터 떨어져 저 모양이라네 ..";
+	next;
+	mes "[인상좋은아저씨]";
+	mes "계속 대화를 나누니 나도 미칠것같네 ..";
+	mes "어이구 머리아퍼 !";
+	close;
+}
+
+//223,56
+aldeba_in,152,47,4	script	호들갑청년#alde	97,{
+	mes "[호들갑청년]";
+	mes "크 크 크 .. 큰일났어요오 !";
+	mes "제가 기르던 우리 귀여운 뼝아리가";
+	mes "집을 나가버린 것이어요 !!";
+	next;
+	if (select("병아리 이름이 뭐예요 ?:. . . . .") == 1) {
+		mes "[호들갑청년]";
+		mes "' 굉장한픽키 ' 라고 해요 ..";
+		mes "엉엉 이를 어째에 ~";
+		mes "제발 우리 귀염둥이를 찾아주세요오 ~";
+		next;
+		if (select("뭐야 ! 흔하디 흔한 이름이잖아 ?:. . . . .") == 1) {
+			mes "[호들갑청년]";
+			mes "무슨 말도 안되는 말씀을 !";
+			mes "우리 ' 굉장한픽키 ' 는 이 세상에 하나밖에 없는";
+			mes "무지막지하게 귀여운 병아리 라구요 !! 이씽 =3";
+			close;
+		}
+		mes "[호들갑청년]";
+		mes "절 우습게 보시는군요 !";
+		mes "전 형제가 없어서 귀염둥이 병아리를 동생처럼 생각했단 말예요 !";
+		mes "으허엉 엉엉엉 ; ; ; ; ;";
+		close;
+	}
+	mes "[호들갑청년]";
+	mes "절 우습게 보시는군요 !";
+	mes "전 형제가 없어서 귀염둥이 병아리를 동생처럼 생각했단 말예요 !";
+	mes "으허엉 엉엉엉 ; ; ; ; ;";
+	close;
+}
+//231,107
+aldeba_in,156,179,4	script	마스터#alde	61,{
+	mes "[마스터]";
+	mes "알데바란에는 카프라 본사가 있어요 ..";
+	mes "그 곳 언니들이 가끔 저희 바에 놀러오는데";
+	mes "굉장히 유쾌한 식구들이 아닐수 없답니다";
+	next;
+	mes "[마스터]";
+	mes "자아 . 바로 이 시점에서 당신께 질문 !";
+	mes "그대의 여성 취향을 알아보는 ' 땡큐 마스터 ' 시간입니다 !";
+	next;
+	mes "[마스터]";
+	mes "그저 . 평소에 . 아앗 이 누나 ! 언니 !";
+	mes "아주아주 멋져 주는데 ~";
+	mes ".. 라고 생각했던 카프라언니를 선택해 주는 겁니닷 !";
+	next;
+	if (sex == 0) {
+		mes "[마스터]";
+		mes "아 . 아 . 댁이 남성이든 여성이든 그건 상관없습니다 .";
+		next;
+	}
+	if (select("오오 재밌겠는걸 !:에이 안해요 ..") == 1) {
+		mes "[마스터]";
+		mes "자아 그럼 보기가 나갑니다 !";
+		mes "페이지를 신중히 넘기세요오 !";
+		next;
+		mes "[마스터]";
+		mes "우리들의 오리지날 카프라 언니 클래식한 푸른 머리칼이 멋져요";
+		mes "기호 (1) 번 ^3355FF' 디포르테 '^000000 !!";
+		mes "포니테일의 차분한 이미지로 덜렁거리는 남자고교생 손님들을 사로 잡았다 !";
+		mes "기호 (2) 번 ^5533FF' 테일링 '^000000 !!";
+		mes "긴 생머리가 챠암 포인트 나긋나긋 그 자체 ! 페이욘 출신의";
+		mes "기호 (3) 번 ^555555' 소린 '^000000 !!";
+		next;
+		mes "[마스터]";
+		mes "보잇쉬한 숏컷에 마냥 씩씩하여 활기넘쳐 버리는 ..";
+		mes "기호 (4) 번 ^1133DD' 비닛 '^000000 !!";
+		mes "냉정하고 침착한 OL 스타일로 나가주마 ! 럭셔리한 안경테가 어울리는";
+		mes "기호 (5) 번 ^33FF55' 글라리스 '^000000 !!";
+		mes "양갈래 머리에 뽀용뽀용 ~ 어려보여두 제 할몫은 다 한다구요 !";
+		mes "기호 (6) 번 ^AAAA00' 더블류 '^000000 !!";
+		next;
+		mes "[마스터]";
+		mes "협찬 : (주) 카프라서비스";
+		mes ". . . . .(유) 존다이벤트";
+		mes "이상입니다";
+		next;
+		switch(select("(1) 디포르테:(2) 테일링:(3) 소린:(4) 비닛:(5) 글라리스:(6) 더블류")) {
+		case 1:
+			mes "[마스터]";
+			mes "오우 낡은것을 선호하는 당신은";
+			mes "무척이나 고지식한 사람 !";
+			mes "신 문물을 받아들이세요 ! 현실로부터 도망쳐 봐야 소용 없습니다 !";
+			close;
+		case 2:
+			mes "[마스터]";
+			mes "지나치게 주의산만 하시군요 !";
+			mes "당신의 파트너 역시 주의산만 했다가는 ..";
+			mes "주변에 민폐만 끼치게 될것입니다 !";
+			close;
+		case 3:
+			mes "[마스터]";
+			mes "이도 저도 아니면";
+			mes "과도하게 싱겁다는 소리 듣기 십상 입니다 .";
+			mes "삶에 의욕을 가지세요 !";
+			close;
+		case 4:
+			mes "[마스터]";
+			mes "언제까지 꿈속에서 허우적 거리고";
+			mes "이상형을 찾아 헤매실겁니까 ?";
+			mes "현실을 직시하세요 !";
+			close;
+		case 5:
+			mes "[마스터]";
+			mes "시니컬한 당신에게 한마디 !";
+			mes "마음을 여세요 !";
+			mes "혼자 놀지 마시고요 !";
+			close;
+		case 6:
+			mes "[마스터]";
+			mes "이 .. 이런 !";
+			mes "어린 연인을 갈구 하시는 당신 !";
+			mes "버 . 범죄입니다 ! 헉헉 .";
+			close;
+		}
+	}
+	mes "[마스터]";
+	mes "으아악 !! 어제 밤을 세워 만들어놓은";
+	mes "멋진 앙케이트가 이리도 간단히 깨져버리다닛 !!";
+	mes "당신 미워어엉";
+	close;
+}
+
+aldeba_in,84,166,4	script	카프라서비스#alde	117,{
+	cutin "kafra_01",2;
+	mes "[카프라디포르테]";
+	mes "어서오십시요 ! 카프라서비스 초대";
+	mes "카프라 타입 ' 디포르테 ' 입니다 ! ";
+	mes "잘 부탁드립니다 .";
+	next;
+	mes "[카프라디포르테]";
+	mes "저희 카프라서비스는 언제나 고객님의 만족도에 기여하기 위해서";
+	mes "성실 . 신용 . 정직 . 3 대 원칙을 바탕으로 ..";
+	mes "철저한 서비스 훈련과 관리를 통해 최선을 다해 고객님을 모시고 있습니다 .";
+	next;
+	mes "[카프라디포르테]";
+	mes "아 참 , 그리고 카프라 서비스의";
+	mes "개편으로 인해 더이상 카프라패스";
+	mes "사용제도를 폐지하였습니다 . 그런";
+	mes "관계로 이제 더이상 카프라패스";
+	mes "판매를 하지않아요 .";
+	next;
+	mes "[카프라디포르테]";
+	mes "하지만 걱정마세요 !";
+	mes "지금까지 사용하시지 않고 가지고";
+	mes "계셨던 카프라패스는구입하신";
+	mes "가격에서 1제니도 손해보시지 않게";
+	mes "그대로 보상해드리고 있으니까요 .";
+	next;
+	if (select("카프라패스 보상받기.:안녕히 계세요.") == 1) {
+		if (countitem(1084) == 0) {
+			mes "[카프라디포르테]";
+			mes "에엣 ? 농담이시죠 ? 고객님께서는 카프라패스를 가지고 계시지 않아요!";
+			mes "하긴 ... 이제 구할 수 없는 물건이 되어버렸으니까 무리도 아니죠 .";
+			close2;
+			cutin "",255;
+			end;
+		}
+		else {
+			set .@kafrapassmoney,countitem(1084)*2000;
+			mes "[Kafra Pavianne]";
+			mes "Let's see...";
+			if (countitem(1084) == 1) {
+				mes "You have 1 Kafra Pass.";
+				mes "You can sell that pass to us for 2000 zeny. Would you like to sell this Kafra Pass back to the Kafra Corporation?";
+			}
+			else {
+				mes "You have "+ countitem(1084) +" Kafra Passes.";
+				mes "If you want to sell them to us, you will receive "+ .@kafrapassmoney +" zeny. Would you like to sell these back to the Kafra Corporation?";
+			}
+			next;
+			if (select("Yes:No") == 1) {
+				if (countitem(1084) == 0) {
+					mes "[Kafra Pavianne]";
+					mes "I'm sorry, but you don't have any Kafra Passes.";
+					close2;
+					cutin "",255;
+					end;
+				}
+				delitem 1084,countitem(1084); //Kapra's_Pass
+				set Zeny,Zeny+.@kafrapassmoney;
+				mes "[Kafra Pavianne]";
+				mes "Thank you.";
+			}
+			close2;
+			cutin "",255;
+			end;
+		}
+	}
+	mes "[카프라디포르테]";
+	mes "이용해 주셔서 감사합니다 !";
+	mes "카프라디포르테 였습니다 .";
+	close2;
+	cutin "",255;
+	end;
+}
+
+aldeba_in,83,245,4	script	카프라서비스#2alde	116,{
+	cutin "kafra_02",2;
+	mes "[카프라테일링]";
+	mes "..... 큰언니 (포르테) 는 언제나 그렇다니깐 !";
+	mes "깐깐해가지고 말이야 .";
+	mes "본사에서는 본사답게 다른 세계에서 볼수없는";
+	mes "조금은 다른 카프라의 색을 밝혀야지";
+	next;
+	mes "[카프라테일링]";
+	mes "자아 ! 안녕하시와요오 ~ 카프라 테일링 타입 입니다 .";
+	mes "앞으로두 저희 카프라서비스 애용해주시옵고 ..";
+	mes "저 . 테일링을 잊지 말아주세요오";
+	next;
+	switch(select("카프라언니 ! 팬이예요 !:에헤헤")) {
+	case 1:
+		mes "[카프라테일링]";
+		mes "앗싸 !";
+		mes "정말 감사드립니다 ~";
+		mes "자 . 여기 사인 ..";
+		next;
+		mes "[카프라테일링]";
+		mes "^3355FF- 슥 삭 슥 삭 -^000000";
+		next;
+		mes "[카프라테일링]";
+		mes "헤헤 .. 아이템 인벤토리를";
+		mes "확인해 보셔두 소용없을거예요";
+		mes "제 사인은 당신의 가슴에 . .";
+		close2;
+		cutin "",255;
+		end;
+	case 2:
+		mes "[카프라테일링]";
+		mes "에헤헤 ?";
+		mes ". . . . .";
+		mes "겨우 그 대사 뿐 ?";
+		mes "에잉 . 싱거운 손님 같으니라궁 ..";
+		close2;
+		cutin "",255;
+		end;
+	}
+}
+
+aldeba_in,24,245,4	script	카프라서비스#3alde	115,{
+	cutin "kafra_03",2;
+	mes "[카프라소린]";
+	mes "하이 - 카프라 No . 1 타입 소린 입니다";
+	mes "이곳 알데바란의 카프라 본사까지 와주셔서 정말 감사드려요 !";
+	next;
+	mes "[카프라소린]";
+	mes "저희 카프라서비스는 언제나 고객 여러분 곁에 있습니다 !";
+	mes "오천팔백년 전통의 저희 카프라서비스는 ..";
+	mes "조잘조잘조잘조잘조잘조잘";
+	next;
+	switch(select("오천팔백년 ?! 믿을수 없어 !:아가씨 시끄러워요:남자친구 있어요 ?")) {
+	case 1:
+		mes "[카프라소린]";
+		mes "잠자코 들어요 ! 이거 외우느라고 일주일이나 걸렸단말얏 !";
+		mes "난 다른 카프라 요원과 달라서 머리가 안좋단 말얏 !";
+		mes "..... 핫 .. 내가 무슨 말을 ..";
+		next;
+		mes "[카프라소린]";
+		mes "호호호 손님 .. 지금 쇼 였어요 ..";
+		mes "그래요 .. 카 .. 카프라에서 손님 여러분에게 저 .. 전해드리는 ~";
+		mes "드림쇼 ! ( .. 라고는 하지만 1 인 원맨쇼 )";
+		break;
+	case 2:
+		mes "[카프라소린]";
+		mes ". . . . .";
+		mes "전 카프라 서비스 팀에 들어오기전에";
+		mes "카프라 경비대 소속 이었답니다 ..";
+		mes "특기는 배쉬 !!";
+		mes ".. 였지만 조용히 예쁘게 살기로 결심했어요 ..";
+		mes "손님 .. 자극 하지 말아주세요 ..";
+		break;
+	case 3:
+		mes "[카프라소린]";
+		mes "어머어머 . 카프라서비스 요원은 남자친구를 만들면 안되는";
+		mes "세상에 말도안되 ~ 규칙에 얽매이고 있답니다";
+		mes ". . . . .";
+		mes ". . . . . . . . . .";
+		next;
+		mes "거짓말이예용 . 에헤";
+		break;
+	}
+	close2;
+	cutin "",255;
+	end;
+}
+
+aldeba_in,142,238,4	script	카프라서비스#4alde	114,{
+	cutin "kafra_04",2;
+	mes "[카프라비닛]";
+	mes "어서오세요 ! 카프라 타입 비닛 입니다 ♤";
+	mes "손님께만 전해드리는 카프라 특급비화 !";
+	next;
+	mes "[카프라비닛]";
+	mes "실은 .. 저희 카프라서비스가 말이죠 ~";
+	mes "이전에는 카프라서비스란 간판이 아니었답니다 ~";
+	mes "자아 . 그럼 무엇이었을까요 ?";
+	next;
+	mes "[카프라비닛]";
+	mes "쨔쟈쟈쟈잔쨔자잔 ! 그것은 놀랍게도 !";
+	mes "카 ! 프 ! ( 띠리리링 ♬ )";
+	mes "핫 . 휴대폰이 .. 잠시만요 ♤";
+	next;
+	mes "[카프라비닛]";
+	mes "예엡 카프라 타입 비닛 입니다 ♤";
+	mes "앗 . 본부장님 ! 옙 ! 옙 ! ..... 옙 !";
+	mes "옛 ?!";
+	next;
+	mes "[카프라비닛]";
+	mes "앗 . 아닙니닷 !";
+	mes "아 .. 아닙니닷 !!";
+	mes "옙 ! 알겠습니닷 !!";
+	next;
+	mes "[카프라비닛]";
+	mes "찰칵 ☆";
+	mes "..... 헤헤헤 ..";
+	mes ". . . . .";
+	next;
+	mes "[카프라비닛]";
+	mes "저기 저 . 손님";
+	mes "조금 전 들으셨던 내용은";
+	mes "저어 . 잊어주시기 바랍니다 . 헤헤 ~";
+	mes ". . . . .";
+	close2;
+	cutin "",255;
+	end;
+}
+
+aldeba_in,91,244,4	script	카프라서비스#5alde	112,{
+	cutin "kafra_06",2;
+	mes "[카프라더블류]";
+	mes "안녕하째여어 !!";
+	mes "카프라서비스의 귀염둥이 막내 ~";
+	mes "카프라 타입 더블류 라고 합니다아 ~";
+	next;
+	mes "[카프라더블류]";
+	mes "저는 신입으로서 카프라 서비스에서 여러분을 뵙게 된지";
+	mes "얼마 되지 않았지만 . 언제나 최선을 다하고 있습니다 !";
+	mes "아무쪼록 잘 부탁 드립니다아 ~";
+	next;
+	if (select("몇짤 ?:그만둔다") == 1) {
+		mes "[카프라더블류]";
+		mes ". . . . .";
+		mes "이잉 !!";
+		mes "어린애 취급 하지 마세여엉 !!";
+		close2;
+		cutin "",255;
+		end;
+	}
+	mes "[카프라더블류]";
+	mes "저희 카프라서비스에서는";
+	mes "최 ! 상 ! 의 서비스를 제공해 드리기 위해 . 최 ! 선 ! 을 다하고 있습니다 .";
+	mes "이용해주셔서 감사합니다 .";
+	close2;
+	cutin "",255;
+	end;
+}
+
+aldeba_in,79,161,6	script	카프라 직원#04	115,{
+	cutin "kafra_03",2;
+	mes "[카프라 직원]";
+	mes "어서오세요~ " + strcharinfo(0) + " 고객님.";
+	mes "저희 카프라 서비스를 이용해 주신 만큼 상품도 받아가세요~";
+	next;
+	mes "[카프라 직원]";
+	mes "각 창구마다 쓰실 수 있는 적립포인트가 다르니 참고해 주십시오.";
+	mes "제가 서 있는 이 창구는 적립포인트 ^7D0781100p 부터 3000p 까지^000000 쓰실 수 있으십니다.";
+	next;
+	mes "[카프라 직원]";
+	mes "고객님의 적립포인트는 ^FF0000"+RESRVPTS+"^000000 이십니다~";
+	mes "다음 항목 중 원하시는 상품을 선택해 주세요.";
+	next;
+M_Menu:
+	next;
+	menu 	"100p = 고구마 7 개",M_1a, "200p = 고구마 15 개",M_1b, "300p = 고구마 25 개",M_1c, "400p = 고구마 35 개",M_1d,
+		"500p = 고구마 50 개",M_1e, "600p = 고구마 60 개",M_1f, "700p = 고구마 75 개",M_1g, "800p = 고구마 85 개",M_1h,
+		"900p = 고구마 100 개",M_1i, "1000p = 1 단계 찬스찬스!",M_1j, "다음 항목",M_2, "취소",M_End;
+	M_1a:
+		if(RESRVPTS < 100) goto sL_LowPts1;
+		mes "[카프라 직원]";
+		mes "고객님~ 다음에도 적립포인트를 많이~ 많이~ 모아 오세요~";
+		mes "언제나 저희 (주) 카프라 서비스를 이용해 주셔서 감사합니다~~";
+		getitem 516, 7;
+		set RESRVPTS, RESRVPTS - 100;
+		close;
+	M_1b:
+		if(RESRVPTS < 200) goto sL_LowPts1;
+		mes "[카프라 직원]";
+		mes "고객님~ 다음에도 적립포인트를 많이~ 많이~ 모아 오세요~";
+		mes "언제나 저희 (주) 카프라 서비스를 이용해 주셔서 감사합니다~~";
+		getitem 516, 15;
+		set RESRVPTS, RESRVPTS - 200;
+		close;
+	M_1c:
+		if(RESRVPTS < 300) goto sL_LowPts1;
+		mes "[카프라 직원]";
+		mes "고객님~ 다음에도 적립포인트를 많이~ 많이~ 모아 오세요~";
+		mes "언제나 저희 (주) 카프라 서비스를 이용해 주셔서 감사합니다~~";
+		getitem 516, 25;
+		set RESRVPTS, RESRVPTS - 300;
+		close;
+	M_1d:
+		if(RESRVPTS < 400) goto sL_LowPts1;
+		mes "[카프라 직원]";
+		mes "고객님~ 다음에도 적립포인트를 많이~ 많이~ 모아 오세요~";
+		mes "언제나 저희 (주) 카프라 서비스를 이용해 주셔서 감사합니다~~";
+		getitem 516, 35;
+		set RESRVPTS, RESRVPTS - 400;
+		close;
+	M_1e:
+		if(RESRVPTS < 500) goto sL_LowPts1;
+		mes "[카프라 직원]";
+		mes "고객님~ 다음에도 적립포인트를 많이~ 많이~ 모아 오세요~";
+		mes "언제나 저희 (주) 카프라 서비스를 이용해 주셔서 감사합니다~~";
+		getitem 516, 50;
+		set RESRVPTS, RESRVPTS - 500;
+		close;
+	M_1f:
+		if(RESRVPTS < 600) goto sL_LowPts1;
+		mes "[카프라 직원]";
+		mes "고객님~ 다음에도 적립포인트를 많이~ 많이~ 모아 오세요~";
+		mes "언제나 저희 (주) 카프라 서비스를 이용해 주셔서 감사합니다~~";
+		getitem 516, 60;
+		set RESRVPTS, RESRVPTS - 600;
+		close;
+	M_1g:
+		if(RESRVPTS < 700) goto sL_LowPts1;
+		mes "[카프라 직원]";
+		mes "고객님~ 다음에도 적립포인트를 많이~ 많이~ 모아 오세요~";
+		mes "언제나 저희 (주) 카프라 서비스를 이용해 주셔서 감사합니다~~";
+		getitem 516, 75;
+		set RESRVPTS, RESRVPTS - 700;
+		close;
+	M_1h:
+		if(RESRVPTS < 800) goto sL_LowPts1;
+		mes "[카프라 직원]";
+		mes "고객님~ 다음에도 적립포인트를 많이~ 많이~ 모아 오세요~";
+		mes "언제나 저희 (주) 카프라 서비스를 이용해 주셔서 감사합니다~~";
+		getitem 516, 85;
+		set RESRVPTS, RESRVPTS - 800;
+		close;
+	M_1i:
+		if(RESRVPTS < 900) goto sL_LowPts1;
+		mes "[카프라 직원]";
+		mes "고객님~ 다음에도 적립포인트를 많이~ 많이~ 모아 오세요~";
+		mes "언제나 저희 (주) 카프라 서비스를 이용해 주셔서 감사합니다~~";
+		getitem 516, 100;
+		set RESRVPTS, RESRVPTS - 900;
+		close;
+	M_1j:
+		if(RESRVPTS < 1000) goto sL_LowPts1;
+		set RESRVPTS, RESRVPTS - 1000;
+		mes "[Kafra]";
+		mes "^0000FF1st Lottery Opportunity!!^000000";
+		set @Lotto, 1;
+		next;
+		callfunc "F_Lottery";
+		goto M_End;
+
+	sL_LowPts1:
+		mes "[Kafra]";
+		mes "I'm sorry but you do not have enough reserve points for that selection.";
+		goto M_Menu;
+
+	M_2:
+		menu 	"1100p = 빨간 포션 7 개",M_2a, "1300p = 빨간 포션 15 개",M_2b, "1500p = 빨간 포션 25 개",M_2c,
+			"1700p = 빨간 포션 35 개",M_2d, "1900p = 빨간 포션 50 개",M_2e, "2100p = 빨간 포션 60 개",M_2f,
+			"2300p = 빨간 포션 75 개",M_2g, "2500p = 빨간 포션 85 개",M_2h, "2800p = 빨간 포션 100 개",M_2i,
+			"3000p = 2단계 찬스찬스!",M_2j, "이전 목록",M_Menu, "취소",M_End;
+		
+		M_2a:
+			if(RESRVPTS < 1100) goto sL_LowPts2;
+			mes "[카프라 직원]";
+			mes "고객님~ 다음에도 적립포인트를 많이~ 많이~ 모아 오세요~";
+			mes "언제나 저희 (주) 카프라 서비스를 이용해 주셔서 감사합니다~~";
+			getitem 501, 7;
+			set RESRVPTS, RESRVPTS - 1100;
+			close;
+		M_2b:
+			if(RESRVPTS < 1300) goto sL_LowPts2;
+			mes "[카프라 직원]";
+			mes "고객님~ 다음에도 적립포인트를 많이~ 많이~ 모아 오세요~";
+			mes "언제나 저희 (주) 카프라 서비스를 이용해 주셔서 감사합니다~~";
+			getitem 501, 15;
+			set RESRVPTS, RESRVPTS - 1300;
+			close;
+		M_2c:
+			if(RESRVPTS < 1500) goto sL_LowPts2;
+			mes "[카프라 직원]";
+			mes "고객님~ 다음에도 적립포인트를 많이~ 많이~ 모아 오세요~";
+			mes "언제나 저희 (주) 카프라 서비스를 이용해 주셔서 감사합니다~~";
+			getitem 501, 25;
+			set RESRVPTS, RESRVPTS - 1500;
+			close;
+		M_2d:
+			if(RESRVPTS < 1700) goto sL_LowPts2;
+			mes "[카프라 직원]";
+			mes "고객님~ 다음에도 적립포인트를 많이~ 많이~ 모아 오세요~";
+			mes "언제나 저희 (주) 카프라 서비스를 이용해 주셔서 감사합니다~~";
+			getitem 501, 35;
+			set RESRVPTS, RESRVPTS - 1700;
+			close;
+		M_2e:
+			if(RESRVPTS < 1900) goto sL_LowPts2;
+			mes "[카프라 직원]";
+			mes "고객님~ 다음에도 적립포인트를 많이~ 많이~ 모아 오세요~";
+			mes "언제나 저희 (주) 카프라 서비스를 이용해 주셔서 감사합니다~~";
+			getitem 501, 50;
+			set RESRVPTS, RESRVPTS - 1900;
+			close;
+		M_2f:
+			if(RESRVPTS < 2100) goto sL_LowPts2;
+			mes "[카프라 직원]";
+			mes "고객님~ 다음에도 적립포인트를 많이~ 많이~ 모아 오세요~";
+			mes "언제나 저희 (주) 카프라 서비스를 이용해 주셔서 감사합니다~~";
+			getitem 501, 60;
+			set RESRVPTS, RESRVPTS - 2100;
+			close;
+		M_2g:
+			if(RESRVPTS < 2300) goto sL_LowPts2;
+			mes "[카프라 직원]";
+			mes "고객님~ 다음에도 적립포인트를 많이~ 많이~ 모아 오세요~";
+			mes "언제나 저희 (주) 카프라 서비스를 이용해 주셔서 감사합니다~~";
+			getitem 501, 75;
+			set RESRVPTS, RESRVPTS - 2300;
+			close;
+		M_2h:
+			if(RESRVPTS < 2500) goto sL_LowPts2;
+			mes "[카프라 직원]";
+			mes "고객님~ 다음에도 적립포인트를 많이~ 많이~ 모아 오세요~";
+			mes "언제나 저희 (주) 카프라 서비스를 이용해 주셔서 감사합니다~~";
+			getitem 501, 85;
+			set RESRVPTS, RESRVPTS - 2500;
+			close;
+		M_2i:
+			if(RESRVPTS < 2800) goto sL_LowPts2;
+			mes "[카프라 직원]";
+			mes "고객님~ 다음에도 적립포인트를 많이~ 많이~ 모아 오세요~";
+			mes "언제나 저희 (주) 카프라 서비스를 이용해 주셔서 감사합니다~~";
+			getitem 501, 100;
+			set RESRVPTS, RESRVPTS - 2800;
+			close;
+		M_2j:
+			if(RESRVPTS < 3000) goto sL_LowPts2;
+			set RESRVPTS, RESRVPTS - 3000;
+			mes "[Kafra]";
+			mes "^0000FF2nd Lottery Opportunity!!^000000";
+			set @Lotto, 2;
+			next;
+			callfunc "F_Lottery";
+			goto M_End;
+
+		sL_LowPts2:
+			mes "[Kafra]";
+			mes "I'm sorry but you do not have enough reserve points for that selection.";
+			next;
+			goto M_2;
+
+	M_End:
+		mes "[Kafra]";
+		mes "Please come back anytime when you have more reserve points.";
+		cutin "",255;
+		close;
+}
+
+// Special Reserve 2 ----------------------------------------------
+aldeba_in,88,161,3	script	카프라 직원#05	115,{
+	cutin "kafra_03",2;
+	mes "[카프라 직원]";
+	mes "어서오세요~ "+strcharinfo(0)+" 고객님.";
+	mes "지금 저희 카프라 센터에서는 고객 여러분을 위한 특별 감사축제를 하고 있습니다.";
+	next;
+	mes "[카프라 직원]";
+	mes "지금까지 모아오신 카프라 포인트를 이용해서 경품을 뽑을 수 있는 ^FF0000특별 카프라 ^529DFF경품 대잔치!^000000";
+	mes "저희 카프라 본사에서 이번에 대폭 경품을 강화했답니다.";
+	next;
+	mes "[카프라 직원]";
+	mes "참여하시겠습니까?";
+	next;
+	menu "참여한다.:안한다.",M_End;
+		mes "[카프라 직원]";
+		mes "고객님의 적립포인트는 ^FF0000"+RESRVPTS+"^000000 이십니다~";
+		mes "다음 항목 중 원하시는 상품을 선택해 주세요.";
+		next;
+		menu "5000p = 1단계 찬스찬스!",sM_1st, "7000p = 2단계 찬스찬스!",sM_2nd, "10000p = 3단계 찬스찬스!",sM_3rd, "취소",M_End; 
+
+		sM_1st:
+			if(RESRVPTS < 5000) goto sL_NotEnuf;
+			set RESRVPTS, RESRVPTS - 5000;
+			set @Lotto, 3;
+			callfunc "F_Lottery";
+			goto M_End;
+		sM_2nd:
+			if(RESRVPTS < 7000) goto sL_NotEnuf;
+			set RESRVPTS, RESRVPTS - 7000;
+			set @Lotto, 4;
+			callfunc "F_Lottery";
+			goto M_End;
+		sM_3rd:
+			if(RESRVPTS < 10000) goto sL_NotEnuf;
+			set RESRVPTS, RESRVPTS - 10000;
+			set @Lotto, 5;
+			callfunc "F_Lottery";
+			goto M_End;
+
+			sL_NotEnuf:
+				mes "[카프라 직원]";
+				mes "죄송합니다~ 고객님~";
+				mes "고객님께서 선택하신 찬스는 적립포인트가 부족하여 참여할 수 없습니다~";
+				mes "고객님의 적립포인트를 다시 한번 확인해 주시고 선택해 주세요~";
+				cutin "",255;
+				close;
+	M_End:
+		mes "[Kafra]";
+		mes "No problem.  Collect more and more special reserve points by using the Kafra Services found throughout Rune Midgard.";
+		mes "Thank you for using Kafra Corp. services.";
+		cutin "",255;
+		close;
+}
+
+// Function F_Lottery ------------------------------------------------------------------------------------------
+function	script	F_Lottery	{
+	mes "[Kafra]";
+	mes "You have the unique opportunity to win a prize sent down from the heavens themselves!!";
+	next;
+	mes "[Kafra]";
+	mes "Don't miss this one and only chance! Now dear, are you ready?";
+	next;
+	mes "[Kafra]";
+	mes "How many times do you want the Lottery Machine to spin? You can choose up to 5 times.";
+	next;
+	input @input;
+	if(@input < 1 || @input > 5) set @input, rand(1,5); //Lupus's fix
+	callsub sF_Spin;
+	mes "[Kafra]";
+	mes "Ok~ Let me check the results~ guess what it is?";
+	next;
+	mes "[Kafra]";
+	mes "^FF0000Lets see.... This is...!!^000000";
+	next;
+	if(@temp <  1) goto sL_Prize1;
+	if(@temp <  2) goto sL_Prize2;
+	if(@temp <  3) goto sL_Prize3;
+	if(@temp <=  4) goto sL_Prize4;
+	goto sL_Prize5;
+
+	sL_Prize1:
+		mes "[Kafra]";
+		mes "WOW!!!!..... You win!!! 1st Prize~! Congratulations~~ You got the 1st prize~~";
+		if(@Lotto == 1) getitem 2328,1;//Items: Wooden_Mail,
+		if(@Lotto == 2) getitem 2307,1;//Items: Mantle,
+		if(@Lotto == 3) getitem 657,10;//Items: Berserk_Potion,
+		if(@Lotto == 4) {
+			getitem 607,2;//Items: Yggdrasilberry,
+			getitem 608,1;//Items: Yggdrasil_Seed,
+		}
+		if(@Lotto == 5) getitem 607,3;//Items: Yggdrasilberry,
+		return;
+	sL_Prize2:
+		mes "[Kafra]";
+		mes "Oh! WOW! You've won the 2nd prize! Congratulations!!";
+		if(@Lotto == 1) getitem 2403,1;//Items: Shoes,
+		if(@Lotto == 2) getitem 2226,1;//Items: Cap,
+		if(@Lotto == 3) getitem 2201,1;//Items: Sunglasses,
+		if(@Lotto == 4) getitem 526,3;//Items: Royal_Jelly,
+		if(@Lotto == 5) {
+			getitem 608,1;//Items: Yggdrasil_Seed,
+			getitem 526,10;//Items: Royal_Jelly,
+		}
+		return;
+	sL_Prize3:
+		mes "[Kafra]";
+		mes "Congratulations! You've won the 3rd prize.";
+		if(@Lotto == 1) getitem 602,4;//Items: Butterfly_Wing,
+		if(@Lotto == 2) getitem 505,3;//Items: Blue_Potion,
+		if(@Lotto == 3) getitem 2203,1;//Items: Glasses,
+		if(@Lotto == 4) getitem 504,15;//Items: White_Potion,
+		if(@Lotto == 5) getitem 504,30;//Items: White_Potion,
+		return;
+	sL_Prize4:
+		mes "[Kafra]";
+		mes "You've won the 4th prize.";
+		if(@Lotto == 1) getitem 516,100;//Items: Sweet_Potato,
+		if(@Lotto == 2) getitem 501,150;//Items: Red_Potion,
+		if(@Lotto == 3) getitem 502,150;//Items: Orange_Potion,
+		if(@Lotto == 4) getitem 505,5;//Items: Blue_Potion,
+		if(@Lotto == 5) getitem 505,10;//Items: Blue_Potion,
+		return;
+	sL_Prize5:
+		mes "[Kafra]";
+		mes "You've won the 5th prize.";
+		if(@Lotto == 1) getitem 516,50;//Items: Sweet_Potato,
+		if(@Lotto == 2) getitem 501,100;//Items: Red_Potion,
+		if(@Lotto == 3) getitem 501,200;//Items: Red_Potion,
+		if(@Lotto == 4) getitem 501,250;//Items: Red_Potion,
+		if(@Lotto == 5) getitem 501,300;//Items: Red_Potion,
+		return;
+
+sF_Spin:
+	mes "[Lottery Machine]";
+	mes "Number of spins remaining: "+@input;
+	next;
+	mes "[Lottery Machine]";
+	mes "(rumble~rumble~rumble~)...";
+	next;
+	set @temp, rand(10);
+	set @input, @input -1;
+	if(@input <= 0) return;
+	goto sF_Spin;
+}
+
+// 문지기
+//============================================================
+c_tower3,10,249,4	script	문지기#ct	84,{
+	callfunc "F_ClockTowerGate","지상 4 층",7026,"c_tower4",185,44,"리쿠"; 
+}
+
+alde_dun03,264,16,4	script	문지기#ct1	101,{
+	callfunc "F_ClockTowerGate","지하 4 층",7027,"alde_dun04",79,267,"아이"; 
+}
+
+function	script	F_ClockTowerGate	{
+	mes "[문지기 리쿠]";
+	mes "알데바란 명물";
+	mes "키나세 - 블루갈리노";
+	mes "시계탑에 오신걸 환영하오";
+	mes getarg(0)+" 부터는";
+	mes "출입금지이니";
+	mes "돌아가주시오";
+	next;
+	switch(select("시계탑에 대하여:"+getarg(0)+"에 대하여:"+getarg(0)+"으로 이동한다:대화를 종료한다")) {
+	case 1:
+		mes "[문지기 "+getarg(5)+"]";
+		mes "연금술사의 고장 알데바란 !";
+		mes "그 오래전 . 전설의";
+		mes "3 대 연금술사로 불리웠던";
+		mes "브루케사이머";
+		mes "필립바리세즈";
+		mes "그리고 ..";
+		next;
+		mes "[문지기 "+getarg(5)+"]";
+		mes "로메로스페샬레 !";
+		mes "이 거룩한 건축물은";
+		mes "그 들이 건설한 시계탑이오";
+		mes "이 곳 까지 오는 도중에";
+		mes "어느정도 느꼈겠지만";
+		mes "이 시계탑은 평범하지 않은";
+		next;
+		mes "[문지기 "+getarg(5)+"]";
+		mes "고대 연금술을 바탕으로한";
+		mes "상당히 괴상망측한 주술적";
+		mes "구조로 이루어져 있소";
+		mes "괜히 뚜렷한 목적없이";
+		mes "허우적 허우적 헤매이고";
+		mes "다녔다가는";
+		next;
+		mes "[문지기 "+getarg(5)+"]";
+		mes "시계탑의";
+		mes "문지기 마물들에 의해";
+		mes "큰 봉변을 피하지";
+		mes "못할것이오";
+		mes "조심하시기 바라오 ..";
+		close;
+	case 2:
+		mes "[문지기 "+getarg(5)+"]";
+		mes "고대 연금술사들은";
+		mes "마물들과 타국의 병사들로부터";
+		mes "그 무언가를 지키기 위해";
+		mes "연금술적 장치를 제작해";
+		mes "4 층으로의 문을 봉인하였소";
+		mes "이 문을 통과하기 위해서는";
+		next;
+		mes "[문지기 "+getarg(5)+"]";
+		mes "어느 열쇠가 필요하네만";
+		mes "열쇠는 이 시계탑 곳곳에서";
+		mes "어슬렁 거리는";
+		mes "무시무시한 문지기 마물이";
+		mes "지니고 있다고 하오";
+		next;
+		mes "[문지기 "+getarg(5)+"]";
+		mes "그 열쇠는 고대 연금술의";
+		mes "집약체로서 ..";
+		mes "사용하고나면";
+		mes "주술이 풀려 사라지도록";
+		mes "고안되어 있다고 하오";
+		next;
+		mes "[문지기 "+getarg(5)+"]";
+		mes "당신이 만약 그 열쇠를";
+		mes "손에 넣었다면";
+		mes "나에게 보여주시오";
+		mes "열쇠를 가지고 있는";
+		mes "사람이야말로";
+		mes "이 문을 넘나들 수 있는";
+		next;
+		mes "[문지기 "+getarg(5)+"]";
+		mes "자격을 가진자 !";
+		mes "그 대의 운을";
+		mes "시험해 보겠소 ..";
+		mes ". . . . .";
+		close;
+	case 3:
+		if (countitem(getarg(1)) > 0) {
+			mes "[문지기 "+getarg(5)+"]";
+			mes "Hmm! I already felt that you are not an Ordinary person,";
+			mes "Now it seems to be successful in Speculation.";
+			mes "Please,You may enter.";
+			mes "May God bless you ..";
+			close2;
+			delitem getarg(1),1; 
+			warp getarg(2),getarg(3),getarg(4);
+			end;
+		}
+		else {
+			mes "[문지기 "+getarg(5)+"]";
+			mes ". . . . . .";
+			mes "당신은 이 문을 통과할";
+			mes "자격이 없소 ..";
+			mes "고대 연금술사들이";
+			mes "허락하지 않는한";
+			mes "문을 지날수는 없을 것이오";
+			close;
+		}
+	case 4:
+		mes "[문지기 "+getarg(5)+"]";
+		mes "이 시계탑은";
+		mes "고대 3 대 연금술사들의";
+		mes "정성과 혼이 깃들여져 있는곳";
+		mes "부디 시계탑의 내부 장식등에";
+		mes "낙서등을 하거나 훼손시키지";
+		mes "말아주길 바라오 ..";
+		close;
+	}
+}

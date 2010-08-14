@@ -1,0 +1,48 @@
+
+//    kk  ""tt""  "";;    """"JJ;;kkJJ  JJtt""    ""tt""  ;;tt""""tt    ""tt""   
+//   JJ  kk""tt;;JJ      ttkk    ""tt    ;;;;ttJJ;;  ""ttkk;;"";;;;ttkk;;  ;;kk  
+//  "";;  ""  kk  kk  tt  ttww    ZZ;;  ww    RR  ;;JJ  JJJJ  tt    RR  ;;JJ  JJ 
+//  JJ      """";;""  kk  ttkk  ;;kk    ZZ    ww  ;;""  kk""  ww    kk;;kk""  JJ 
+//  kk      JJ  kk    ww  ttkk  JJJJ  ;;ww  ""JJ  ;;tt""RR    ZZ  ;;ZZJJ      kk 
+//  kk  ;;  "";;JJ        JJtt  JJJJ  ""kk  JJ""  ww""""ww    ww  ""JJ  ZZ    kk 
+//  JJ  JJ  ;;JJ""  "";;  ww;;  kkJJ  JJ""  kk;;  ww  ;;ww  ""JJ  ww;;  ww  ;;tt 
+//;;""  RR    RR    ww""  kk""  ;;tt  ww    kkkk      kktt  JJ;;  ZZ;;  ;;  tt   
+//  JJkkttkkkk;;kkkk;;JJkktt""kkJJJJkkttJJkk;;  kkkkJJ  ttkkttJJkk;;ttkkJJkkJJ   
+//| I | - | L | U | N | A | A | T | H | E | N | A | P | R | O | J | E | C | T |  
+//------------------------------------------------------------------------------
+// iLAthena 워프 배치 스크립트 <http://www.i-luna.com>
+// 한글화 by 아이루나 iLAthena Project
+//------------------------------------------------------------------------------
+
+//= 해안 던전 ============================================
+//beach_dun,89,28,0	warp	cmd00a	3,3,beach_dun2,15,182
+//beach_dun2,13,182,0	warp	cmd00b	3,3,beach_dun,89,30
+
+//= 코모도 필드
+//moc_fild12,35,303,0	warp	cmd011	3,3,cmd_fild08,331,319
+//cmd_fild09,14,120,0	warp	cmdf14-3	3,3,cmd_fild07,386,96
+
+
+//= 모로크 필드 =============================================
+//moc_fild04,219,327,0	warp	mocf016	3,4,anthell01,35,262
+//moc_fild15,258,253,0	warp	mocf017	3,3,anthell01,35,262
+
+//= 개미지옥 =================================================
+//anthell01,35,267,0	warp	ant001	1,1,moc_fild04,213,327
+//anthell02,171,169,0	warp	ant002	1,2,moc_fild04,213,327
+
+//= 모로크 폐허 =============================================
+//morocc_in,108,179,0	warp	w280	3,2,morocc,284,175
+
+//= 모로크 마을 ==============================================
+//morocc_in,72,67,0	warp	w341	2,2,morocc_in,44,162
+
+//= 이즈루드 마을 ==============================================
+//izlude_in,62,170,0	warp	w1039	1,1,izlude_in,68,165
+
+//= 페이욘 동굴
+//pay_dun03,127,62,0	warp	payd04	1,2,pay_dun04,201,204
+
+// 공항
+//airplane,255,55,0	warp	ein044	1,1,airplane,90,68
+//airplane,88,68,0	warp	ein044a	1,1,airplane,253,55

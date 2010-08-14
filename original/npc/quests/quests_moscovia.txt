@@ -1,0 +1,1769 @@
+
+//    kk  ""tt""  "";;    """"JJ;;kkJJ  JJtt""    ""tt""  ;;tt""""tt    ""tt""   
+//   JJ  kk""tt;;JJ      ttkk    ""tt    ;;;;ttJJ;;  ""ttkk;;"";;;;ttkk;;  ;;kk  
+//  "";;  ""  kk  kk  tt  ttww    ZZ;;  ww    RR  ;;JJ  JJJJ  tt    RR  ;;JJ  JJ 
+//  JJ      """";;""  kk  ttkk  ;;kk    ZZ    ww  ;;""  kk""  ww    kk;;kk""  JJ 
+//  kk      JJ  kk    ww  ttkk  JJJJ  ;;ww  ""JJ  ;;tt""RR    ZZ  ;;ZZJJ      kk 
+//  kk  ;;  "";;JJ        JJtt  JJJJ  ""kk  JJ""  ww""""ww    ww  ""JJ  ZZ    kk 
+//  JJ  JJ  ;;JJ""  "";;  ww;;  kkJJ  JJ""  kk;;  ww  ;;ww  ""JJ  ww;;  ww  ;;tt 
+//;;""  RR    RR    ww""  kk""  ;;tt  ww    kkkk      kktt  JJ;;  ZZ;;  ;;  tt   
+//  JJkkttkkkk;;kkkk;;JJkktt""kkJJJJkkttJJkk;;  kkkkJJ  ttkkttJJkk;;ttkkJJkkJJ   
+//| I | - | L | U | N | A | A | T | H | E | N | A | P | R | O | J | E | C | T |  
+//------------------------------------------------------------------------------
+// iLAthena 모스코비아 고래섬 퀘스트 스크립트 <http://www.i-luna.com>
+// 한글화 by 아이루나 iLAthena Project
+//------------------------------------------------------------------------------
+// 한글화중 by 악승
+// 검수 by ★orz。
+//------------------------------------------------------------------------------
+
+moscovia,171,71,3	script	베르바예프#mosk	968,{
+	if(!mosk_1que) {
+		mes "[베르바예프]";
+		mes "이 녀석이고... 저 녀셕이고...";
+		mes "다들 의심만 많아서는... 쳇...";
+		mes "사람을 허풍쟁이로 몰다니...";
+		next;
+		select("무슨 일이라도 있으신가요?.");
+		mes "[베르바예프]";
+		mes "으음? 못 보던 얼굴인걸 보니";
+		mes "타지의 여행자인 모양이구나?";
+		mes "여행자라면 이곳저곳에서 신기한";
+		mes "믿기 어려운 여러 일들을 보아 왔겠지?";
+		next;
+		mes "[베르바예프]";
+		mes "그래, 자네라면 분명 내 이야기";
+		mes "에 흥미를 갖고 들어줄거야.";
+		mes "마을 녀석들은 죄다 꽉 막힌 꼰대";
+		mes "뿐이라 날 바보취급만 한다구...";
+		next;
+		switch(select("그런 이야기에는 관심 없습니다.:그 이야기를 좀 해주세요.")){
+			case 1:
+				mes "[베르바예프]";
+				mes "그런가... 관심이 없단 말이지...";
+				mes "그렇다면 어쩔 수 없지.";
+				next;
+				mes "[베르바예프]";
+				mes "혹시 생각이 바뀌어 흥미가 생긴";
+				mes "다면 언제라도 다시 말해줘.";
+				close;
+			case 2:
+				mes "[베르바예프]";
+				mes "좋아, 처음부터 자네에게 들려줄";
+				mes "생각으로 시작한 이야기란 말이지.";
+				next;
+				mes "[베르바예프]";
+				mes "아직 이 곳에 온지 얼마 안된 것";
+				mes "같은데 혹시 움직이는 섬에 대한";
+				mes "이야기를 들어본적 있어?";
+				next;
+				mes "이 섬에 옛부터 내려오는 전설같은";
+				mes "이야기야.";
+				next;
+				mes "[베르바예프]";
+				mes "여기서 멀리 떨어지지않은 해역";
+				mes "에는 때때로 움직이는 섬이 하나";
+				mes "있다고 전해지고 있어.";
+				next;
+				mes "[베르바예프]";
+				mes "하지만 아직까지 아무도 그 섬을";
+				mes "직접 목격한 사람은 없었던거야.";
+				mes "하지만 이 전설을 진짜로 믿는";
+				mes "사람도 거의 없는거나 다름없어.";
+				next;
+				mes "[베르바예프]";
+				mes "나도 실제로는 이 전설은 그저 옛";
+				mes "이야기 중에 하나일 뿐이라 생각";
+				mes "했었지. 하지만... 난 봐버린거야... 그 움직이는 섬을 말이지...";
+				next;
+				mes "[베르바예프]";
+				mes "놀랍지? 그래 많이 놀라울거야.";
+				mes "솔직히 당신도 내 말을 완전히 믿긴";
+				mes "힘들겠지...";
+				next;
+				mes "[베르바예프]";
+				mes "내가 그 섬을 처음 목격한 건 마을";
+				mes "남부 해안가의 한복판 이였어.";
+				mes "처음에는 나도 내 눈을 의심했지.";
+				mes "평생을 이 곳에서 살아온 나 조차 이런 곳에 육지가 있는지 몰랐으니...";
+				next;
+				mes "[베르바예프]";
+				mes "가까이 다가서 육지에 오르려 했지만";
+				mes "다가갈수록 육지는 점점 내 곁에서";
+				mes "멀어져 결국 바다 저편으로 사라져 버리고 말았어.";
+				next;
+				select("이제 그 섬은 다시 나타나지 않나요?");
+				mes "[베르바예프]";
+				mes "그랬다면 나도 결국 헛것을 본 것";
+				mes "으로 생각하고 넘어갔을지도 모르지.";
+				next;
+				mes "[베르바예프]";
+				mes "하지만 바로 엊그제 저녁에...";
+				mes "여느때처럼 배를 몰고 집으로";
+				mes "돌아오던 내 앞에 그 섬은 다시 모습을 드러낸 거야.";
+				next;
+				mes "[베르바예프]";
+				mes "이번에도 내가 다가가자 서서히";
+				mes "움직여 바다의 저편으로 사라져";
+				mes "버리고 말았어. 그리고 그 섬의";
+				mes "존재를 믿을 수 밖에 없게 되었지.";
+				next;
+				mes "[베르바예프]";
+				mes "분명 이건 대단한 발견이라구.";
+				mes "그렇게 생각하지 않아? 그 섬을";
+				mes "모험해 보고싶다고 자네의 그 모험혼이 외치지 않는거야?";
+				next;
+				mes "[베르바예프]";
+				mes "난 아직 포기하지 않았어.";
+				mes "반드시 다시 우리 앞에 나타날거야.";
+				mes "그 날에는 반드시 직접 섬에 올라";
+				mes "이 두눈으로 모든 것을 확인해 줄테다.";
+				set mosk_1que,1;
+				close;
+		}
+	}
+	if(mosk_1que == 1) {
+		switch(rand(1,2)) {
+			case 1:
+				mes "[베르바예프]";
+				mes "분명 그 섬의 존재를 모두에게 증명";
+				mes "할 수 있다면 좋을텐데...";
+				next;		
+				mes "[베르바예프]";
+				mes "다시 그 섬이 나타난다면 이번에야";
+				mes "말로 정체를 밝혀주겠어.";
+				mes "그쪽도 한번 도전해 보는 것은 어떨까?";
+				close;
+			case 2:
+				mes "[베르바예프]";
+				mes "역시 섬을 찾아 나서는 방법에는";
+				mes "직접 배를타고 나가 찾아보는 것";
+				mes "만한 방법이 없다고 생각해.";
+				next;
+				mes "[베르바예프]";
+				mes "나? 물론 나는 배를 가지고 있지.";
+				mes "이래뵈도 어엿한 어부라고 나는...";
+				next;
+				mes "[베르바예프]";
+				mes "아... 그런가? 당신도 배가 필요";
+				mes "하단 소리인가? 음... 아쉽지만 내";
+				mes "배를 빌려줄 수는 없는 노릇인데...";
+				next;
+				mes "[베르바예프]";
+				mes "그래! 이바노프 아저씨라면 당신에게";
+				mes "자신의 배를 빌려줄지도 몰라.";
+				mes "그 아저씨는 나처럼 타지의 여행자들";
+				mes "을 좋아하니까.";
+				mes "예전 자기 모습을 보는 것 같다나...";
+				next;
+				mes "[베르바예프]";
+				mes "이바노프 아저씨도 예전에는 당신과";
+				mes "같이 각지를 여행하며 모험을 해온";
+				mes "사람이니 어쩌면 둘은 이야기가 잘";
+				mes "잘 통할지도 모르지.";
+				next;
+				mes "[베르바예프]";
+				mes "직접 배를 타고 섬을 찾아볼 생각이";
+				mes "있다면 이바노프 아저씨를 찾아가서";
+				mes "부탁해 보라구.";
+				close;
+		}
+	}
+	if (mosk_1que > 1) {
+		emotion e_omg,0;
+		mes "[베르바예프]";
+		mes "그게 정말이야? 그 이동하는 섬을";
+		mes "직접 찾아냈단 말이지?";
+		next;
+		emotion e_no1,0;
+		mes "[베르바예프]";
+		mes "역시 전설은 사실이였어. 역시 내";
+		mes "말이 맞았던 거지? 후우... 정말";
+		mes "당신은 대단한 모험가임이 틀림없어.";
+		close;
+	}
+}
+
+moscovia,135,49,5	script	이바노프#mosk	964,{
+	if (!mosk_1que) {	
+		mes "[이바노프]";
+		mes "자네도 이 곳을 찾아온 타지의";
+		mes "모험가인 모양이군. 나 또한 왕년엔 잘 나가던 모험가였지.";
+		next;
+		mes "[이바노프]";
+		mes "캬... 나도 딱 20년만 젊었어도";
+		mes "자네처럼 이곳저곳을 누비며 젊음을";
+		mes "불사르고 다녔을텐데... 세월이 웬수로구먼. 껄껄껄.";
+		next;
+	}
+	if (mosk_1que == 1) {
+		mes "[" +strcharinfo(0)+ "]";
+		mes "저기 실례지만 이바노프 아저씨가 맞나요?";
+		next;
+		mes "[Mr. Ibanoff]";
+		mes "그래 내가 이바노프 이다만 무슨...";
+		mes "용건이라도 있어?";
+		next;
+	}
+	if (mosk_1que == 2) {
+		mes "[이바노프]";
+		mes "과거엔 나도 전설의 모험자를";
+		mes "꿈꾸던 그런 시절이 있었지... 허허.";
+		next;
+	}
+	if (mosk_1que == 1 || mosk_1que == 2) {
+		switch (select("과거의 모험담을 들려주세요.:배를 빌려주세요.")) {
+			case 1:
+				mes "[이바노프]";
+				mes "행색을 보니 젊은이도 이국에서 온";
+				mes "모험가인 모양이구먼... 허허허...";
+				mes "잘 왔소이다.";
+				next;
+				mes "[이바노프]";
+				mes "마침 내가 한참 룬 미드가츠의";
+				mes "이곳저곳을 누비며 여행하던 때가";
+				mes "딱 자네와 비슷한 또래였을 게요.";
+				mes "아... 그립구먼... 그 시절이...";
+				next;
+				mes "[이바노프]";
+				mes "지금은 몸도 마음도 너무도 지쳐";
+				mes "이렇게 고향의 바닷가를 보며 그때의";
+				mes "추억을 떠올리고는 한다네...";
+				next;
+				mes "[이바노프]";
+				mes "음... 어디서부터 말해야 할까나...";
+				mes "우선 거대포링떼들과 싸워 이겼던 이야기부터 시작해야 겠군...";
+				next;
+				mes "[" +strcharinfo(0)+ "]";
+				mes "하하하...";
+				next;
+				mes "[이바노프]";
+				mes "자네도 역시 이런 모험담을 들으니";
+				mes "기분이 좋은가 보구먼 허허허...";
+				mes "때는 내 나이 24살이 되던 해...";
+				mes "나와 동료들은 페이욘 근처의 숲속을 지나고 있었네.";
+				next;
+				mes "...";
+				next;
+				mes "....";
+				next;
+				mes ".....";
+				next;
+				mes "......";
+				next;
+				mes ".......";
+				next;
+				mes "[이바노프]";
+				mes "이리하여 목숨을 건 나의 활약으로";
+				mes "동료들과 난 무사히 돌아올 수 있었다네. 어떤가?";
+				next;
+				mes "[이바노프]";
+				mes "다음은 고블린 소굴에서의 이야기를";
+				mes "들려주겠네. 어떤가?";
+				next;
+				switch(select("뒷 이야기는 다음번에 듣기로...:재미있네요. 계속 해주세요.")){
+					case 1:
+						mes "[이바노프]";
+						mes "그런가... 후우 한참 물이 올랐는데";
+						mes "아쉽구먼... 허허...";
+						mes "그럼 다음에 또 이야기하기로 하게나.";
+						close;
+					case 2:
+						mes "[이바노프]";
+						mes "역시 그런겐가? 허허... 이 친구";
+						mes "나랑 뭔가 통하는 젊은이로군...";
+						next;
+						mes "[이바노프]";
+						mes "그렇다면 이번엔 고블린 소굴떼";
+						mes "에서 벌어졌던 대혈투에 대한 이야기를 해주겠네.";
+						next;
+						mes "[이바노프]";
+						mes "...";
+						next;
+						mes "....";
+						next;
+						mes ".....";
+						next;
+						mes "[이바노프]";
+						mes "이렇게해서 치열했던 그 날의 전투는";
+						mes "막을 내리게 되었다네... 후우...";
+						next;
+						mes "[이바노프]";
+						mes "하아... 이렇게 내 이야기를";
+						mes "기분좋게 들어준 젊은이는 참";
+						mes "오랫만일세. 기분이 아주 좋구먼...";
+						next;
+						mes "[이바노프]";
+						mes "자네는 분명 훌륭한 모험가의";
+						mes "기질을 타고난게 분명하다네.";
+						mes "자네와는 좋은 친구가 될 수 있겠구먼...";
+						next;
+						mes "[이바노프]";
+						mes "다음에는 자네의 모험이야기도";
+						mes "해주게나... 혹시 내게 부탁";
+						mes "할 일이 있으면 언제든지 말해주게... 허허";
+						set mosk_1que,2;
+						close;
+				}
+			case 2:
+				if (gettime(3) < 7 || gettime(3) > 20) {
+				mes "[이바노프]";
+				mes "I look, you at all have moved! ";
+				mes "I do not leave in the sea ";
+				mes "at such recent o'clock. ";
+				mes "It is very dangerous! ";
+				mes "Come in the afternoon, then ";
+				mes "also we shall talk. ";
+				close;
+				}
+				if (mosk_1que == 1) {
+					mes "[이바노프]";
+					mes "잠시만 기달리게나.";
+					mes "흠.. 배를 빌려달라?..";
+					mes "배를 빌려달라는 그 말이지....";
+					mes "자네의 마음은 알겠지만 안되겠네..";
+					next;
+					mes "다음에 다시 찾아오게";
+					mes "마음의 준비가 되거든 다시 나를 찾아오게나!";
+					close;
+				} else {
+					mes "[이바노프]";
+					mes "젊은이는 배를 빌려주면 무얼 할";
+					mes "작정이오? 그게 일단 궁금하구먼...";
+					next;
+					mes "[" +strcharinfo(0)+ "]";
+					mes "이 섬의 인근에 전설로 내려오는";
+					mes "움직이는 정체불명의 섬을 찾아내";
+					mes "모험해보기 위해서 입니다.";
+					next;
+					mes "[이바노프]";
+					mes "그 이동섬 말인가... 나도 이제껏";
+					mes "한번도 그 섬을 실제로 본 일은";
+					mes "없네만... 청춘일세 청춘이야. 껄껄껄.";
+					next;
+					mes "[이바노프]";
+					mes "꼭 섬을 찾아내 모두에게 깜짝놀랄";
+					mes "만한 소식을 전해주길 바라겠소이다.";
+					next;
+					mes "[이바노프]";
+					mes "그렇다면 나도 배의 상태를 봐야겠";
+					mes "구먼... 젊은이가 도와줘야 할 것이";
+					mes "있다네.";
+					next;
+					mes "[이바노프]";
+					mes "오랫동안 띄우지 않던 배인지라 동력";
+					mes "부분의 정비가 필요하오. 이 곳에서";
+					mes "재료를 준비하기엔 시일이 필요하니";
+					mes "가능하면 젊은이가 준비를 해줬으면 좋겠구려.";
+					next;
+					mes "[이바노프]";
+					mes "재료는 다음과 같네.";
+					mes "^0000FF기묘한 철조각 10개, 나사 10개, 튜브 5개, 쥬빌레 10개^000000를 준비해주면 되네.";
+					next;
+					mes "[이바노프]";
+					mes "재료가 모두 준비된다면 내게 가지고";
+					mes "와주게나. 그동안 나는 배를 정비하고";
+					mes "있도록 하겠네.";
+					set mosk_1que,3;
+					close;
+				}
+		}
+	}
+	if (mosk_1que == 3) {
+		mes "[이바노프]";
+		mes "그래 재료는 모두 구해온건가?";
+		mes "재료만 있으면 출항준비는 모두";
+		mes "끝이라네...";
+		next;
+		if (countitem(7317) < 10 || countitem(7167) < 10 || countitem(7312) < 10 || countitem(7325) < 5) {
+			mes "[이바노프]";
+			mes "재료가 모자라는군...";
+			mes "혹시 재료를 까먹은 것은 아닌가?";
+			next;
+			mes "[이바노프]";
+			mes "재료는 다음과 같네.";
+			mes "^0000FF기묘한 철조각 10개, 나사 10개, 튜브 5개, 쥬빌레 10개^000000를 준비해주면 되네.";
+			close;
+		}
+		mes "[이바노프]";
+		mes "오... 재료를 모두 다 구해왔군.";
+		mes "이거면 모두 됐네.";
+		delitem 7317,10;	// 나사 10개
+		delitem 7167,10;	// 기묘한 철조각 10개
+		delitem 7312,10;	// 쥬빌레 10개
+		delitem 7325,5;		// 튜브 5게
+		set mosk_1que,4;
+		next;
+		mes "[이바노프]";
+		mes "자 이제 준비는 이제 끝났네...";
+		mes "언제 출항할 셈인가?";
+		mes "한가지 말해두자면 해가 떨어진";
+		mes "다음에는 배를 띄우기가 어렵다네.";
+		next;
+		if (gettime(3) < 7 || gettime(3) > 20) {
+			mes "[이바노프]";
+			mes "But it's too late ";
+			mes "for travel.";
+			mes "Come in the afternoon, then";
+			mes "also we shall talk. ";
+		}
+		else {
+			mes "[이바노프]";
+			mes "Come, when will be ready ";
+			mes "to poison in a way. ";
+		}
+		close;
+	}
+	if (mosk_1que == 4 || mosk_1que == 5) {
+		if (gettime(3) < 7 || gettime(3) > 20) {
+			mes "[이바노프]";
+			mes "...";
+			mes "... ...";
+			next;
+			mes "뭐라 그러시는거 같은데";
+			mes "뭐라 그러는지 잘 몰르겠다.";
+			close;
+		}
+		mes "[이바노프]";
+		mes "지난 항해는 참 고역이였지...";
+		mes "하지만 뭐 모험이란게 다 그런";
+		mes "거 아니겠나... 허허허...";
+		next;
+		mes "[이바노프]";
+		mes "아직 계속 배를 띄울 생각이 남아";
+		mes "있다면 해가 떠 있는 시간에 다시";
+		mes "내게 말을 해주게나.";
+		next;
+		switch (select("준비 되었습니다.!","아직 준비가 되지 않았습니다")) {
+		case 1:
+			mes "[이바노프]";
+			mes "음... 시간상으로는 나쁘지 않군...";
+			mes "해가 떨어지기 전에 서둘러 가야겠네.";
+			mes "배는 이미 선착장에 준비를 해뒀으니";
+			mes "바로 출발하도록 하지.";
+			close2;
+			if (getmapusers("mosk_ship") == 0) {
+				set $@ship_direction_count,0;
+				set $@control_trigger,0;
+				set $@wrong_direction,0;
+				set $@ship_mobs,0;
+				killmonsterall "mosk_ship";
+			}
+			warp "mosk_ship",95,110;
+			end;
+		case 2:
+			mes "[이바노프]";
+			mes "준비가 되거든";
+			mes "다시 오게나~";
+			close;
+		}
+	}
+	if (mosk_1que == 10) {
+		mes "[이바노프]";
+		mes "Hey guy..You are alive.huuh...";
+	  	mes "When you was swept away by the";
+	  	mes "waves,";
+	  	mes "I thought that we won't meet";
+		mes "forever";
+	  	next;
+	  	mes "[이바노프]";
+	  	mes "That? You speak, that were ";
+	  	mes "on a back of the Moving Island also have met ";
+	  	mes "you there? ";
+	  	next;
+		mes "[이바노프]";
+		mes "Dear Czar like so much";
+		mes "marvelous and valuable things or";
+		mes "stories...If he listen to";
+		mes "your story,will give a high";
+		mes "prize...";
+		set mosk_1que,11;
+		close;	
+	}
+	if (mosk_1que > 10 && mosk_1que < 13) {
+		mes "[이바노프]";
+		mes "...";
+		mes "... ...";
+		next;
+		mes "뭐라 그러시는거 같은데";
+		mes "뭐라 그러는지 잘 몰르겠다.";
+		close;
+	}
+	if (mosk_1que == 13) {
+		mes "[이바노프]";
+		mes "지난 항해는 참 고역이였지...";
+		mes "하지만 뭐 모험이란게 다 그런";
+		mes "거 아니겠나... 허허허...";
+		next;
+		mes "[이바노프]";
+		mes "아직 계속 배를 띄울 생각이 남아";
+		mes "있다면 해가 떠 있는 시간에 다시";
+		mes "내게 말을 해주게나.";
+		next;
+		switch (select("준비 되었습니다.!","아직 준비가 되지 않았습니다")) {
+			case 1:
+				if (gettime(3) < 7 || gettime(3) > 20) {
+					mes "[이바노프]";
+					mes "음... 시간상으로는 나쁘지 않군...";
+					mes "해가 떨어지기 전에 서둘러 가야겠네.";
+					mes "배는 이미 선착장에 준비를 해뒀으니";
+					mes "바로 출발하도록 하지.";
+					close2;
+					if (getmapusers("mosk_ship") == 0) {
+						set $@ship_direction_count,0;
+						set $@control_trigger,0;
+						set $@wrong_direction,0;
+						set $@ship_mobs,0;
+						killmonsterall "mosk_ship";
+					}
+					warp "mosk_ship",95,110;
+							end;
+				}
+		case 2:
+			mes "[이바노프]";
+			mes "준비가 되거든";
+			mes "다시 오게나~";
+			close;
+		}
+	}
+	if (mosk_1que > 15 && mosk_1que < 19) {
+		mes "[이바노프]";
+		mes "음... 차르께서 고래섬의 증거를 ";
+		mes "요구하셨단 말인가?...";
+		next;
+		mes "[이바노프]";
+		mes "꽤나 어려운 이야기군...";
+		mes "고래섬을 다시 찾는 것이 가능하다는 보장이 없는 일일테니 말이야...";
+		next;
+		mes "[이바노프]";
+		mes "하지만 자네가 이대로 포기하지는";
+		mes "않을 것이라 생각하네. 어떤가?";
+		mes "자네가 한번 더 출항하겠다고 하면 난 기꺼이 돕겠네.";
+		next;
+		switch (select("다시 한번 고래섬을 찾아 떠난다.:이제 포기한다")) {
+			case 1:
+				if (gettime(3) < 7 || gettime(3) > 20) {
+					mes "[이바노프]";
+					mes "과연... 자네가 그렇게 나올줄 알았네.";
+					mes "그래야 내가 인정한 모험자라 할 수 있지.";
+					next;
+					mes "[이바노프]";
+					mes "이번에도 준비를 모두 끝내고 해가 떠 있는 시간에 출발하도록 하지.";
+					close;
+				}
+				mes "[이바노프]";
+				mes "오... 출항 준비는 모두 끝났는가?";
+				mes "그럼 잠시 기다려보게...";
+				next;
+				mes "[이바노프]";
+				mes "음... 시간상으로는 나쁘지 않군...";
+				mes "해가 떨어지기 전에 서둘러 가야겠네.";
+				mes "배는 이미 선착장에 준비를 해뒀으니";
+				mes "바로 출발하도록 하지.";
+				close2;
+				warp "mosk_fild01",93,95;
+				end;
+			case 2:
+				mes "[이바노프]";
+				mes "그런가... 아무리 모험이 좋아도";
+				mes "다시 찾을 수 있을지 없을지 모를";
+				mes "고래섬을 찾아 나서는 것은 무리일 수도 있지.";
+				next;
+				mes "[이바노프]";
+				mes "하지만 언제든 생각이 바뀌면 다시";
+				mes "말해주게나. 솔직히 난 자네가 다시 고래섬을 찾아 차르께 증거를 보여주는 광경이 보고싶다네.";
+				close;
+		}
+	}
+	if (mosk_1que == 19) {
+		mes "[이바노프]";
+		mes "이런 좋은 연주는";
+		mes "궁에 계신 차르께도 들려드리면";
+		mes "정말 기뻐하실거라네.";
+		next;
+		mes "[이바노프]";
+		mes "분명 자네에게 큰 상을 내리시겠지. 암...";
+		close;
+	}
+	if (mosk_1que == 20) {
+		mes "[이바노프]";
+		mes "황궁에서 그 고래섬 악기로 대단한";
+		mes "연주를 했다고 들었네. 껄껄...";
+		mes "그런 재주도 있었단 말인가?";
+		next;
+		mes "[이바노프]";
+		mes "결국 모든 것이 잘 끝났군.";
+		mes "이로써 나의... 아니지. 우리의";
+		mes "모험담에 1페이지가 추가된 셈일세.";
+		next;
+		mes "[이바노프]";
+		mes "또 이런 멋진 모험을 자네와 함꼐";
+		mes "할 수 있는 기회가 있다면 좋겠군 그래. 껄껄껄.";
+		close;
+	}
+}
+
+moscovia,135,49,0	script	GUSLI연주#hidden_gusli	-1,3,3,{
+	end;
+OnTouch:
+	if (mosk_1que == 20 && isequipped(2707)) {
+		mes "부둣가에서 바다를 바라보니";
+		mes "불현듯 고래섬에서의 추억이";
+		mes "떠오른다.";
+		next;
+		mes "[" +strcharinfo(0)+ "]";
+		mes "고래섬에 한번 들려볼까?";
+		next;
+		switch (select("고래섬으로 출발한다:그만둔다")) {
+		case 1:
+			mes "[" +strcharinfo(0)+ "]";
+			mes "앗차... GUSLI를 장비하는 것을";
+			mes "깜빡 잊었다.";
+			next;
+			mes "[" +strcharinfo(0)+ "]";
+			mes "할아버지가 고래섬에 다시 오고";
+			mes "싶을 때에는 이곳에서 그 GUSLI를";
+			mes "연주하라고 하셨지?";
+			close2;
+			warp "mosk_fild01",0,0;
+			end;
+		case 2:
+			mes "[" +strcharinfo(0)+ "]";
+			mes "나중에 들려도 늦지않아.";
+			mes "지금은 다른 볼일을 보자.";
+			close;
+		}
+		if (mosk_1que == 19) {
+			mes "[이바노프]";
+			mes "반갑네!";
+			mes "무슨 볼일 이라도 있는 건가?";
+			close;	
+		}
+	}
+}
+
+mosk_ship,98,110,3	script	이바노프#ship	964,{
+	if (mosk_1que == 4 || mosk_1que == 13) {
+		mes "[이바노프]";
+		mes "여기서 내가 바다를 바라보며";
+		mes "자네에게 지시를 내리도록 하겠네.";
+		mes "자네는 내 지시에 따라 키의 방향을 조절해주게.";
+		set mosk_1que,mosk_1que+1;
+		close;
+	}
+	if($@ship_mobs > 0) {
+		mes "[이바노프]";
+		mes "지금은 일단 몬스터들을 처치하는";
+		mes "것이 우선일세...";
+		close;
+	}
+	if ($@wrong_direction == 1) {
+		mes "[이바노프]";
+		mes "내가 나의 지시에 따라서";
+		mes "하라고 하지 않았는가? ";
+		mes "방향을 다시 잡아주게나!!!!";
+		set $@wrong_direction,0;
+		close;
+	}
+	if ($@ship_direction_count == 4 && ship_killed_mobs > 0) {
+		mes "[이바노프]";
+		mes "저기보게... 저기 고래섬이 보이네.";
+		mes "이번에도 어떻게든 찾아낸 것 같군.";
+		next;
+		mes "[이바노프]";
+		mes "세...세상에... 정말로 저게 진짜";
+		mes "고래란 말인가... 믿을 수가 없군.";
+		mes "그 말 그대로야...";
+		next;
+		mes "[이바노프]";
+		mes "자네와 함께있으면 불가능한 일도";
+		mes "뭔든지 가능하게 되는 느낌이네. 껄껄.";
+		mes "자네는 행운을 부르는 친구로군.";
+		next;
+		mes "[이바노프]";
+		mes "자 이제 자네는 어서 섬으로 상륙";
+		mes "하도록 하게. 나는 일단 돌아가도록";
+		mes "하지... 저번처럼 또 부딪히기라도 하면 이번엔 정말 배가 부서져 버릴 것 같으니...";
+		next;
+		mes "[이바노프]";
+		mes "자 그럼 행운을 비네. 무사히 다시";
+		mes "돌아오도록 내 열심히 기도함세.";
+		mes "그럼 나중에 무사히 다시 보도록 하지.";
+		if (mosk_1que == 14) {
+			close2;
+			warp "mosk_fild01",93,95;
+			if (getmapusers("mosk_ship") == 0) {
+				set $@ship_direction_count,0;
+				set $@control_trigger,0;
+				set $@wrong_direction,0;
+				set $@ship_mobs,0;
+			}
+			set mosk_1que,15;
+			end;
+		}
+		next;
+		mes "[이바노프]";
+		mes "허어... 저것은 대체... 무엇이란";
+		mes "말인가... 자...자네, 갑판 근처로";
+		mes "가서 자세히 좀 봐주게. 어서...";
+		set ship_wave,1;
+		close;	
+	}
+	else if ($@ship_direction_count == 4) {
+		mes "... ...";
+		close;
+	}
+	if ((mosk_1que == 5 || mosk_1que == 14) && $@control_trigger == 1 && ship_direction == 0) {
+		mes "[이바노프]";
+		mes "아직 키 조정은 하지 말게.";
+		mes "조정은 내 지시가 있을때만 해주면 된다네.";
+		close;
+	}
+	if ((mosk_1que == 5 || mosk_1que == 14) && ship_direction == 0 && $@control_trigger != 1) {
+		if (rand(1,10) == 5) {
+			set ship_direction,rand(1,4);
+			set $@control_trigger,1;
+			mes "[Mr. Ibanoff]";
+			if (ship_direction == 1) set @ship_directions$,"동쪽";
+			if (ship_direction == 2) set @ship_directions$,"서쪽";
+			if (ship_direction == 3) set @ship_directions$,"남쪽";
+			if (ship_direction == 4) set @ship_directions$,"북쪽";
+			mes "음... 해류의 흐름이 바뀌었군...";
+			mes "헤류를 따라";
+			mes ""+@ship_directions$+" 쪽으로";
+			mes "변경해주게나.";
+			close;
+		}
+		else {
+			mes "[이바노프]";
+			mes "아직이야... 아직 해류의 흐름이";
+			mes "바뀌지 않았어... 눈에 보이는 것도";
+			mes "아직 별다른 것이 없군...";
+			next;
+			mes "아직 아무 반응이 없는것으로 보이니깐";
+			mes "이대로 쭈욱~ 가지. ";
+			if (rand(1,5) == 5) {
+				donpcevent "ShipCreatures_Spawn::OnInvation"+rand(1,2)+"";
+				next;
+				mes "[이바노프]";
+				mes "잠깐... 전방에 뭔가가 나타났네.";
+				mes "몬...몬스터인가...";
+				next;
+				mes "[이바노프]";
+				mes "이번 녀석들은 지금까지 녀석들과는";
+				mes "느낌이 다르다네. 조심하게나...";
+				mes "일단은 몬스터들을 처리해야겠네.";
+			}
+			close;
+		}
+	}
+	else if (mosk_1que == 5 || mosk_1que == 14) {
+		mes "[이바노프]";
+		mes "음... 해류의 흐름이 바뀌었군...";
+		mes "헤류를 따라";
+		mes ""+@ship_directions$+" 쪽으로";
+		mes "변경해주게나.";
+		close;
+	}
+OnInit:
+	set $@ship_direction_count,0;
+	set $@control_trigger,0;
+	set $@wrong_direction,0;
+	set $@ship_mobs,0;
+	end;
+}
+
+mosk_ship,101,110,0	script	키#ship	111,{
+	if($@ship_mobs > 0) {
+		mes "[이바노프]";
+		mes "몬스터들을 다시한번";
+		mes "물리쳐 주게나";
+		close;
+	}
+	if($@ship_direction_count == 4) {
+		mes "[이바노프]";
+		mes "저기좀봐! 고래섬인거 같다. ";
+		close;
+	}
+	if (ship_direction != 0) {
+		mes "진로를 어느방향으로 할까?";
+		next;
+		switch (select("동쪽:서쪽:남쪽:북쪽")) {
+			case 1:
+				mes "[이바노프]";
+				mes "음... 좋네... 일단 이대로 동쪽으로";
+				mes "나아가겠네. 다시 내 지시가 있을 때";
+				mes "키의 조정을 부탁하겠네.";
+				if (ship_direction == 1) {
+					set $@ship_direction_count,$@ship_direction_count+1;
+				}
+				else {
+					set $@wrong_direction,1;
+					set $@ship_direction_count,0;
+				}
+				set ship_direction,0;
+				set $@control_trigger,0;
+				break;
+			case 2:
+				mes "[이바노프]";
+				mes "음... 좋네... 일단 이대로 서쪽으로";
+				mes "나아가겠네. 다시 내 지시가 있을 때";
+				mes "키의 조정을 부탁하겠네.";
+				if (ship_direction == 2) {
+					set $@ship_direction_count,$@ship_direction_count+1;
+				}
+				else {
+					set $@wrong_direction,1;
+					set $@ship_direction_count,0;
+				}
+				set ship_direction,0;
+				set $@control_trigger,0;
+				break;
+			case 3:
+				mes "[이바노프]";
+				mes "음... 좋네... 일단 이대로 남쪽으로";
+				mes "나아가겠네. 다시 내 지시가 있을 때";
+				mes "키의 조정을 부탁하겠네.";
+				if (ship_direction == 3) {
+					set $@ship_direction_count,$@ship_direction_count+1;
+				}
+				else {
+					set $@wrong_direction,1;
+					set $@ship_direction_count,0;
+				}
+				set ship_direction,0;
+				set $@control_trigger,0;
+				break;
+			case 4:
+				mes "[이바노프]";
+				mes "음... 좋네... 일단 이대로 북쪽으로";
+				mes "나아가겠네. 다시 내 지시가 있을 때";
+				mes "키의 조정을 부탁하겠네.";
+				if (ship_direction == 4) {
+					set $@ship_direction_count,$@ship_direction_count+1;
+				}
+				else {
+					set $@wrong_direction,1;
+					set $@ship_direction_count,0;
+				}
+				set ship_direction,0;
+				set $@control_trigger,0;
+				break;
+		}
+		if ($@ship_direction_count == 4) {
+			close2;
+			mapannounce "mosk_ship","바다 한가운대에 거대한 물고기가 배에 가까워진다.",bc_map;
+			end;	
+		}
+		else if (($@ship_direction_count == 1 || $@ship_direction_count == 3) && $@wrong_direction != 1) {
+			close2;
+			donpcevent "ShipCreatures_Spawn::OnInvation"+rand(1,2)+"";
+			end;
+		}
+		else {
+			close;
+		}
+	}
+	else {
+		mes "아마도 아바노프 아저씨와.";
+		mes "이야기를 해야 할것만 될것 같다.";
+		close;
+	}
+}
+
+-	script	ShipCreatures_Spawn	-1,{
+OnInvation1:
+	set $@ship_mobs,4;
+	areamonster "mosk_ship",85,113,92,106,"바다괴물",1044,2,"ShipCreatures_Death::OnMyMobDead";
+	areamonster "mosk_ship",85,113,92,106,"바다괴물",1045,2,"ShipCreatures_Death::OnMyMobDead";
+	end;
+OnInvation2:
+	set $@ship_mobs,3;
+	areamonster "mosk_ship",85,113,92,106,"바다괴물",1406,2,"ShipCreatures_Death::OnMyMobDead";
+	areamonster "mosk_ship",85,113,92,106,"바다괴물",1264,1,"ShipCreatures_Death::OnMyMobDead";
+	end;
+}
+
+-	script	ShipCreatures_Death	-1,{
+OnMyMobDead:
+	set $@ship_mobs,$@ship_mobs-1;
+	set ship_killed_mobs,ship_killed_mobs+1;
+	if($@ship_mobs > 0) {
+		mapannounce "mosk_ship","몬스터들이 배에 남아있습니다.: "+$@ship_mobs+".",bc_map;
+	}
+	if($@ship_mobs == 0) {
+		mapannounce "mosk_ship","몬스터들이 죽었습니다. 배에 몬스터들이 또 언제 나타날지 모릅니다..",bc_map; 
+	}
+	end;
+}
+
+-	script	ShipCreatures_AutoDie	-1,{
+OnAutoDie:
+	sleep 300000;
+	killmonsterall "mosk_ship";
+	set $@ship_mobs,0;
+	end;
+}
+
+mosk_ship,81,110,0	script	Wave#ship_wave	-1,2,2,{
+	end;
+OnTouch:
+	if (ship_wave == 1 && mosk_1que == 5) {
+		mes "[이바노프]";
+		mes "위험하네! ";
+		mes "아... 저...저것은... 대체...";
+		close2;
+		warp "mosk_fild01",89,106;
+		set mosk_1que,6;
+		if (getmapusers("mosk_ship") == 0) {
+			set $@ship_direction_count,0;
+			set $@control_trigger,0;
+			set $@wrong_direction,0;
+			set $@ship_mobs,0;
+		}
+		end;
+	}
+}
+
+mosk_fild01,89,106,0	script	Wave#fild_wave	-1,2,2,{
+	end;
+OnTouch:
+	if (mosk_1que == 6) {
+		mes "머리가 멍해지더니 금방이라도 정신을 놓아버릴거 같다.";
+		mes "앞이 희미해지면서 ...";
+		mes "무엇인가에 홀린듯... 눈이 감긴다.";
+		set mosk_1que,7;
+		close;
+	}
+}
+
+mosk_fild01,86,104,3	script	기이한 노인#whale_i	963,{
+	if (mosk_1que == 7) {
+		mes "[기이한 노인]";
+		mes "오... 이제 정신을 차린 모양이군.";
+		mes "어떤가? 몸은 좀 괜찮은가?";
+		next;
+		mes "[" +strcharinfo(0)+ "]";
+		mes "여... 여기는...";
+		mes "으... 뭐가 어떻게 된건지...";
+		next;
+		mes "[기이한 노인]";
+		mes "껄껄... 많이 놀랐구먼 젊은이...";
+		mes "이렇게 육지의 사람과 직접 대화를";
+		mes "해본게 얼마만인지 모르겠네.";
+		next;
+		mes "[" +strcharinfo(0)+ "]";
+		mes "이곳은 어디죠?";
+		mes "할아버지는 누구신가요?";
+		next;
+		mes "[기이한 노인]";
+		mes "이 곳은... 글쎄... 뭐라고 할까...";
+		mes "흔히들 사람들이 말하는 이동하는";
+		mes "섬이라네.";
+		next;
+		mes "[기이한 노인]";
+		mes "살고있는 사람은 비록 나 하나 뿐인";
+		mes "작은 섬이지만 말일세...";
+		mes "난 이 섬을 고래섬이라고 부른다네.";
+		next;
+		mes "[" +strcharinfo(0)+ "]";
+		mes "이곳이 그 소문의 움직이는 섬이군요.";
+		mes "그런데... 이 섬은... 혹시...";
+		next;
+		mes "[기이한 노인]";
+		mes "이제야 눈치챘는가? 껄껄껄...";
+		mes "그렇네. 우리가 서있는 이 곳은";
+		mes "커다란 고래의 등 위라네.";
+		mes "왜 이 섬을 고래섬이라 부르는지 알겠나?";
+		next;
+		mes "[" +strcharinfo(0)+ "]";
+		mes "어떻게 이런일이... 고래의 등위로";
+		mes "물이 흐르고, 나무가 자라다는게...";
+		mes "이게 어떻게 된 일이죠?";
+		next;
+		mes "[기이한 노인]";
+		mes "허허허... 그러니 이 섬이 전설속의";
+		mes "섬 아니겠는가... 자네는 지금 정말";
+		mes "좋은 경험을 하고 가는거라네. 껄껄...";
+		next;
+		mes "[" +strcharinfo(0)+ "]";
+		mes "혹시 할아버지는 사람이 맞나요?";
+		mes "귀...귀신은 아니시죠?";
+		next;
+		mes "[기이한 노인]";
+		mes "껄껄껄... 보는대로 난 평범한 한";
+		mes "늙은이에 지나지 않는다네.";
+		mes "그저 속세와 연을 끊고 이 곳에서";
+		mes "한가로운 여생을 즐기고 있을 따름이네";
+		next;
+		mes "[기이한 노인]";
+		mes "자 이제 자네가 정신도 차렸고하니";
+		mes "육지로 다시 보내주겠네.";
+		mes "자네가 돌아오지 않으면 걱정할 사람도 있을테지.";
+		next;
+		mes "노인이 나직하게 등에 메고 있던";
+		mes "악기를 연주하기 시작하자 서서히";
+		mes "섬이 움직이기 시작한다.";
+		next;
+		mes "[기이한 노인]";
+		mes "이제 잠시 기다리면 자네가 왓던";
+		mes "육지에 도착할 것이니 안심하게나.";
+		next;
+		mes "노인은 눈을 지긋이 감고 손에 든";
+		mes "악기를 연주하기 시작한다.";
+		mes "그리고는 더이상 어느 물음에도";
+		mes "대답하지 않고 자신만의 세계에 빠져든것 같다.";
+		set mosk_1que,8;
+		close;
+	}
+	if (mosk_1que == 8) {
+		mes "[" +strcharinfo(0)+ "]";
+		mes "할아버지, 다시 이 곳에 오고싶으면";
+		mes "어떻게 해야하지요?";
+		next;
+		mes "[기이한 노인]";
+		mes "허허... 사람이라곤 나 밖에 없는";
+		mes "이 좁고 재미없는 섬에 다시 오고";
+		mes "싶다는 생각을 해야 한다는 말인가?";
+		mes "자네 재미있는 젊은이로군...";
+		next;
+		mes "[기이한 노인]";
+		mes "자네와 내가 또 인연이 닿는다면";
+		mes "다시 이곳에서 만날 수도 있지";
+		mes "않겠는가? 허허허...";
+		next;
+		mes "[기이한 노인]";
+		mes "음... 거의 다 도착한거 같구만...";
+		mes "젊은이, 이제 곧 육지에 도착할터이니";
+		mes "조심히 돌아가게나.";
+		next;
+		set mosk_1que,9;
+		close;
+	}
+	if (mosk_1que == 9) {
+		mes "[" +strcharinfo(0)+ "]";
+		mes "하하하;;.";
+		next;
+		mes "[기이한 노인]";
+		mes "시간이 되었군... 그럼 젊은이여.";
+		mes "조심히 돌아가게나. 또다시 자네가";
+		mes "지난번과 같은 수고를 들여 나를";
+		mes "만나려 온다면 그것을 말릴 생각은 없다네. 껄껄껄.";
+		close2;
+		set mosk_1que,10;
+		warp "moscovia",0,0;
+		end;
+	}
+	if (mosk_1que == 15) {
+		mes "[기이한 노인]";
+		mes "허허허... 이렇게 젊은이와 다시";
+		mes "만나게 될 줄은 몰랐네. 어쩌다 다시 이 곳을 찾아왔는가?";
+		next;
+		select("자초지종을 설명한다.");
+		mes "[기이한 노인]";
+		mes "흠... 그런 일이 있었구먼 그래.";
+		mes "누구라도 이 섬에 직접 내려보지";
+		mes "않는다면 모두 그런 반응을 보였을걸세. 껄껄껄.";
+		next;
+		mes "[기이한 노인]";
+		mes "한가로이 남은 여생을 이 섬에서";
+		mes "여유롭게 보내고 싶었네만... 세간의 관심을 끌다니... 나도 아직 멀었구먼... 껄껄껄";
+		next;
+		mes "[기이한 노인]";
+		mes "그렇게 미안한 표정을 짓지는 말게.";
+		mes "내가 자네를 돌려보낼 때 이 섬에";
+		mes "대해서 아무에게도 말하지 말라고 한 적은 없지 않는가?";
+		next;
+		mes "[기이한 노인]";
+		mes "내가 마음만 먹는다면 영영 모두에게";
+		mes "발견되지 않는 것도 불가능한 것도 아니니 너무 미안해는 말게나.";
+		next;
+		switch (select("조금 더 생각해 본다.:뭔가 방법이 없을까요?.")) {
+			case 1:
+				mes "[기이한 노인]";
+				mes "그렇게 하게. 곰곰히 생각해보면 방법이";
+				mes "나오지 않겠는가... 껄껄껄.";
+				close;
+			case 2:
+				mes "[기이한 노인]";
+				mes "어려운 일이구먼... 차르를 이 곳에";
+				mes "모셔와 직접 보여줄 수 있는 일도 아니고...";
+				next;
+				mes "[기이한 노인]";
+				mes "이 고래섬의 증거라... 그렇다면";
+				mes "이 섬에만 존재하는 무엇인가가 필요한거군...";
+				next;
+				mes "노인은 생각에 잠긴 듯 눈을 지긋이 감고 들고있던 악기를 연주하기 시작한다.";
+				next;
+				mes "[" +strcharinfo(0)+ "]";
+				mes "할아버지. 그 악기를 제게도 만들어 주실 수는 없나요?";
+				mes "그 악기는 분명 이 곳에서만 볼 수";
+				mes "있는 신기한 물건이겠지요?";
+				next;
+				mes "[기이한 노인]";
+				mes "오... 그런 방법이 있겠군.";
+				mes "모스코비아의 본토에는 더 이상 이 악기가 남아있지 않겠지... 분명...";
+				next;
+				mes "[기이한 노인]";
+				mes "그렇다면 내 부탁을 들어준다면";
+				mes "자네에게도 이 악기를 만들어주겠네. 어떤가?";
+				next;
+				mes "[" +strcharinfo(0)+ "]";
+				mes "어떤 부탁이신가요?";
+				next;
+				mes "[기이한 노인]";
+				mes "마침 내가 쓰고 있는 이 악기도 벌써";
+				mes "만든지 50년이 넘었다네. 이미 몸통은";
+				mes "닳을대로 닳아 언제 망가진다해도 이상한 노릇이 아니지...";
+				next;
+				mes "[기이한 노인]";
+				mes "이 악기의 줄은 이 고래섬에서만";
+				mes "나오는 천년고래의 힘줄이 필요하네만";
+				mes "나머지 재료는 육지에서도 충분히 구할 수 있을거네.";
+				next;
+				mes "[기이한 노인]";
+				mes "자네가 필요한 재료를 구해오면";
+				mes "새로 자네것도 하나 만들어 놓도록 하겠네.";
+				next;
+				mes "[기이한 노인]";
+				mes "재료는 ^0000FF통나무 30개, 질긴나무덩쿨 20개, 산양의 뿔 20개, 해달의가죽 10개^000000라네.";
+				next;
+				mes "[기이한 노인]";
+				mes "재료를 들고 다시 찾아올 때에는";
+				mes "자네가 찾을 수 있게 섬을 이동 시키지 않도록 하겠네.";
+				set mosk_1que,16;
+				next;
+				mes "[기이한 노인]";
+				mes "그렇다면 준비가 되는대로 말해주게.";
+				mes "육지로 다시 보내줄터이니.";
+				close;
+		}
+	}
+	if (mosk_1que == 16) {
+		mes "[Stranged Aged]";
+		mes "You have returned... That will desire? ";
+		next;
+		switch (select("재료를 다시 물어본다.:육지로 돌아간다.:재료를 다 가지고 왔습니다.")) {
+			case 1:
+				mes "[기이한 노인]";
+				mes "자네가 구해와야 할 재료는 다음과 같네.";
+				next;
+				mes "[기이한 노인]";
+				mes "^0000FF통나무 30개, 질긴나무덩쿨 20개, 산양의 뿔 20개, 해달의가죽 10개^000000라네.";
+				close;
+			case 2:
+				mes "노인은 눈을 지긋이 감고 손에 든";
+				mes "악기를 연주하기 시작한다.";
+				mes "그리고는 더이상 어느 물음에도";
+				mes "대답하지 않고 자신만의 세계에 빠져든것 같다.";
+				close2;
+				warp "moscovia",0,0;
+				end;
+			case 3:
+				mes "[기이한 노인]";
+				mes "오... 재료는 모두 구해온 것인가?";
+				next;
+				mes "[기이한 노인]";
+				mes "좋은 재료로 잘 구해왔네.";
+				mes "이제 만들어 보도록 하겠네.";
+				next;
+				if(countitem(7201) < 30 || countitem(7197) < 20 || countitem(7106) < 20 || countitem(7065) < 10){
+					mes "[기이한 노인]";
+					mes "자네가 필요한 재료를 구해오면";
+					mes "새로 자네것도 하나 만들어 놓도록 하겠네.";
+					next;
+					mes "[기이한 노인]";
+					mes "자 보거라 재료다";
+					mes "^0000FF통나무 30개, 질긴나무덩쿨 20개, 산양의 뿔 20개, 해달의가죽 10개^000000라네.";
+					close;
+				}
+				mes "[기이한 노인]";
+				mes "오... 재료를 모두 다 구해왔군.";
+				mes "이거면 모두 됐네.";
+				next;
+				delitem 7201,30;	// 통나무 30개
+				delitem 7197,20;	// 질긴나무덩굴 20개
+				delitem 7106,20;	// 신양의 뿔 20개
+				delitem 7065,10;	// 해달의 가죽 10개
+				next;
+				mes "[기이한 노인]";
+				mes "악기가 모두 완성될 때까지 잠시 기다려주게나.";
+				next;
+				mes "[기이한 노인]";
+				mes "자 악기가 모두 완성되었다네.";
+				mes "여기 자네의 몫이네. 받게나.";
+				getitem 2707,1;		// GUSLI 흭득
+				next;
+				mes "[기이한 노인]";
+				mes "이 악기는 GUSLI라고 부른다네.";
+				mes "지금 모스코비아 땅의 먼 선조들에게";
+				mes "전해 내려오는 전통 악기이지.";
+				next;
+				mes "[기이한 노인]";
+				mes "육지에서 이 악기의 마지막 전수자인";
+				mes "내 이후로 이 악기를 배운 사람은 아무도 없었지.";
+				next;
+				mes "[기이한 노인]";
+				mes "즉... 이 악기는 나와 자네만이 가지고 있는 이 섬의 명물이라네.";
+				next;
+				mes "[기이한 노인]";
+				mes "그 악기를 보여준다면 차르도 자네의 말을 믿을 수 밖에 없지 않겠는가.";
+				mes "다 잘 풀릴걸세.";
+				next;
+				set mosk_1que,17;
+				close;
+		}
+	}
+	if (mosk_1que == 17 && isequipped(2707)) {
+		mes "[기이한 노인]";
+		mes "자 이제 자네는 어떻게 하겠는가?";
+		next;
+		switch (select("GUSLI를 배우고 싶어요:고래섬을 다시 오는 방법은 없나요?:육지로 돌아가겠습니다")) {
+			case 1:
+				set .@learn_gusli,rand(1,25);
+				if (.@learn_gusli == 25) {
+					mes "[기이한 노인]";
+					mes "이 악기를 지닌 자네는... 내 친구나";
+					mes "마찬가지라네. 허허허. 언제든";
+					mes "자네가 이 곳에 찾아오고 싶을 때에는";
+					mes "모스코비아의 부두가에서 이 GUSLI의 소리를 내어보게.";
+					next;
+					mes "[기이한 노인]";
+					mes "악기를 배우지 못한 자네가 연주는";
+					mes "무리겠지만 소리내는 것쯤이야 문제없지 않는가.";
+					next;
+					mes "[기이한 노인]";
+					mes "이 섬... 즉 이 고래는 GUSLI의 소리를 아주 멀리에서도 감지할 수 있다네.";
+					next;
+					set mosk_1que,19;
+					next;
+					mes "[기이한 노인]";
+					mes "자네가 연주한다면 나와 이 섬은 반드시 자네를 찾아가도록 하겠네. 친구로써 말일세... 껄껄껄";
+					next;
+					mes "[기이한 노인]";
+					mes "GUSLI를 배울 준비가 다 되었나?";
+					mes "GUSLI를 장비하고 오도록 하게.";
+					next;
+					mes "[기이한 노인]";
+					mes "음... 준비상태가 좋지않군.";
+					mes "악기를 배울 사람이 악기도 제대로";
+					mes "들지않고 어떻게 배울 생각인가.";
+					next;
+					mes "[기이한 노인]";
+					mes "GUSLI를 제대로 장비한 뒤에 다시 말을 걸게나.";
+						close2;
+						end;
+				}
+				else {
+					mes "[기이한 노인]";
+					mes "GUSLI를 배울 준비가 다 되었나?";
+					mes "GUSLI를 장비하고 오도록 하게.";
+					next;
+					mes "[기이한 노인]";
+					mes "음... 준비를 잘 맞췄군.";
+					mes "자 이제 내가 연주하는 것을 보고";
+					mes "천천히 따라해보도록 하게.";
+					next;
+					mes "[기이한 노인]";
+					mes "처음부터 잘 될리야 없으니";
+					mes "조급하게 생각하지 말고 천천히";
+					mes "내가 하는 것을 보고 따라하면 되는것일세.";
+					next;
+					mes "[기이한 노인]";
+					mes "자 이제 자네가 한번 연주해보게나.";
+					mes "아까 내가 연주했던 구절을 그대로";
+					mes "연주하면 되는 걸세.";
+					next;
+					mes "...";
+					next;
+					mes "... ...";
+					next;
+					mes "... ... ...";
+					next;
+					mes "... ... ... ...";
+					next;
+					mes "[기이한 노인]";
+					mes "오... 이렇게 빨리 GUSLI 연주에";
+					mes "익숙해 지다니... 자네는 역시 굉장하구먼.";
+					next;
+					mes "[기이한 노인]";
+					mes "이정도면 내가 더 자네에게 가르킬";
+					mes "것도 없겠네. 차차 스스로 연습하면서";
+					mes "실력을 키워나갈 수 있겠지...";
+					next;
+					mes "[기이한 노인]";
+					mes "이래서야... 내가 자네에게 가르쳐";
+					mes "주었다고 할 수도 없겠구먼. 껄껄껄...";
+					mes "자 이제 육지로 돌아가 차르에게";
+					mes "연주를 들려주도록 하게.";
+					next;
+					mes "[기이한 노인]";
+					mes "자네의 실력이라면 모두를 탄복시킬";
+					mes "멋진 연주를 할 수 있을거라네.";
+					close;
+				}
+			case 2:
+				mes "[기이한 노인]";
+				mes "자네는 이미 나에게 안배워도 될";
+				mes "실력에 도달했군..";
+				mes "이제 모스코비아가 그립겠군..";
+				mes "그치 않나?";
+				set mosk_1que,18;
+				next;
+				mes "[" +strcharinfo(0)+ "]";
+				mes "그야 돌아 가고 싶긴하죠";
+				mes "혹시 모스코비아로 돌아가는 방법을";
+				mes "아세요? 이바노프 아저씨는 이미";
+				mes "모스코비아로 돌아가셨는데.";
+				next;
+				mes "[기이한 노인]";
+				mes "가는방법이라..?";
+				mes "간단하지 고래섬에게 연주를 해준다면";
+				mes "이 고래섬은 움직여서 모스코비아 까지";
+				mes "안전하게 돌아갈수 있다네..";
+				mes "자네 이제 어떻게 할것인가";
+				next;
+				select("이제 돌아가고 싶습니다...");
+				mes "[기이한 노인]";
+				mes "타지의 여행자여!";
+				mes "당신의 연주는 많은 사람들에게";
+				mes "희망을 줄수 있는 그러한 곡이라네..";
+				mes "당신의 연주는 내 기억에서 못잊을걸세.";
+				next;
+				mes "그럼 다음에 만날것을 계약하며!!";
+				next;
+				close2;
+				warp "moscovia",0,0;
+				end;
+		}
+	}
+	else if (mosk_1que > 16 && mosk_1que < 20) {
+		mes "- 당신은 부두에 정박해 있는 배를 발견 했다. -";
+		next;
+		switch (select("좀 더 탐험한다.:배를 이용하여 마을로 돌아간다.")) {
+			case 1:
+				mes "- 이 미지의 지역은 당신으로 하여금 큰 호기심을 불러 일으킨 것 같다. -";
+				close;
+			case 2:
+				mes "- 당신은 배를 타고 마을을 향해 노를 젓기 시작했다. -";
+				close2;
+				if (mosk_1que == 17) set mosk_1que,18;
+				warp "moscovia",0,0;
+				end;
+		}
+	}
+	if (mosk_1que == 20) {
+		mes "[기이한 노인]";
+		mes "이곳은 고래섬이라는 곳이네.";
+		mes "자네는 어쩌다 이곳으로 흘러 들어왔는지 모르겠군.";
+		next;
+		mes "[기이한 노인]";
+		mes "자네가 원한다면 바로 육지로 돌려보내 주도록 하겠네. 어떤가?";
+		next;
+		switch (select("고래섬을 좀 더 둘러본다.:육지로 돌아간다.:미지의 땅을 탐험해 보고 싶다.")) {
+			case 1:
+				mes "[기이한 노인]";
+				mes "허허... 그렇게 하게나.";
+				mes "그렇다면 나는 좀 쉬고 있겠네.";
+				close;
+			case 2:
+				mes "[기이한 노인]";
+				mes "알겠네. 그렇다면 출발하도록 하지.";
+				next;
+				mes "노인은 눈을 지긋이 감고 손에 든";
+				mes "악기를 연주하기 시작한다.";
+				mes "그리고는 더이상 어느 물음에도";
+				mes "대답하지 않고 자신만의 세계에 빠져든것 같다.";
+				next;
+				mes "[기이한 노인]";
+				mes "이곳은 고래섬이라는 곳이네.";
+				mes "자네는 어쩌다 이곳으로 흘러 들어왔는지 모르겠군.";
+				next;
+				mes "음.! 다왔군. 잘가게나";
+				mes "다음에 한번 만날세";
+				close2;
+				warp "moscovia",0,0;
+				end;
+			case 3:
+				mes "[기이한 노인]";
+				mes "오... 그런가. 마침 내가 적당한";
+				mes "곳을 알고 있다네.";
+				next;
+				mes "[기이한 노인]";
+				mes "모스코비아 섬 근처의 섬들 중에는";
+				mes "아직 사람의 손을 타지않은 미지의";
+				mes "장소가 존재한다네.";
+				next;
+				mes "[기이한 노인]";
+				mes "그곳으로 보내주도록 하곘네. 어떤가?";
+				next;
+				switch (select("조금 더 생각해 본다.:네, 그곳으로 보내주세요.")) {
+					case 1:
+						mes "[기이한 노인]";
+						mes "허허... 그런가...";
+						mes "알겠네. 조금 더 생각해 보게나.";
+						close;
+					case 2:
+						mes "[기이한 노인]";
+						mes "알겠네. 곧 바로 그곳으로 출발";
+						mes "하도록 하곘네.";
+						next;
+						mes "노인은 눈을 지긋이 감고 손에 든";
+						mes "악기를 연주하기 시작한다.";
+						mes "그리고는 더이상 어느 물음에도";
+						mes "대답하지 않고 자신만의 세계에 빠져든것 같다.";
+						close2;
+						warp "mosk_fild02",0,0;
+						end;
+				}
+		}
+	}
+}
+
+mosk_in,128,89,3	script	총리대신 드미트리	967,{
+	if (mosk_1que < 11) {
+		mes "[총리대신 드미트리]";
+		mes "음.. 타지역 여행자분이.";
+		mes "이 황궁에는 무슨 일인가.?";
+		mes "혹시 폐하를 만나러 여기에.";
+		mes "온거라면 지금 담장 나가거라";
+		mes "태도를 고치고 다시 나를 찾아오게...";
+		close;
+	}
+	if (mosk_1que == 11) {
+		mes "[총리대신 드미트리]";
+		mes "황궁에는 무슨 일로 왔는가 여행자여.";
+		next;
+		switch (select("황궁을 구경하러 왔습니다.:차르를 알현하러 왔습니다.")) {
+			case 1:
+				mes "[총리대신 드미트리]";
+				mes "그런가... 황궁과 차르께 폐가 되지";
+				mes "않게 주의하여 관광해 주게나.";
+				next;
+				mes "[총리대신 드미트리]";
+				mes "우리 모스코비아는 자네와 같은 젊은";
+				mes "여행자들을 환영한다네.";
+				next;
+				mes "[총리대신 드미트리]";
+				mes "차르께서도 신기하고 재미있는 모험";
+				mes "이야기를 매우 좋아하시니 종종 들려주게나.";
+				close;
+			case 2:
+				mes "[총리대신 드미트리]";
+				mes "폐하를 알현하러 온 것인가?";
+				mes "그렇다면 용건을 미리 내게 말해주게나.";
+				next;
+				switch (select("안부인사:고래섬 모험 이야기.")) {
+					case 1:
+						mes "[총리대신 드미트리]";
+						mes "그런 용건이라면 내가 직접 전달하여";
+						mes "드리겠네. 차르를 직접 알현해서까지";
+						mes "수고를 할 필요는 없다네.";
+						close;
+					case 2:
+						mes "[총리대신 드미트리]";
+						mes "아니 그런 일이 있었단 말인가?";
+						mes "차르께서 들으시면 크게 기뻐하시겠군.";
+						next;
+						mes "[총리대신 드미트리]";
+						mes "자네의 알현을 허락하겠다. 차르께서";
+						mes "흡족해하실 이야기라면 아마 자네에게";
+						mes "큰 상을 내리실게야.";
+						set mosk_1que,12;
+						close;
+				}
+		}
+	}
+	if (mosk_1que > 12 && mosk_1que < 17) {
+		mes "[차르 알렉세이 3세]";
+		mes "오... 짐에게 신기한 모험 이야기를";
+		mes "들려줄 사람이 바로 자네인가...";
+		next;
+		mes "[차르 알렉세이 3세]";
+		mes "더욱이 우리 모스코비아의 국민도";
+		mes "아닌 자네가 그 전설의 이동하는";
+		mes "섬을 발견해내다니... 자세하게 들어보고 싶군...";
+		next;
+		mes "[차르 알렉세이 3세]";
+		mes "어서 속히 이야기를 시작하게.";
+		mes "그 섬의 정체가 매우 궁금하군.";
+		next;
+		select("그동안의 일들을 이야기한다.");
+		mes "...";
+		next;
+		mes "... ...";
+		next;
+		mes "... ... ...";
+		next;
+		mes "... ... ... ...";
+		next;
+		mes "[차르 알렉세이 3세]";
+		mes "확실히 흥미로운 이야기로군...";
+		mes "하지만 믿을 수가 없는 일 아닌가. 어떤가 총리대신은?";
+		next;
+		mes "[총리대신 드미트리]";
+		mes "거짓말이라고 보이진 않습니다만";
+		mes "100신용하기는 어렵군요. 고래가";
+		mes "엄청나게 크다는 것은 알고있지만";
+		mes "생명체의 등 위로 물이 흐르고 나무가 자라고 사람이 살고있다니...";
+		next;
+		mes "[차르 알렉세이 3세]";
+		mes "바로 그 말일세. 내가 지금까지";
+		mes "온갖 신비한 모험담을 들어왔지만";
+		mes "이런 황당무계한 이야기가 그것도";
+		mes "짐의 영토 근처에서 일어났다고는";
+		mes "믿을 수 없군.";
+		next;
+		mes "[총리대신 드미트리]";
+		mes "하지만 폐하... 제 기억에 확실히";
+		mes "과거에 그 노인이 연주했다고 했던";
+		mes "형태의 신비한 악기에 대한 이야기는 저도 들어본 적이 있습니다.";
+		next;
+		mes "[차르 알렉세이 3세]";
+		mes "정말인가? 한번 소상히 말해보도록 하게.";
+		next;
+		mes "[총리대신 드미트리]";
+		mes "확실히 과거 이 땅에 살던 선조들";
+		mes "에 대한 문헌 중에 이 젊은이가 말한";
+		mes "것과 일치하는 악기에 대한 이야기를 본 기억이 있습니다.";
+		next;
+		mes "[차르 알렉세이 3세]";
+		mes "흠... 여러가지 의문점이 많군.";
+		mes "원래대로라면 자네에게 큰 상을";
+		mes "내려야 마땅하지만 이렇게 논란거리가 된다면 곤란하지 않곘는가.";
+		next;
+		mes "[차르 알렉세이 3세]";
+		mes "짐에게 그 고래섬의 존재를 믿게 할";
+		mes "만한 증거를 가져오도록 하게.";
+		mes "만약 가져온다면 자네에게 큰 상을 내리도록 하지.";
+		next;
+		mes "[차르 알렉세이 3세]";
+		mes "허나 구해오지 못할 경우에는 짐을";
+		mes "능멸한 죄를 물어 벌을 내리도록 하겠다.";
+		mes "그 노인이 가지고 있던 악기라도 가져오도록 하게.";
+		next;
+		mes "[총리대신 드미트리]";
+		mes "폐...폐하. 이 젊은이는 우리의";
+		mes "백성이 아닙니다. 불경한 뜻을";
+		mes "가지고 폐하에게 고한 것은 아닐터...";
+		mes "조금 더 너그러운 처우를 바랍니다.";
+		next;
+		mes "[차르 알렉세이 3세]";
+		mes "아닐세... 만약 이 젊은이의 말이";
+		mes "사실이 아닐경우, 이 땅을 밟는 수많은";
+		mes "타국의 여행자들이 짐을 이런식으로";
+		mes "능멸하려 든다면... 그 때에는 어떻게 하겠는가?";
+		next;
+		mes "[총리대신 드미트리]";
+		mes "......";
+		next;
+		mes "[차르 알렉세이 3세]";
+		mes "알겠는가?... 자네의 책임은 실로";
+		mes "막중하다네. 꼭 그 고래섬의 증거를";
+		mes "가져와 짐을 안심시켜 주게나. 이제 그만 물러나보게.";
+		close;
+	}
+	if (mosk_1que > 17 && mosk_1que < 20  && isequipped(2707)) {
+		mes "[총리대신 드미트리]";
+		mes "차르께서는 이제 휴식이 필요하네.";
+		mes "자네는 주어진 고래섬 탐사의 의무를 다하도록 하게.";
+		close;
+	}
+	else if (mosk_1que > 17 && mosk_1que < 20) {
+		mes "[차르 알렉세이 3세]";
+		mes "이제 피곤하네... 짐은 이제 휴식을";
+		mes "취해야 겠으니 그만 물러나게나.";
+		mes "자네는 고래섬 탐사의 증거를 찾는 일을 생각하게.";
+		close;
+	}
+	if (mosk_1que > 19) {
+		mes "[총리대신 드미트리]";
+		mes "자네의 그 GUSLI 연주는 정말 잊지못할 감동이였다네. 언제고 또 이곳에서 그 연주를 들려주었으면 좋겠군.";
+		close;
+	}
+}
+
+mosk_in,130,92,3	script	차르 알렉세이 3세	965,{
+	if (mosk_1que < 11) {
+		mes "[차르 알렉세이 3세]";
+		mes "모스코비아에 온것을 진심으로";
+  		mes "환영하네. 나는 이 왕국의 ";
+  		mes "황제라네..";
+	}
+	if (mosk_1que == 11) {
+		mes "[차르 알렉세이 3세]";
+		mes "타지의 여행자여... 짐에게 하고";
+		mes "싶은 이야기라도 있는가?";
+		next;
+		mes "[차르 알렉세이 3세]";
+		mes "중요한 일이 아니라면 총리대신에게";
+		mes "먼저 알현신청부터 하게.";
+		close;
+	}
+	if (mosk_1que < 11) {
+		close;
+	}
+	if (mosk_1que == 12) {
+		mes "[차르 알렉세이 3세]";
+		mes "알현신청을 한사람이 당신인가?";
+		mes "총리대신 드미트리에게 들었다";
+		mes "고래섬에 대해서 이야기를 해준다고 했나?";
+		mes "단순히 신비의 섬으로 알고있는데.?";
+  		next;
+  		mes "[차르 알렉세이 3세]";
+  		mes "그럼, 어디 한번 말을 해보거라";
+		mes "한번 속는샘 치고 너의 이야기를 들어주마";
+		next;
+		mes "당신은 자신이 고래섬에서의 신기한 일들과 GUSLI에 대해서";
+		mes "차르 알렉세이에게 모든것을 이야기 하는 중이다.";
+		mes "그러나 차르 알렉세이의 눈은 의심이 가득찬 눈초리 이다.";
+		next;
+		mes "[차르 알렉세이 3세]";
+		mes "나.. 차르 알렉세이 3세를 물로 보는건가?";
+		mes "감히 어디에서 이 황제인 나에게 거짓말을";
+		mes "시도 하는건가?";
+		next;
+		mes "[차르 알렉세이 3세]";
+		mes "총리대신! ";
+  		mes "이 자의 말이 다 거짓말인거 같으니";
+		mes "끌고 가게나!";
+		next;
+		mes "[" +strcharinfo(0)+ "]";
+		mes "잠시만요! 거짓말 이라뇨?.";
+		mes "저의 이야기는 전부다 진실입니다.";
+		mes "믿어 주십시요.";
+		next;
+		mes "[차르 알렉세이 3세]";
+		mes "내가 믿으면 당장이라도";
+		mes "이 섬에서 빠져 나갈려고 했겠지";
+		mes "여봐라 드미트리 이 자를 처형하거라 드미트리!";
+		set mosk_1que,13;
+		next;
+		mes "[총리대신 드미트리]";
+		mes "황제님. 저희 왕국은 처형이 불가능 합니다.";
+		mes "그러지 말고 진심으로 이 자를 한번만 믿어보는게 어떻습니까?. ";
+		mes "제 지금 기억에는 실제 고래섬에서 어떠한 노인이";
+		mes "GUSLI란 악리를 가지고 연주를 하면 고래섬이 움직였다는 ";
+		mes "말을 얼핏 마을 주민들한테서 들은거 같습니다.";
+  		next;
+  		mes "[차르 알렉세이 3세]";
+  		mes "흠.. 그래? 그러면 딱 한번 믿어주겠네. ";
+		mes "" +strcharinfo(0)+ " 시간은 오늘 하루 주겠네";
+		mes "만약 당신이 GUSLI라는 악기로 연주를 해서";
+		mes "나를 감동시키면 너에게 큰 포상을 내리도록하겠네..";
+		next;
+		mes "만약 도망을 간다면 나의 용병들이 너를 잡아서";
+		mes "아주 큰 처벌을 내리도록 하겠네..";
+		mes "시간이 없으니 지금 빨리 가보게나..";
+		next;
+		mes "[총리대신 드미트리]";
+		mes "차르께서는 이제 휴식이 필요하네.";
+		mes "자네는 주어진 고래섬 탐사의 의무를 다하도록 하게.";
+		close;
+	}
+	if (mosk_1que > 12 && mosk_1que < 17) {
+		mes "[차르 알렉세이 3세]";
+		mes "이제 피곤하네... 짐은 이제 휴식을";
+		mes "취해야 겠으니 그만 물러나게나.";
+		mes "자네는 고래섬 탐사의 증거를 찾는 일을 생각하게.";
+		close;
+	}
+	if (mosk_1que > 17 && mosk_1que < 20  && isequipped(2707)) {
+		mes "[차르 알렉세이 3세]";
+		mes "오 드디어 돌아왔군... 그래 짐을";
+		mes "만족시킬 만한 물건을 고래섬에서";
+		mes "찾아서 왔는가?";
+		next;
+		mes "[" +strcharinfo(0)+ "]";
+		mes "그렇습니다. 고래섬에서 이 악기의";
+		mes "연주법을 배워왔습니다.";
+		next;
+		switch (select("연주시작 준비를 한다.:돈을 내세요")) {
+			case 1:
+				if (mosk_1que == 19) {
+					mes "[차르 알렉세이 3세]";
+					mes "오오... 바로 이것이 그 GUSLI란 악기인가...";
+					mes "이보게 총리대신. 이 악기가 그 자료에 남아있던 악기가 맞는가?";
+					next;
+					mes "[총리대신 드미트리]";
+					mes "확실한 것은 모르겠으나 이런 악기는";
+					mes "현재 우리 대륙에 있는 악기는 아니옵니다. 폐하.";
+					next;
+					mes "[차르 알렉세이 3세]";
+					mes "오오... 그렇단 말인가.";
+					mes "어서 연주를 해보도록 하게. 참으로 그 소리가 궁금하군.";
+					next;
+					mes "연주를 시작하자 황궁의 모든";
+					mes "사람들이 눈을 감고 GUSLI의";
+					mes "음색에 빠져들기 시작한다."; // mos_gusli2.wav 라는 BGM이 재생
+					next;
+					mes "[차르 알렉세이 3세]";
+					mes "오오.. 정말 눈물없이는 들을 수";
+					mes "없는 애절한 곡조로다.";
+					next;
+					mes "[총리대신 드미트리]";
+					mes "그렇습니다. 황제폐하.";
+					mes "이렇게나 아름다운 곡조는 처음";
+					mes "들어보는 것 같습니다. 크흑.";
+					next;
+					mes "[차르 알렉세이 3세]";
+					mes "크흑... 여봐라. 이 여행자에게";
+					mes "큰 상을 내리도록 하여라.";
+					next;
+					mes "[총리대신 드미트리]";
+					mes "흑흑... 상은 어떻게 하면 되겠는지요?";
+					next;
+					mes "[차르 알렉세이 3세]";
+					mes "자네에게 일임하겠네. 하지만 이런";
+					mes "훌륭한 음악과 모험이야기를 들려준";
+					mes "이에게 어울릴만한 포상을 부탁하네.";
+					next;
+					mes "[총리대신 드미트리]";
+					mes "황궁의 모든 이를 대신하여 자네에게";
+					mes "감사를 표시하네. 자네의 그동안의 노고를 치하하며 차르를 대신하여 포상을 내리도록 하지.";
+					getexp 1200000,0;	// 1,200,000 Base Exp
+					getitem 617,1;		// 오래된 보라색 상자 
+					set mosk_1que,20;
+					next;
+					mes "[차르 알렉세이 3세]";
+					mes "자네의 그 GUSLI 연주는 정말 잊지못할 감동이였다네. 언제고 또 이곳에서 그 연주를 들려주었으면 좋겠군.";
+					close;
+					mes "[차르 알렉세이 3세]";
+					mes "오... 자네로군. 정말 반갑네.";
+					mes "자네가 종종 자주들려 그 GUSLI 연주를 들었으면 좋겠군.";
+					close;
+				}
+			case 2:
+				mes "[차르 알렉세이 3세]";
+				mes "뭐..뭐라고? 돈을?";
+				mes "자네 이럴려고 여기까지 온것인가?";
+				mes "당장 이놈을 마을로 내쫓아 버려라!";
+				next;
+				mes "[총리대신 드미트리]";
+				mes "알겠습니다. 황제폐하";
+				mes "가버리거라! 반성하고 다시 오거라";
+				next;
+				warp "moscovia",0,0;
+				close;
+		}
+	}
+}
+
+//============================================================
+// Mapflags
+//============================================================
+mosk_fild01	mapflag	nobranch
+mosk_fild01	mapflag	nomemo
+mosk_fild01	mapflag	noteleport
+mosk_fild01	mapflag	noicewall
+mosk_ship	mapflag	noloot
+mosk_ship	mapflag	nobranch
+mosk_ship	mapflag	nomemo
+mosk_ship	mapflag	noteleport
+mosk_ship	mapflag	monster_noteleport
+mosk_ship	mapflag	nosave
+mosk_ship	mapflag	noicewall
+mosk_ship	mapflag	nopenalty
+mosk_ship	mapflag	noexp
+mosk_ship	mapflag	nodrop
+//============================================================

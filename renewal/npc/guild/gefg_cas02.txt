@@ -1,0 +1,140 @@
+
+//    kk  ""tt""  "";;    """"JJ;;kkJJ  JJtt""    ""tt""  ;;tt""""tt    ""tt""   
+//   JJ  kk""tt;;JJ      ttkk    ""tt    ;;;;ttJJ;;  ""ttkk;;"";;;;ttkk;;  ;;kk  
+//  "";;  ""  kk  kk  tt  ttww    ZZ;;  ww    RR  ;;JJ  JJJJ  tt    RR  ;;JJ  JJ 
+//  JJ      """";;""  kk  ttkk  ;;kk    ZZ    ww  ;;""  kk""  ww    kk;;kk""  JJ 
+//  kk      JJ  kk    ww  ttkk  JJJJ  ;;ww  ""JJ  ;;tt""RR    ZZ  ;;ZZJJ      kk 
+//  kk  ;;  "";;JJ        JJtt  JJJJ  ""kk  JJ""  ww""""ww    ww  ""JJ  ZZ    kk 
+//  JJ  JJ  ;;JJ""  "";;  ww;;  kkJJ  JJ""  kk;;  ww  ;;ww  ""JJ  ww;;  ww  ;;tt 
+//;;""  RR    RR    ww""  kk""  ;;tt  ww    kkkk      kktt  JJ;;  ZZ;;  ;;  tt   
+//  JJkkttkkkk;;kkkk;;JJkktt""kkJJJJkkttJJkk;;  kkkkJJ  ttkkttJJkk;;ttkkJJkkJJ   
+//| I | - | L | U | N | A | A | T | H | E | N | A | P | R | O | J | E | C | T |  
+//------------------------------------------------------------------------------
+// iLAthena War of Emperium <http://www.i-luna.com>
+// 한글화 by 아이루나 iLAthena Project
+//------------------------------------------------------------------------------
+// 한글화 by 유란
+//------------------------------------------------------------------------------
+
+// 길드 깃발 (마을)
+//============================================================
+geffen,113,130,1	script	욜브리거#g2-1::Eeyolbriggar	722,{
+	end;
+
+OnRecvCastleG02:
+	FlagEmblem GetCastleData("gefg_cas02",1);
+	end;
+}
+
+// 길드 깃발 (외성)
+//============================================================
+gef_fild13,303,243,4	script	욜브리거#g2-2::Eeyolbriggar2	722,{
+	set .@GID, GetCastleData("gefg_cas02",1);
+	if (.@GID == 0) {
+		mes " [ 신성 룬 미드가츠 왕국 포고령 ]";
+		mes " ";
+		mes "1. 신성 룬 미드가츠 왕국령에";
+		mes "　 의해 아직 이 아지트는 마스터가";
+		mes "　 정해지지 않았다";
+		mes " ";
+		mes "2. 모든 예심을 극복하고 엠펠리움을";
+		mes "　 파괴하는 자에게, 국왕은 이 성의";
+		mes "　 소유권을 부여 할 것이다";
+	}
+	else {
+		if (getcharid(2) == .@GID) {
+			mes "[ 울리는 목소리 ]";
+			mes "용감한 자들이여...";
+			mes "그대의 명예로움으로 돌아가겠는가?";
+			next;
+			if (select("아지트로 돌아간다.:그만둔다.") == 1) {
+				if (getcharid(2) == GetCastleData("gefg_cas02",1)) {
+					warp "gefg_cas02",23,66;
+					//warp "gefg_cas02",178,43;
+					end;
+				}
+			}
+			close;
+		}
+		mes " [ 신성 룬 미드가츠 왕국 포고령 ]";
+		mes " ";
+		mes "1. 이곳은 신성 룬 미드가츠 왕국령에 ";
+		mes "    따라 ^ff0000" + GetGuildName(.@GID) + "^000000 길드의";
+		mes "    사유물임을 인정한다.";
+		mes " ";
+		mes "2. ^ff0000" + GetGuildName(.@GID) + "^000000 길드의 마스터는";
+		mes "    ^ff0000" + GetGuildMaster(.@GID) + "^000000 이며 , 누구라도";
+		mes "    이사항에 이의 있는자들은 검을";
+		mes "    들어 자신의 명예를 드높이라.";
+	}
+	close;
+
+OnRecvCastleG02:
+	FlagEmblem GetCastleData("gefg_cas02",1);
+	end;
+}
+
+gef_fild13,312,243,4	duplicate(Eeyolbriggar2)	욜브리거#g2-3	722
+gef_fild13,290,243,4	duplicate(Eeyolbriggar2)	욜브리거#g2-4	722
+gef_fild13,324,243,4	duplicate(Eeyolbriggar2)	욜브리거#g2-5	722
+
+// 길드 깃발 (내성)
+//============================================================
+gefg_cas02,65,130,5	script	욜브리거#g2-6::Eeyolbriggar3	722,{
+	end;
+
+OnRecvCastleG02:
+	FlagEmblem GetCastleData("gefg_cas02",1);
+	end;
+}
+
+gefg_cas02,30,123,5	duplicate(Eeyolbriggar3)	욜브리거#g2-7	722
+gefg_cas02,65,139,6	duplicate(Eeyolbriggar3)	욜브리거#g2-8	722
+gefg_cas02,37,177,6	duplicate(Eeyolbriggar3)	욜브리거#g2-9	722
+gefg_cas02,37,168,6	duplicate(Eeyolbriggar3)	욜브리거#g2-10	722
+gefg_cas02,68,47,2	duplicate(Eeyolbriggar3)	욜브리거#g2-11	722
+gefg_cas02,68,36,2	duplicate(Eeyolbriggar3)	욜브리거#g2-12	722
+
+// AGIT Manager
+//============================================================
+gefg_cas02,176,178,0	duplicate(Gld_Agit_Manager)	Agit#gefg_cas02	-1
+
+// 집사
+//============================================================
+gefg_cas02,12,66,5	duplicate(Gld_Mngr_Template)	이스마르크#gefg_cas02	55
+
+// 가디언
+//============================================================
+gefg_cas02,12,66,5	duplicate(Gld_Guard_Template)	Guardian#gefg_cas02	-1
+
+// 카프라 직원
+//============================================================
+gefg_cas02,23,66,3	duplicate(Gld_Kafra_Template)	카프라 직원#gefg_cas02	117
+
+// 마스터방
+//============================================================
+gefg_cas02,145,115,0	script	#switch_G02	111,{
+	mes " ";
+	mes "레버가 있습니다. 당기시겠습니까?";
+	next;
+	switch(select("당긴다.:당기지 않는다.")) {
+	case 1:
+		warp "gefg_cas02",12,67;
+		break;
+	case 2:
+		break;
+	}
+	end;
+}
+
+// 길드 보물 안정장치
+//============================================================
+gefg_cas02,140,116,0	duplicate(Gld_Trea_Protect)	ban_warp#gefg_cas02	-1,6,6
+
+// 길드 보물 소환
+//============================================================
+gefg_cas02,140,116,0	duplicate(Gld_Trea_Spawn)	Treasure#gefg_cas02	-1
+
+// 길드 던젼 스위치
+//============================================================
+gefg_cas02,167,40,0	duplicate(Gld_Dun_Template)	#gefg_cas02	111

@@ -1,0 +1,208 @@
+
+//    kk  ""tt""  "";;    """"JJ;;kkJJ  JJtt""    ""tt""  ;;tt""""tt    ""tt""   
+//   JJ  kk""tt;;JJ      ttkk    ""tt    ;;;;ttJJ;;  ""ttkk;;"";;;;ttkk;;  ;;kk  
+//  "";;  ""  kk  kk  tt  ttww    ZZ;;  ww    RR  ;;JJ  JJJJ  tt    RR  ;;JJ  JJ 
+//  JJ      """";;""  kk  ttkk  ;;kk    ZZ    ww  ;;""  kk""  ww    kk;;kk""  JJ 
+//  kk      JJ  kk    ww  ttkk  JJJJ  ;;ww  ""JJ  ;;tt""RR    ZZ  ;;ZZJJ      kk 
+//  kk  ;;  "";;JJ        JJtt  JJJJ  ""kk  JJ""  ww""""ww    ww  ""JJ  ZZ    kk 
+//  JJ  JJ  ;;JJ""  "";;  ww;;  kkJJ  JJ""  kk;;  ww  ;;ww  ""JJ  ww;;  ww  ;;tt 
+//;;""  RR    RR    ww""  kk""  ;;tt  ww    kkkk      kktt  JJ;;  ZZ;;  ;;  tt   
+//  JJkkttkkkk;;kkkk;;JJkktt""kkJJJJkkttJJkk;;  kkkkJJ  ttkkttJJkk;;ttkkJJkkJJ   
+//| I | - | L | U | N | A | A | T | H | E | N | A | P | R | O | J | E | C | T |  
+//------------------------------------------------------------------------------
+// iLAthena 리히타르젠 안내요원 스크립트 <http://www.i-luna.com>
+// 한글화 by 아이루나 iLAthena Project
+//------------------------------------------------------------------------------
+// 한글화 by RUSH
+//------------------------------------------------------------------------------
+
+lighthalzen,207,310,5	script	안내요원#lhz::LhzGuide	852,{
+	cutin "ein_soldier",2;
+	mes "[리히타르젠 안내요원]";
+	mes "여기는 기업도시 리히타르젠 입니다. 여러분의 방문을 환영합니다.";
+	mes "저희들은 이 곳 리히타르젠에 오신 여행자분들의 편의를 위하여 마을을 안내해드리고 있으니, 언제든 저희들 안내요원들에게 문의해 주시기 바랍니다.";
+	mes "저희에게 안내를 처음 받으시는 분들은 '공지사항을 듣는다.' 메뉴를 선택해 주십시오.";
+	set .@loop1,1;
+	while (.@loop1) {
+		next;
+		switch(select("마을 안내를 받는다.:미니 맵에 표시들을 모두 지운다.:공지사항을 듣는다.:그만둔다.")) {
+		case 1:
+			mes "[리히타르젠 안내요원]";
+			mes "저는 리히타르젠의 ^FF0000'좌측 구역'^000000의 안내를 맡고 있습니다.";
+			mes "알고 싶으신 메뉴를 선택해 주십시오.";
+			if (.@compass_check == 0) {
+				next;
+				mes "[리히타르젠 안내요원]";
+				mes "미니 맵에 위치표시를 남겨 두시겠습니까?";
+				next;
+				if (select("네.:아니오.") == 1) set .@compass_check,1;
+			}
+			set .@loop2,1;
+			while(.@loop2) {
+				if (.@wait_button_chk == 0) set .@wait_button_chk,1;
+				else next;
+				switch(select("^FF0000레켄베르^000000:기차역:경찰서:은행:호텔:공항:상인길드:보석상점:무기점:백화점:^FF0000경매장^000000:취소")) {
+				case 1:
+					mes "[리히타르젠 안내요원]";
+					mes "마을 북서쪽에는 슈발츠발드에서 가장";
+					mes "큰기업, ''^FF0000레켄베르^000000''가 위치해";
+					mes "있습니다. ''레켄베르''는 슈발츠발드";
+					mes "전역에 비공정 서비스를 하고 있는";
+					mes "대규모 기업으로, 한번 쯤 견학해";
+					mes "보시기를 권장합니다.";
+					if (.@compass_check)
+						viewpoint 1,102,247,2,0xFF0000;
+					break;
+				case 2:
+					mes "[리히타르젠 안내요원]";
+					mes "''기차역''은 마을의 중앙에 위치하고";
+					mes "있습니다. 광산도시 아인베흐로부터";
+					mes "출발하는 기차는, 이 곳";
+					mes "리히타르젠까지도 연결되어";
+					mes "있습니다.";
+					if (.@compass_check)
+						viewpoint 1,233,164,3,0xFF00FF;
+					break;
+				case 3:
+					mes "[리히타르젠 안내요원]";
+					mes "중앙에서 조금 북쪽으로 치안을";
+					mes "담당하고 있는 ''경찰서''가 있습니다.";
+					mes "수상한 자가 있거나 어려운 일이";
+					mes "있으면 경찰서를 방문해 주시길";
+					mes "바랍니다.";
+					if (.@compass_check)
+						viewpoint 1,236,276,4,0x99FFFFF;
+					break;
+				case 4:
+					mes "[리히타르젠 안내요원]";
+					mes "중앙에서 조금 북쪽으로 경찰서";
+					mes "건너편에 ''은행'''이 자리잡고";
+					mes "있습니다. 각종 금전 관련 업무를";
+					mes "담당하고 있는 곳입니다.";
+					if (.@compass_check)
+						viewpoint 1,198,257,5,0x0000FF;
+					break;
+				case 5:
+					mes "[리히타르젠 안내요원]";
+					mes "''호텔''은 ''리히타르젠''남쪽의 넓은";
+					mes "광장의 중앙에 위치해 있습니다.";
+					mes "유명인사들이 가장 많이 찾은 호텔로,";
+					mes "최고급 시설과 서비스로 편안한 여행에";
+					mes "도움이 될 것입니다.";
+					if (.@compass_check)
+						viewpoint 1,159,133,6,0x00FF00;
+					break;
+				case 6:
+					mes "[리히타르젠 안내요원]";
+					mes "''공항은''은 중앙대로의 끝부분의";
+					mes "오른편에 자리잡고 있습니다. 비공정을";
+					mes "통해 각 마을로 편안히 이동하실 수";
+					mes "있을 것입니다.";
+					if (.@compass_check)
+						viewpoint 1,267,75,7,0x00FF00;
+					break;
+				case 7:
+					mes "[리히타르젠 안내요원]";
+					mes "''상인길드''는 ''리히타르젠''남서쪽에";
+					mes "위치하고 있습니다.";
+					if (.@compass_check)
+						viewpoint 1,74,53,8,0xFF99FF;
+					break;
+				case 8:
+					mes "[리히타르젠 안내요원]";
+					mes "''보석상점''은 ''리히타르젠'' 남서쪽,";
+					mes "남쪽 광장의 서쪽에 위치하고";
+					mes "있습니다. 이 곳에서 각종 귀금속을";
+					mes "구입하실 수 있을 것입니다.";
+					if (.@compass_check)
+						viewpoint 1,93,110,9,0xFF9900;
+					break;
+				case 9:
+					mes "[리히타르젠 안내요원]";
+					mes "''무기점''은 ''리히타르젠'' 중앙 대로의";
+					mes "가장 끝에 위치해 있습니다. 판매";
+					mes "품목과 규모는 가히 리히타르젠 최고라";
+					mes "할 수 있을 것입니다.";
+					if (.@compass_check)
+						viewpoint 1,196,46,10,0x330033;
+					break;
+				case 10:
+					mes "[리히타르젠 안내요원]";
+					mes "''백화점''은 ''리히타르젠'' 정중앙에";
+					mes "위치하고 있으며, 각종 상정들이";
+					mes "밀집해 있는 최고의 쇼핑지역입니다.";
+					if (.@compass_check)
+						viewpoint 1,199,163,11,0xFFFF00;
+					break;
+				case 11:
+					mes "[리히타르젠 안내요원]";
+					mes "''경매장''은 ''리히타르젠'' 정중앙에";
+					mes "위치하고 있는 경매장 안내인을 통해";
+					mes "입장하실 수 있습니다..";
+					if (.@compass_check)
+						viewpoint 1,198,162,12,0xFFFF00;
+					break;
+				case 12:
+					mes "[리히타르젠 안내요원]";
+					mes "위치표시를 지우시고 싶으시면 ''미니";
+					mes "맵에 표시들을 모두 지운다.''를 선택해";
+					mes "주세요.";
+					set .@loop2,0;
+				}
+			}
+			break;
+		case 2:
+			viewpoint 2,102,247,2,0xFF0000;
+			viewpoint 2,233,164,3,0xFF00FF;
+			viewpoint 2,236,276,4,0x99FFFF;
+			viewpoint 2,198,257,5,0x0000FF;
+			viewpoint 2,159,133,6,0x00FF00;
+			viewpoint 2,267,75,7,0x00FF00;
+			viewpoint 2,74,53,8,0xFF99FF;
+			viewpoint 2,93,110,9,0xFF9900;
+			viewpoint 2,196,46,10,0x330033;
+			viewpoint 2,199,163,11,0xFFFF00;
+			viewpoint 2,198,162,12,0xFFFF00;
+			set .@compass_check,0;
+			break;
+		case 3:
+			mes "[리히타르젠 안내요원]";
+			mes "미흡한 기존의 아날로그 안내방식에서";
+			mes "벗어나 알고 싶으신 장소를 미니맵에";
+			mes "표시해 주는 광역측위시스템을 이용한";
+			mes "최첨단 디지털 안내방식으로";
+			mes "바뀌었습니다.";
+			mes "룬 미드가츠 왕국의 눈부신 마법과";
+			mes "과학기술의 조합으로 만들어낸 이";
+			mes "광역측위시스템의 성능을 직접 눈으로";
+			mes "확인해 보십시오.";
+			next;
+			mes "[리히타르젠 안내요원]";
+			mes "본 안내에 앞서 여러분들은 모니터";
+			mes "우측상단에 있는 미니 맵을 꼭 참조해";
+			mes "주시기 바랍니다.";
+			mes "''Ctrl + Tab'' 또는 기본정보창에서";
+			mes "'Map' 버튼을 클릭하시면 됩니다.";
+			next;
+			mes "[리히타르젠 안내요원]";
+			mes "이제 미니 맵이 보이시면''-''버튼을";
+			mes "여러번 클릭하셔서 모든 마을이";
+			mes "보이도록 설정해 주십시오.";
+			break;
+		case 4:
+			mes "[리히타르젠 안내요원]"; 
+			mes "즐거운 여행이 되시기 바랍니다.";
+			close2;
+			set .@loop1,0;
+		}
+	}
+	cutin "ein_soldier",255;
+	end;
+}
+
+lighthalzen,220,311,3	duplicate(LhzGuide)	안내요원#2lhz	852
+
+lighthalzen,154,100,5	duplicate(LhzGuide)	안내요원#3lhz	852
+
+lighthalzen,307,224,3	duplicate(LhzGuide)	안내요원#4lhz	852
+
