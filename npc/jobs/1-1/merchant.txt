@@ -1,0 +1,946 @@
+
+//    kk  ""tt""  "";;    """"JJ;;kkJJ  JJtt""    ""tt""  ;;tt""""tt    ""tt""   
+//   JJ  kk""tt;;JJ      ttkk    ""tt    ;;;;ttJJ;;  ""ttkk;;"";;;;ttkk;;  ;;kk  
+//  "";;  ""  kk  kk  tt  ttww    ZZ;;  ww    RR  ;;JJ  JJJJ  tt    RR  ;;JJ  JJ 
+//  JJ      """";;""  kk  ttkk  ;;kk    ZZ    ww  ;;""  kk""  ww    kk;;kk""  JJ 
+//  kk      JJ  kk    ww  ttkk  JJJJ  ;;ww  ""JJ  ;;tt""RR    ZZ  ;;ZZJJ      kk 
+//  kk  ;;  "";;JJ        JJtt  JJJJ  ""kk  JJ""  ww""""ww    ww  ""JJ  ZZ    kk 
+//  JJ  JJ  ;;JJ""  "";;  ww;;  kkJJ  JJ""  kk;;  ww  ;;ww  ""JJ  ww;;  ww  ;;tt 
+//;;""  RR    RR    ww""  kk""  ;;tt  ww    kkkk      kktt  JJ;;  ZZ;;  ;;  tt   
+//  JJkkttkkkk;;kkkk;;JJkktt""kkJJJJkkttJJkk;;  kkkkJJ  ttkkttJJkk;;ttkkJJkkJJ   
+//| I | - | L | U | N | A | A | T | H | E | N | A | P | R | O | J | E | C | T |  
+//------------------------------------------------------------------------------
+// iLAthena 상인 전직 스크립트 <http://www.i-luna.com>
+// 한글화 by 아이루나 iLAthena Project
+//------------------------------------------------------------------------------
+// 한글화 by 인즈
+// 수정 by 빅토이
+//------------------------------------------------------------------------------
+
+alberta_in,53,43,6	script	상인조합원#mer1	86,{
+	if (Upper == 1) {
+		if (Class == Job_Novice_High && (ADVJOB == Job_Whitesmith || ADVJOB == Job_Creator)) {
+			mes "[조합원 만수]";
+			mes "여어, 오랜만이군!";
+			mes "갑자기 연락도 뚝 끊고 사라졌었잖아?";
+			mes "도대체 무슨 일이 있었어?";
+			next;
+			mes "[조합원 만수]";
+			mes "후우..";
+			mes "자네는 진실로 발할라에 다녀온 모양이군?! 매우 긴 길을 지나왔구나...";
+			next;
+			if (getskilllv("NV_BASIC") < 9) {
+				mes "[조합원 만수]";
+				mes "다시 상인이 되기에는 아직 준비가 미흡한데. 먼저 기본기능을 모두 배우고 오도록 해.";
+				next;
+				mes "[조합원 만수]";
+				mes "걱정하지마, 언제나 네 상인으로써의 위치는 확고하니까. 준비가 되면 바로 와.";
+				close;
+			}
+			mes "[조합원 만수]";
+			mes "우리가 또 다시 만난 건 마치 운명같군. 좋아, 또 한번 상인으로 만들어주지!";
+			next;
+			skill 143,0,0;
+			jobchange Job_Merchant_High;
+			skill 153,1,0;
+			skill 154,1,0;
+			skill 155,1,0;
+			mes "[조합원 만수]";
+			mes "얼마나 그리웠겠어. 자, 이제 다시 자네는 상인이야!";
+			close;
+		}
+		else {
+			mes "[조합원 만수]";
+			mes "^333333*씨익*^000000";
+			mes "나는 무척 지겨운걸...";
+			mes "내 사랑하는 꽃의 이야기를 들어보겠어?";
+			close;
+		}
+	}
+	if (BaseJob == Job_Merchant) {
+		mes "[조합원 만수]";
+		mes ".....? 으응? 뭐라는 거야. 넌 이미 상인이야. 나 원참..";
+		mes "웃?! 혹시, 이거.... 내가 웃어줘야 하는 건가?!";
+		close;
+	}
+	else if (BaseJob != Job_Merchant && BaseJob != Job_Novice) {
+		mes "[조합원 만수]";
+		mes "우리 상인길드 사람들은 양다리 걸치고 일하는 녀석을 가장 싫어하지.";
+		mes "낮에는 상인이였다, 밤에는 야시시한 복장을 입고 이상한 술집에 다니는 그런 녀석들 말야.";
+		mes "아웅~ 그런 녀석들을 보고 있으면 내가 미쳐~";
+		next;
+		mes "[조합원 만수]";
+	   	mes "뭐.. 말이 길어졌지만 어찌되었던간에 다른 직업을 갖고 있는 자네 같은 사람은 필요없어.";
+		close;
+	}
+	else if (job_merchant_q == 9) {
+		mes "[조합원 만수]";
+		mes "Hello there,";
+		mes ""+ strcharinfo(0) +".";
+		set job_merchant_q,0;
+		set job_merchant_q2,0;
+		set quest_alb_01,0;
+		mes "자네는 불합격 판정을 받았다네. 알고 있겠지?";
+		next;
+		mes "[조합원 만수]";
+		mes "일단 네 기록은 말소 하겠어. 재신청을 원한다면 나에게 다시 문의 하게나.";
+		close;
+	}
+	else if (job_merchant_q == 8 || job_merchant_q == 7) {
+		mes "[조합원 만수]";
+		mes ""+ strcharinfo(0) +".";
+   		mes "기쁜 소식이 와 있어.";
+		next;
+		mes "[조합원 만수]";
+   		mes "네가 전직시험을 치리는 동안 상인길드 총회에서 널 상인자격과 상인길드의 정식입단을 승인했다.";
+		if (job_merchant_q == 7) {
+			next;
+			mes "[조합원 만수]";
+ 			mes "그러면 이제... 남은 건 나머지 회비일 뿐. 준비는 다 되었겠지?";
+			next;
+			switch(select("나머지 500 제니을 낸다:그만둔다")) {
+			case 1:
+				mes "[조합원 만수]";
+				if (Zeny < 500) {
+				mes "여기까지 와서 회비에 문제가 생기다니.";
+				next;
+				mes "[조합원 만수]";
+				mes "상인이 되려는 사람이 이렇게 신용이 부족해서야!! 어떻게든 빨리 조치를 취해보게나.";
+				close;
+				}
+				set zeny,zeny-500;
+ 				mes "으흠... 500 제니 확실하군!";
+				break;
+			case 2:
+				mes "[조합원 만수]";
+	   			mes "어째서..? 문제라도 있는건가?";
+				close;
+			}
+		}
+		next;
+		mes "[조합원 만수]";
+		mes "상인이 된 것을 축하한다!";
+		callfunc "Job_Change",Job_Merchant;
+		callfunc "F_ClearJobVar";
+		mes "우리들의 동료, 상인 길드의 일원이 된 것을 다시 한번 진심으로 축하하며 앞으로 지속적인 활동이 있기를 바란다.";
+		next;
+		if (quest_alb_01 == 1) {
+			mes "[조합원 만수]";
+			mes "(그리고.... 이건 얼마 안되지만 받아 둬. 편지에 대한 수고비야. 다음에도 잘 부탁해~)";
+			set zeny,zeny+200;
+			set quest_alb_01,2;
+		}
+		else {
+			mes "[조합원 만수]";
+			mes "(편지.... 잊고 있었나..... 뭐... 할 수 없지... 수고 했다.)";
+		}
+		next;
+		mes "[조합원 만수]";
+		mes "전세계 통화량의 20% 확보라는 우리들의 원대한 목표을 달성하기 위해 열정의 뜨거운 피가 흐르는 청년들이 절대적으로 필요하다! 알겠나? 나의 말 뜻을!?";
+		next;
+		mes "[조합원 만수]";
+		mes "뭐, 말이 그렇다는거지, 결론적으로는 뭐.. 돈 많이 벌자는거야. 다 알잖아~";
+		close;
+	}
+	else if (job_merchant_q <= 6 && job_merchant_q != 0) {
+		mes "[조합원 만수]";
+		if (job_merchant_q2 == 1 || job_merchant_q2 == 2) {
+			mes "창고에서 물건을 받고 프론테라의 옛 검사길드로 찾아가서 카프라 프론테라 지부 총 책임자 누님에게 전해주면 된다.";
+			next;
+			if (job_merchant_q2 == 1) {
+				mes "[조합원 만수]";
+				mes "물건 일련번호는 ^3355FF2485741^000000.";
+			}
+			else {
+				mes "[조합원 만수]";
+				mes "물건 일련번호는 ^3355FF2328137^000000.";
+			}
+		}
+		else if (job_merchant_q2 == 3 || job_merchant_q2 == 4) {
+   			mes "창고에서 물건을 받고 게펜의 마법학교로 찾아가서 그 곳 관계자에게 전해주면 된다.";
+			next;
+			if (job_merchant_q2 == 3) {
+				mes "[조합원 만수]";
+				mes "물건 일련번호는 ^3355FF2989396^000000.";
+			}
+			else {
+				mes "[조합원 만수]";
+				mes "물건 일련번호는 ^3355FF2191737^000000.";
+			}
+		}
+		else if (job_merchant_q2 == 5 || job_merchant_q2 == 6) {
+			mes "창고에서 물건을 받고 모로크의 염료제작사인 자바두리한 씨를 찾아가서 전해주면 된다.";
+			next;
+			if (job_merchant_q2 == 5) {
+				mes "[조합원 만수]";
+				mes "단, 그는 가끔 깜빡하곤 하니, 그의 학생에게 전달해주면 될거다. 물건 일련번호는 ^3355FF3012685^000000.";
+			}
+			else {
+				mes "[조합원 만수]";
+				mes "단, 그는 가끔 깜빡하곤 하니, 그의 학생에게 전달해주면 될거다. 물건 일련번호는 ^3355FF3487372^000000.";
+			}
+		}
+		else if (job_merchant_q2 == 7 || job_merchant_q2 == 8) {
+			mes "창고에서 물건을 받고 바이아란 섬의 카프라 직원에게 전해주면 전해주면 된다.";
+			next;
+			if (job_merchant_q2 == 7) {
+				mes "[조합원 만수]";
+				mes "물건 일련번호는 ^3355FF3318702^000000.";
+			}
+			else {
+				mes "[조합원 만수]";
+				mes "물건 일련번호는 ^3355FF3543625^000000.";
+			}
+			mes "그리고... (편지도 잘 부탁함세~~)";
+		}
+		next;
+		mes "[조합원 만수]";
+		mes "이 번호를 잘 기억해 두었다가 창고에 가서 창고 관리자에게 목적지와 일련번호를 알려주면 그 곳에 맞는 물건을 건내줄거야. 꼭 잘 기억해둬야해!";
+		mes "창고는 내 기준으로 오른쪽 방에 자리잡고 있지.";
+		next;
+		mes "[조합원 만수]";
+     		mes "일이 끝나면 이 곳으로 다시 돌아와 물건을 가져간 창고에 영수증을 건내주고 나에게 다시 오면 되는거야.";
+    		mes "그럼, 조심해서 다녀오게나.";
+		close;
+	}
+	else if (job_merchant_q == 0) {
+		mes "[조합원 만수]";
+   		mes "무슨 일로 찾아왔지?";
+		next;
+		switch(select("상인으로 전직한다.:상인에 대해 묻는다.:상인 전직조건에 대해 묻는다.:그만둔다.")) {
+		case 1:
+			mes "[조합원 만수]";
+			mes "상인이 되고 싶다고? 흠...";
+			next;
+			if (getskilllv("NV_BASIC") < 9) {
+				mes "[조합원 만수]";
+	 			mes "하지만, 상인이 되려면 적어도 초보자 직업스킬은 레벨 9 이상이 되어야 한다고.";
+				next;
+				mes "[조합원 만수]";
+				mes "아무리 돈만 만지는 상인이라도 최소한의 기본은 있어야 하지 않겠는가?";
+				close;
+			}
+			mes "[조합원 만수]";
+			mes "좋아. 그렇다면 이 신청서에 확인 서명하고 상인길드 가입회비 1000 제니를 준비해.";
+			next;
+			mes "[조합원 만수]";
+			mes "아~ 지금 돈이 없으면 우선은 500 제니만 받고 나머지 금액은 전직 시험 이후에 받도록 하지.";
+			next;
+			mes "[조합원 만수]";
+			mes "어떻게? 지금 가입할래?";
+			next;
+			if (select("할게요.:아니, 나중에...") ==1 ) {
+				mes "[조합원 만수]";
+				mes "그럼 신청서를 작성해볼까.";
+				next;
+				mes "[조합원 만수]";
+				mes "이름이... " + strcharinfo(0) + " 이라.";
+				mes "좋은 이름이군.";
+				next;
+				mes "[조합원 만수]";
+				mes "이 신청서는 회비와 같이 올리야 하는데.... 회비는 어떻게 할래?";
+				next;
+				switch(select("1천 제니를 모두 낸다!:500제니로 나눠낸다.:그만둔다")) {
+				case 1:
+					mes "[조합원 만수]";
+					if (Zeny >= 1000) {
+						set job_merchant_q,2;
+						set zeny,zeny-1000;
+						mes "어디... 1천 제니, 확실하군";
+					}
+					else {
+						mes "엄한 표정을 짓고 있군... 500 제니을 나눠 내는 방식도 있으니 잘 생각해 봐.";
+						close;
+					}
+					break;
+				case 2:
+					mes "[조합원 만수]";
+					if (Zeny >= 500) {
+						set job_merchant_q,1;
+						set zeny,zeny-500;
+	   					mes "어디보자... 500 제니.... 확실하군. 좋아. 할부는 그다지 좋은 버릇이 아니지만...";
+					}
+					else {
+	   					mes "...'한 푼도 없는 내 자신이 정말 싫다'라는 그런 어눌한 표정 짓지말게... 지금이라도 늦지 않았으니 돈을 좀 더 모아 와.";
+						close;
+					}
+					break;
+				case 3:
+					mes "[조합원 만수]";
+					mes "준비되면 언제든 찾아와.";
+					close;
+				}
+			}
+			else {
+				mes "[조합원 만수]";
+				mes "지금은 돈이 없나보지? 그래, 그러던지.";
+				mes "천천히 모아 와.";
+				close;
+			}
+			next;
+			mes "[조합원 만수]";
+			mes "좋아, 길드 가입 신청서는 완벽히 작성되어 곧 올리겠다. 그렇다면 전직 시험에 대해 설명할께.";
+			next;
+			mes "[조합원 만수]";
+			mes "그 전에 한마디만 하자. 가끔 남의 이야기를 엉뚱하게 듣고나서 엉뚱한 실수를 하는 엉뚱한 녀석들이 있는데 자넨 그런 실수하지 않겠지?";
+			next;
+			mes "[조합원 만수]";
+			switch(rand(1,4)) {
+			case 1:
+				mes "창고에서 물건을 받고 프론테라의 옛 검사길드로 찾아가서 카프라 프론테라 지부 총 책임자 누님에게 전해주면 된다.";
+				next;
+				callsub S_GiveSerial,2485741,1,2328137,2;
+				break;
+			case 2:
+				mes "창고에서 물건을 받고 게펜의 마법학교로 찾아가 그 곳 관계자에게 전해주면 된다.";
+				callsub S_GiveSerial,2989396,3,2191737,4;
+				break;
+			case 3:
+				mes "창고에서 물건을 받고 모로크의 염료제작사인 자바두리한 씨를 찾아가 전해주면 된다.";
+				next;
+				mes "[조합원 만수]";
+				mes "그는 가끔 자주 잊어버리니, 그의 수습생을 찾아가게.";
+				callsub S_GiveSerial,3012685,5,3487372,6;
+				break;
+			case 4:
+				mes "창고에서 물건을 받고 바이아란 섬의 카프라 직원에게 전해주면 전해주면 된다.";
+				callsub S_GiveSerial,3318702,7,3543625,8;
+				next;
+				mes "[조합원 만수]";
+   				mes "그리고... (이건 내 개인적인 부탁인데... 물건을 전해줄때 이 편지도 같이 전해줘. 꼭~ 좀~ 부탁할께~~)";
+				getitem 1072,1; //Delivery_Message
+				break;
+			}
+			next;
+			mes "[조합원 만수]";
+			mes "이 번호를 잘 기억해 두었다가 창고에 가서 창고 관리자에게 목적지와 일련번호를 알려주면 그 곳에 맞는 물건을 건내줄거야. 꼭 잘 기억해둬야 해!";
+			mes "창고는 내 기준으로 오른쪽 방에 있다.";
+			next;
+			mes "[조합원 만수]";
+			mes "일이 끝나면 이 곳으로 다시 돌아와 물건을 가져간 창고에 영수증을 건내주고 나에게 다시 오면 되는거야.";
+			mes "그럼, 조심해서 다녀오게나.";
+			close;
+		case 2:
+			mes "[조합원 만수]";
+			mes "상인? 간단하게 말해 물건을 팔아 돈을 버는게 상인이지.";
+			mes "싸움을 잘하는 것도 아니고, 특별한 공격/회복기술이 있는 것도 아니지만, 저렴한 가격에 물건을 사 팔 수 있지 않은가.";
+			next;
+			mes "[조합원 만수]";
+   			mes "돈발라치기라는 궁극의 기술이 있긴하지만... 뭐, 어쨌든, 활하고 지팡이나 양손검 같은 특이한 무기를 빼고는 다 쓸 수 있지. 물론, 사고 팔기는 할 수 있어.";
+			mes "뭐, 대충 상인은 결론적으로 돈 많이 벌고자하는 직업이야. 알겠지?";
+			close;
+		case 3:
+			mes "[조합원 만수]";
+			mes "상인이 되기 위해선 세가지 조건을 만족시켜야 하지.";
+			next;
+			mes "[조합원 만수]";
+			mes "첫번째, 아무리 물건 건네주고 돈 받는 일을 하는 것이 상인이라 하지만 최소한 초보자 직업스킬은 레벨 9 이상이어야 한다.";
+			next;
+			mes "[조합원 만수]";
+			mes "두번째, 상인길드 가입 회비 1000 제니가 필요하다. 상인이 될려면 그 정도는 쉽게 모아야겠지. 암~";
+			next;
+			mes "[조합원 만수]";
+			mes "세번째, 기초 체력 및 방향 감각의 테스트, 정확성을 알아보기 위한 전직 시험이다. 지정한 마을을 찾아가 특정 인물에게 물건을 전해줘야 해.";
+			close;
+		case 4:
+			close;
+		}
+	}
+
+S_GiveSerial:
+	next;
+	mes "[조합원 만수]";
+	mes "물건 일련번호는 ";
+	if (rand(1)) {
+		mes "^3355FF"+getarg(0)+"^000000.";
+		set job_merchant_q2,getarg(1);
+	}
+	else {
+		mes "^3355FF"+getarg(2)+"^000000.";
+		set job_merchant_q2,getarg(3);
+	}
+	return;
+}
+
+alberta_in,28,29,2	script	상인조합원#mer2	83,{
+	if (BaseJob == Job_Merchant) {
+		mes "[조합원 케이]";
+		mes "여어~ 무슨 일로 찾아왔나?";
+		close;
+	}
+	else if (BaseJob != Job_Merchant && BaseJob != Job_Novice) {
+		mes "[조합원 케이]";
+		mes "여기선 자네에게 해줄 것이 없어.";
+		close;
+	}
+	else if (job_merchant_q == 9) {
+		mes "[조합원 케이]";
+		mes "시험을 다시 시작하고 싶다면 중앙의 전직과 직원에게 가보도록.";
+		mes "나가봐.";
+		close;
+	}
+	else if (job_merchant_q == 8 || job_merchant_q == 7) {
+		mes "[조합원 케이]";
+		mes "....좋아! 모든 것이 완벽하다! 네 기록은 전직과로 넘기겠다.";
+		mes "중앙의 전직과 조합원 '만수'에게 가보도록.";
+		close;
+	}
+	else if (job_merchant_q == 6 || job_merchant_q == 5) {
+		mes " [조합원 케이] ";
+		mes "아, 왔군. 그러면 확인할게. ";
+		mes "아, 그래? 좋아, 확인해 보자. 네 이름은 " + strcharinfo(0) + ".";
+		next;
+		mes "[조합원 케이]";
+		if (job_merchant_q2 == 1 || job_merchant_q2 == 2)
+			mes "프론테라의 카프라 누님들 이였군. 영수증은 받아왔겠지?";
+		else if (job_merchant_q2 == 3 || job_merchant_q2 == 4)
+			mes "게펜의 마법학교 였군.  영수증은 받아왔겠지?";
+		else if (job_merchant_q2 == 5 || job_merchant_q2 == 6)
+			mes "모로크의 염료 제작사 였군.  영수증은 받아왔겠지?";
+		else if (job_merchant_q2 == 7 || job_merchant_q2 == 8)
+			mes "이즈루드의 바이아란 카프라 누님 이였군. 영수증은 받아왔겠지?";
+
+		if (job_merchant_q2 == 1 && countitem(1073) != 0)
+			delitem 1073,1; //Merchant_Voucher_1
+		else if (job_merchant_q2 == 2 && countitem(1074) != 0)
+			delitem 1074,1; //Merchant_Voucher_2
+		else if (job_merchant_q2 == 3 && countitem(1075) != 0)
+			delitem 1075,1; //Merchant_Voucher_3
+		else if (job_merchant_q2 == 4 && countitem(1076) != 0)
+			delitem 1076,1; //Merchant_Voucher_4
+		else if (job_merchant_q2 == 5 && countitem(1077) != 0)
+			delitem 1077,1; //Merchant_Voucher_5
+		else if (job_merchant_q2 == 6 && countitem(1078) != 0)
+			delitem 1078,1; //Merchant_Voucher_6
+		else if (job_merchant_q2 == 7 && countitem(1079) != 0)
+			delitem 1079,1; //Merchant_Voucher_7
+		else if (job_merchant_q2 == 8 && countitem(1080) != 0)
+			delitem 1080,1; //Merchant_Voucher_8
+		else {
+			next;
+			set job_merchant_q,9;
+			mes "[조합원 케이]";
+			mes "응? 뭐야!? 영수증이 없잖아? 어떻게 된거야?";
+			next;
+			mes "[조합원 케이]";
+			mes "불합격!";
+			mes "시험을 다시 시작하고 싶다면 중앙의 전직과 직원에 가보도록.";
+			mes "나가봐.";
+			close;
+		}
+		next;
+		mes " [조합원 케이] ";
+		mes "....좋아! 모든 것이 완벽하다! 네 기록은 전직과로 넘기겠다.";
+		mes "중앙의 전직과 조합원 '만수'에게 가보도록.";
+		close2;
+		if (job_merchant_q == 6)
+			set job_merchant_q,8;
+		else if (job_merchant_q == 5)
+			set job_merchant_q,7;
+		end;
+	}
+	else if (job_merchant_q == 4 || job_merchant_q == 3 && countitem(1081) == 0 && countitem(1082) == 0 && countitem(1091) == 0) {
+		mes " [조합원 케이] ";
+   		mes "응...? 다녀온건가?";
+		next;
+		if (select("물건을 잃어버렸습니다.:아무일도 아녜요.") == 1) {
+			set job_merchant_q,9;
+			mes "[조합원 케이]";
+			mes "이 바보야! 물건을 잃어버렸다고?! 어쩌자고 물건을 잃어버리는 거야?";
+			next;
+			mes "[조합원 케이]";
+			mes "불합격!";
+			mes "시험을 다시 시작하고 싶다면 중앙의 전직과 직원에 가보도록.";
+			mes "나가봐.";
+			close;
+		}
+		mes "[조합원 케이]";
+		mes "흠... 싱겁긴....";
+		close;
+	}
+	else if (job_merchant_q == 4 || job_merchant_q == 3 && countitem(1081) != 0 || countitem(1082) != 0 || countitem(1091) != 0) {
+		mes "[조합원 케이]";
+		mes "응? 아직도 안 떠나고 뭘 하고 있는거야?";
+		next;
+		if (select("물건을 교환해 주세요.:아무 일도 아니예요.") == 1) {
+			if (countitem(1081) == 0 && countitem(1082) == 0 && countitem(1083) == 0 && countitem(1091) == 0) {
+				mes "[조합원 케이]";
+				mes "물건은? 물건은 어디 있는거야?!";
+				next;
+				if (select("물건을 잃어버렸습니다:아.. 아닙니다.") == 1) {
+					set job_merchant_q,9;
+					mes "[조합원 케이]";
+					mes "이 바보야! 물건을 잃어버렸다고?! 어쩌자고 물건을 잃어버리는 거야?";
+					next;
+					mes "[조합원 케이]";
+					mes "불합격!";
+					mes "시험을 다시 시작하고 싶다면 중앙의 전직과 직원에 가보도록.";
+					mes "나가봐.";
+					close;
+				}
+				mes "[조합원 케이]";
+				mes "횡설수설이야? 어이! 정신차려!!";
+				close;
+			}
+			mes "[조합원 케이]";
+			mes "이런, 바보 자식! 상당히 귀찮게 하는군!";
+			mes "일단 네 기록을 파기 시키고 물건을 회수하마.";
+			if (countitem(1081) != 0)
+				delitem 1081,1; //Merchant_Box_1
+			else if (countitem(1082) != 0)
+				delitem 1082,1; //Merchant_Box_2
+			else if (countitem(1091) != 0)
+				delitem 1091,1; //Merchant_Box_Etc
+			if (job_merchant_q == 4)
+				set job_merchant_q,2;
+			else if (job_merchant_q == 3)
+				set job_merchant_q,1;
+			next;
+			mes "[조합원 케이]";
+			mes "다시 주문이 들어오는데 시간이 걸리니까, 조금 있다가 와.";
+			close;
+		}
+		mes "[조합원 케이]";
+		mes "싱겁긴...";
+		close;
+	}
+	else if ((job_merchant_q == 0 || job_merchant_q == 1 || job_merchant_q == 2)) {
+		set where_village,0;
+		mes "[조합원 케이]";
+		mes "여어~ 무슨 일로 찾아왔나?";
+		next;
+		switch(select("전직시험 일로 왔습니다.:아르바이트 일로 왔습니다.:그만둔다.")) {
+		case 1:
+			mes "[조합원 케이]";
+			mes "그래. 이름은? ";
+			mes ""+strcharinfo(0) + "......";
+			next;
+			if (job_merchant_q == 0) {
+				mes "[조합원 케이]";
+				mes "....이라는 이름은 명단에 없어. 전직 신청은 한거야?";
+				mes "이 방을 나가면 중앙의 직원에게 다시 한 번 확인해 보는게 어때?";
+				close;
+			}
+			mes "[조합원 케이]";
+			mes "아, 여기 있군. 그렇다면 전직시험용 물건을 줘야지.";
+			next;
+			mes "[조합원 케이]";
+			mes "전직시험의 정확한 목적지를 리스트에서 선택해 봐.";
+			next;
+			switch(select("프론테라.:게펜.:모로크.:바이아란 섬.")) {
+			case 1: set .@where_village,1; break;
+			case 2: set .@where_village,2; break;
+			case 3: set .@where_village,3; break;
+			case 4: set .@where_village,4; break;
+			}
+			mes "[조합원 케이]";
+			mes "자, 물건 일렬번호를 적어. 만약, 취소를 원한다면 '0'으로 적어둬.";
+			next;
+			while(1) {
+				while(1) {
+					input .@input;
+					if (.@input == 0) {
+						mes "[조합원 케이]";
+						mes "정말 취소할래?";
+						if (select("네.:다시 할래요.") == 1) {
+							mes "좋을대로 해.";
+							close;
+						}
+						next;
+					}
+					else if (.@input < 1000000 || .@input > 5000000) {
+						mes "[조합원 케이]";
+						mes "어이~ 어이~ 일렬번호 범위를 벗어났어. 1000000 에서 5000000 이하로 적어봐.";
+						next;
+					}
+					else 
+						break;
+				}
+				mes "[조합원 케이]";
+				if (.@where_village == 1)
+					mes "목적지는 프론테라. 물건 일련번호는 " + .@input + ". 맞나?";
+				else if (.@where_village == 2) {
+					mes "목적지는 게펜. 어이구~ 정말 멀리도 가네~ 너도 참 재수 더럽게 없다. 그치?";
+					mes "물건 일련번호는 " + .@input + ". 맞나?"; }
+				else if (.@where_village == 3) {
+					mes "목적지는 모로크. 휴~ 멀리도 가네~ 어이, 너도 참 재수 더럽게 없다. 그치?";
+					mes "물건 일련번호는 " + .@input + ". 맞나?"; }
+				else
+					mes "목적지는 바이아란 섬. 물건 일련번호는 " + .@input + ". 맞나?";
+				next;
+				if (select("네.:앗, 번호가 틀렸어요!") == 1) {
+					break;
+				}
+			}
+			if (.@where_village == 1) {
+				if (job_merchant_q2 == 1 && .@input == 2485741)
+					getitem 1081,1; //Merchant_Box_1
+				else if (job_merchant_q2 == 2 && .@input == 2328137)
+					getitem 1082,1; //Merchant_Box_2
+				else
+					getitem 1091,1; //Merchant_Box_Etc
+			}
+			else if (.@where_village == 2) {
+				if (job_merchant_q2 == 3 && .@input == 2989396)
+					getitem 1081,1; //Merchant_Box_1
+				else if (job_merchant_q2 == 4 && .@input == 2191737)
+					getitem 1082,1; //Merchant_Box_2
+				else
+					getitem 1091,1; //Merchant_Box_Etc
+			}
+			else if (.@where_village == 3) {
+				if (job_merchant_q2 == 5 && .@input == 3012685)
+					getitem 1081,1; //Merchant_Box_1
+				else if (job_merchant_q2 == 6 && .@input == 3487372)
+					getitem 1082,1; //Merchant_Box_2
+				else
+					getitem 1091,1; //Merchant_Box_Etc
+			}
+			else {
+				if (job_merchant_q2 == 7 && .@input == 3318702)
+					getitem 1081,1; //Merchant_Box_1
+				else if (job_merchant_q2 == 8 && .@input == 3543625)
+					getitem 1082,1; //Merchant_Box_2
+				else
+					getitem 1091,1; //Merchant_Box_Etc
+			}
+			if (job_merchant_q == 2)
+				set job_merchant_q,4;
+			else if (job_merchant_q == 1)
+				set job_merchant_q,3;
+			mes "[조합원 케이]";
+			mes "한 번 지급된 물건은 어떤한 이유에서든 물건을 잃어버리면 절대 전직이 안되니 두 번 다시 지급되지 않으니 절대 잃어버리지마.";
+			next;
+			mes "[조합원 케이]";
+			mes "그럼, 잘 다녀와. 아! 그리고 영수증 잊지 말고 꼭 챙겨와야해.";
+			close;
+		case 2:
+			mes "[조합원 케이]";
+			mes "아르바이트? 아직 준비중인데.";
+			mes "총회에서 예산이 떨어져야 준비라도 하지. 나원 참.";
+			close;
+		case 3:
+			mes "[조합원 케이]";
+			mes "...? 응..? 응..?";
+			mes "뭐가..?";
+			close;
+		}
+	}
+}
+
+morocc_in,140,102,4	script	수습생#mer	86,{
+	if ((job_merchant_q == 4) || (job_merchant_q == 3)) {
+		mes "[염료제작 수습생]";
+		mes "상인 길드에서 나오셨군요?";
+		next;
+		mes "[염료제작 수습생]";
+		if (countitem(1081) == 1 || countitem(1082) == 1 || countitem(1091) == 1) {
+			mes "자, 여기 내려 놓으세요.";
+		}
+		else {
+			mes "그런데 물건은 보이지 않네요? 아하하하~";
+			close;
+		}
+		next;
+		mes "[염료제작 수습생]";
+		mes "영수증도 끊어드려야 하니 물건 일련번호를 확인해 볼께요.";
+		next;
+		mes "[염료제작 수습생]";
+		if (job_merchant_q2 == 5 && countitem(1081) != 0) {
+			mes "3012685...";
+			mes "주문한 물건이 맞습니다. 자, 여기 영수증.";
+			delitem 1081,1; //Merchant_Box_1
+			getitem 1077,1; //Merchant_Voucher_5
+		}
+		else if (job_merchant_q2 == 6 && countitem(1082) != 0) {
+			mes "3487372...";
+			mes "주문한 물건이 맞습니다. 자, 여기 영수증.";
+			delitem 1082,1; //Merchant_Box_2
+			getitem 1078,1; //Merchant_Voucher_6
+		}
+		else {
+			if (job_merchant_q2 == 5)
+				mes "상인길드에서 저희쪽으로 오는 물건의 일련번호는 3012685 입니다만?";
+			else if (job_merchant_q2 == 6)
+				mes "상인길드에서 저희쪽으로 오는 물건의 일련번호는 3487372 입니다만?";
+			else
+	   			mes "상인길드에서 저희쪽으로 오는 물건의 일련번호는 3012685 또는 3487372 입니다만...";
+			close;
+		}
+		if (job_merchant_q == 4)
+			set job_merchant_q,6;
+		else if (job_merchant_q == 3)
+			set job_merchant_q,5;
+		next;
+		mes "[염료제작 수습생]";
+		mes "다음 주문때도 잘 부탁드립니다. 그럼~";
+		close;
+	}
+	else if (job_merchant_q == 6 || job_merchant_q == 5 && job_merchant_q2 == 6 || job_merchant_q2 == 5) {
+		mes "[염료제작 수습생]";
+   		mes "아, 이제 돌아가실려고요? 조심해서 돌아가세요~";
+		close;
+	}
+	else {
+		mes "[염료제작 수습생]";
+		mes "자바두리한 선생님의 염색 솜씨는 미드가르드 대륙의 통틀어 그 누구도 따라갈 수 없지요.";
+		next;
+		mes "[염료제작 수습생]";
+		mes "저는 그 분의 제자입니다!!";
+		next;
+		mes "[염료제작 수습생]";
+		mes "그냥, 그렇다구요...";
+		close;
+	}
+}
+
+geffen_in,155,122,4	script	길드 관계자#mer	47,{
+	if (job_merchant_q == 4 || job_merchant_q == 3) {
+		mes "[마술사 길드 관계자]";
+		mes "아! 왔네~ 왔어~ 상인길드에서 물건이 왔어~  자자, 이 곳에....";
+		next;
+		mes "[마술사 길드 관계자]";
+		if (countitem(1081) == 1 || countitem(1082) == 1 || countitem(1091) == 1) {
+			mes "어이구~ 날씨도 이렇게 짜릿한데 이 곳까지 오시느라 수고가 많으십니다.";
+		}
+		else {
+			mes "어라? 물건은? 물건은 어디에 있습니까?";
+			close;
+		}
+		next;
+		mes "[마술사 길드 관계자]";
+		mes "자, 일련번호를 확인해 볼까요? 에....";
+		if (job_merchant_q2 == 3 && countitem(1081) != 0) {
+			mes "2989396.... 주문한 물건이 맞습니다. 자, 여기 영수증.";
+			delitem 1081,1; //Merchant_Box_1
+			getitem 1075,1; //Merchant_Voucher_3
+		}
+		else if (job_merchant_q2 == 4 && countitem(1082) != 0) {
+			mes "2191737.... 주문한 물건이 맞습니다. 자, 여기 영수증.";
+			delitem 1082,1; //Merchant_Box_2
+			getitem 1076,1; //Merchant_Voucher_4
+		}
+		else {
+			mes ".....! 번호가 틀려!?";
+			mes "잠깐만요! 이 물건은 저희 물건이 아닙니다!";
+			next;
+			mes "[마술사 길드 관계자]";
+			if (job_merchant_q2 == 3) {
+				mes "상인길드에서 저희쪽으로 오는 물건의 일련번호는 2989396입니다.";
+			}
+			else if (job_merchant_q2 == 4) {
+				mes "상인길드에서 저희쪽으로 오는 물건의 일련번호는 2191737입니다.";
+			}
+			else {
+				mes "상인길드에서 저희쪽으로 오는 물건의 일련번호는 2989396 또는 2191737 입니다.";
+			}
+		mes "뭔가 잘못된 것 같지 않습니까?";
+		close;
+		}
+		if (job_merchant_q == 4)
+			set job_merchant_q,6;
+		else if (job_merchant_q == 3)
+			set job_merchant_q,5;
+		next;
+		mes "[마술사 길드 관계자]";
+		mes "헤헤~ 다음에도 잘 부탁드립니다.";
+		close;
+	}
+	else if (job_merchant_q == 6 || job_merchant_q == 5 && job_merchant_q2 == 4 || job_merchant_q2 == 3) {
+		mes "[마술사 길드 관계자]";
+		mes "어여~ 상인길드 양반 안녕하슈~";
+		mes "다음에도 잘 부탁드립니다.";
+		close;
+	}
+	else {
+		mes "[마술사 길드 관계자]";
+		mes "물건이 도착할 때가 되어을텐데....";
+		mes "늦는군.... 흠...";
+		close;
+	}
+}
+
+prontera,248,42,0	script	카프라 직원#mer	116,{
+	cutin "kafra_02",2;
+	if (job_merchant_q == 6 || job_merchant_q == 5) && (job_merchant_q2 == 2 || job_merchant_q2 == 1) {
+		mes "[카프라 직원]";
+		mes "먼 곳까지 배달을 와주셔서 감사합니다";
+		close2;
+		cutin "",255;
+		end;
+	}
+	else if (job_merchant_q == 4 || job_merchant_q == 3) {
+		mes "[카프라 직원]";
+		mes "상인 길드에서 배달인가요?";
+		mes "아, 맞아요. 여기에 내려 놓아주세요";
+		next;
+		mes "[카프라 직원]";
+		if (countitem(1081) == 1 || countitem(1082) == 1 || countitem(1091) == 1) {
+			mes "오랜 시간 운송에 피곤하신 모양이네요";
+		}
+		else {
+			mes "저, 잠시만요. 확실히 가져오신 건가요?";
+			mes "물건은 어디있죠?";
+			close2;
+			cutin "",255;
+			end;
+		}
+		next;
+		mes "[카프라 직원]";
+		mes "그럼 확인해보겠습니다.";
+		mes "일련 번호가...";
+		if (job_merchant_q2 == 1 && countitem(1081) != 0) {
+			mes "2485741. 맞아요.";
+			mes "저희가 주문한 것이 확실하네요";
+			mes "여기 영수증. 잃어버리지 마세요.";
+			next;
+			delitem 1081,1; //Merchant_Box_1
+			getitem 1073,1; //Merchant_Voucher_1
+		}
+		else if (job_merchant_q2 == 2 && countitem(1082) != 0) {
+			mes "2328137. 맞아요.";
+			mes "저희가 주문한 것이 확실하네요";
+			mes "여기 영수증. 잃어버리지 마세요.";
+			next;
+			delitem 1082,1; //Merchant_Box_2
+			getitem 1074,1; //Merchant_Voucher_2
+		}
+		else {
+			mes "저, 잠시만요.";
+			mes "이 물건이 아닌데요?";
+			if (job_merchant_q2 == 1)
+				mes "저희가 주문한 물건의 일련 번호는 2485741이예요.";
+			else if (job_merchant_q2 == 2)
+				mes "저희가 주문한 물건의 일련 번호는 2328137이예요.";
+			else
+				mes "저희가 주문한 물건의 일련 번호는 2328137이거나 2328137이예요";
+			next;
+			mes "[카프라 직원]";
+			mes "상인 길드로 돌아가셔서";
+			mes "다시 한번 확인해보는 것이 좋겠군요.";
+			close2;
+			cutin "",255;
+			end;
+		}
+		if (job_merchant_q == 4)
+			set job_merchant_q,6;
+		else if (job_merchant_q == 3)
+			set job_merchant_q,5;
+		mes "[카프라 직원]";
+		mes "가져다 주셔서 감사합니다.";
+		close2;
+		cutin "",255;
+		end;
+	}
+	else {
+		mes "[카프라 직원]";
+		mes "안녕하세요, 카프라 서비스 입니다.";
+		next;
+		mes "[카프라 직원]";
+		mes "원하신다면^3355FF이즈루드의 검사길드로^000000 워프해 드립니다.";
+		mes "600제니가 소모됩니다.";
+		next;
+		if (select("Use:Cancel") == 1) {
+			if (Zeny < 600) {
+				mes "[카프라 직원]";
+				mes "요금이 부족합니다.";
+				close2;
+				cutin "",255;
+				end;
+			}
+			set zeny,zeny-600;
+			set RESRVPTS, RESRVPTS + 37;
+			cutin "",255;
+			warp "izlude",94,103;
+			end;
+		}
+		close2;
+		cutin "",255;
+		end;
+	}
+}
+
+//izlu2dun,106,58,4	script	카프라 직원#mer	116,{
+function	script	F_MercKafra	{
+	if ((job_merchant_q == 6 || job_merchant_q == 5) && (job_merchant_q2 == 8 || job_merchant_q2 == 7)) {
+		mes "[카프라 직원]";
+		mes "안녕하세요~";
+		mes "이곳에 계시는 특별한 이유라도 있으신가요?";
+		close2;
+		cutin "",255;
+		end;
+	}
+	else if (job_merchant_q == 4 || job_merchant_q == 3) {
+		mes "[카프라 직원]";
+		mes "상인조합에서 오셨다고요? 아!! 잊을뻔 했네요..";
+	       	mes "어디보자. 내가 적은 인증번호가...";
+		next;
+		mes "[카프라 직원]";
+		if (countitem(1081) == 1 || countitem(1082) == 1 || countitem(1091) == 1) {
+			mes "오랜 시간 운송에 피곤하신 모양이네요";
+		}
+		else {
+			mes "저, 잠시만요. 확실히 가져오신 건가요?";
+			mes "물건은 어디있죠?";
+			close2;
+			cutin "",255;
+			end;
+		}
+		next;
+		mes "[카프라 직원]";
+		mes "그럼 확인해보겠습니다.";
+		mes "일련 번호가...";
+		if (job_merchant_q2 == 7 && countitem(1081) != 0) {
+			mes "3318702. 맞네요.";
+			mes "저희가 주문한 것이 확실하네요";
+			mes "여기 영수증. 잃어버리지 마세요.";
+			delitem 1081,1; //Merchant_Box_1
+			getitem 1079,1; //Merchant_Voucher_7
+		}
+		else if (job_merchant_q2 == 8 && countitem(1082) != 0) {
+			mes "3543625. 맞네요.";
+			mes "저희가 주문한 것이 확실하네요";
+			mes "여기 영수증. 잃어버리지 마세요.";
+			delitem 1082,1; //Merchant_Box_2
+			getitem 1080,1; //Merchant_Voucher_8
+		}
+		else {
+			mes "저, 잠시만요.";
+			mes "이 물건이 아닌데요?";
+			if (job_merchant_q2 == 7)
+				mes "저희가 주문한 물건의 일련번호는 3318702이예요.";
+			else if (job_merchant_q2 == 8)
+				mes "저희가 주문한 물건의 일련번호는 3543625이예요.";
+			else
+				mes "저희가 주문한 물건의 일련번호는 3318702이거나 3543625이예요.";
+			close2;
+			cutin "",255;
+			end;
+		}
+		if (job_merchant_q == 4)
+			set job_merchant_q,6;
+		else if (job_merchant_q == 3)
+			set job_merchant_q,5;
+		next;
+		if (countitem(1072) != 0 && quest_alb_01 == 0) {
+			select("상인 길드의 만수란 사람이 이 편지를...");
+			delitem 1072,1; //Delivery_Message
+			set quest_alb_01,1;
+			mes "[카프라 직원]";
+     			mes "아!! 만수씨의 편지??";
+     			mes "요즘 편지가 안와서 걱정했는데.. 너무 감사해요";
+			next;
+			mes "[카프라 직원]";
+			mes "이건 보답입니다.";
+			getitem 513,3; //Banana
+		}
+		else {
+			mes "[카프라 직원]";
+			mes "다음에도 잘 부탁드립니다.";
+		}
+		close2;
+		cutin "",255;
+		end;
+	}
+	return;
+}

@@ -1,0 +1,108 @@
+
+//    kk  ""tt""  "";;    """"JJ;;kkJJ  JJtt""    ""tt""  ;;tt""""tt    ""tt""   
+//   JJ  kk""tt;;JJ      ttkk    ""tt    ;;;;ttJJ;;  ""ttkk;;"";;;;ttkk;;  ;;kk  
+//  "";;  ""  kk  kk  tt  ttww    ZZ;;  ww    RR  ;;JJ  JJJJ  tt    RR  ;;JJ  JJ 
+//  JJ      """";;""  kk  ttkk  ;;kk    ZZ    ww  ;;""  kk""  ww    kk;;kk""  JJ 
+//  kk      JJ  kk    ww  ttkk  JJJJ  ;;ww  ""JJ  ;;tt""RR    ZZ  ;;ZZJJ      kk 
+//  kk  ;;  "";;JJ        JJtt  JJJJ  ""kk  JJ""  ww""""ww    ww  ""JJ  ZZ    kk 
+//  JJ  JJ  ;;JJ""  "";;  ww;;  kkJJ  JJ""  kk;;  ww  ;;ww  ""JJ  ww;;  ww  ;;tt 
+//;;""  RR    RR    ww""  kk""  ;;tt  ww    kkkk      kktt  JJ;;  ZZ;;  ;;  tt   
+//  JJkkttkkkk;;kkkk;;JJkktt""kkJJJJkkttJJkk;;  kkkkJJ  ttkkttJJkk;;ttkkJJkkJJ   
+//| I | - | L | U | N | A | A | T | H | E | N | A | P | R | O | J | E | C | T |  
+//------------------------------------------------------------------------------
+// iLAthena 스킬 사용 제한 데이터베이스 <http://www.i-luna.com>
+// 한글화 by 아이루나 iLAthena Project
+//------------------------------------------------------------------------------
+// 스킬ID,플래그
+// 플래그:
+//  1 = 일반지역 사용불가 
+//  2 = PvP지역 사용불가
+//  4 = GvG지역 사용불가
+//  8 = 공성전지역 사용불가
+//  16 = 복제된 대상은 스킬 사용불가
+//  32 = 맵플래그 conf/mapflag/restricted.txt 파일에서 1번으로 설정된 지역에서 사용불가
+//  64 = 맵플래그 conf/mapflag/restricted.txt 파일에서 2번으로 설정된 지역에서 사용불가
+//  128 = 맵플래그 conf/mapflag/restricted.txt 파일에서 3번으로 설정된 지역에서 사용불가
+//  256 = 맵플래그 conf/mapflag/restricted.txt 파일에서 4번으로 설정된 지역에서 사용불가
+//  512 = 맵플래그 conf/mapflag/restricted.txt 파일에서 5번으로 설정된 지역에서 사용불가
+//  1024 = 맵플래그 conf/mapflag/restricted.txt 파일에서 6번으로 설정된 지역에서 사용불가
+//  2048 = 맵플래그 conf/mapflag/restricted.txt 파일에서 7번으로 설정된 지역에서 사용불가
+//
+// 예제 : 8,6 - PvP지역 및 GvG지역에서 인듀어 사용불가
+
+//GVG
+26,4	 // 텔레포테이션
+27,4	 // 워프 포탈
+87,4	 // 아이스월
+150,4	 // 백 슬라이딩
+361,4	 // 아숨프티오
+362,4	 // 바실리카
+395,4	 // 달빛 물레방앗간에 떨어지는 꽃잎
+491,4	 // 식물 재배
+691,4	//CASH_ASSUMPITO
+
+//BATTLEGROUND
+26,8	 // 텔레포테이션
+27,8	 // 워프 포탈
+87,8	 // 아이스월
+150,8	 // 백 슬라이딩
+361,8	 // 아숨프티오
+362,8	 // 바실리카
+395,8	 // 달빛 물레방앗간에 떨어지는 꽃잎
+491,8	 // 식물 재배
+411,8	 // 달리기
+426,8	 // 높이뛰기
+427,8	 // 태양과 달과 별의 느낌
+428,8	 // 태양의 따스함
+429,8	 // 달의 따스함
+430,8	 // 별의 따스함
+431,8	 // 태양의 안락함
+432,8	 // 달의 안락함
+433,8	 // 별의 안락함
+434,8	 // 태양과 달과 별의 증오
+435,8	 // 태양의 분노
+436,8	 // 달의 분노
+437,8	 // 별의 분노
+438,8	 // 태양의 축복
+439,8	 // 달의 축복
+440,8	 // 별의 축복
+691,8	//CASH_ASSUMPITO
+
+//mixed
+488,3	 // 헤르모드의 지팡이
+
+//Clone Forbidden/pointless skills
+77,16	 // 턴 언데드
+79,16	 // 마그누스 엑소르시스무스
+
+//Zone 1 - Aldebaran Turbo Track
+219,32	 // 인티머데이트
+26,32	 // 텔레포테이션
+27,32	 // 워프 포탈
+51,32	 // 하이딩
+135,32	 // 클로킹
+389,32	 // 체이스 워크
+35,32	 // 큐어
+87,32	 // 아이스월
+359,32	 // 버서크
+362,32	 // 바실리카
+395,32	 // 달빛 물레방앗간에 떨어지는 꽃잎
+357,32	 // 컨센트레이션
+264,32	 // 궁신탄영(弓身彈影)
+
+//Zone 2 - Jail
+421,64	 // 날라차기
+426,64	 // 높이뛰기
+
+//Zone 3 - Izlude Battle Arena
+219,128  // 인티머데이트
+26,128	 // 텔레포테이션
+
+//Zone 4 - WoE:SE
+426,256  // 높이뛰기
+//Zone 5 - Sealed Shrine
+12,512	//MG_SAFETYWALL
+26,512	//AL_TELEPORT
+219,512	//Snatch
+361,512	//HP_ASSUMPTIO
+691,512	//CASH_ASSUMPTIO

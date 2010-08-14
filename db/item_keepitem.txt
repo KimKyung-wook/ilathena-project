@@ -1,0 +1,29 @@
+
+//    kk  ""tt""  "";;    """"JJ;;kkJJ  JJtt""    ""tt""  ;;tt""""tt    ""tt""   
+//   JJ  kk""tt;;JJ      ttkk    ""tt    ;;;;ttJJ;;  ""ttkk;;"";;;;ttkk;;  ;;kk  
+//  "";;  ""  kk  kk  tt  ttww    ZZ;;  ww    RR  ;;JJ  JJJJ  tt    RR  ;;JJ  JJ 
+//  JJ      """";;""  kk  ttkk  ;;kk    ZZ    ww  ;;""  kk""  ww    kk;;kk""  JJ 
+//  kk      JJ  kk    ww  ttkk  JJJJ  ;;ww  ""JJ  ;;tt""RR    ZZ  ;;ZZJJ      kk 
+//  kk  ;;  "";;JJ        JJtt  JJJJ  ""kk  JJ""  ww""""ww    ww  ""JJ  ZZ    kk 
+//  JJ  JJ  ;;JJ""  "";;  ww;;  kkJJ  JJ""  kk;;  ww  ;;ww  ""JJ  ww;;  ww  ;;tt 
+//;;""  RR    RR    ww""  kk""  ;;tt  ww    kkkk      kktt  JJ;;  ZZ;;  ;;  tt   
+//  JJkkttkkkk;;kkkk;;JJkktt""kkJJJJkkttJJkk;;  kkkkJJ  ttkkttJJkk;;ttkkJJkkJJ   
+//| I | - | L | U | N | A | A | T | H | E | N | A | P | R | O | J | E | C | T |  
+//------------------------------------------------------------------------------
+// iLAthena 차암 아이템 데이터베이스 <http://www.i-luna.com>
+// 한글화 by 아이루나 iLAthena Project
+//------------------------------------------------------------------------------
+// 원작자 by 페퍼민트
+// 코드수정 by ★orz。
+//------------------------------------------------------------------------------
+// format: nameid,del,ref,pvp,gvg,addeff,{script}
+// nameid : 아이템번호
+// del : 바닥에 버렸을때 파괴인지 드랍인지 파괴 1, 드랍 0
+// ref : 해당 아이템의 제련도를 방어도 보너스로 적용 1, 아닌 0
+// pvp : PvP 맵에서 사용가능 0, 불가 1
+// gvg : GvG 맵에서 사용가능 0, 불가 1
+// addeff : 소비아이템처럼 여러개가 같은위치에 있을 수 있는 아이템의 경우 중복효과  1, 안함 0
+// script : 효과
+
+//7314,1,0,0,1,0,{ bonus bAllStats,5; }	// 더 사인
+//7511,1,0,1,1,1,{ bonus bStr,20; }	// 어둠의 룬

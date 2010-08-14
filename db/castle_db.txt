@@ -1,0 +1,52 @@
+
+//    kk  ""tt""  "";;    """"JJ;;kkJJ  JJtt""    ""tt""  ;;tt""""tt    ""tt""   
+//   JJ  kk""tt;;JJ      ttkk    ""tt    ;;;;ttJJ;;  ""ttkk;;"";;;;ttkk;;  ;;kk  
+//  "";;  ""  kk  kk  tt  ttww    ZZ;;  ww    RR  ;;JJ  JJJJ  tt    RR  ;;JJ  JJ 
+//  JJ      """";;""  kk  ttkk  ;;kk    ZZ    ww  ;;""  kk""  ww    kk;;kk""  JJ 
+//  kk      JJ  kk    ww  ttkk  JJJJ  ;;ww  ""JJ  ;;tt""RR    ZZ  ;;ZZJJ      kk 
+//  kk  ;;  "";;JJ        JJtt  JJJJ  ""kk  JJ""  ww""""ww    ww  ""JJ  ZZ    kk 
+//  JJ  JJ  ;;JJ""  "";;  ww;;  kkJJ  JJ""  kk;;  ww  ;;ww  ""JJ  ww;;  ww  ;;tt 
+//;;""  RR    RR    ww""  kk""  ;;tt  ww    kkkk      kktt  JJ;;  ZZ;;  ;;  tt   
+//  JJkkttkkkk;;kkkk;;JJkktt""kkJJJJkkttJJkk;;  kkkkJJ  ttkkttJJkk;;ttkkJJkkJJ   
+//| I | - | L | U | N | A | A | T | H | E | N | A | P | R | O | J | E | C | T |  
+//------------------------------------------------------------------------------
+// iLAthena 길드 성 데이터베이스 <http://www.i-luna.com>
+// 한글화 by 아이루나 iLAthena Project
+//------------------------------------------------------------------------------
+//
+// 데이터베이스 구조:
+// 성ID,맵이름,성이름,성포기이벤트이름(OnGuildBreak),플래그(비교)
+0,aldeg_cas01,노이슈반스타인,Agit#aldeg_cas01,1		// kRO : Noisyubantian
+1,aldeg_cas02,호헨슈반가우,Agit#aldeg_cas02,1		// kRO : Hohensyubangawoo
+2,aldeg_cas03,뉘렌베르크,Agit#aldeg_cas03,1		// kRO : Nyirenverk
+3,aldeg_cas04,뷔르츠부르크,Agit#aldeg_cas04,1		// kRO : Byirtsburi
+4,aldeg_cas05,로텐부르크,Agit#aldeg_cas05,1		// kRO : Rotenburk
+5,gefg_cas01,레프리온,Agit#gefg_cas01,1			// kRO : Reprion
+6,gefg_cas02,욜브리거,Agit#gefg_cas02,1			// kRO : Yolbriger
+7,gefg_cas03,이스넬프,Agit#gefg_cas03,1			// kRO : Isinlife
+8,gefg_cas04,베르겔,Agit#gefg_cas04,1			// kRO : Berigel
+9,gefg_cas05,멜세스데츠,Agit#gefg_cas05,1		// kRO : Melsedetsu
+10,payg_cas01,명정(明亭),Agit#payg_cas01,1		// kRO : Mingting
+11,payg_cas02,천단(天壇),Agit#payg_cas02,1		// kRO : Tiantan
+12,payg_cas03,불영(佛影),Agit#payg_cas03,1		// kRO : Fuying
+13,payg_cas04,홍루(紅樓),Agit#payg_cas04,1		// kRO : Honglou
+14,payg_cas05,죽림현(竹林峴),Agit#payg_cas05,1		// kRO : Zhulinxian
+15,prtg_cas01,크림힐트,Agit#prtg_cas01,1		// kRO : Creamhilt
+16,prtg_cas02,스반힐트,Agit#prtg_cas02,1		// kRO : Sbanhealt
+17,prtg_cas03,라즈리그스,Agit#prtg_cas03,1		// kRO : Lazrigees
+18,prtg_cas04,스쾨굴,Agit#prtg_cas04,1			// kRO : Squagul
+19,prtg_cas05,괸들,Agit#prtg_cas05,1			// kRO : Guindull
+20,nguild_alde,뉘렌베르크,Agit_N01,2
+21,nguild_gef,이스넬프,Agit_N02,2
+22,nguild_pay,불영(佛影),Agit_N03,2
+23,nguild_prt,라즈리그스,Agit_N04,2
+24,schg_cas01,히민,Agit_Sc01,1				// kRO : Himinn
+25,schg_cas02,안들랑그,Agit_Sc02,1			// kRO : Andlangr
+26,schg_cas03,비드블라인,Agit_Sc03,1			// kRO : Viblainn
+27,schg_cas04,흘료드,Agit_Sc04,1			// kRO : Hljod
+28,schg_cas05,스카티르닐,Agit_Sc05,1			// kRO : Skidbladnir
+29,arug_cas01,마르돌,Agit_Ar01,1			// kRO : Mardol
+30,arug_cas02,시르,Agit_Ar02,1				// kRO : Cyr
+31,arug_cas03,호른,Agit_Ar03,1				// kRO : Horn
+32,arug_cas04,게픈,Agit_Ar04,1				// kRO : Gefn
+33,arug_cas05,바나디스,Agit_Ar05,1			// kRO : Bandis

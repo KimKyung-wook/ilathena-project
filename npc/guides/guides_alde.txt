@@ -1,0 +1,49 @@
+
+//    kk  ""tt""  "";;    """"JJ;;kkJJ  JJtt""    ""tt""  ;;tt""""tt    ""tt""   
+//   JJ  kk""tt;;JJ      ttkk    ""tt    ;;;;ttJJ;;  ""ttkk;;"";;;;ttkk;;  ;;kk  
+//  "";;  ""  kk  kk  tt  ttww    ZZ;;  ww    RR  ;;JJ  JJJJ  tt    RR  ;;JJ  JJ 
+//  JJ      """";;""  kk  ttkk  ;;kk    ZZ    ww  ;;""  kk""  ww    kk;;kk""  JJ 
+//  kk      JJ  kk    ww  ttkk  JJJJ  ;;ww  ""JJ  ;;tt""RR    ZZ  ;;ZZJJ      kk 
+//  kk  ;;  "";;JJ        JJtt  JJJJ  ""kk  JJ""  ww""""ww    ww  ""JJ  ZZ    kk 
+//  JJ  JJ  ;;JJ""  "";;  ww;;  kkJJ  JJ""  kk;;  ww  ;;ww  ""JJ  ww;;  ww  ;;tt 
+//;;""  RR    RR    ww""  kk""  ;;tt  ww    kkkk      kktt  JJ;;  ZZ;;  ;;  tt   
+//  JJkkttkkkk;;kkkk;;JJkktt""kkJJJJkkttJJkk;;  kkkkJJ  ttkkttJJkk;;ttkkJJkkJJ   
+//| I | - | L | U | N | A | A | T | H | E | N | A | P | R | O | J | E | C | T |  
+//------------------------------------------------------------------------------
+// iLAthena 알데바란 안내요원 스크립트 <http://www.i-luna.com>
+// 한글화 by 아이루나 iLAthena Project
+//------------------------------------------------------------------------------
+// 한글화 by RUSH
+//------------------------------------------------------------------------------
+
+aldebaran,139,63,4	script	병사#alde	105,{
+	cutin "prt_soldier",2;
+	mes "[알데바란수비병]";
+	mes "어느 마을에나 있는 수비병이 아닙니닷 !!";
+	mes "알데바란 수호대의 서비스 안내를 책임진";
+	mes "알데바란수비병 !! (이름 없음)";
+	mes "길 안내를 해드리겠습니닷 !";
+	next;
+	if (select("위치를 안내받는다:그만둔다") == 1) {
+		viewpoint 1,61,229,0,0xFF6633;
+		viewpoint 1,72,197,1,0x0000FF;
+		viewpoint 1,223,222,2,0x00FFFF;
+		viewpoint 1,233,105,3,0x515151;
+		viewpoint 1,197,70,4,0x3355FF;
+		viewpoint 1,60,60,5,0xFF5555;
+		mes "^FF6633+^000000 -> 카프라본사";
+		mes "^0000FF+^000000 -> 무기점";
+		mes "^00FFFF+^000000 -> 소서러길드 (Closed)";
+		mes "^515151+^000000 -> 주점";
+		mes "^3355FF+^000000 -> 도구점";
+		mes "^FF5555+^000000 -> 연금술사 조합";
+		close2;
+		cutin "prt_soldier",255;
+		end;
+	}
+	mes "[알데바란수비병]";
+	mes "알데바란은 저희 수비대가 지키겠습니닷 !!";
+	close2;
+	cutin "prt_soldier",255;
+	end;
+}

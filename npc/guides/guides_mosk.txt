@@ -1,0 +1,126 @@
+//<<<<<<< .mine
+
+//    kk  ""tt""  "";;    """"JJ;;kkJJ  JJtt""    ""tt""  ;;tt""""tt    ""tt""   
+//   JJ  kk""tt;;JJ      ttkk    ""tt    ;;;;ttJJ;;  ""ttkk;;"";;;;ttkk;;  ;;kk  
+//  "";;  ""  kk  kk  tt  ttww    ZZ;;  ww    RR  ;;JJ  JJJJ  tt    RR  ;;JJ  JJ 
+//  JJ      """";;""  kk  ttkk  ;;kk    ZZ    ww  ;;""  kk""  ww    kk;;kk""  JJ 
+//  kk      JJ  kk    ww  ttkk  JJJJ  ;;ww  ""JJ  ;;tt""RR    ZZ  ;;ZZJJ      kk 
+//  kk  ;;  "";;JJ        JJtt  JJJJ  ""kk  JJ""  ww""""ww    ww  ""JJ  ZZ    kk 
+//  JJ  JJ  ;;JJ""  "";;  ww;;  kkJJ  JJ""  kk;;  ww  ;;ww  ""JJ  ww;;  ww  ;;tt 
+//;;""  RR    RR    ww""  kk""  ;;tt  ww    kkkk      kktt  JJ;;  ZZ;;  ;;  tt   
+//  JJkkttkkkk;;kkkk;;JJkktt""kkJJJJkkttJJkk;;  kkkkJJ  ttkkttJJkk;;ttkkJJkkJJ   
+//| I | - | L | U | N | A | A | T | H | E | N | A | P | R | O | J | E | C | T |  
+//------------------------------------------------------------------------------
+// iLAthena 모스코비아 가이드 스크립트 <http://www.i-luna.com>
+// 한글화 by 아이루나 iLAthena Project
+//------------------------------------------------------------------------------
+// 한글화 by 악승
+//------------------------------------------------------------------------------
+
+//    kk  ""tt""  "";;    """"JJ;;kkJJ  JJtt""    ""tt""  ;;tt""""tt    ""tt""   
+//   JJ  kk""tt;;JJ      ttkk    ""tt    ;;;;ttJJ;;  ""ttkk;;"";;;;ttkk;;  ;;kk  
+//  "";;  ""  kk  kk  tt  ttww    ZZ;;  ww    RR  ;;JJ  JJJJ  tt    RR  ;;JJ  JJ 
+//  JJ      """";;""  kk  ttkk  ;;kk    ZZ    ww  ;;""  kk""  ww    kk;;kk""  JJ 
+//  kk      JJ  kk    ww  ttkk  JJJJ  ;;ww  ""JJ  ;;tt""RR    ZZ  ;;ZZJJ      kk 
+//  kk  ;;  "";;JJ        JJtt  JJJJ  ""kk  JJ""  ww""""ww    ww  ""JJ  ZZ    kk 
+//  JJ  JJ  ;;JJ""  "";;  ww;;  kkJJ  JJ""  kk;;  ww  ;;ww  ""JJ  ww;;  ww  ;;tt 
+//;;""  RR    RR    ww""  kk""  ;;tt  ww    kkkk      kktt  JJ;;  ZZ;;  ;;  tt   
+//  JJkkttkkkk;;kkkk;;JJkktt""kkJJJJkkttJJkk;;  kkkkJJ  ttkkttJJkk;;ttkkJJkkJJ   
+//| I | - | L | U | N | A | A | T | H | E | N | A | P | R | O | J | E | C | T |  
+//------------------------------------------------------------------------------
+// iLAthena 모스코비아 안내요원 스크립트 <http://www.i-luna.com>
+// 한글화 by 아이루나 iLAthena Project
+//------------------------------------------------------------------------------
+// 한글화 by RUSH
+//------------------------------------------------------------------------------
+
+moscovia,161,76,4	script	Moscovia Guide#mosk	959,{
+	mes "[모스코비아 안내원]";
+	mes "끝없이 펼쳐진 바다위의 낙원,";
+	mes "아름다운 파도와 따스한 태양이";
+	mes "당신을 기다리는 모스코비아에 잘";
+	mes "오셨습니다.";
+	next;
+	mes "[모스코비아 안내원]";
+	mes "전 모스코비아 황궁에서 파견되어";
+	mes "이 곳을 찾는 여행자들에게 마을";
+	mes "이곳저곳을 안내해 드리고 있습니다.";
+	mes "궁금한 점이 있으면 저에게";
+	mes "말씀해주세요.";
+	next;
+	switch(select("마을지리를 묻는다.:미니 맵에 표시들을 모두 지운다.:그만둔다.")) {
+		case 1:
+			mes "[모스코비아 안내원]";
+			mes "어디를 안내해 드릴까요?";
+			next;
+			switch(select("왕궁:예배당:무기점:도구점:여관")) {
+				case 1:
+					mes "[모스코비아 안내원]";
+					mes "왕궁은 ^ff0000+^000000에 있어요.";
+					mes "모스코비아의 통치자이신 차르폐하";
+					mes "와 여러 신료들이 있는 곳이지요.";
+					close2;
+					viewpoint 1,257,138,1,0xFF0000;
+					end;
+				case 2:
+					viewpoint 1,185,187,2,0x00FF00;
+					mes "[모스코비아 안내원]";
+					mes "예배당은 ^ff0000+^000000에 있어요.";
+					mes "모스코비아의 안녕을 기원하시는";
+					mes "수도사분들이 계신 곳입니다.";
+					close2;
+					viewpoint 1,229,208,2,0x3355FF;
+					close;
+				case 3:
+					mes "[모스코비아 안내원]";
+					mes "The Tool Shop is located just south";
+					mes "from the center of town.";
+					mes "You can find all sorts of things";
+					mes "you need for your travels.";
+					mes "[모스코비아 안내원]";
+					mes "무기점은 ^ff0000+^000000에 있어요.";
+					mes "모스코비아 최고 장인들의 실력좋은";
+					mes "무기를 보실 수 있습니다.";
+					close2;
+					viewpoint 1,253,114,3,0x00FF00;   // 무기점 좌표 정보 필요
+					end;
+				case 4:
+					mes "[모스코비아 안내원]";
+					mes "The Inn 'Sticky Herb Tree' is just";
+					mes "north from the center of town.";
+					mes "If you need to rest, there is no";
+					mes "better place to stay.";
+					mes "[모스코비아 안내원]";
+					mes "도구점은 ^ff0000+^000000에 있어요.";
+					mes "여행을 떠나기 전에는 준비를 든든히";
+					mes "하셔야지요.";
+					close2;
+					viewpoint 1,223,174,4,0x00FF00;
+					end;
+				case 5:
+					mes "[모스코비아 안내원]";
+					mes "여관은 ^ff0000+^000000에 있어요.";
+					mes "여행에 지친 피로를 이 곳에서 꼭 풀고";
+					mes "가시기 바랍니다.";
+					close2;
+					viewpoint 1,185,187,5,0x00FF00; // 여관 좌표정보필요
+					close;
+			}
+		case 2:
+			mes "[모스코비아 안내원]";
+			mes "미니맵의 표시를 모두 지웠어요.";
+			mes "미니맵에 다시 표시하고 싶으시면";
+			mes "언제든지 다시 물어보세요.";
+			viewpoint 1,257,138,1,0xFF0000;           //좌표정보 수정 필요
+			viewpoint 1,229,208,2,0x3355FF;
+			viewpoint 1,253,114,3,0x00FF00;
+			viewpoint 1,223,174,4,0x00FF00;
+			viewpoint 1,185,187,5,0x00FF00;      
+			close;
+		case 3:
+			mes "[모스코비아 안내원]";
+			mes "직접 돌아다니면서 익히는 것도.";
+			mes "재미있겟죠. 그럼 몸조심 하세요.";
+			close;
+	}
+}
