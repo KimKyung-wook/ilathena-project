@@ -1,0 +1,313 @@
+
+//    kk  ""tt""  "";;    """"JJ;;kkJJ  JJtt""    ""tt""  ;;tt""""tt    ""tt""   
+//   JJ  kk""tt;;JJ      ttkk    ""tt    ;;;;ttJJ;;  ""ttkk;;"";;;;ttkk;;  ;;kk  
+//  "";;  ""  kk  kk  tt  ttww    ZZ;;  ww    RR  ;;JJ  JJJJ  tt    RR  ;;JJ  JJ 
+//  JJ      """";;""  kk  ttkk  ;;kk    ZZ    ww  ;;""  kk""  ww    kk;;kk""  JJ 
+//  kk      JJ  kk    ww  ttkk  JJJJ  ;;ww  ""JJ  ;;tt""RR    ZZ  ;;ZZJJ      kk 
+//  kk  ;;  "";;JJ        JJtt  JJJJ  ""kk  JJ""  ww""""ww    ww  ""JJ  ZZ    kk 
+//  JJ  JJ  ;;JJ""  "";;  ww;;  kkJJ  JJ""  kk;;  ww  ;;ww  ""JJ  ww;;  ww  ;;tt 
+//;;""  RR    RR    ww""  kk""  ;;tt  ww    kkkk      kktt  JJ;;  ZZ;;  ;;  tt   
+//  JJkkttkkkk;;kkkk;;JJkktt""kkJJJJkkttJJkk;;  kkkkJJ  ttkkttJJkk;;ttkkJJkkJJ   
+//| I | - | L | U | N | A | A | T | H | E | N | A | P | R | O | J | E | C | T |  
+//------------------------------------------------------------------------------
+// iLAthena 아이템 옵션 리스트 <http://www.i-luna.com>
+// 한글화 by 아이루나 iLAthena Project
+//------------------------------------------------------------------------------
+// 한글화 by 패드릭
+//------------------------------------------------------------------------------
+
+//===== 안내 ==============================================
+//= 아이템 구문(옵션) 스크립트의 설명과 사용법을 기술했음.
+//= bonus/bonus2/bonus3/bonus4/bonus5 스크립트 기술.
+//=========================================================
+
+skill i,n;				스킬 i를 n레벨 만큼 취득한다. (i=스킬ID 및 스킬이름)
+
+bonus bStr,n;				n만큼 힘을 증감시킨다. (순수±n)
+bonus bAgi,n;				n만큼 어질을 증감시킨다. (순수±n)
+bonus bVit,n;				n만큼 바탈을 증감시킨다. (순수±n)
+bonus bInt,n;				n만큼 인트를 증감시킨다. (순수±n)
+bonus bDex,n;				n만큼 덱스를 증감시킨다. (순수±n)
+bonus bLuk,n;				n만큼 럭을 증감시킨다. (순수±n)
+bonus bAllStats,n;			n만큼 모든 스테이터스를 증감시킨다. (순수±n)
+bonus bMaxHP,n;				n만큼 최대HP를 증감시킨다.
+bonus bMaxSP,n;				n만큼 최대SP를 증감시킨다.
+bonus bMaxHPrate,n;			n%만큼 최대HP를 증감시킨다.
+bonus bMaxSPrate,n;			n%만큼 최대SP를 증감시킨다.
+bonus bAtk,n;				n만큼 물리 공격력을 증감시킨다. (최저+n)
+bonus bAtk2,n;				n만큼 물리 공격력2를 증감시킨다. (최대+n)
+bonus bAtkRate,n;			n%만큼 물리 공격력을 증감시킨다. (화면표시안됨)
+bonus bBaseAtk,n;			n만큼 무기 공격력을 증감시킨다.
+// eAthena SVN Trunk 13809 에서 삭제
+// bonus bMatk,n;				n만큼 마법 공격력을 증감시킨다.
+// bonus bMatk1,n;				n만큼 마법 공격력1을 증감시킨다. (최저+n)
+// bonus bMatk2,n;				n만큼 마법 공격력2를 증감시킨다. (최대+n)
+bonus bMatkRate,n;			n%만큼 마법 공격력을 증감시킨다. (화면표시안됨)
+bonus bDef,n;				n만큼 물리 방어력을 증감시킨다. (앞방)
+bonus bDef2,n;				n만큼 물리 방어력을 증감시킨다. (뒷방)
+bonus bDefRate,n;			n%만큼 물리 방어력을 증감시킨다. (앞방)
+bonus bDef2Rate,n;			n%만큼 물리 방어력을 증감시킨다. (뒷방)
+bonus bMdef,n;				n만큼 마법 방어력을 증감시킨다. (앞방)
+bonus bMdef2,n;				n만큼 마법 방어력2를 증감시킨다. (뒷방)
+bonus bMdefRate,n;			n%만큼 마법 방어력을 증감시킨다. (앞방)
+bonus bMdef2Rate,n;			m%만큼 마법 방어력2를 증감시킨다. (뒷방)
+bonus bHit,n;				n만큼 명중율을 증감시킨다.
+bonus bHitRate,n;			n%만큼 명중율을 증감시킨다.
+bonus bCritical,n;			n만큼 크리티컬을 증감시킨다.
+bonus bCriticalRate,n;			n%만큼 크리티컬을 증감시킨다.
+bonus bFlee,n;				n만큼 회피율을 증감시킨다.
+bonus bFleeRate,n;			n%만큼 회피율을 증감시킨다.
+bonus bFlee2,n;				n만큼 완전회피율을 증감시킨다.
+bonus bFlee2Rate,n;			n%만큼 완전회피율을 증감시킨다.
+bonus bSpeedRate,n;			n%만큼 이동속도를 증감시킨다. (단, 중복일 경우 가장 높은것만 적용된다.)
+bonus bSpeedAddRate,n;			n%만큼 이동속도를 증감시킨다.
+bonus bAspd,n;				n만큼 공격속도를 증감시킨다.
+bonus bAspdRate,n;			n%만큼 공격속도를 증감시킨다.
+bonus bAtkRange,n;			n만큼 공격 사정거리를 증감시킨다.
+bonus bCastrate,n;			n%만큼 캐스팅 속도를 증감시킨다.
+bonus bUseSPrate,n;			m%만큼 SP소비량을 증감시킨다.
+bonus bHPrecovRate,n;			n%만큼 HP자연회복율을 증감시킨다. (순수±)
+bonus bSPrecovRate,n;			n%만큼 SP자연회복율을 증감시킨다. (순수±)
+bonus bDoubleRate,n;			n%만큼 더불어택 확률을 증감시킨다. (모든 무기에 적용된다. | 단, 중복일 경우 가장 높은것만 적용된다.)
+bonus bDoubleAddRate,n;			n%만큼 더불어택 확률을 증감시킨다. (모든 무기에 적용된다.)
+bonus bPerfectHitRate,n;		n%만큼 유도공격 확률을 증감시킨다. (단, 중복일 경우 가장 높은것만 적용된다.)
+bonus bPerfectHitAddRate,n;		n%만큼 유도공격 확률을 증감시킨다.
+bonus bCriticalDef,n;			n%만큼 크리티컬 내성을 증감시킨다.
+bonus bNearAtkDef,n;			n%만큼 근거리 공격에 대한 내성을 증감시킨다.
+bonus bLongAtkDef,n;			n%만큼 원거리 공격에 대한 내성을 증감시킨다.
+bonus bMagicAtkDef,n;			n%만큼 마법 공격에 대한 내성을 증감시킨다.
+bonus bMiscAtkDef,n;			n%만큼 기타 공격에 대한 내성을 증감시킨다. (펄콘/트랩 등)
+bonus bIgnoreDefRace,n;			n종족에 대한 물리 방어력을 무시한다.
+							n: 	0=무형, 1=불사(언데드), 2=동물, 3=식물, 4=곤충,
+								5=어류, 6=악마, 7=인간, 8=천사, 9=용족, 
+								10=보스 몬스터, 11=보스이외 몬스터(보통 몬스터)
+bonus bIgnoreDefEle,n;			n속성에 대한 물리 방어력을 무시한다.
+							n: 	0=무, 1=수, 2=지, 3=화, 4=풍, 5=독, 6=성, 7=암, 8=염, 9=불사(언데드)
+bonus bIgnoreMDefRace,n;			n종족에 대한 마법 방어력을 무시한다.
+							n: 	0=무형, 1=불사(언데드), 2=동물, 3=식물, 4=곤충,
+								5=어류, 6=악마, 7=인간, 8=천사, 9=용족, 
+								10=보스 몬스터, 11=보스이외 몬스터(보통 몬스터)
+bonus bIgnoreMDefEle,n;			n속성에 대한 마법 방어력을 무시한다.
+							n: 	0=무, 1=수, 2=지, 3=화, 4=풍, 5=독, 6=성, 7=암, 8=염, 9=불사(언데드)
+bonus bIgnoreMdefRate,n;		n%만큼 타켓의 마법 방어력을 무시한다.
+bonus bDefRatioAtkRace,n;		n종족에 대한 방어력에 따른 증가 데미지를 준다. (방어 무시)
+							n: 	0=무형, 1=불사(언데드), 2=동물, 3=식물, 4=곤충,
+								5=어류, 6=악마, 7=인간, 8=천사, 9=용족, 
+								10=보스 몬스터, 11=보스이외 몬스터(보통 몬스터)
+bonus bDefRatioAtkEle,n;		n속성에 대한 방어력에 따른 증가 데미지를 준다. (방어 무시)
+							n: 	0=무, 1=수, 2=지, 3=화, 4=풍, 5=독, 6=성, 7=암, 8=염, 9=불사(언데드)
+bonus bAtkEle,n;			무기에 n 속성을 부여한다.
+							n: 	0=무, 1=수, 2=지, 3=화, 4=풍, 5=독, 6=성, 7=암, 8=염, 9=불사(언데드)
+bonus bDefEle,n;			방어구에 n 속성을 부여한다.
+							n: 	0=무, 1=수, 2=지, 3=화, 4=풍, 5=독, 6=성, 7=암, 8=염, 9=불사(언데드)
+bonus bSplashRange,n;			n만큼 범위공격을 부여한다. (n=1 3*3 셀 범위, n=2 5*5 셀 범위, 등등)
+								   (단, 중복일 경우 가장 높은것만 적용된다.)
+bonus bSplashAddRange,n;		n만큼 범위공격을 부여한다. (n=1 3*3 셀 범위, n=2 5*5 셀 범위, 등등)
+bonus bRestartFullRecover,n;		부활시 HP와 SP의 회복량을 정한다. (n=0)
+bonus bNoCastCancel,n;			캐스팅도중 타격을 입어도 캔솔되지 않는다.
+								(GvG에서는 적용이 안됩니다. | n=0)
+bonus bNoCastCancel2,n;			캐스팅도중 어떠한(모든) 타격을 입어도 캔솔되지 않는다.
+								(GvG에서는 적용이 안됩니다. | n=0)
+bonus bNoSizeFix,n;			모든 크기에 대하여 100% 데미지를 준다. (n=0)
+bonus bNoWeaponDamage,n;		물리 데미지를 무시한다. (n=0)
+bonus bNoMagicDamage,n;			마법 데미지를 무시한다. (버프 역시 무시합니다. | n=0)
+bonus bNoGemStone,n;			스킬사용시 젬스톤을 소모하지 않는다.
+								(옐로우 젬스톤은 소모합니다. | n=0)
+bonus bIntravision,n;			하이딩이나 클로킹한 유저나 몬스터를 볼수 있다. (n=0)
+bonus2 bAddEff,e,x;			x/10000%확률로 타켓에게 e상태이상을 건다. (x=100 1%확률, x=10000 100%확률, 등등)
+							e: Eff_Blind=암혹, Eff_Sleep=수면, Eff_Poison=독, Eff_Freeze=결빙, Eff_Silence=침묵
+							   Eff_Stan=스턴, Eff_Curse=저주, Eff_Confusion=혼란, Eff_Stone=석화, Eff_Bleeding=출혈
+bonus2 bResEff,e,x;			x/10000%만큼 e상태이상에 대한 내성을 증감시킨다. (x=100 1%확률, x=10000 100%확률, 등등)
+							e: Eff_Blind=암혹, Eff_Sleep=수면, Eff_Poison=독, Eff_Freeze=결빙, Eff_Silence=침묵
+							   Eff_Stan=스턴, Eff_Curse=저주, Eff_Confusion=혼란, Eff_Stone=석화, Eff_Bleeding=출혈
+bonus2 bCastrate,n,x;			x%만큼 스킬 n의 캐스팅 속도를 증감시킨다. (n=스킬ID 및 스킬이름)
+bonus2 bAddSize,n,x;			n크기에 대한 물리 공격력을 x%만큼 증감시킨다.
+							n: 0=소형  1=중형  2=대형
+bonus2 bMagicAddSize,n,x;		n크기에 대한 마법 공격력을 x%만큼 증감시킨다.
+							n: 0=소형  1=중형  2=대형
+bonus2 bSubSize,n,x;			n크기 몬스터에게 받는 데미지를 x%만큼 증감시킨다.
+							n: 0=소형  1=중형  2=대형
+bonus2 bAddRace,n,x;			n종족에 대한 물리 공격력을 x%만큼 증감시킨다.
+							n: 	0=무형, 1=불사(언데드), 2=동물, 3=식물, 4=곤충,
+								5=어류, 6=악마, 7=인간, 8=천사, 9=용족, 
+								10=보스 몬스터, 11=보스이외 몬스터(보통 몬스터)
+bonus2 bMagicAddRace,n,x;		n종족에 대한 마법 공격력을 n%만큼 증감시킨다.
+							n: 	0=무형, 1=불사(언데드), 2=동물, 3=식물, 4=곤충,
+								5=어류, 6=악마, 7=인간, 8=천사, 9=용족, 
+								10=보스 몬스터, 11=보스이외 몬스터(보통 몬스터)
+bonus2 bSubRace,n,x;			n종족 몬스터에게 받는 데미지를 x%만큼 증감시킨다.
+							n: 	0=무형, 1=불사(언데드), 2=동물, 3=식물, 4=곤충,
+								5=어류, 6=악마, 7=인간, 8=천사, 9=용족, 
+								10=보스 몬스터, 11=보스이외 몬스터(보통 몬스터)
+bonus2 bAddEle,n,x;			n속성에 대한 물리 공격력을 x%만큼 증감시킨다.
+							n: 	0=무, 1=수, 2=지, 3=화, 4=풍, 5=독, 6=성, 7=암, 8=염, 9=불사(언데드)
+bonus2 bMagicAddEle,n,x; 		n속성에 대한 마법 공격력을 x%만큼 증감시킨다.
+							n: 	0=무, 1=수, 2=지, 3=화, 4=풍, 5=독, 6=성, 7=암, 8=염, 9=불사(언데드)
+bonus2 bSubEle,n,x;			n속성 몬스터에게 받는 데미지를 x%만큼 증감시킨다.
+							n: 	0=무, 1=수, 2=지, 3=화, 4=풍, 5=독, 6=성, 7=암, 8=염, 9=불사(언데드)
+bonus2 bAddDamageClass,n,x;		n에 대한 물리 공격력를 x%만큼 증감시킨다. (n=몬스터ID 및 직업ID)
+bonus2 bAddMagicDamageClass,n,x;	n에 대한 마법 공격력를 x%만큼 증감시킨다. (n=몬스터ID 및 직업ID)
+bonus2 bAddDefClass,n,x;		n에 대한 물리 방어력을 x%만큼 증감시킨다. (n=몬스터ID 및 직업ID)
+bonus2 bAddMDefClass,n,x;		n에 대한 마법 방어력을 x%만큼 증감시킨다. (n=몬스터ID 및 직업ID)
+bonus2 bIgnoreMdefRate,n,x;		n종족 몬스터의 마법 방어력을 x%확률로 무시한다.
+bonus2 bHPDrainRate,n,x;		n/10%확률로 매공격마다 준 데미지의 x%만큼 HP로 흡수한다.
+bonus2 bSPDrainRate,n,x;		n/10%확률로 매공격마다 준 데미지의 x%만큼 SP로 흡수한다.
+bonus2 bSPVanishRate,n,x;		n/10%확률로 타켓의 SP를 x만큼 소멸시킨다.
+bonus2 bAddMonsterDropItem,n,x;		x%확률로 몬스터 사망시 n의 아이템을 획득한다. (몬스터가 드랍하는 아이템과는 관계없다.)
+									x값이 부정일 경우 아래 공식을 적용합니다.
+										확률 = -x*(killed_mob_level/10)+1
+bonus2 bGetZenyNum,n,x;			x%확률로 몬스터 사망시 1~n Zeny를 획득한다.
+								(단, 중복일 경우 가장 높은것만 적용된다.)
+								n < 0 일경우, 소지 금액에서 -n*monster level한다.
+bonus2 bAddGetZenyNum,n,x;		x%확률로 몬스터 사망시 1~n Zeny를 획득한다.
+								n < 0 일경우, 소지 금액에서 -n*monster level한다.
+bonus3 bAddMonsterDropItem,n,x,y;	y%확률로 x종족 몬스터 사망시 n의 아이템을 획득한다. (몬스터가 드랍하는 아이템과는 관계없다.)
+								x: 	0=무형, 1=불사(언데드), 2=동물, 3=식물, 4=곤충,
+									5=어류, 6=악마, 7=인간, 8=천사, 9=용족, 
+									10=보스 몬스터, 11=보스이외 몬스터(보통 몬스터)
+									x값이 부정일 경우 아래 공식을 적용합니다.
+										확률 = -x*(killed_mob_level/10)+1
+bonus3 bAutoSpell,n,x,y;		y/10%확률로 공격시 스킬 n을 x레벨로 오토스펠한다. (n=스킬ID 및 스킬이름)
+								자기 보조스킬이나 보조스킬이 아니면 타켓에게 스펠됩니다.
+
+// bAddDamageClass, bAddMagicDamageClass, bAddMonsterDropItem 구문은 최대 10개까지 사용이 가능하며, 11개 이상부터는 무시됩니다. 
+// 화살에 사용할 수 있는 구문은 bCritical, bAtkEle, bHit, bAddEle, bAddRace, bAddSize, bAddEff 뿐이며, 그 외 구문은 무시됩니다.
+
+
+
+//---- 2/15 신규 카드 구문(옵션) ----
+
+bonus bCritAtkRate,n;			n%만큼 크리티컬 공격력을 증감시킨다.
+bonus bNoRegen,n;			HP/SP 회복이 되지 않는다.
+							n: 1=HP, 2=SP
+bonus bUnstripableWeapon,n;		스트립 웨폰 스킬에 의해 벗겨지지 않는다. (n=0)
+bonus bUnstripableArmor,n;		스트립 아머 스킬에 의해 벗겨지지 않는다. (n=0)
+bonus bUnstripableHelm,n;		스트립 헬름 스킬에 의해 벗겨지지 않는다. (n=0)
+bonus bUnstripableShield,n;		스트립 쉴드 스킬에 의해 벗겨지지 않는다. (n=0)
+bonus bSPGainValue,n;			근접물리 공격에 의한 몬스터 사망시 SP를 n만큼 얻는다.
+bonus bHPGainValue,n;			근접물리 공격에 의한 몬스터 사망시 HP를 n만큼 얻는다.
+bonus bIgnoreDefMob,n;			몬스터 방어력을 무시한다.
+							n: 0=보스이외 몬스터(보통 몬스터), 1=모든 몬스터(보스 포함)
+bonus2 bCriticalAddRace,n,r;		r종족 몬스터에 한해서 크리티컬을 증감시킨다.
+							r: 	0=무형, 1=불사(언데드), 2=동물, 3=식물, 4=곤충,
+								5=어류, 6=악마, 7=인간, 8=천사, 9=용족, 
+								10=보스 몬스터, 11=보스이외 몬스터(보통 몬스터)
+								x값이 부정일 경우 아래 공식을 적용합니다.
+bonus2 bHPRegenRate,n,x;		n%만큼 x초마다 HP를 회복한다. (x=ms단위)
+bonus2 bHPLossRate,n,x;			n%만큼 x초마다 HP를 소실한다. (x=ms단위)
+bonus2 bAddEffWhenHit,n,x;		물리 데미지를 입었을 때, 적에게 x/100%확률로 n상태이상을 건다.
+							n: Eff_Blind=암혹, Eff_Sleep=수면, Eff_Poison=독, Eff_Freeze=결빙, Eff_Silence=침묵
+							   Eff_Stan=스턴, Eff_Curse=저주, Eff_Confusion=혼란, Eff_Stone=석화, Eff_Bleeding=출혈
+bonus2 bSkillAtk,n,x;			n스킬의 공격력을 x%만큼 증감시킨다. (n=스킬ID 및 스킬이름)
+bonus2 bSkillHeal,n,x;			n스킬의 회복량을 x%만큼 증감시킨다. (n=스킬ID 및 스킬이름)
+bonus2 bAddDamageByClass,n,x;		n에 대한 물리 공격력를 x%만큼 증감시킨다. (n=몬스터ID 및 직업ID)
+bonus2 bAddRace2,n,x;			n종족에 대한 물리 공격력을 x%만큼 증감시킨다. (bAddRace와 다릅니다.)
+							n: 	1=고블린, 2=코볼트, 3=오크, 4=골렘, 5=가디안 (db/mob_race2_db.txt 참조)
+							y:	0=데미지 않보임 1=데미비 보임
+bonus3 bAutoSpellWhenHit,x,y,n;		물리 데미지를 입었을 때, x스킬 y레벨을 자신에게 n/10%확률로 오토스펠한다.
+								자기 보조스킬이나 보조스킬만 가능합니다. (x=스킬ID 및 스킬이름)
+bonus3 bSPDrainRate,n,x,y;		n%확률로 적에게 준 데미지의 x%를 자신의 SP로 흡수한다.
+							y: 0=SP 흡수  1:상대 SP흡수
+bonus4 bAutoSpell,x,y,n,i;		공격시 n/10%확률로 x스킬 y레벨을 오토스펠한다. (x=스킬ID 및 스킬이름)
+							i:
+								0=자기 자신에게 시전
+								1=적에게 시전
+								2=임의의 스킬레벨 시전
+								3=임의의 스킬레벨을 적에게 시전
+bonus4 bAutoSpellWhenHit,x,y,n,i;	물리 데미지를 입었을 때, x스킬 y레벨을 n/10%확률로 오토스펠한다. (x=스킬ID 및 스킬이름)
+							i:
+								0=자기 자신에게 시전
+								1=적에게 시전
+								2=임의의 스킬레벨 시전
+								3=임의의 스킬레벨을 적에게 시전
+bonus5 bAutoSpell,x,y,n,t,i;		공격시 n/10%확률로 x스킬 y레벨을 오토스펠한다. (x=스킬ID 및 스킬이름)
+							t:
+								BF_SHORT: 근거리 물리 공격시
+					 			BF_LONG: 원거리 물리 공격시
+					  			( 기본값: BF_SHORT+BF_LONG )
+					   
+								BF_WEAPON: 근거리 스킬 공격시
+								BF_MAGIC: 마법 스킬 공격시 
+								BF_MISC: 기타 스킬 공격시(팔콘/트랩등)
+								( 기본값: BF_WEAPON )
+					   
+								BF_NORMAL: 물리 공격시
+								BF_SKILL: 스킬 공격시
+								( 기본값: BF_SKILL = BF_MISC+BF_MAGIC, BF_NORMAL = BF_WEAPON)
+					   
+							i:
+								0=자기 자신에게 시전
+								1=적에게 시전
+								2=임의의 스킬레벨 시전
+								3=임의의 스킬레벨을 적에게 시전
+bonus5 bAutoSpellWhenHit,x,y,n,t,i;	데미지를 입었을 때, x스킬 y레벨을 n/10%확률로 오토스펠한다. (x=스킬ID 및 스킬이름)
+							t:
+								BF_SHORT: 근거리 물리 공격시
+					 			BF_LONG: 원거리 물리 공격시
+					  			( 기본값: BF_SHORT+BF_LONG )
+					   
+								BF_WEAPON: 근거리 스킬 공격시
+								BF_MAGIC: 마법 스킬 공격시 
+								BF_MISC: 기타 스킬 공격시(팔콘/트랩등)
+								( 기본값: BF_WEAPON )
+					   
+								BF_NORMAL: 물리 공격시
+								BF_SKILL: 스킬 공격시
+								( 기본값: BF_SKILL = BF_MISC+BF_MAGIC, BF_NORMAL = BF_WEAPON)
+					   
+							i:
+								1=적에게 시전
+								2=임의의 스킬레벨 시전
+								3=임의의 스킬레벨을 적에게 시전
+
+
+
+//---- 2/22 신규 카드 구문(옵션) ----
+
+bonus2 bAddItemHealRate,n,x;		회복 아이템 n을 소비할때 HP회복량을 x%만큼 증감시킨다.
+							n: 	8=포션, 9=허브, 10=과일, 11=고기, 12=사탕, 13=쥬스
+								14=회	(db/item_group_db.txt 참조)
+
+
+
+//---- 3/15 신규 카드 구문(옵션) ----
+
+bonus2 bSPRegenRate,n,x;		n%만큼 x초마다 SP를 회복한다. (x=ms단위)
+bonus2 bSPLossRate,n,x;			n%만큼 x초마다 SP를 소실한다. (x=ms단위)
+bonus2 bExpAddRace,n,x;			n종족 몬스터에게 얻는 경험치를 x%만큼 증감시킨다.
+							n: 	0=무형, 1=불사(언데드), 2=동물, 3=식물, 4=곤충,
+								5=어류, 6=악마, 7=인간, 8=천사, 9=용족, 
+								10=보스 몬스터, 11=보스이외 몬스터(보통 몬스터)
+bonus2 bSPGainRace,n,x;			n종족 몬스터 타격시(물리) 타격당 x의 SP를 회복한다.
+bonus2 bSubRace2,n,x;			n종족 몬스터에게 받는 데미지를 x%만큼 증감시킨다. (bSubRace와 다릅니다.)
+							n: 	1=고블린, 2=코볼트, 3=오크, 4=골렘, 5=가디안 (db/mob_race2_db.txt 참조)
+bonus2 bAddMonsterDropItemGroup,n,x;	x%확률로 몬스터 사망시 그룹 n의 아이템을 획득한다.
+									(db/item_group_db.txt 참조)
+									x값이 부정일 경우 아래 공식을 적용합니다.
+										확률 = -x*(killed_mob_level/10)+1
+bonus3 bAddEff,n,x,y;			x/10000%확률로 타켓에게 n상태이상을 건다.
+								(x=100 1%확률, x=10000 100%확률, 등등)
+								y:
+									ATF_SELF: 자신에게만
+									ATF_TARGET: 타켓에게만 (기본값)
+									ATF_SHORT: 근거리 공격시
+									ATF_LONG: 원거리 공격시 (기본값: 모든 공격시)
+bonus3 bAddEffWhenHit,n,x,y;		공격시 x/10000%확률로 n상태이상을 건다.
+								y:
+									ATF_SELF: 자신에게만
+									ATF_TARGET: 타켓에게만 (기본값)
+									ATF_SHORT: 근거리 공격시
+									ATF_LONG: 원거리 공격시 (기본값: 모든 공격시)
+bonus3 bAddMonsterDropItemGroup,n,x,y;	y%확률로 x종족 몬스터 사망시 n의 아이템을 획득한다.
+									(db/item_group_db.txt 참조)
+									x: 	0=무형, 1=불사(언데드), 2=동물, 3=식물, 4=곤충,
+										5=어류, 6=악마, 7=인간, 8=천사, 9=용족, 
+										10=보스 몬스터, 11=보스이외 몬스터(보통 몬스터)
+										x값이 부정일 경우 아래 공식을 적용합니다.
+									x값이 부정일 경우 아래 공식을 적용합니다.
+										확률 = -x*(killed_mob_level/10)+1
+bonus2 bWeaponComaRace,x,y;		x종족 몬스터에 대한 물리 공격시 y/100% 확률로 몬스터가 코마(Coma)한다.
+								x: 	0=무형, 1=불사(언데드), 2=동물, 3=식물, 4=곤충,
+									5=어류, 6=악마, 7=인간, 8=천사, 9=용족, 
+bonus bAddStealRate,n;			n/100%확률만큼 스틸 성공확률을 증감시킨다. (x=스킬ID 및 스킬이름)
+bonus2 bAddSkillBlow,x,y;		x스킬 사용시 y만큼 넉백시킨다. (supports skill names)

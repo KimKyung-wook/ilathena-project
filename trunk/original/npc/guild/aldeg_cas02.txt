@@ -1,0 +1,146 @@
+
+//    kk  ""tt""  "";;    """"JJ;;kkJJ  JJtt""    ""tt""  ;;tt""""tt    ""tt""   
+//   JJ  kk""tt;;JJ      ttkk    ""tt    ;;;;ttJJ;;  ""ttkk;;"";;;;ttkk;;  ;;kk  
+//  "";;  ""  kk  kk  tt  ttww    ZZ;;  ww    RR  ;;JJ  JJJJ  tt    RR  ;;JJ  JJ 
+//  JJ      """";;""  kk  ttkk  ;;kk    ZZ    ww  ;;""  kk""  ww    kk;;kk""  JJ 
+//  kk      JJ  kk    ww  ttkk  JJJJ  ;;ww  ""JJ  ;;tt""RR    ZZ  ;;ZZJJ      kk 
+//  kk  ;;  "";;JJ        JJtt  JJJJ  ""kk  JJ""  ww""""ww    ww  ""JJ  ZZ    kk 
+//  JJ  JJ  ;;JJ""  "";;  ww;;  kkJJ  JJ""  kk;;  ww  ;;ww  ""JJ  ww;;  ww  ;;tt 
+//;;""  RR    RR    ww""  kk""  ;;tt  ww    kkkk      kktt  JJ;;  ZZ;;  ;;  tt   
+//  JJkkttkkkk;;kkkk;;JJkktt""kkJJJJkkttJJkk;;  kkkkJJ  ttkkttJJkk;;ttkkJJkkJJ   
+//| I | - | L | U | N | A | A | T | H | E | N | A | P | R | O | J | E | C | T |  
+//------------------------------------------------------------------------------
+// iLAthena War of Emperium <http://www.i-luna.com>
+// 한글화 by 아이루나 iLAthena Project
+//------------------------------------------------------------------------------
+// 한글화 by 유란
+//------------------------------------------------------------------------------
+
+// 길드 깃발 (마을)
+//============================================================
+aldebaran,149,97,4	script	호헨슈반가우#a2-1::Hohenschwangau	722,{
+	end;
+
+OnRecvCastleA02:
+	FlagEmblem GetCastleData("aldeg_cas02",1);
+	end;
+}
+
+// 길드 깃발 (외성)
+//============================================================
+alde_gld,99,251,4	script	호헨슈반가우#a2-2::Hohenschwangau2	722,{
+	set .@GID, GetCastleData("aldeg_cas02",1);
+	if (.@GID == 0) {
+		mes " [ 신성 룬 미드가츠 왕국 포고령 ]";
+		mes " ";
+		mes "1. 신성 룬 미드가츠 왕국령에";
+		mes "　 의해 아직 이 아지트는 마스터가";
+		mes "　 정해지지 않았다";
+		mes " ";
+		mes "2. 모든 예심을 극복하고 엠펠리움을";
+		mes "　 파괴하는 자에게, 국왕은 이 성의";
+		mes "　 소유권을 부여 할 것이다";
+	}
+	else {
+		if (getcharid(2) == .@GID) {
+			mes "[ 울리는 목소리 ]";
+			mes "용감한 자들이여...";
+			mes "그대의 명예로움으로 돌아가겠는가?";
+			next;
+			if (select("아지트로 돌아간다.:그만둔다.") == 1) {
+				if (getcharid(2) == GetCastleData("aldeg_cas02",1)) {
+					warp "aldeg_cas02",84,74;
+					//warp "aldeg_cas02",220,190;
+					end;
+				}
+			}
+			close;
+		}
+		mes " [ 신성 룬 미드가츠 왕국 포고령 ]";
+		mes " ";
+		mes "1. 이곳은 신성 룬 미드가츠 왕국령에 ";
+		mes "    따라 ^ff0000" + GetGuildName(.@GID) + "^000000 길드의";
+		mes "    사유물임을 인정한다.";
+		mes " ";
+		mes "2. ^ff0000" + GetGuildName(.@GID) + "^000000 길드의 마스터는";
+		mes "    ^ff0000" + GetGuildMaster(.@GID) + "^000000 이며 , 누구라도";
+		mes "    이사항에 이의 있는자들은 검을";
+		mes "    들어 자신의 명예를 드높이라.";
+	}
+	close;
+
+OnRecvCastleA02:
+	FlagEmblem GetCastleData("aldeg_cas02",1);
+	end;
+}
+
+alde_gld,99,244,4	duplicate(Hohenschwangau2)	호헨슈반가우#a2-3	722
+
+// 길드 깃발 (내성)
+//============================================================
+aldeg_cas02,82,71,2	script	호헨슈반가우#a2-4::Hohenschwangau3	722,{
+	end;
+
+OnRecvCastleA02:
+	FlagEmblem GetCastleData("aldeg_cas02",1);
+	end;
+}
+
+aldeg_cas02,67,30,2	duplicate(Hohenschwangau3)	호헨슈반가우#a2-5	722
+aldeg_cas02,183,140,2	duplicate(Hohenschwangau3)	호헨슈반가우#a2-6	722
+aldeg_cas02,212,152,2	duplicate(Hohenschwangau3)	호헨슈반가우#a2-7	722
+aldeg_cas02,108,39,2	duplicate(Hohenschwangau3)	호헨슈반가우#a2-8	722
+aldeg_cas02,57,213,2	duplicate(Hohenschwangau3)	호헨슈반가우#a2-9	722
+aldeg_cas02,91,181,2	duplicate(Hohenschwangau3)	호헨슈반가우#a2-10	722
+aldeg_cas02,103,53,2	duplicate(Hohenschwangau3)	호헨슈반가우#a2-11	722
+aldeg_cas02,73,53,2	duplicate(Hohenschwangau3)	호헨슈반가우#a2-12	722
+aldeg_cas02,63,41,2	duplicate(Hohenschwangau3)	호헨슈반가우#a2-13	722
+aldeg_cas02,229,6,2	duplicate(Hohenschwangau3)	호헨슈반가우#a2-14	722
+aldeg_cas02,230,40,2	duplicate(Hohenschwangau3)	호헨슈반가우#a2-15	722
+aldeg_cas02,197,40,2	duplicate(Hohenschwangau3)	호헨슈반가우#a2-16	722
+aldeg_cas02,32,213,2	duplicate(Hohenschwangau3)	호헨슈반가우#a2-17	722
+aldeg_cas02,121,29,2	duplicate(Hohenschwangau3)	호헨슈반가우#a2-18	722
+
+// 공성 매니져
+//============================================================
+aldeg_cas02,214,24,0	duplicate(Gld_Agit_Manager)	Agit#aldeg_cas02	-1
+
+// 집사
+//============================================================
+aldeg_cas02,78,74,0	duplicate(Gld_Mngr_Template)	첸첸리#aldeg_cas02	55
+
+// 가디언
+//============================================================
+aldeg_cas02,78,74,0	duplicate(Gld_Guard_Template)	Guardian#aldeg_cas02	-1
+
+// 카프라 직원
+//============================================================
+aldeg_cas02,84,74,0	duplicate(Gld_Kafra_Template)	카프라 직원#aldeg_cas02	117
+
+// 마스터방
+//============================================================
+aldeg_cas02,139,235,0	script	#switch_A02	111,{
+	mes " ";
+	mes "레버가 있습니다. 당기시겠습니까?";
+	next;
+	switch(select("당긴다.:당기지 않는다.")) {
+	case 1:
+		warp "aldeg_cas02",78,75;
+		break;
+	case 2:
+		break;
+	}
+	end;
+}
+
+// 길드 보물 안정장치
+//============================================================
+aldeg_cas02,135,230,0	duplicate(Gld_Trea_Protect)	ban_warp#aldeg_cas02	-1,8,8
+
+// 길드 보물 소환
+//============================================================
+aldeg_cas02,135,230,0	duplicate(Gld_Trea_Spawn)	Treasure#aldeg_cas02	-1
+
+// 길드 던젼 스위치
+//============================================================
+aldeg_cas02,194,136,0	duplicate(Gld_Dun_Template)	#aldeg_cas02	111

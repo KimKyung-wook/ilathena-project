@@ -1,0 +1,73 @@
+
+//    kk  ""tt""  "";;    """"JJ;;kkJJ  JJtt""    ""tt""  ;;tt""""tt    ""tt""   
+//   JJ  kk""tt;;JJ      ttkk    ""tt    ;;;;ttJJ;;  ""ttkk;;"";;;;ttkk;;  ;;kk  
+//  "";;  ""  kk  kk  tt  ttww    ZZ;;  ww    RR  ;;JJ  JJJJ  tt    RR  ;;JJ  JJ 
+//  JJ      """";;""  kk  ttkk  ;;kk    ZZ    ww  ;;""  kk""  ww    kk;;kk""  JJ 
+//  kk      JJ  kk    ww  ttkk  JJJJ  ;;ww  ""JJ  ;;tt""RR    ZZ  ;;ZZJJ      kk 
+//  kk  ;;  "";;JJ        JJtt  JJJJ  ""kk  JJ""  ww""""ww    ww  ""JJ  ZZ    kk 
+//  JJ  JJ  ;;JJ""  "";;  ww;;  kkJJ  JJ""  kk;;  ww  ;;ww  ""JJ  ww;;  ww  ;;tt 
+//;;""  RR    RR    ww""  kk""  ;;tt  ww    kkkk      kktt  JJ;;  ZZ;;  ;;  tt   
+//  JJkkttkkkk;;kkkk;;JJkktt""kkJJJJkkttJJkk;;  kkkkJJ  ttkkttJJkk;;ttkkJJkkJJ   
+//| I | - | L | U | N | A | A | T | H | E | N | A | P | R | O | J | E | C | T |  
+//------------------------------------------------------------------------------
+// iLAthena 맵 캐시 설명문 <http://www.i-luna.com>
+// 한글화 by 아이루나 iLAthena Project
+//------------------------------------------------------------------------------
+// 한글화 by ★orz。
+//------------------------------------------------------------------------------
+
+서문:
+-------------------------------------------------------------------------------
+
+SVN revision 10000 까지(혹은 부터), 맵서버가 어떻게 라그나로크 클라이언트 파일들을 읽는지 더 이상 알지 못했습니다. (?)
+맵서버는 맵들에 대한 유용한 자료를 포함하는 '맵 캐시(map cache)' 로 부터 맵들을 읽습니다.
+eA는 현재 공식 한국 라그나로크 사크라이 서버의 모든 맵을 포함하는 맵 캐시를 기본적으로 제공합니다.
+만약 독자(사용자)가 커스텀 맵을 갖고 싶거나, 혹은 독자(사용자)의 서버가 멀티 서버나 테스트의 목적등으로 인해 맵 전부를
+읽지 못하는 이유가 발생하여 맵 캐시의 크기를 줄이고 싶다면, 독자(사용자)의 필요에 맞는 새로운 맵 캐시를 생성하기 위해
+맵 캐시 빌더를 사용할 수 있습니다.
+
+맵 캐시 빌더 메뉴얼:
+-------------------------------------------------------------------------------
+
+맵 캐시 빌더을 위한 소스는 'src/tool' 폴더에 내장되어 있습니다. 독자(사용자)는 Makefile이나 비쥬얼 스튜디오에서
+맵 캐시 프로젝트를 이용하여 컴파일(생성) 할 수 있고, 실행파일은 당신의 eA 메인 폴더에 있을 것입니다.
+맵 캐시 빌더는 3개의 파일 경로가 필요한데, 하나는 맵을 갖고 있는 GRF와(혹은) data 폴더의 경로 목록이고,
+두번째는 맵 캐시에 추가할 맵의 목록입니다. 그리고 마지막으로 생성될 맵 캐시의 경로입니다.
+이 경로들의 각각의 기본값은 "tools/mapcache/grf_files.txt", "db/map_index.txt", "db/map_cache.dat" 입니다.
+GRF와(혹은) data 폴더의 경로 목록은 기본 파일의 지시와 형식을 따라야만 합니다: as many "grf:" entries as
+you wish and optionally one only "data_dir:" entry with trailing backslash included. 주석문은 보통처럼 지원됩니다.
+사실상, 라인당 하나의 맵을 가진 어떤 파일은 맵 리스트로서 사용될 수 있어서 맵 인덱스 리스트는 기본적으로 사용됩니다:
+우리는 이것이 서버에 의해 지원되는 모든 맵을 포함한다고 확신합니다.
+맵 이름 뒤에 나오는 어떠한 것도 무시됩니다, 주석문은 지원되고 만약 줄의 첫 단어가 "map:" 이라면 두번째 단어는 맵 이름으로서 사용됩니다.: 
+맵 캐시는 maps_athena.conf 가 너의 맵 리스트로서 사용하는 것을 허용합니다.
+그리고 그것은 만약 당신이 당신의 여러 맵 서버 각각에 대한 축소판 맵 캐시를 생성하기를 원한다면 유용할 것입니다.
+만약 이것이 아직 캐시화 되지 않은 경우에만 빌더가 맵을 추가함으로서 맵 캐시 파일 경로는 이미 존재하는 파일을 가르킬 수 있습니다.
+이런식으로 베이스 맵 캐시에 한국 사크라이 맵들이 없더라도 당신은 커스텀 맵을 추가할 수 있습니다. 
+만약 당신이 전체 맵캐시를 재 구축하기를 원한다면, 그래도 당신은 존재하지 않는 파일을 제공 할 수 있더나 재 구축 모드를 강제 실행 할 수 있습니다.
+
+당신이 이것의 반응을 커스터마이즈하기위해 맵 캐시 빌더에 제공할 수 있는 커맨드 라인 정의가 여기에 정의되었습니다:
+ -grf path/to/grf/list
+   Allows to specify the file containing the list of GRFs and/or data directory
+ -list path/to/map/list
+   Allows to specify the file containing the list of maps to add to the map cache
+ -cache path/to/map/cache
+   Allows to specify the path to the generated map cache
+ -rebuild
+   Allows to force the rebuild mode (map cache will be overwritten even if it already exists)
+
+
+맵 캐시 형식 참조:
+-------------------------------------------------------------------------------
+
+The file is written as little-endian, even on big-endian systems, for cross-compatibility reasons. Appropriate conversions
+are done when generating it, so don't worry about it.
+The first 6 bytes are a main header:
+<unsigned long> file size
+<unsigned short> number of maps
+Then maps are stored one right after another:
+<12-characters-long string> map name
+<short> X size
+<short> Y size
+<long> compressed cell data length
+<variable> compressed cell data
+

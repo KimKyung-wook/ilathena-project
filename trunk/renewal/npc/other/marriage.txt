@@ -1,0 +1,767 @@
+
+//    kk  ""tt""  "";;    """"JJ;;kkJJ  JJtt""    ""tt""  ;;tt""""tt    ""tt""   
+//   JJ  kk""tt;;JJ      ttkk    ""tt    ;;;;ttJJ;;  ""ttkk;;"";;;;ttkk;;  ;;kk  
+//  "";;  ""  kk  kk  tt  ttww    ZZ;;  ww    RR  ;;JJ  JJJJ  tt    RR  ;;JJ  JJ 
+//  JJ      """";;""  kk  ttkk  ;;kk    ZZ    ww  ;;""  kk""  ww    kk;;kk""  JJ 
+//  kk      JJ  kk    ww  ttkk  JJJJ  ;;ww  ""JJ  ;;tt""RR    ZZ  ;;ZZJJ      kk 
+//  kk  ;;  "";;JJ        JJtt  JJJJ  ""kk  JJ""  ww""""ww    ww  ""JJ  ZZ    kk 
+//  JJ  JJ  ;;JJ""  "";;  ww;;  kkJJ  JJ""  kk;;  ww  ;;ww  ""JJ  ww;;  ww  ;;tt 
+//;;""  RR    RR    ww""  kk""  ;;tt  ww    kkkk      kktt  JJ;;  ZZ;;  ;;  tt   
+//  JJkkttkkkk;;kkkk;;JJkktt""kkJJJJkkttJJkk;;  kkkkJJ  ttkkttJJkk;;ttkkJJkkJJ   
+//| I | - | L | U | N | A | A | T | H | E | N | A | P | R | O | J | E | C | T |  
+//------------------------------------------------------------------------------
+// iLAthena 결혼 스크립트 <http://www.i-luna.com>
+// 한글화 by 아이루나 iLAthena Project
+//------------------------------------------------------------------------------
+// 한글화 by 아이루나(사이버짱)
+//------------------------------------------------------------------------------
+
+prt_church,97,100,4	script	결혼 도우미#w	71,{
+	cutin "wedding_marry01",2;
+	if (Upper == 2) {
+	// 베이비 캐릭터 
+		mes "[Marry Happy]";
+		mes "Hello~";
+		mes "My name is Marry Happy";
+		mes "and I'm here to provide you";
+		mes "with information related to";
+		mes "marriage. Now, did you";
+		mes "have any questions?";
+		next;
+		if (select("I want to get married.:I don't need your help!") == 1) {
+			mes "[Marry Happy]";
+			mes "Oh, I'm sorry, but";
+			mes "adopted characters";
+			mes "aren't allowed to get";
+			mes "married. For now, why";
+			mes "don't you enjoy the simple";
+			mes "pleasures of childhood?";
+			goto L_End;
+		}
+		mes "[Marry Happy]";
+		mes "Oh, of course you";
+		mes "don't! Little children";
+		mes "can't get married-- there";
+		mes "are too many laws against";
+		mes "that~ Aren't you the most";
+		mes "adorable little thing?";
+		goto L_End;
+	}
+	mes "[메리 해피]";
+	mes "결혼이라는 것은 행복을 꿈꾸는";
+	mes "모든 이들의 희망이랍니다.";
+	mes "혹시나 결혼하고 싶으신 상대가";
+	mes "있으신가요?";
+	next;
+	switch(select("결혼식에 대해 설명해주세요.:결혼식 과정은 어떻게 되나요?:결혼식을 신청하고 싶어요.:우리는 무적의 솔로군단이다!")) {
+	case 1:
+		mes "[메리 해피]";
+		mes "얼마전까지 국왕폐하께서 결혼을";
+		mes "주관하셨지만, 바쁘신 일정 탓에";
+		mes "다시 국정을 보러가셨고, 대신";
+		mes "앞으로 룬 미드가츠 왕국의";
+		mes "주교이신 보마르스 주교님께서";
+		mes "결혼식을 주관해 주시겠습니다.";
+		next;
+		mes "[메리 해피]";
+		mes "주교님은 많은 솔로들을 커플로";
+		mes "맺어주신 덕분에 '사랑의 주교'";
+		mes "라는 별명도 가지고 계시답니다.";
+		mes "호홋...";
+		next;
+		mes "[메리 해피]";
+		mes "프로포즈는, 신중하고 정중하게";
+		mes "하여야만 합니다. 한번 결혼하게";
+		mes "되신 이후에는 다시 되돌릴 수";
+		mes "없으니까요. 결혼한 두 사람은";
+		mes "이 세상을 떠나는 날까지 영원히";
+		mes "함께하게 됩니다.";
+		next;
+		mes "[메리 해피]";
+		mes "또한 남성은 여성에게, 여성은";
+		mes "남성에게만 결혼하실 수 있어요.";
+		mes "동성이나 몬스터와 결혼을 주장";
+		mes "하시는 분들이 가끔 있을지도";
+		mes "모르겠지만... 성립되지 않아요.";
+		next;
+		mes "[메리 해피]";
+		mes "미래를 약속한 상대방이 있다면";
+		mes "프로포즈를 해보세요. 행복한";
+		mes "미래를 꿈꾸는 모든 연인들에";
+		mes "축복이 가득하기를!!";
+		break;
+
+	case 2:
+		mes "[메리 해피]";
+		mes "먼저 신랑신부 모두 제게 신청을";
+		mes "하셨는지 확인하세요. 물론 두분";
+		mes "다 결혼하신 분이 아니셔야겠죠?";
+		mes "신청하셨다면 두분만의 파티를";
+		mes "결성하시고 주교님께 가세요.";
+		next;
+		mes "[메리 해피]";
+		mes "주교님께 가셔서 남자쪽이";
+		mes "말을 하세요. 그리고 결혼하실";
+		mes "여성분의 이름을 말하세요.";
+		mes "이름을 틀리지 않게 정확히";
+		mes "말하셔야 결혼식이 성사되요.";
+		next;
+		mes "[메리 해피]";
+		mes "얘기가 끝나면 곧바로 여자쪽이";
+		mes "주교님께 말을 하세요. 그러면";
+		mes "폐하께서 결혼할 상대의 이름을";
+		mes "물어보실껍니다. 그러면 똑같이";
+		mes "남성분의 이름을 말하세요.";
+		next;
+		mes "[메리 해피]";
+		mes "결혼 상대방의 이름이 정확하면";
+		mes "결혼반지를 나누게 되지요. 그";
+		mes "순간부터 두 사람은 영원히 함께";
+		mes "할 수 있게 된답니다. 좋겠지요?";
+		mes "물론 멋지게 거절당할지도 모르";
+		mes "겠지만, 슬퍼하지는 마세요.";
+		next;
+		mes "[메리 해피]";
+		mes "결혼하고 싶어하는 분들이 많이";
+		mes "몰려있을 경우에는, 순서를 지켜";
+		mes "서 차례대로 말씀하셔야 해요.";
+		mes "주교님께서는 동시에 여러 커플을";
+		mes "봐주시지 않거든요.";
+		next;
+		mes "[메리 해피]";
+		mes "마지막으로, 이름을 말씀하시고";
+		mes "대답하시는걸 빨리 하셔야 해요.";
+		mes "^ff0000신랑이 말을 건 다음 3분 이내로";
+		mes "모든 과정을 끝내세요.^000000 안그러면";
+		mes "결혼식이 멈춰버려서, 두번 다시";
+		mes "결혼할 수 없어요.";
+		next;
+		mes "[메리 해피]";
+		mes "배우자의 이름을 쉽게 적는";
+		mes "방법은, 먼저 상대방에게 쪽지를";
+		mes "보내시고 대화창에서 이름을";
+		mes "넣는 부분에서 화살표키 위쪽을";
+		mes "누르세요.";
+		next;
+		mes "[메리 해피]";
+		mes "그러면 쪽지를 보낸 상대의 이름";
+		mes "이 나오죠. ctrl키를 누른 상태";
+		mes "에서 C키를 누르시면 그 이름이";
+		mes "기억됩니다. 나중에 이름을 넣을";
+		mes "때 shift키를 누른 상태에서";
+		mes "insert 누르세요. 그러면 이름을";
+		mes "빠르고 편하게 적을 수 있어요.";
+		next;
+		mes "[메리 해피]";
+		mes "한번 시험해보도록 하지요.";
+		mes "결혼하고 싶으신 상대의 이름을";
+		mes "알려드린 방식으로 써보세요.";
+		mes "ctrl키를 누른 상태에서 C키를";
+		mes "누르시는 것으로 기억... 대답은";
+		mes "shift키를 누른 상태에서";
+		mes "insert 누르시는거예요.";
+		next;
+		input .@partner$;
+		mes "[메리 해피]";
+		mes "네, 잘 쓰셨어요. 마음이 정해지";
+		mes "셨다면, 꼭 오셔서 신청하세요.";
+		break;
+
+	case 3:
+		cutin "wedding_marry02",2;
+		mes "[메리 해피]";
+		mes "결혼을 하시려면 신청을 하셔야";
+		mes "합니다. 남성은 ^3377FF1,300,000 제니와";
+		mes "턱시도 1벌^000000, 여성은 ^3377FF1,200,000";
+		mes "제니와 웨딩드레스 1벌^000000을 내시고";
+		mes "신청서를 작성해주시면 됩니다.";
+		mes "남녀 모두 신청이 되어있으셔야";
+		mes "결혼하실 수 있어요.";
+		next;
+		mes "[메리 해피]";
+		mes "또한 결혼반지를 준비해야 하겠네요.";
+		mes "남녀분 모두 ^3377FF다이아반지 1개^000000가 필요";
+		mes "하겠네요. 신청하실 때 전부 같이";
+		mes "주시면 되요.";
+		next;
+		mes "[메리 해피]";
+		mes "두분 다 신청하신 이후에는 바로";
+		mes "결혼식을 진행할 수 있어요.";
+		mes "지금 결혼 신청을 하시겠습니까?";
+		next;
+		if (select("네.:아니오.") == 1) {
+			if (getpartnerid()) {
+				cutin "wedding_marry02",2;
+				mes "[메리 해피]";
+				mes "결혼하신 분이 누구한테 바람을";
+				mes "피우시려구요... 그러면 상대의";
+				mes "기분이 어떻겠어요. 안그래요?";
+				mes "평생토록 함께하기로 한 그런";
+				mes "약속을 저버린다는 것이 어떠한";
+				mes "의미를 가지는지?";
+				next;
+				mes "[메리 해피]";
+				mes "들으셨겠지만, 결혼을 하셨으면";
+				mes "다시는 되돌릴 수 없어요. 다른";
+				mes "상대방이 죽는다고 하더라도...";
+				mes "그리고, 사람의 마음을 가지고";
+				mes "놀려는 그런 분에게는 그만한";
+				mes "댓가가 돌아갈꺼예요.";
+				break;
+			}
+			else if (wedding_sign == 1) {
+				mes "[메리 해피]";
+				mes "음...? 예전에 신청하셨었네요.";
+				mes "이미 신청이 되어 있으니까요,";
+				mes "배우자께서 신청이 되어 있는지";
+				mes "물어보세요. 두분 모두 신청하";
+				mes "셨다면, 어서 국왕폐하께 가서";
+				mes "결혼식을 올리시구요.";
+				break;
+			}
+			else if (BaseLevel < 45) {
+				mes "[Marry Happy]";
+				mes "Hmm, you need to be";
+				mes "strong enough to protect";
+				mes "the one that you love before";
+				mes "you can consider marriage.";
+				mes "After you grow stronger,";
+				mes "come and talk to me again.";
+				goto L_End;
+			}
+			else if (countitem(2613) < 1) {
+				mes "[Marry Happy]";
+				mes "Mm? Did you forget to";
+				mes "bring the Diamond Ring";
+				mes "to exchange with your partner";
+				mes "during the wedding ceremony?";
+				mes "Look for it carefully and come";
+				mes "back after you find it, okay?";
+				goto L_End;
+			}
+			else if (sex) {
+				if (zeny < 1300000) {
+					mes "[Marry Happy]";
+					mes "I'm sorry, but you don't";
+					mes "have the 1,300,000 zeny";
+					mes "that all grooms must pay";
+					mes "for the wedding ceremony.";
+					mes "Did you misplace your money?";
+					goto L_End;
+				}
+				else if (countitem(7170) < 1) {
+					mes "[Marry Happy]";
+					mes "Where's your Tuxedo?";
+					mes "You absolutely have to";
+					mes "wear it during the wedding";
+					mes "ceremony! Find it, bring it";
+					mes "to me, and then we can finally";
+					mes "begin the wedding, okay?";
+					goto L_End;
+				}
+			}
+			else if (sex == 0) {
+				if (zeny < 1200000) {
+					mes "[Marry Happy]";
+					mes "I'm sorry, but all brides";
+					mes "must pay the 1,200,000";
+					mes "zeny fee to proceed with the";
+					mes "wedding ceremony. Perhaps";
+					mes "you could ask your partner";
+					mes "to help you with the funds?";
+					goto L_End;
+				}
+				else if (countitem(2338) < 1) {
+					mes "[Marry Happy]";
+					mes "Oh dear, did you forget";
+					mes "your Wedding Dress?";
+					mes "Hurry and find it, then";
+					mes "bring it to me-- you";
+					mes "absolutely need it";
+					mes "for the wedding!";
+					goto L_End;
+				}
+			}
+			mes "[메리 해피]";
+			mes "미리, 결혼 축하드려요! 상대가";
+			mes "누구인지 몰라도 정말 좋겠어요.";
+			next;
+			mes "[메리 해피]";
+			mes "그럼, 신청서를 받겠습니다.";
+			mes "여기에 자기 이름을 적어주세요.";
+			next;
+			while(1) {
+				input .@name$;
+				if (.@name$ != strcharinfo(0)) {
+					mes "[메리 해피]";
+					mes "저런! 이름도 정확히 못쓰면서";
+					mes "어떻게 결혼을 하려구요? 이름";
+					mes "쓰는 법부터 배워오셔야겠네요.";
+					mes "빠르게 쓰시는게 좋을꺼예요.";
+					mes "다시 한번 써보세요.";
+					next;
+				}
+				else 
+					break;
+			}
+			mes "[메리 해피]";
+			mes "네, 정확히 신청받았습니다.";
+			mes "나중에 이런 방식으로 주교님께";
+			mes "배우자의 이름을 말해야 하니까,";
+			mes "결혼하실 분의 이름도 정확하게";
+			mes "알고 계시는게 좋아요. 아셨죠?";
+			mes "미리 준비하고 가세요.";
+			next;
+			mes "[Marry Happy]";
+			mes "When your partner is";
+			mes "finished with the application";
+			mes "process, both of you should";
+			mes "speak to the Bishop to begin";
+			mes "the wedding ceremony.";
+			Emotion e_lv;
+			next;
+			mes "[Marry Happy]";
+			if (sex) {
+				mes "Since you're the groom,";
+				mes "you need to speak to the";
+				mes "Bishop first. When you're";
+				mes "finished, it will be your";
+				mes "bride's turn to speak to";
+				mes "Bishop Vomars.";
+				set zeny,zeny-1300000;
+				delitem 7170,1; // 턱시도
+			}
+			else {
+				mes "Since you're the bride,";
+				mes "you need to wait for the";
+				mes "groom to speak to Bishop";
+				mes "Vomars first. When he's";
+				mes "finished, it'll be your turn";
+				mes "to speak to Bishop Vomars.";
+				set zeny,zeny-1200000;
+				delitem 2338,1; // 웨딩 드레스
+			}
+			delitem 2613,1; // 다이아반지
+			set wedding_sign,1;
+			goto L_End;
+		}
+		mes "[메리 해피]";
+		mes "오늘도 행복한 하루 되세요...!";
+		break;
+
+	case 4:
+		cutin "wedding_marry02",2;
+		donpcevent "솔로 군단#Prontera::OnEnable";
+		donpcevent "솔로 군단#Geffen::OnEnable";
+		donpcevent "솔로 군단#Morocc::OnEnable";
+		donpcevent "솔로 군단#Payon::OnEnable";
+		donpcevent "솔로 군단#Amatsu::OnEnable";
+		donpcevent "솔로 군단#Gonryun::OnEnable";
+		Emotion e_omg;
+		mes "[솔로 군단]";
+		mes "제련은 혼자해야 제대로 만든다!";
+		mes "던전에서 파티는 사치일 뿐이다!";
+		mes "내게 하트를 띄우는 NPC가 있다!";
+		mes "태어나서 전직까지 혼자서 했다!";
+		mes "크리스마스라도 풀을 캐고 산다!";
+		mes "...우리는 무적의 솔로군단이다!";
+		donpcevent "솔로 군단#Prontera::OnEmote";
+		donpcevent "솔로 군단#Geffen::OnEmote";
+		donpcevent "솔로 군단#Morocc::OnEmote";
+		donpcevent "솔로 군단#Payon::OnEmote";
+		donpcevent "솔로 군단#Amatsu::OnEmote";
+		donpcevent "솔로 군단#Gonryun::OnEmote";
+		close2;
+		cutin "wedding_marry01",255;
+		Emotion e_swt;
+		donpcevent "솔로 군단#Prontera::OnInit";
+		donpcevent "솔로 군단#Geffen::OnInit";
+		donpcevent "솔로 군단#Morocc::OnInit";
+		donpcevent "솔로 군단#Payon::OnInit";
+		donpcevent "솔로 군단#Amatsu::OnInit";
+		donpcevent "솔로 군단#Gonryun::OnInit";
+		end;
+	}
+	close2;
+	cutin "wedding_marry01",255;
+	end;
+
+L_End:
+	close2;
+	cutin "",255;
+	end;
+}
+
+prt_church,97,102,0	script	솔로 군단#Prontera	105,{
+	mes "[솔로 군단]";
+	mes "^CC9933You have to refine";
+	mes "items on your own to";
+	mes "make great equipment!^000000";
+	close;
+
+OnInit:
+	hideonnpc "솔로 군단#Prontera";
+	end;
+
+OnEnable:
+	hideoffnpc "솔로 군단#Prontera";
+	Emotion e_go;
+	end;
+
+OnEmote:
+	emotion e_rock;
+	end;
+}
+
+
+prt_church,98,102,0	script	솔로 군단#Geffen	705,{
+	mes "[솔로 군단]";
+	mes "^330099It's a waste to";
+	mes "form parties in";
+	mes "dungeons! I can";
+	mes "make it on my own!^000000";
+	close;
+
+OnInit:
+	hideonnpc "솔로 군단#Geffen";
+	end;
+
+OnEnable:
+	hideoffnpc "솔로 군단#Geffen";
+	Emotion e_go;
+	end;
+
+OnEmote:
+	emotion e_rock;
+	end;
+}
+
+prt_church,99,102,0	script	솔로 군단#Morocc	707,{
+	mes "[솔로 군단]";
+	mes "^666666Hell, I've trained";
+	mes "all by myself since";
+	mes "birth, all the way";
+	mes "to my job change!^000000";
+	close;
+
+OnInit:
+	hideonnpc "솔로 군단#Morocc";
+	end;
+
+OnEnable:
+	hideoffnpc "솔로 군단#Morocc";
+	Emotion e_go;
+	end;
+
+OnEmote:
+	emotion e_rock;
+	end;
+}
+
+prt_church,100,102,0	script	솔로 군단#Payon	708,{
+	mes "[솔로 군단]";
+	mes "^666600I CHOOSE to spend";
+	mes "Christmas alone...";
+	mes "playing Solitaire and";
+	mes "doing crossword puzzles!^000000";
+	close;
+
+OnInit:
+	hideonnpc "솔로 군단#Payon";
+	end;
+
+OnEnable:
+	hideoffnpc "솔로 군단#Payon";
+	Emotion e_go;
+	end;
+
+OnEmote:
+	emotion e_rock;
+	end;
+}
+
+prt_church,101,102,0	script	솔로 군단#Amatsu	767,{
+	mes "[솔로 군단]";
+	mes "^CC9966Women may break my";
+	mes " spirit, but they'll never";
+	mes "take... my FREEDOM!^000000";
+	close;
+
+OnInit:
+	hideonnpc "솔로 군단#Amatsu";
+	end;
+
+OnEnable:
+	hideoffnpc "솔로 군단#Amatsu";
+	Emotion e_go;
+	end;
+
+OnEmote:
+	emotion e_rock;
+	end;
+}
+
+prt_church,102,102,0	script	솔로 군단#Gonryun	780,{
+	mes "[솔로 군단]";
+	mes "^669900...We're the free! We're";
+	mes "the Invincible 솔로 군단!^000000";
+	close;
+
+OnInit:
+	hideonnpc "솔로 군단#Gonryun";
+	end;
+
+OnEnable:
+	hideoffnpc "솔로 군단#Gonryun";
+	Emotion e_go;
+	end;
+
+OnEmote:
+	emotion e_rock;
+	end;
+}
+
+prt_church,100,128,4	script	Bishop#w	60,{
+	cutin "wedding_bomars01",2;
+	if (Upper == 2) { // 베이비 직업군
+		mes "[Vomars]";
+		mes "Greetings, child.";
+		mes "Are you lost? Hmmm.";
+		mes "Do you know where your";
+		mes "mommy and daddy are?";
+		close2;
+		cutin "wedding_bomars01",255;
+		end;
+	}
+
+	if (!getpartnerid()) {
+		if (!$wedding) {
+			if (wedding_sign == 1) {
+				getpartymember(getcharid(1));
+				set .@partymembercount,$@partymembercount;
+				if (.@partymembercount == 2) {
+					if (sex) {
+						set $wedding,1;
+						initnpctimer;
+						mes "[보마르스]";
+						mes "행복한 미래를 꿈꾸는 젊은이여.";
+						mes "지금 이 순간을 영원히 기억하길";
+						mes "바란다. 언제나 자네들에게 좋은";
+						mes "일들만이 가득하기를, 지금까지";
+						mes "함께했던 시간들이 영원하기를.";
+						next;
+						mapannounce "prt_church","It's the marriage proposal from the groom, Mr. " + strcharinfo(0) + "...",bc_map;
+						mes "[보마르스]";
+						mes "이 세계에서 사라지는 그 날까지";
+						mes "함께하며, 자네의 앞길에 밝은";
+						mes "등불을 비추어줄 반려자.";
+						mes "결혼하고자 하는 그녀의 이름은";
+						mes "무엇인가?";
+						next;
+						input $wed_bride$;
+						mes "[보마르스]";
+						mes "신랑 " + strcharinfo(0) + "군,";
+						mes "자네의 생명에 맹세할지어다.";
+						mes "자네는 신부 " + $wed_bride$ + "양을";
+						mes "평생동안 아끼고 사랑할 것인가?";
+						next;
+						select("네.");
+						set $wed_groom$,strcharinfo(0);
+						mes "[보마르스]";
+						mes "좋다. 그렇다면 자네의 신부에게";
+						mes "물어보도록 하겠다.";
+						close2;
+						mapannounce "prt_church","The groom, Mr. " + strcharinfo(0) + ", has made his vows to Miss " + $wed_bride$ + "...",bc_map;
+						cutin "",255;
+						end;
+					} // 여자가 먼저 대화시
+					mes "[Vomars]";
+					mes "I'm sorry, but the groom";
+					mes "must speak to me first in";
+					mes "order to begin the wedding.";
+					mes "It's old fashioned protocol,";
+					mes "but I'll admit that it does";
+					mes "keep things running smoothly.";
+					goto L_End;
+				}
+				mes "[보마르스]";
+				mes "결혼식을 원한다면, 두사람만의";
+				mes "파티를 결성하고 오도록 하게나.";
+				goto L_End;
+			}
+			mes "[보마르스]";
+			mes "결혼을 원한다면 신청부터 하게.";
+			goto L_End;
+		}
+		else if ($wedding == 1) {
+			if (wedding_sign == 1) {
+				getpartymember(getcharid(1));
+				set .@partymembercount,$@partymembercount;
+				if (.@partymembercount == 2) {
+					if (sex == 0) {
+						if (strcharinfo(0) == $wed_bride$) {
+							mes "[보마르스]";
+							mes "행복한 미래를 꿈꾸는 젊은이여.";
+							mes "지금 이 순간을 영원히 기억하길";
+							mes "바란다. 언제나 자네들에게 좋은";
+							mes "일들만이 가득하기를, 지금까지";
+							mes "함께했던 시간들이 영원하기를.";
+							next;
+							mapannounce "prt_church","Let's hear what the bride, Miss "+$wed_bride$+", has to say...",bc_map;
+							mes "[보마르스]";
+							mes "이 세계에서 사라지는 그 날까지";
+							mes "함께하며, 언제 어디서나 자네를";
+							mes "보며 위험에서 지켜줄 반려자.";
+							mes "결혼하고자 하는 그의 이름은";
+							mes "'"+$wed_groom$+"'군이 맞는가?";
+							next;
+							if (select("아니오.:예.") == 1) {
+								cutin "wedding_bomars03",2;
+								mapannounce "prt_church","Next couple, please proceed...",bc_map;
+								mes "[Vomars]";
+								mes "So "+$wed_groom$;
+								mes "isn't the one you";
+								mes "want to marry? Hmm.";
+								mes "I'm truly sorry for this";
+								mes "misunderstanding...";
+								set $wedding,0;
+								close2;
+								stopnpctimer;
+								cutin "",255;
+								end;
+							}
+							mes "[보마르스]";
+							mes "신부 "+$wed_groom$+"양,";
+							mes "자네의 생명에 맹세할지어다.";
+							mes "자네는 신랑 예천화군을";
+							mes "평생동안 믿고 사랑할 것인가?";
+							next;
+							if (select("예:아니오") == 1) {
+								if (isloggedin(getcharid(3,$wed_groom$))) {
+									if (marriage($wed_groom$)) {
+										// 결혼 이펙트
+										wedding;
+										// 결혼 복장
+										sc_start SC_Wedding,3600000,1;
+										getitem 2635,1; // 결혼 반지
+										attachrid(getcharid(3,$wed_groom$));
+										sc_start SC_Wedding,3600000,1;
+										getitem 2634,1; // 결혼 반지
+										detachrid;
+										attachrid(getcharid(3,$wed_bride$));
+										cutin "wedding_bomars02",2;
+										mapannounce "prt_church","I now pronounce you, "+$wed_groom$+" and "+$wed_bride$+", husband and wife.",bc_map;
+										mes "[보마르스]";
+										mes "나, 룬 미드가츠 왕국의 주교,";
+										mes "보마르스의 이름으로 그대들";
+										mes "두사람의 미래를 축복하노라.";
+										mes "이제부터 영원히 함께하도록.";
+										next;
+										mes "[보마르스]";
+										mes "그리고... 마지막으로...";
+										mes "행복하거라, "+$wed_bride$+"...";
+										set $wed_groom$,"";
+										set $wed_bride$,"";
+										set $wedding,0;
+										close2;
+										stopnpctimer;
+										cutin "",255;
+										detachrid;
+										end;
+									}
+								}
+								cutin "wedding_bomars03",2;
+								mes "[Vomars]";
+								mes "Hm. It seems that";
+								mes "your groom left before";
+								mes "the ceremony has finished";
+								mes "Please try again once he's";
+								mes "returned.";
+								goto L_End;
+							}
+							else {
+								cutin "wedding_bomars03",2;
+								mapannounce "prt_church","Alas! "+$wed_bride$+" has rejected "+$wed_groom$+"'s marriage proposal!",bc_map;
+								mes "[Vomars]";
+								mes "Hm. It seems that";
+								mes "you've changed your";
+								mes "mind. Although I feel";
+								mes "sorry for the groom, you";
+								mes "must do what your heart";
+								mes "tells you is right. Now, run!";
+							}
+							set $wed_groom$,"";
+							set $wed_bride$,"";
+							set $wedding,0;
+							close2;
+							stopnpctimer;
+							cutin "",255;
+							end;
+						}
+						callsub S_Busy;
+					}
+					callsub S_Busy;
+				}
+				callsub S_Busy;
+			}
+			if (strcharinfo(0) == $wed_bride$) {
+				mes "[Vomars]";
+				mes "Hm? It appears that";
+				mes "Happy Marry still hasn't";
+				mes "received your marriage";
+				mes "application. Please speak";
+				mes "to her so that we can begin";
+				mes "the wedding ceremony.";
+				goto L_End;
+			}
+			callsub S_Busy;
+		}
+		callsub S_Busy;
+	}
+	mes "[보마르스]";
+	mes "언제까지나 행복하기를 바라네.";
+
+L_End:
+	close2;
+	cutin  "",255;
+	end;
+
+S_Busy:
+	if ($wed_groom$ != "" && $wed_bride$ != "") {
+		mes "[Vomars]";
+		mes "The wedding of";
+		mes "Miss "+ $wed_bride$ +" and";
+		mes "Mister "+ $wed_groom$;
+		mes "is currently in progress.";
+		mes "Please keep your voice down.";
+		goto L_End;
+	}
+	mes "[Vomars]";
+	mes "I'm conducting a wedding";
+	mes "for another couple now, so";
+	mes "please wait patiently for your";
+	mes "turn. Thanks for understanding... ^FFFFFF ^000000";
+	goto L_End;
+
+OnInit:
+	set $wedding,0;
+	end;
+
+OnStop:
+	stopnpctimer;
+	end;
+
+OnReset:
+	set $wed_groom$,"";
+	set $wed_bride$,"";
+	set $wedding,0;
+	end;
+
+OnTimer180000:
+	mapannounce "prt_church","You've responded too slowly... Next couple, please proceed.",bc_map;
+	set $wed_groom$,"";
+	set $wed_bride$,"";
+	set $wedding,0;
+	stopnpctimer;
+	end;
+}

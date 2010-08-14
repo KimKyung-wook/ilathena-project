@@ -1,0 +1,132 @@
+
+//    kk  ""tt""  "";;    """"JJ;;kkJJ  JJtt""    ""tt""  ;;tt""""tt    ""tt""   
+//   JJ  kk""tt;;JJ      ttkk    ""tt    ;;;;ttJJ;;  ""ttkk;;"";;;;ttkk;;  ;;kk  
+//  "";;  ""  kk  kk  tt  ttww    ZZ;;  ww    RR  ;;JJ  JJJJ  tt    RR  ;;JJ  JJ 
+//  JJ      """";;""  kk  ttkk  ;;kk    ZZ    ww  ;;""  kk""  ww    kk;;kk""  JJ 
+//  kk      JJ  kk    ww  ttkk  JJJJ  ;;ww  ""JJ  ;;tt""RR    ZZ  ;;ZZJJ      kk 
+//  kk  ;;  "";;JJ        JJtt  JJJJ  ""kk  JJ""  ww""""ww    ww  ""JJ  ZZ    kk 
+//  JJ  JJ  ;;JJ""  "";;  ww;;  kkJJ  JJ""  kk;;  ww  ;;ww  ""JJ  ww;;  ww  ;;tt 
+//;;""  RR    RR    ww""  kk""  ;;tt  ww    kkkk      kktt  JJ;;  ZZ;;  ;;  tt   
+//  JJkkttkkkk;;kkkk;;JJkktt""kkJJJJkkttJJkk;;  kkkkJJ  ttkkttJJkk;;ttkkJJkkJJ   
+//| I | - | L | U | N | A | A | T | H | E | N | A | P | R | O | J | E | C | T |  
+//------------------------------------------------------------------------------
+// iLAthena 지면스킬 설정 데이터베이스 <http://www.i-luna.com>
+// 한글화 by 아이루나 iLAthena Project
+//------------------------------------------------------------------------------
+// ID,unit ID,unit ID 2,layout,range,interval,target,flag
+
+ 12,0x7e,    ,  0, 0,  -1,all,   0x003	//MG_SAFETYWALL#세이프티_월#
+ 18,0x7f,    , -1, 0,  20,enemy, 0x010	//MG_FIREWALL#화이어_월#
+ 21,0x86,    ,  0, 2,1000,enemy, 0x018	//MG_THUNDERSTORM#선더스톰#
+ 25,0x85,    ,  1, 0,  -1,all,   0x003	//AL_PNEUMA#흐뉴마#
+ 27,0x81,0x80,  0, 0,  -1,all,   0x00E	//AL_WARP#워프_포탈#
+ 47,0x86,    ,  0, 2,1000,enemy, 0x080	//AC_SHOWER#애로우_샤워#
+ 70,0x83,    , -1, 1,1000,all,   0x018	//PR_SANCTUARY#생츄어리#
+ 79,0x84,    , -1, 1,3000,enemy, 0x018	//PR_MAGNUS#마그누스_엑소르시스무스#
+ 80,0x87,0x88,  0, 1,2000,enemy, 0x006	//WZ_FIREPILLAR#화이어_필라#
+ 83,0x86,    ,  0, 3,1000,enemy, 0x010	//WZ_METEOR#메테오_스톰#
+ 85,0x86,    ,  0, 6:6:6:6:6:6:6:6:6:6:8,1250,enemy,0x018	//WZ_VERMILION#로드_오브_버밀리온#
+ 87,0x8d,    , -1, 0,  -1,all,   0x010	//WZ_ICEWALL#아이스월#
+ 89,0x86,    ,  0, 5, 450,enemy, 0x018	//WZ_STORMGUST#스톰_가스트#
+ 91,0x86,    ,  0, 2,1000,enemy, 0x010	//WZ_HEAVENDRIVE#헤븐즈_드라이브#
+ 92,0x8e,    ,  2, 0,  -1,enemy, 0x010	//WZ_QUAGMIRE#콰그마이어#
+115,0x90,    ,  0, 1,1000,enemy, 0x006	//HT_SKIDTRAP#스키드_트랩#
+116,0x93,    ,  0, 1,1000,enemy, 0x006	//HT_LANDMINE#랜드_마인#
+117,0x91,    ,  0, 1,1000,enemy, 0x006	//HT_ANKLESNARE#앵클스네어#
+118,0x94,    ,  0, 1,1000,enemy, 0x006	//HT_SHOCKWAVE#쇼크웨이브_트랩#
+119,0x95,    ,  0, 1,1000,enemy, 0x006	//HT_SANDMAN#샌드맨#
+120,0x96,    ,  0, 1,1000,enemy, 0x006	//HT_FLASHER#플래셔#
+121,0x97,    ,  0, 1,1000,enemy, 0x006	//HT_FREEZINGTRAP#프리징_트랩#
+122,0x8f,    ,  0, 1,1000,enemy, 0x006	//HT_BLASTMINE#블래스트_마인#
+123,0x98,    ,  0, 1,1000,enemy, 0x006	//HT_CLAYMORETRAP#크레모어_트랩#
+125,0x99,    ,  0, 1,1000,all,   0x000	//HT_TALKIEBOX#토키_박스#
+140,0x92,    , -1, 0,1000,enemy, 0x000	//AS_VENOMDUST#베넘_더스트#
+220,0xb0,    ,  0, 0,  -1,all,   0x002	//RG_GRAFFITI#그래피티#
+229,0xb1,    ,  0, 1,1000,enemy, 0x006	//AM_DEMONSTRATION#데몬스트레이션#
+254,0x86,    , -1, 0, 300,enemy, 0x010	//CR_GRANDCROSS#그랜드_크로스#
+285,0x9a,    ,  3, 0,  -1,all,   0x010	//SA_VOLCANO#볼케이노#
+286,0x9b,    ,  3, 0,  -1,all,   0x010	//SA_DELUGE#델류즈#
+287,0x9c,    ,  3, 0,  -1,all,   0x010	//SA_VIOLENTGALE#바이어런스_게일#
+288,0x9d,    ,  3:3:4:4:5,0, -1,all,   0x010	//SA_LANDPROTECTOR#랜드_프로텍터#
+306,0x9e,    ,  4, 0,6000,all,   0x200	//BD_LULLABY#자장가#
+307,0x9f,    ,  4, 0,  -1,enemy, 0x220	//BD_RICHMANKIM#김서방_돈벌었네#
+308,0xa0,    ,  4, 0,  -1,enemy, 0x200	//BD_ETERNALCHAOS#영원의_혼돈#
+309,0xa1,    ,  4, 0,  -1,party, 0x200	//BD_DRUMBATTLEFIELD#전장의_북소리#
+310,0xa2,    ,  4, 0,  -1,party, 0x200	//BD_RINGNIBELUNGEN#니벨룽겐의_반지#
+311,0xa3,    ,  4, 0,  -1,all,   0x200	//BD_ROKISWEIL#울부짖는_로키#
+312,0xa4,    ,  4, 0,  -1,party, 0x240	//BD_INTOABYSS#심연속으로#
+313,0xa5,    ,  4, 0,  -1,party, 0x200	//BD_SIEGFRIED#불사신_지크프리드#
+317,0xa6,    ,  3, 0,3000,enemy, 0x400	//BA_DISSONANCE#불협화음#
+319,0xa7,    ,  3, 0,  -1,all,   0x440	//BA_WHISTLE#휘파람#
+320,0xa8,    ,  3, 0,  -1,all,   0x440	//BA_ASSASSINCROSS#석양의_어세신_크로스#
+321,0xa9,    ,  3, 0,  -1,all,   0x440	//BA_POEMBRAGI#브라기의_시#
+322,0xaa,    ,  3, 0,6000,all,   0xC40	//BA_APPLEIDUN#이둔의_사과#
+325,0xab,    ,  3, 0,3000,enemy, 0x100	//DC_UGLYDANCE#막춤#
+327,0xac,    ,  3, 0,  -1,all,   0x140	//DC_HUMMING#흥얼거림#
+328,0xad,    ,  3, 0,  -1,enemy, 0x100	//DC_DONTFORGETME#나를_잊지_말아요#
+329,0xae,    ,  3, 0,  -1,all,   0x140	//DC_FORTUNEKISS#행운의_키스#
+330,0xaf,    ,  3, 0,  -1,all,   0x140	//DC_SERVICEFORYOU#당신을_위한_서비스#
+336,0xb2,    ,  0,-1,  -1,noone, 0x000	//WE_CALLPARTNER#당신이_보고싶어요#
+339,0x86,    , -1, 0, 300,enemy, 0x000	//NPC_DARKGRANDCROSS#다크그랜드크로스#
+362,0xb4,    ,  0, 2, 300,all,   0x000	//HP_BASILICA#바실리카#
+369,0xb3,    , -1, 0,10000,all,  0x008	//PA_GOSPEL#가스펠#
+395,0xb5,    ,  4, 0,  -1,all,   0x200	//CG_MOONLIT#달빛_물레방앗간에_떨어지는_꽃잎#
+404,0xb6,    , -1, 0,  -1,all,   0x000	//PF_FOGWALL#월_오브_포그#
+405,0xb7,    ,  0, 0,  -1,enemy, 0x000	//PF_SPIDERWEB#스파이더_웹#
+409,0xb2,    ,  0,-1,  -1,noone, 0x000	//WE_CALLBABY#엄마_아빠_보고싶어요#
+410,0xb2,    ,  0,-1,  -1,noone, 0x000	//WE_CALLPARENT#아가야_이리오렴#
+428,0x86,    ,  0, 1, 100,enemy, 0x000	//SG_SUN_WARM#태양의_따스함#
+429,0x86,    ,  0, 1, 100,enemy, 0x000	//SG_MOON_WARM#달의_따스함#
+430,0x86,    ,  0, 1, 100,enemy, 0x000	//SG_STAR_WARM#별의_따스함#
+484,0xb8,    ,  2, 0,1000,enemy, 0x808	//HW_GRAVITATION#그라비테이션_필드#
+488,0xb9,    ,  3, 0,  -1,all,   0x200	//CG_HERMODE#헤르모드의_지팡이#
+516,0x86,    ,  3, 0, 100,enemy, 0x000	//GS_DESPERADO#데스페라도#
+521,0xbe,    ,  0, 1,1000,enemy, 0x000	//GS_GROUNDDRIFT#그라운드_드리프트#
+527,0xbc,    , -1, 0,2000,enemy, 0x018	//NJ_TATAMIGAESHI#다다미_뒤집기#
+535,0xbd,    , -1, 0,  20,enemy, 0x010	//NJ_KAENSIN#화염진(火炎陣)#
+538,0xbb,    ,  1:1:1:2:2:2:3:3:3:4,0,-1,all,0x010	//NJ_SUITON#수둔(水遁)#
+670,0xc7,    ,  1, 4:7:10:13:16:19:22:25:28:31,1000,all,0x008	//NPC_EVILLAND#이블_랜드#
+2032,0xe1,    ,  2, 0,1000,enemy, 0x000	//GC_POISONSMOKE#에우카리스티카#
+2044,0xca,    ,  0, 3,1000,all,   0x000	//AB_EPICLESIS#새로운_독_연구#
+2214,0x86,    ,  0, 5, 100,enemy, 0x080	//WL_CHAINLIGHTNING
+2216,0xcb,    , -1, 2,1000,enemy, 0x018	//WL_EARTHSTRAIN
+2238,0xd8,    ,  0, 1,1000,enemy, 0x002	//RA_ELECTRICSHOCKER
+2239,0xd9,    ,  0, 0,1000,enemy, 0x004	//RA_CLUSTERBOMB
+2249,0xd2,    ,  0, 1,1000,enemy, 0x022	//RA_MAGENTATRAP
+2250,0xd3,    ,  0, 1,1000,enemy, 0x022	//RA_COBALTTRAP
+2251,0xd4,    ,  0, 1,1000,enemy, 0x022	//RA_MAIZETRAP
+2252,0xd5,    ,  0, 1,1000,enemy, 0x022	//RA_VERDURETRAP
+2253,0xd6,    ,  0, 1,1000,enemy, 0x002	//RA_FIRINGTRAP
+2254,0xd7,    ,  0, 1,1000,enemy, 0x002	//RA_ICEBOUNDTRAP
+2273,0xe2,    ,  1, 0, 300,friend,0x000	//NC_NEUTRALBARRIER
+2274,0xe3,    ,  1, 0, 300,all,   0x000	//NC_STEALTHFIELD
+2299,0xcc,    ,  0, 1,1000,all,   0x006	//SC_MANHOLE
+2300,0xcd,    ,  0, 1,1000,all,   0x006	//SC_DIMENSIONDOOR
+2301,0xce,    ,  0, 2,  -1,all,   0x00E	//SC_CHAOSPANIC
+2302,0xcf,    ,  0, 2,  -1,all,   0x002	//SC_MAELSTROM
+2303,0xd0,    ,  0, 1,  -1,all,   0x018	//SC_BLOODYLUST
+2304,0xd1,    ,  0, 2,  -1,enemy, 0x000	//SC_FEINTBOMB
+2319,0xec,    ,  0, 3,5000,all,   0x000	//LG_BANDING
+2414,0xda,    ,  0, 2,1000,enemy, 0x018	//WM_REVERBERATION
+2418,0xdb,    ,  0,11, 300,enemy, 0x800	//WM_SEVERE_RAINSTORM
+2419,0xde,    ,  0, 3,1000,enemy, 0x010  //WM_POEMOFNETHERWORLD
+2443,0xdc,    ,  0, 1,1000,enemy, 0x008	//SO_FIREWALK
+2444,0xdd,    ,  0, 1,1000,enemy, 0x008	//SO_ELECTRICWALK
+2446,0x86,    ,  0, 3:3:3:4:4,1000,enemy,0x000	//SO_EARTHGRAVE
+2447,0x86,    ,  0, 3:3:3:4:4,1000,enemy,0x000	//SO_DIAMONDDUST
+2449,0xdf,    ,  0, 3:3:4:4:5, 500,enemy,0x000	//SO_PSYCHIC_WAVE
+2450,0xe0,    ,  0, 3, 300,enemy, 0x010	//SO_CLOUD_KILL
+2452,0xe4,    ,  0, 3,3000,all, 0x010	//SO_WARMER
+2453,0xeb,    ,  0, 1:1:2:2:3,1000,enemy,0x010	//SO_VACUUM_EXTREME
+2479,0xe5,    ,  0, 1,1000,enemy, 0x000	//GN_THORNS_TRAP
+2482,0xe6,0x7f, -1, 1, 100,all, 0x000	//GN_WALLOFTHORN
+2483,0x86,    ,  0, 5,1000,enemy, 0x000	//GN_CRAZYWEED
+2485,0xe7,    ,  0, 3,1000,enemy, 0x080	//GN_DEMONIC_FIRE
+2487,0xe8,    ,  0, 3,1000,enemy, 0x000	//GN_FIRE_EXPANSION_SMOKE_POWDER
+2488,0xe9,    ,  0, 3,1000,enemy, 0x000	//GN_FIRE_EXPANSION_TEAR_GAS
+2490,0xea,    ,  0, 5,1000,enemy, 0x000	//GN_HELLS_PLANT
+8208,0x86,    ,  0, 2,1000,enemy, 0x080	//MA_SHOWER#애로우_샤워#
+8209,0x90,    ,  0, 1,1000,enemy, 0x006	//MA_SKIDTRAP#스키드_트랩#
+8210,0x93,    ,  0, 0,1000,enemy, 0x006	//MA_LANDMINE#랜드_마인#
+8211,0x95,    ,  0, 1,1000,enemy, 0x006	//MA_SANDMAN#샌드맨#
+8212,0x97,    ,  0, 1,1000,enemy, 0x006	//MA_FREEZINGTRAP#프리징_트랩#

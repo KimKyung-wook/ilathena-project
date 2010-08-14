@@ -1,0 +1,167 @@
+
+//    kk  ""tt""  "";;    """"JJ;;kkJJ  JJtt""    ""tt""  ;;tt""""tt    ""tt""   
+//   JJ  kk""tt;;JJ      ttkk    ""tt    ;;;;ttJJ;;  ""ttkk;;"";;;;ttkk;;  ;;kk  
+//  "";;  ""  kk  kk  tt  ttww    ZZ;;  ww    RR  ;;JJ  JJJJ  tt    RR  ;;JJ  JJ 
+//  JJ      """";;""  kk  ttkk  ;;kk    ZZ    ww  ;;""  kk""  ww    kk;;kk""  JJ 
+//  kk      JJ  kk    ww  ttkk  JJJJ  ;;ww  ""JJ  ;;tt""RR    ZZ  ;;ZZJJ      kk 
+//  kk  ;;  "";;JJ        JJtt  JJJJ  ""kk  JJ""  ww""""ww    ww  ""JJ  ZZ    kk 
+//  JJ  JJ  ;;JJ""  "";;  ww;;  kkJJ  JJ""  kk;;  ww  ;;ww  ""JJ  ww;;  ww  ;;tt 
+//;;""  RR    RR    ww""  kk""  ;;tt  ww    kkkk      kktt  JJ;;  ZZ;;  ;;  tt   
+//  JJkkttkkkk;;kkkk;;JJkktt""kkJJJJkkttJJkk;;  kkkkJJ  ttkkttJJkk;;ttkkJJkkJJ   
+//| I | - | L | U | N | A | A | T | H | E | N | A | P | R | O | J | E | C | T |  
+//------------------------------------------------------------------------------
+// iLAthena 베인스 안내요원 스크립트 <http://www.i-luna.com>
+// 한글화 by 아이루나 iLAthena Project
+//------------------------------------------------------------------------------
+// 한글화 by RUSH
+//------------------------------------------------------------------------------
+
+veins,210,345,5	script	Veins Guide#1::ve_guide	934,{
+	mes "[베인스 안내 병사]";
+	mes "황량한 모래 폭풍을 피해오신 여러분,";
+	mes "환영합니다. 여기는 사막 도시 베인스";
+	mes "입니다.";
+	mes "안내를 처음 받는거라면 ''공지사항을";
+	mes "듣는다.'' 메뉴를 선택해 보시길";
+	mes "바랍니다.";
+	set .@loop1,1;
+	while(.@loop1) {
+		next;
+		switch(select("마을 안내를 받는다.:미니 맵에 표시들을 모두 지운다.:공지사항을 듣는다.:그만둔다.")) {
+		case 1:
+			mes "[베인스 안내 병사]";
+			mes "어느 곳의 위치를 알고 싶으신지요?";
+			if (.@compass_check == 0) {
+				mes "미니 맵에 위치표시를";
+				mes "남기시겠습니까?";
+				next;
+				if (select("네.:아니오.") == 1) set .@compass_check,1;
+			}
+			set .@loop2,1;
+			while(.@loop2) {
+				if (.@wait_button_chk == 0) set .@wait_button_chk,1;
+				else next;
+
+				switch(select("신전:여관:무기점:도구점:비공정:주점:지질학 연구소:치안 관리소:취소")) {
+				case 1:
+					mes "[베인스 안내 병사]";
+					mes "신전은 경건한 마음으로 프레이야님을,";
+					mes "향해 기도하는 신도들로 언제나.";
+					mes "북적입니다.";
+					mes "베인스 북쪽에 위치하고 있습니다.";
+					if (.@compass_check == 1) viewpoint 1,196,258,1,0xFF0000;
+					break;
+				case 2:
+					mes "[베인스 안내 병사]";
+					mes "지친 여행객을 언제나 환영합니다.";
+					mes "여관은 베인스 북서쪽에 위치해";
+					mes "있습니다.";
+					if (.@compass_check == 1) viewpoint 1,128,266,2,0xFF00FF;
+					break;
+				case 3:
+					mes "[베인스 안내 병사]";
+					mes "자기의 몸은 스스로 지켜야 하죠.";
+					mes "값싸고 질 좋은 무기를 베인스";
+					mes "무기점에서 구입하세요.";
+					mes "베인스 서쪽에 위치하고 있습니다.";
+					if (.@compass_check == 1) viewpoint 1,150,175,3,0x99FFFF;
+					break;
+				case 4:
+					mes "[베인스 안내 병사]";
+					mes "여행 필수품! 마을 중앙에 위치한";
+					mes "베인스 도구점에서 여행 준비물을";
+					mes "점검하시기 바랍니다.";
+					if (.@compass_check == 1) viewpoint 1,230,161,4,0x0000FF;
+					break;
+				case 5:
+					mes "[베인스 안내 병사]";
+					mes "베인스의 비공정은 화물용으로만";
+					mes "이용되고 있습니다.";
+					if (.@compass_check == 1) viewpoint 1,273,285,5,0x00FF00;
+					break;
+				case 6:
+					mes "[베인스 안내 병사]";
+					mes "베인스 주민과 진솔한 이야기를 나누고";
+					mes "싶으실 땐 베인스 주점에 찾아가";
+					mes "보십시오.";
+					mes "주점은 베인스 서쪽에 위치해";
+					mes "있습니다.";
+					if (.@compass_check == 1) viewpoint 1,150,217,6,0x00FF00;
+					break;
+				case 7:
+					mes "[베인스 안내 병사]";
+					mes "지질학에 대해 궁금한게 있으십니까??";
+					mes "그렇다면 무기점 2층에 있는 지질학";
+					mes "연구소를 찾아가 보십시오.";
+					if (.@compass_check == 1) viewpoint 1,150,175,7,0x00FF00;
+					break;
+				case 8:
+					mes "[베인스 안내 병사]";
+					mes "베인스에는 치안을 담당하는";
+					mes "치안관리소가 있습니다.";
+					mes "언제든지 치안관리소로 달려가시길!";
+					if (.@compass_check == 1) viewpoint 1,250,175,8,0x00FF00;    // 베인스 치안관리소 좌표정보 필요
+					break;
+				case 9:
+					mes "[베인스 안내 병사]";
+					mes "위치표시를 지우시고 싶으면 ''미니,";
+					mes "맵에 표시들을 모두 지운다.''를";
+					mes "선택하슈.";
+					set .@loop2,0;
+					break;
+				}
+			}
+			break;
+
+		case 2:
+			viewpoint 2,196,258,1,0xFF0000;
+			viewpoint 2,128,266,2,0xFF00FF;
+			viewpoint 2,150,175,3,0x99FFFF;
+			viewpoint 2,230,161,4,0x0000FF;
+			viewpoint 2,273,285,5,0x00FF00;
+			viewpoint 2,150,217,6,0x00FF00;
+			viewpoint 2,150,175,7,0x00FF00;
+			viewpoint 2,250,175,8,0x00FF00;  // 좌표수정필요
+			mes "[베인스 안내 병사]";
+			mes "미니 맵의 표시를 모두";
+			mes "제거하였습니다.";
+			mes "궁금한게 있으면 언제든지 문의하시길";
+			mes "바랍니다. 즐거운 여행 되시기를.";
+			break;
+		case 3:
+			mes "[베인스 안내 병사]";
+			mes "미흡한 기존의 아날로그 안내방식에서";
+			mes "벗어나 알고 싶으신 장소를 미니맵에";
+			mes "표시해 주는 광역측위시스템을 이용한";
+			mes "최첨단 디지털 안내방식으로";
+			mes "바뀌었습니다.";
+			mes "룬 미드가츠 왕국의 눈부신 마법과";
+			mes "과학기술의 조합으로 만들어낸 이";
+			mes "광역측위시스템의 성능을 직접 눈으로";
+			mes "확인해 보십시오.";
+			next;
+			mes "[베인스 안내 병사]";
+			mes "본 안내에 앞서 여러분들은 모니터";
+			mes "우측상단에 있는 미니 맵을 꼭 참조해";
+			mes "주시기 바랍니다.";
+			mes "''Ctrl + Tab'' 또는 기본정보창에서";
+			mes "'Map' 버튼을 클릭하시면 됩니다.";
+			next;
+			mes "[베인스 안내 병사]";
+			mes "이제 미니 맵이 보이시면''-''버튼을";
+			mes "여러번 클릭하셔서 모든 마을이";
+			mes "보이도록 설정해 주십시오.";
+			break;
+		case 4:
+			mes "[베인스 안내 병사]";
+			mes "즐거운 여행이 되시길 바랍니다.";
+			close2;
+			set .@loop1,0;
+			break;
+		}
+	}
+	close;
+}
+
+veins,189,101,5	duplicate(ve_guide)	Veins Guide#2	934
+

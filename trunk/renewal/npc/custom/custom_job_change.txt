@@ -1,0 +1,642 @@
+
+//    kk  ""tt""  "";;    """"JJ;;kkJJ  JJtt""    ""tt""  ;;tt""""tt    ""tt""   
+//   JJ  kk""tt;;JJ      ttkk    ""tt    ;;;;ttJJ;;  ""ttkk;;"";;;;ttkk;;  ;;kk  
+//  "";;  ""  kk  kk  tt  ttww    ZZ;;  ww    RR  ;;JJ  JJJJ  tt    RR  ;;JJ  JJ 
+//  JJ      """";;""  kk  ttkk  ;;kk    ZZ    ww  ;;""  kk""  ww    kk;;kk""  JJ 
+//  kk      JJ  kk    ww  ttkk  JJJJ  ;;ww  ""JJ  ;;tt""RR    ZZ  ;;ZZJJ      kk 
+//  kk  ;;  "";;JJ        JJtt  JJJJ  ""kk  JJ""  ww""""ww    ww  ""JJ  ZZ    kk 
+//  JJ  JJ  ;;JJ""  "";;  ww;;  kkJJ  JJ""  kk;;  ww  ;;ww  ""JJ  ww;;  ww  ;;tt 
+//;;""  RR    RR    ww""  kk""  ;;tt  ww    kkkk      kktt  JJ;;  ZZ;;  ;;  tt   
+//  JJkkttkkkk;;kkkk;;JJkktt""kkJJJJkkttJJkk;;  kkkkJJ  ttkkttJJkk;;ttkkJJkkJJ   
+//| I | - | L | U | N | A | A | T | H | E | N | A | P | R | O | J | E | C | T |  
+//------------------------------------------------------------------------------
+// 커스텀 3차 전직 스크립트 <http://www.i-luna.com>
+// 아이루나 iLAthena Project
+//------------------------------------------------------------------------------
+// 스크립트 작성자 : 유란 <uRhan@zetys.com / http://urhan.zetys.com>
+// 참조 스크립트 : 전직&전승도우미[Ver.1.2] by 이슈비케	
+//------------------------------------------------------------------------------
+//--1차,2차,2-2차,확장,전승,전승1,2,2-2차,3차직업 전직스크립트
+//v2.0 - 모든직업패치, 직업변경시 공지패치
+//v2.1 - 직업 확인구문 에러패치, 오타수정
+//v2.2 - 3차직업 2차로전승 되버리는 패치, 변수수정, 환생패치(분리)
+//v2.3 - 잘못 연결된 라벨 수정,오타수정
+//------------------------------------------------------------------------------
+
+prontera.gat,141,175,3	script	전직도우미#프론::jobnpc	811,{
+
+	set @name$,"전직도우미";	// NPC 이름
+
+//1차,2차,전승관련설정
+	set @Min1stJobLevel,10;		// 1차 직업(전승후도 동일)을 위한 최소 Job 레벨
+	set @Min2ndJobLevel,40;		// 2차 직업(전승후도 동일)을 위한 최소 Job 레벨
+	set @MinSupNoviceBaseL,45;	// 슈퍼 노비스에 필요한 최소 Base 레벨
+	set @MinOverBaseLevel,99;	// 전승에 필요한 최소 Base 레벨
+	set @MinOverJobLevel,50;	// 전승에 필요한 최소 Job 레벨
+	set @OverZeny,0;		// 전승에 필요한 Zeny
+	set @PlusStatusPoint,100;	// 전승 후에 주어질 추가 Status 포인트
+	set @PlusSkillPoint,0;		// 전승 후에 주어질 추가 Skill 포인트
+	set @SkPointCheck,0;		// 스킬 포인트를 남았는지를 체크합니다.(0 = On, 1=Off)
+	set @notice,0;			// 전직&전승 했을 시 전체방송(0 = On, 1=Off)
+
+
+//3차관련설정
+	set @no3rdBaseLevel,99;		// 비전승에서 3차전직시 필요 Base 레벨
+	set @no3rdJobLevel,50;		// 비전승에서 3차전직시 필요 Job 레벨
+	set @nonotice,0;		// 비전승에서 3차전직시 전체방송(0 = On, 1=Off)
+	set @re3rdBaseLevel,99;		// 전승에서 3차전직시 필요 Base 레벨
+	set @re3rdJobLevel,70;		// 전승에서 3차전직시 필요 Job 레벨
+	set @renotice,0;		// 전승에서 3차전직시 전체방송(0 = On, 1=Off)
+	set @checkZeny,0;		// 3차전직시 필요 Zeny
+	set @c3PlusStatusPoint,0;	// 3차전직후 추가 Status 포인트
+	set @c3PlusSkillPoint,0;	// 3차전직후 추가 Skill 포인트
+
+
+	mes "["+@name$+"]";
+	mes "안녕하세요?";
+	mes "직업 도우미 입니다.";
+	mes "무엇을 도와드릴까요?";
+	next;
+	menu 
+	"^0000FF전직^000000한다.",M_Check,
+	"^2E8B57전승^000000한다.",M_OverJob,
+	"^0000FF3차전직^000000한다.",L_check,
+	"그만둔다.",W_Close;
+	//OnInit:
+	//waitingroom "전직도우미",0;
+	end;
+
+
+
+
+M_Check:
+	if(GetSkillLv(1) != 9)	goto W_BaseSkill;
+	if(Class == Novice)	goto M_1stJob;
+	if(Class >= 1 && Class <= 6 || class == Job_Taekwon)	goto M_2ndJob;
+	if(Class == Job_Gunslinger || Class == Job_Ninja || Class == Job_SuperNovice)	goto W_2ndNot;
+	if(Class == Job_Novice_High)	goto M_Over1stJob;
+	if(Class >= 7 && Class <= 21 || Class == Job_Soul_Linker || Class == Job_Star_Gladiator)	goto W_Overplz;
+	if(Class >= 4002 && Class <= 4007)	goto M_Over2ndJob;
+	if(Class >= 4008 && Class <= 4022)	goto W_2ndNot;
+	if(Class >= 4054 && Class <= 4079) goto L_error_job;
+	if(RBcount >= 1) goto Lnovalkyrie;
+	set @I_ErrorCode,101;
+	goto W_Error;	// 오류가 발생했을시 경고 문구를 출력합니다.
+
+
+
+// 1차 직업에 대한 메뉴
+	M_1stJob:
+		if(JobLevel < @Min1stJobLevel)	goto W_Need1stJobLevel;
+		mes "["+@name$+"]";
+		mes "어떤 직업을 원하십니까?";
+		mes "참고로 베이비 직업은";
+		mes "전승 및 환생을 할 수 없습니다.";
+		next;
+		menu 
+		"검사",J_Swordman,
+		"마술사",J_Mage,
+		"상인",J_Merchant,
+		"궁수",J_Archer,
+		"복사",J_Acolyte,
+		"도둑",J_Thief,
+		"태권소년/소녀",J_Taekwon,
+		"닌자",J_Ninja,
+		"건슬링거",J_Gunslinger,
+		"슈퍼노비스",J_SuperNovice;
+
+
+// 2차 직업에 대한 메뉴
+	M_2ndJob:
+		if(JobLevel < @Min2ndJobLevel)	goto W_Need2ndJobLevel;
+		if(@SkPointCheck == 0 && SkillPoint != 0)	goto W_SkillUsePlz;
+		mes "["+@name$+"]";
+		mes "어떤 직업을 원하십니까?";
+		next;
+		if(Class == Job_Swordman)		menu "기사",J_Knight,"크루세이더",J_Crusader;
+		if(Class == Job_Mage)			menu "위저드",J_Wizard,"세이지",J_Sage;
+		if(Class == Job_Merchant)		menu "블랙스미스",J_Blacksmith,"알케미스트",J_Alchemist;
+		if(Class == Job_Archer && Sex == 1)	menu "헌터",J_Hunter,"바드",J_Bard;
+		if(Class == Job_Archer && Sex == 0)	menu "헌터",J_Hunter,"댄서",J_Dancer;
+		if(Class == Job_Acolyte)		menu "프리스트",J_Priest,"몽크",J_Monk;
+		if(Class == Job_Thief)			menu "어쌔신",J_Assassin,"로그",J_Rogue;
+		if(Class == Job_Taekwon)		menu "권성",J_Star_Gladiator,"소울링커",J_Soul_Linker;
+		set @I_ErrorCode,102;
+		goto W_Error;
+
+
+// 전승에 대한 조건 체크&전승
+	M_OverJob:
+		if(Class >= 0 && Class <= 6  || Class == Job_Taekwon)	goto W_2ndOverNot;
+		if(Class >= 4001 && Class <= 4022)	goto W_why;
+		if(Class >= 4023 && Class <= 4045)	goto W_OverNot;
+		if(Class == Job_Gunslinger || Class == Job_Ninja || Class == Job_SuperNovice || Class == Job_Star_Gladiator || Class == Job_Soul_Linker)	goto W_OverNot;
+		if(BaseLevel < @MinOverBaseLevel)	goto W_NeedOverBaseLevel;
+		if(JobLevel < @MinOverJobLevel)		goto W_NeedOverJobLevel;
+		if(Zeny < @OverZeny)			goto W_NeedZeny;
+		if(checkfalcon() || checkcart() || checkriding()) goto W_Remove;
+		if(Class >= 4054 && Class <= 4079) goto L_error_job;
+		mes "["+@name$+"]";
+		mes "전승 가능합니다.";
+		mes "전승 하시겠습니까?";
+		mes "전승 비용 : "+@OverZeny+"z";
+		menu "전승 하겠습니다.",-,"조금더 생각해보겠습니다.",W_Close;
+		set lastJob, readparam(19);
+		jobchange 4001;
+		resetlvl(1);
+		set StatusPoint,0;
+		set SkillPoint,0;
+		set StatusPoint,StatusPoint+@PlusStatusPoint;
+		set Zeny,Zeny-@OverZeny;
+		if(@notice == 0) announce ""+strcharinfo(0)+"님이 전승 하셨습니다.",bc_all,0xFFFFFF;
+		close;
+		set @I_ErrorCode,103;
+		goto W_Error;
+
+
+// 전승 후의 1차 직업에 대한 메뉴
+	M_Over1stJob:
+		if(JobLevel < @Min1stJobLevel)	goto W_Need1stJobLevel;
+		if(lastJob == Job_Knight || lastJob == Job_Crusader)				goto J_Swordman_High;
+		if(lastJob == Job_Wizard || lastJob == Job_Sage)				goto J_Mage_High;
+		if(lastJob == Job_Blacksmith || lastJob == Job_Alchem)				goto J_Merchant_High;
+		if(lastJob == Job_Hunter || lastJob == Job_Bard || lastJob == Job_Dancer)	goto J_Archer_High;
+		if(lastJob == Job_Priest || lastJob == Job_Monk)				goto J_Acolyte_High;
+		if(lastJob == Job_Assassin || lastJob == Job_Rogue)				goto J_Thief_High;
+		if(Class == Job_Novice_High)	
+		menu 
+		"High 검사",J_Swordman_High,
+		"High 마법사",J_Mage_High,
+		"High 상인",_Merchant_High,
+		"High 궁수",J_Archer_High,
+		"High 복사",J_Acolyte_High,
+		"High 도둑",J_Thief_High;
+		set @I_ErrorCode,104;
+		goto W_Error;			// 오류가 발생했을시 경고 문구를 출력합니다.
+
+
+// 전승 후의 2차 직업에 대한 메뉴
+	M_Over2ndJob:
+		if(JobLevel < @Min2ndJobLevel)	goto W_Need2ndJobLevel;
+		if(@SkPointCheck == 0 && SkillPoint != 0)	goto W_SkillUsePlz;
+			if(lastJob == Job_Knight) goto J_Lord_Knight;
+			if(lastJob == Job_Priest) goto J_High_Priest;
+			if(lastJob == Job_Wizard) goto J_High_Wizard;
+			if(lastJob == Job_Blacksmith) goto J_Whitesmith;
+			if(lastJob == Job_Hunter) goto J_Sniper;
+			if(lastJob == Job_Assassin) goto J_Assassin_Cross;
+			if(lastJob == Job_Crusader) goto J_Paladin;
+			if(lastJob == Job_Monk) goto J_Champion;
+			if(lastJob == Job_Sage) goto J_Professor;
+			if(lastJob == Job_Rogue) goto J_Stalker;
+			if(lastJob == Job_Alchem) goto J_Creator;
+			if(lastJob == Job_Bard) goto J_Clown;
+			if(lastJob == Job_Dancer) goto J_Gypsy;
+			if(Class == Job_Swordman_High)	menu "로드 나이트",J_Lord_Knight,"팔라딘",J_Paladin;
+			if(Class == Job_Mage_High)	menu "하이 위저드",J_High_Wizard,"프로페셔",J_Professor;
+			if(Class == Job_Merchant_High)	menu "화이트 스미스",J_Whitesmith,"크리에이터",J_Creator;
+			if(Class == Job_Archer_High && Sex == 1)	menu "스나이퍼",J_Sniper,"크로운",J_Clown;
+			if(Class == Job_Archer_High && Sex == 0)	menu "스나이퍼",J_Sniper,"집시",J_Gypsy;
+			if(Class == Job_Acolyte_High)	menu "하이 프리스트",J_High_Priest,"챔피언",J_Champion;
+			if(Class == Job_Thief_High)	menu "어쌔신 크로스",J_Assassin_Cross,"스토커",J_Stalker;
+			set @I_ErrorCode,105;
+			goto W_Error;			// 오류가 발생했을시 경고 문구를 출력합니다.
+
+
+// 직업 변경
+	M_ChangeJob:
+		jobchange @jobchange;
+		if(Class >= 4008 && Class <= 4022)	set SkillPoint,SkillPoint+@PlusSkillPoint;
+		if(Class == Job_Gunslinger || Class == Job_Ninja || Class == Job_Star_Gladiator || Class == Job_Soul_Linker)	set SkillPoint,SkillPoint+@PlusSkillPoint;
+		if(@notice == 0) announce ""+strcharinfo(0)+"님이 '"+@jobname$+"'(으)로 전직 하셨습니다.",bc_all,0xFFFFFF;
+		close;
+
+
+
+// 직업변경을 위한 설정 변수.
+//비전승 1,2차,2-2차,확장직업군
+J_Novice:	set @jobchange,0;	set @jobname$,"노비스";		goto W_RealSelect;
+J_Swordman:	set @jobchange,1;	set @jobname$,"검사";		goto W_RealSelect;
+J_Mage:		set @jobchange,2;	set @jobname$,"마법사";		goto W_RealSelect;
+J_Archer:	set @jobchange,3;	set @jobname$,"궁수";		goto W_RealSelect;
+J_Acolyte:	set @jobchange,4;	set @jobname$,"복사";		goto W_RealSelect;
+J_Merchant:	set @jobchange,5;	set @jobname$,"상인";		goto W_RealSelect;
+J_Thief:	set @jobchange,6;	set @jobname$,"도둑";		goto W_RealSelect;
+J_Knight:	set @jobchange,7;	set @jobname$,"기사";		goto W_RealSelect;
+J_Priest:	set @jobchange,8;	set @jobname$,"프리스트";	goto W_RealSelect;
+J_Wizard:	set @jobchange,9;	set @jobname$,"위자드";		goto W_RealSelect;
+J_Blacksmith:	set @jobchange,10;	set @jobname$,"블랙스미스";	goto W_RealSelect;
+J_Hunter:	set @jobchange,11;	set @jobname$,"헌터";		goto W_RealSelect;
+J_Assassin:	set @jobchange,12;	set @jobname$,"어쌔신";		goto W_RealSelect;
+J_Crusader:	set @jobchange,14;	set @jobname$,"크루세이더";	goto W_RealSelect;
+J_Monk:		set @jobchange,15;	set @jobname$,"몽크";		goto W_RealSelect;
+J_Sage:		set @jobchange,16;	set @jobname$,"세이지";		goto W_RealSelect;
+J_Rogue:	set @jobchange,17;	set @jobname$,"로그";		goto W_RealSelect;
+J_Alchemist:	set @jobchange,18;	set @jobname$,"알케미스트";	goto W_RealSelect;
+J_Bard:		set @jobchange,19;	set @jobname$,"바드";		goto W_RealSelect;
+J_Dancer:	set @jobchange,20;	set @jobname$,"댄서";		goto W_RealSelect;
+//슈퍼노비스및 확장직업군
+J_SuperNovice:
+if(BaseLevel<@MinSupNoviceBaseL)	goto	W_NeedSupBaseLevel;
+set @jobchange,23;	set @jobname$,"슈퍼노비스";	goto W_RealSelect;
+J_Gunslinger:	set @jobchange,24;	set @jobname$,"건슬링거";	goto W_RealSelect;
+J_Ninja:	set @jobchange,25;	set @jobname$,"닌자";		goto W_RealSelect;
+
+//전승직업군
+J_Novice_High:		set @jobchange,4001;	set @jobname$,"High 노비스";	goto W_RealSelect;
+J_Swordman_High:	set @jobchange,4002;	set @jobname$,"High 검사";	goto W_RealSelect;
+J_Mage_High:		set @jobchange,4003;	set @jobname$,"High 마법사";	goto W_RealSelect;
+J_Archer_High:		set @jobchange,4004;	set @jobname$,"High 궁수";	goto W_RealSelect;
+J_Acolyte_High:		set @jobchange,4005;	set @jobname$,"High 복사";	goto W_RealSelect;
+J_Merchant_High:	set @jobchange,4006;	set @jobname$,"High 상인";	goto W_RealSelect;
+J_Thief_High:		set @jobchange,4007;	set @jobname$,"High 도둑";	goto W_RealSelect;
+J_Lord_Knight:		set @jobchange,4008;	set @jobname$,"로드 나이트";	goto W_RealSelect;
+J_High_Priest:		set @jobchange,4009;	set @jobname$,"하이 프리스트";	goto W_RealSelect;
+J_High_Wizard:		set @jobchange,4010;	set @jobname$,"하이 위자드";	goto W_RealSelect;
+J_Whitesmith:		set @jobchange,4011;	set @jobname$,"화이트 스미스";	goto W_RealSelect;
+J_Sniper:		set @jobchange,4012;	set @jobname$,"스나이퍼";	goto W_RealSelect;
+J_Assassin_Cross:	set @jobchange,4013;	set @jobname$,"어쌔신 크로스";	goto W_RealSelect;
+J_Paladin:		set @jobchange,4015;	set @jobname$,"팔라딘";		goto W_RealSelect;
+J_Champion:		set @jobchange,4016;	set @jobname$,"챔피온";		goto W_RealSelect;
+J_Professor:		set @jobchange,4017;	set @jobname$,"프로페서";	goto W_RealSelect;
+J_Stalker:		set @jobchange,4018;	set @jobname$,"스토커";		goto W_RealSelect;
+J_Creator:		set @jobchange,4019;	set @jobname$,"크리에이터";	goto W_RealSelect;
+J_Clown:		set @jobchange,4020;	set @jobname$,"크라운";		goto W_RealSelect;
+J_Gypsy:		set @jobchange,4021;	set @jobname$,"집시";		goto W_RealSelect;
+J_Taekwon:		set @jobchange,4046;	set @jobname$,"태권소년/소녀";	goto W_RealSelect;
+J_Star_Gladiator:	set @jobchange,4047;	set @jobname$,"권성";		goto W_RealSelect;
+J_Soul_Linker:		set @jobchange,4049;	set @jobname$,"소울링커";	goto W_RealSelect;
+
+
+
+
+
+
+//3차관련
+	L_check:
+	if(Class >= 0 && Class <= 6) goto L_1stNot;
+	if(Class >= 7 && Class <= 21) goto L_Secondjob;
+	if(Class >= 4008 && Class <= 4022) goto L_Resecondjob;
+	if(Class >= 4054 && Class <= 4079) goto L_error_job;
+	set @I_ErrorCode,399;
+	goto W_Error;
+
+
+	L_Secondjob:
+		mes "["+@name$+"]";
+		mes "비전승 2차직업군이시군요.";
+		next;
+		if(BaseLevel < @no3rdBaseLevel) goto L_Need_noBaseLevel;
+		if(JobLevel < @no3rdJobLevel) goto L_Need_noJobLevel;
+		if(Zeny < @checkZeny) goto L_NeedZeny;
+		if(checkfalcon() || checkcart() || checkriding()) goto W_Remove;
+
+		//2-1차에서 3차 전직 (클래스확인 if구문 db/const.txt 설정참조)
+		if(class == Job_Knight) goto KN_Rune_Knight;
+		if(class == Job_Wizard) goto WZ_Warlock;
+		if(class == Job_Hunter) goto HT_Ranger;
+		if(class == Job_Priest) goto PT_Arch_Bishop;
+		//if(class == Job_Blacksmith) goto BS_Mechanic;
+		if(class == Job_Assassin) goto AS_Guillotine_Cross;;
+		//2-2차에서 3차 전직 (클래스확인 if구문 db/const.txt 설정참조)
+		//if(class == Job_Crusader) goto CR_Royal_Guard;
+		//if(class == Job_Sage) goto SA_Sorcerer;
+		//if(class == Job_Bard) goto BD_Minstrel;
+		//if(class == Job_Dancer) goto DS_Wanderer;
+		//if(class == Job_Monk) goto MK_Sura;
+		//if(class == Job_Alchem) goto AL_Genetic;
+		//if(class == Job_Rogue) goto RG_Shadow_Chaser;
+
+		mes "["+@name$+"]";
+		mes "해당 직업 3차직업군은 미구현입니다.";
+		close;
+
+	L_Resecondjob:
+		mes "["+@name$+"]";
+		mes "전승 2차직업군이시군요.";
+		next;
+		if(BaseLevel < @re3rdBaseLevel) goto L_Need_reBaseLevel;
+		if(JobLevel < @re3rdJobLevel) goto L_Need_reJobLevel;
+		if(Zeny < @checkZeny) goto L_NeedZeny;
+		if(checkfalcon() || checkcart() || checkriding()) goto W_Remove;
+
+		//2-1차에서 3차전직 (클래스확인 if구문 db/const.txt 설정참조)
+		if(class == Job_Lord_Knight) goto LK_Rune_Knight;
+		if(class == Job_High_Wizard) goto HW_Warlock;
+		if(class == Job_Sniper) goto SN_Ranger;
+		if(class == Job_High_Priest) goto HP_Arch_Bishop;
+		//if(class == Job_Whitesmith) goto WS_Mechanic;
+		if(class == Job_Assassin_Cross) goto AC_Guillotine_Cross;
+		//2-2차에서 3차전직 (클래스확인 if구문 db/const.txt 설정참조)
+		//if(class == Job_Paladin) goto PD_Royal_Guard;
+		//if(class == Job_Professor) goto PF_Sorcerer;
+		//if(class == Job_Clown) goto CW_Minstrel;
+		//if(class == Job_Gypsy) goto GP_Wanderer;
+		//if(class == Job_Champion) goto CP_Sura;
+		//if(class == Job_Creator) goto CR_Genetic;
+		//if(class == Job_Stalker) goto ST_Shadow_Chaser;
+
+		mes "["+@name$+"]";
+		mes "해당 직업 3차직업군은 미구현입니다..";
+		close;
+
+//비전승군
+//2-1차에서 3차 전직
+KN_Rune_Knight: 	set @jobchange,4054;	set @jobname$,"룬나이트"; 	goto L_SelectJob_no;
+WZ_Warlock:		set @jobchange,4055;	set @jobname$,"워록";		goto L_SelectJob_no;
+HT_Ranger:		set @jobchange,4056;	set @jobname$,"레인져"; 	goto L_SelectJob_no;
+PT_Arch_Bishop:		set @jobchange,4057;	set @jobname$,"아크비숍"; 	goto L_SelectJob_no;
+BS_Mechanic:		set @jobchange,4058;	set @jobname$,"미케닉"; 	goto L_SelectJob_no;
+AS_Guillotine_Cross:	set @jobchange,4059;	set @jobname$,"길로틴크로스"; 	goto L_SelectJob;
+//2-2차에서 3차 전직
+CR_Royal_Guard:		set @jobchange,4066;	set @jobname$,"로얄가드";	goto L_SelectJob_no;
+SA_Sorcerer:		set @jobchange,4067;	set @jobname$,"소서러";		goto L_SelectJob_no;
+BD_Minstrel:		set @jobchange,4068;	set @jobname$,"민스트렐";	goto L_SelectJob_no;
+DS_Wanderer:		set @jobchange,4069;	set @jobname$,"원더러";		goto L_SelectJob_no;
+MK_Sura:		set @jobchange,4070;	set @jobname$,"수라";		goto L_SelectJob_no;
+AL_Genetic:		set @jobchange,4071;	set @jobname$,"제네릭";		goto L_SelectJob_no;
+RG_Shadow_Chaser:	set @jobchange,4072;	set @jobname$,"쉐도우체이서";	goto L_SelectJob_no;
+
+//전승직업군
+//2-1차에서 3차전직
+LK_Rune_Knight:		set @jobchange,4060;	set @jobname$,"룬나이트";	goto L_SelectJob_re;
+HW_Warlock:		set @jobchange,4061;	set @jobname$,"워록";		goto L_SelectJob_re;
+SN_Ranger:		set @jobchange,4062;	set @jobname$,"레인져";		goto L_SelectJob_re;
+HP_Arch_Bishop:		set @jobchange,4063;	set @jobname$,"아크비숍";	goto L_SelectJob_re;
+WS_Mechanic:		set @jobchange,4064;	set @jobname$,"미케닉";		goto L_SelectJob_re;
+AC_Guillotine_Cross:	set @jobchange,4065;	set @jobname$,"길로틴크로스";	goto L_SelectJob_re;
+//2-2차에서 3차전직
+PD_Royal_Guard:		set @jobchange,4073;	set @jobname$,"로얄가드";	goto L_SelectJob_re;
+PF_Sorcerer:		set @jobchange,4074;	set @jobname$,"소서러";		goto L_SelectJob_re;
+CW_Minstrel:		set @jobchange,4075;	set @jobname$,"민스트렐";	goto L_SelectJob_re;
+GP_Wanderer:		set @jobchange,4076;	set @jobname$,"원더러";		goto L_SelectJob_re;
+CP_Sura:		set @jobchange,4077;	set @jobname$,"수라";		goto L_SelectJob_re;
+CR_Genetic:		set @jobchange,4078;	set @jobname$,"제니릭";		goto L_SelectJob_re;
+ST_Shadow_Chaser:	set @jobchange,4079;	set @jobname$,"쉐도우체이서";	goto L_SelectJob_re;
+
+
+
+// 비전승에서 전직 확인 구문
+	L_SelectJob_no:
+		mes "["+@name$+"]";
+		mes "직업 : ^0000FF"+@jobname$+"^000000";
+		mes "정말 하시겠습니까?";
+		next;
+		menu "예. 하겠습니다.",L_ChangeJob_no,"다시 생각해보겠습니다.",W_Close;
+
+// 전승에서 전직 확인 구문
+	L_SelectJob_re:
+		mes "["+@name$+"]";
+		mes "직업 : ^0000FF"+@jobname$+"^000000";
+		mes "정말 하시겠습니까?";
+		next;
+		menu "예. 하겠습니다.",L_ChangeJob_re,"다시 생각해보겠습니다.",W_Close;
+
+// 비전승에서 직업 변경 확인
+	L_ChangeJob_no:
+		jobchange @jobchange;
+		//set lastJob, readparam(19);
+		//resetlvl(1);
+		//resetskill; 
+		//resetstatus; 
+		//setoption 0; 
+		set SkillPoint,SkillPoint+@c3PlusSkillPoint;
+		set StatusPoint,StatusPoint+@c3PlusStatusPoint;
+		if(@nonotice == 0) announce ""+strcharinfo(0)+"님이 '"+@jobname$+"'(으)로 전직 하셨습니다.",bc_all,0xFFFFFF;
+		close;
+
+// 전승에서 직업 변경 확인
+	L_ChangeJob_re:
+		jobchange @jobchange;
+		//set lastJob, readparam(19);
+		//resetlvl(1);
+		//resetskill; 
+		//resetstatus; 
+		//setoption 0; 
+		set SkillPoint,SkillPoint+@c3PlusSkillPoint;
+		set StatusPoint,StatusPoint+@c3PlusStatusPoint;
+		if(@renotice == 0) announce ""+strcharinfo(0)+"님이 '"+@jobname$+"'(으)로 전직 하셨습니다.",bc_all,0xFFE4E1;
+		close;
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+// 각종 경고 메시지를 보여줍니다.
+// 기본기능 Skill Level이 부족할 때
+	W_BaseSkill:
+		mes "["+@name$+"]";
+		mes "^FF0000기본기능 스킬이 부족합니다.^000000";
+		mes "스킬레벨을 9로 만들어 주세요.";
+		close;
+
+
+
+// 1차 직업을 전직시 Job Level이 부족할 때
+	W_Need1stJobLevel:
+		mes "["+@name$+"]";
+		mes "^FF0000Job 레벨이 부족합니다.^000000";
+		mes "필요 Job Level : ^0000FF"+@Min1stJobLevel+"^000000";
+		close;
+
+
+
+// 2차 직업을 전직시 Job Level이 부족할 때
+	W_Need2ndJobLevel:
+		mes "["+@name$+"]";
+		mes "^FF0000Job 레벨이 부족합니다.^000000";
+		mes "필요 Job Level : ^0000FF"+@Min2ndJobLevel+"^000000";
+		close;
+
+
+
+// 전승할 시 Base Level이 부족할 때
+	W_NeedOverBaseLevel:
+		mes "["+@name$+"]";
+		mes "^FF0000Base 레벨이 부족합니다.^000000";
+		mes "필요 Base Level : ^0000FF"+@MinOverBaseLevel+"^000000";
+		close;
+
+
+// 전승할 시 Job Level이 부족할 때
+	W_NeedOverJobLevel:
+		mes "["+@name$+"]";
+		mes "^FF0000Job 레벨이 부족합니다.^000000";
+		mes "필요 Job Level : ^0000FF"+@MinOverJobLevel+"^000000";
+		close;
+
+
+// 슈퍼노이스 전직 시 Base Level이 부족할 때
+	W_NeedSupBaseLevel:
+		mes "["+@name$+"]";
+		mes "^FF0000Base 레벨이 부족합니다.^000000";
+		mes "필요 Base Level : ^0000FF"+@MinSupNoviceBaseL+"^000000";
+		close;
+
+
+
+// 전직할 시 정말 그 직업을 할껀지 다시 물어봄
+	W_RealSelect:
+		mes "["+@name$+"]";
+		mes "직업 : ^0000FF"+@jobname$+"^000000";
+		mes "정말 하시겠습니까?";
+		next;
+		menu "예. 하겠습니다.",M_ChangeJob,"다시 생각해보겠습니다.",W_Close;
+
+
+// 전승할 시 제니가 부족할 때
+	W_NeedZeny:
+		mes "["+@name$+"]";
+		mes "제니가 부족합니다.";
+		mes "^0000FF전승 비용 : "+@OverZeny+"z^000000";
+		close;
+
+
+
+// 더이상 전직이 안될 때(건슬,닌자가 전직시 // 전승 직업군이 전직 시 등등)
+	W_2ndNot:
+		mes "["+@name$+"]";
+		mes "더이상 전직이 안됩니다.";
+		close;
+
+
+// 전승하기를 눌렀을 시, 전승 가능한 직업군이 아닐 때
+	W_OverNot:
+		mes "["+@name$+"]";
+		mes "전승 가능한 직업이 아닙니다.";
+		close;
+
+
+
+// 옵션(팔콘,카트,페코)을 제거 안했을 때
+	W_Remove:
+		if(checkfalcon())	goto W_Remove_Falcon;
+		if(checkcart())	goto W_Remove_Cart;
+		if(checkriding())	goto W_Remove_riding;
+
+	W_Remove_Falcon:
+		mes "["+@name$+"]";
+		mes "^0000FF팔콘^000000을 제거해 주시기 바랍니다.";
+		close;
+
+	W_Remove_Cart:
+		mes "["+@name$+"]";
+		mes "^0000FF카트^000000를 제거해 주시기 바랍니다.";
+		close;
+
+	W_Remove_riding:
+		mes "["+@name$+"]";
+		mes "^0000FF페코페코^000000를 제거해 주시기 바랍니다.";
+		close;
+
+
+
+// 스크립이 오류 났을 때
+	W_Error:
+		mes "^FF0000스크립트 오류입니다.^000000";
+		mes "ErrorCode : "+@I_ErrorCode+"";
+		mes "알려주실 땐 ErrorCode를 알려주세요";
+		close;
+
+
+// 환생케릭터가 전직을 하고자 할경우
+	Lnovalkyrie:
+		mes "["+@name$+"]";
+		mes "환생하신 케릭터입니다.";
+		mes "^FF0000환생하신 곳에서만 전직이 가능합니다.^000000";
+		close;
+
+
+// 전승 직업군이 전승하기를 눌렀을 때
+	W_why:
+		mes "["+@name$+"]";
+		mes "전승 해놓고 왜 그러세요?";
+		mes "가까운 병원에 가보세요.";
+		close;
+
+
+// 2차 직업군이 아닌데 전승을 눌렀을 때
+	W_2ndOverNot:
+		mes "["+@name$+"]";
+		mes "2차 직업도 아니면서";
+		mes "벌써 전승을 생각한단 말이냐?";
+		close;
+
+
+// 스킬 포인트를 체크하기가 On 되있을 시 스킬 포인트가 남아있을 때
+	W_SkillUsePlz:
+		mes "["+@name$+"]";
+		mes "스킬 포인트를 다 소진하세요.";
+		close;
+
+
+// 전승안한 2차 직업군이 전직하기를 눌렀을 때
+	W_Overplz:
+		mes "["+@name$+"]";
+		mes "더 강해지고 싶으시면";
+		mes "전승을 하시기 바랍니다.";
+		close;
+
+
+// 그만하기를 눌렀을 때
+	W_Close:
+		mes "["+@name$+"]";
+		mes "좋은 하루 되세요.";
+		close;
+
+//////////////////////////////////////////////////////////////////////////////////////
+//3차관련 경고 메세지
+//비해당 1차직업군시 에러메세지
+	L_1stNot:
+		mes "["+@name$+"]";
+		mes "2차 직업도 아니면서";
+		mes "벌써 3차 전직을 생각한단 말이냐?";
+		close;
+
+// 비전승 Base Level이 부족할 때
+	L_Need_noBaseLevel:
+		mes "["+@name$+"]";
+		mes "^FF0000Base 레벨이 부족합니다.^000000";
+		mes "필요 Base Level : ^0000FF"+@no3rdBaseLevel+"^000000";
+		close;
+
+// 비전승 Job Level이 부족할 때
+	L_Need_noJobLevel:
+		mes "["+@name$+"]";
+		mes "^FF0000Job 레벨이 부족합니다.^000000";
+		mes "필요 Job Level : ^0000FF"+@no3rdJobLevel+"^000000";
+		close;
+
+// 전승 Base Level이 부족할 때
+	L_Need_reBaseLevel:
+		mes "["+@name$+"]";
+		mes "^FF0000Base 레벨이 부족합니다.^000000";
+		mes "필요 Base Level : ^0000FF"+@re3rdBaseLevel+"^000000";
+		close;
+
+// 전승 Job Level이 부족할 때
+	L_Need_reJobLevel:
+		mes "["+@name$+"]";
+		mes "^FF0000Job 레벨이 부족합니다.^000000";
+		mes "필요 Job Level : ^0000FF"+@re3rdJobLevel+"^000000";
+		close;
+
+// 제니가 부족할 때
+	L_NeedZeny:
+		mes "["+@name$+"]";
+		mes "제니가 부족합니다.";
+		mes "^0000FFw전직 비용 : "+@checkZeny+"z^000000";
+		close;
+
+
+// 이미 전직한 케릭에러 메세지
+	L_error_job:
+		mes "["+@name$+"]";
+		mes "더 이상 직업변경을 불가능합니다.";
+		close;
+
+}
+//다른 마을에 배치
+//map.gat,x,y,z	duplicate(jobnpc)	전직도우미#name	811

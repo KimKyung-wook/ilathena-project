@@ -1,0 +1,195 @@
+
+//    kk  ""tt""  "";;    """"JJ;;kkJJ  JJtt""    ""tt""  ;;tt""""tt    ""tt""   
+//   JJ  kk""tt;;JJ      ttkk    ""tt    ;;;;ttJJ;;  ""ttkk;;"";;;;ttkk;;  ;;kk  
+//  "";;  ""  kk  kk  tt  ttww    ZZ;;  ww    RR  ;;JJ  JJJJ  tt    RR  ;;JJ  JJ 
+//  JJ      """";;""  kk  ttkk  ;;kk    ZZ    ww  ;;""  kk""  ww    kk;;kk""  JJ 
+//  kk      JJ  kk    ww  ttkk  JJJJ  ;;ww  ""JJ  ;;tt""RR    ZZ  ;;ZZJJ      kk 
+//  kk  ;;  "";;JJ        JJtt  JJJJ  ""kk  JJ""  ww""""ww    ww  ""JJ  ZZ    kk 
+//  JJ  JJ  ;;JJ""  "";;  ww;;  kkJJ  JJ""  kk;;  ww  ;;ww  ""JJ  ww;;  ww  ;;tt 
+//;;""  RR    RR    ww""  kk""  ;;tt  ww    kkkk      kktt  JJ;;  ZZ;;  ;;  tt   
+//  JJkkttkkkk;;kkkk;;JJkktt""kkJJJJkkttJJkk;;  kkkkJJ  ttkkttJJkk;;ttkkJJkkJJ   
+//| I | - | L | U | N | A | A | T | H | E | N | A | P | R | O | J | E | C | T |  
+//------------------------------------------------------------------------------
+// iLAthena 몬스터 배치 스크립트 <http://www.i-luna.com>
+// 한글화 by 아이루나 iLAthena Project
+//------------------------------------------------------------------------------
+
+//==================================================
+// nif_fild01 - 스켈링튼(니플헤임의 외딴마을)
+//==================================================
+nif_fild01,0,0,0,0	monster	디스가이즈	1506,20,0,0,0
+nif_fild01,0,0,0,0	monster	디스가이즈	1506,30,300000,120000,0
+nif_fild01,227,253,20,20	monster	듀라한	1504,7,1800000,1200000,0
+nif_fild01,0,0,0,0	monster	듀라한	1504,13,0,0,0
+nif_fild01,0,0,0,0	monster	지벳트	1503,10,0,0,0
+nif_fild01,0,0,0,0	monster	하이로 조이스트	1510,10,0,0,0
+nif_fild01,0,0,0,0	monster	큐브	1508,30,0,0,0
+
+//==================================================
+// nif_fild02 - 굘의 골짜기
+//==================================================
+nif_fild02,366,236,15,15	monster	루드	1509,10,360000,150000,0
+nif_fild02,356,139,10,10	monster	블러디 머더러	1507,1,1200000,600000,0
+nif_fild02,144,232,10,10	monster	블러디 머더러	1507,1,1200000,600000,0
+nif_fild02,118,282,15,15	monster	블러디 머더러	1507,1,1200000,600000,0
+nif_fild02,62,327,15,15	monster	블러디 머더러	1507,1,1200000,600000,0
+nif_fild02,0,0,0,0	monster	블러디 머더러	1507,7,0,0,0
+nif_fild02,114,136,15,15	monster	로리루리	1505,2,1200000,600000,0
+nif_fild02,52,115,10,10	monster	하이로 조이스트	1510,4,1200000,600000,0
+nif_fild02,84,276,15,15	monster	지벳트	1503,5,1200000,600000,0
+nif_fild02,352,273,15,15	monster	지벳트	1503,5,300000,150000,0
+nif_fild02,0,0,0,0	monster	로리루리	1505,19,120000,60000,0
+nif_fild02,352,273,15,15	monster	듀라한	1504,5,600000,300000,0
+nif_fild02,0,0,0,0	monster	듀라한	1504,5,0,0,0
+nif_fild02,0,0,0,0	monster	하이로 조이스트	1510,6,0,0,0
+nif_fild02,0,0,0,0	monster	지벳트	1503,10,0,0,0
+
+//==================================================
+// niflheim - 죽은자의나라 니플헤임
+//==================================================
+niflheim,0,0,0,0	monster	듀라한	1504,5,1800000,1200000,0
+niflheim,0,0,0,0	monster	지벳트	1503,10,1200000,600000,0
+niflheim,0,0,0,0	monster	하이로 조이스트	1510,10,1200000,600000,0
+niflheim,0,0,0,0	monster	큐브	1508,20,300000,150000,0
+niflheim,0,0,0,0	monster	루드	1509,20,300000,150000,0
+
+niflheim,1,1,0	script	NifInvasion	-1,{
+OnInit:
+
+	while(1)
+	{
+	initnpctimer;
+	end;
+
+OnTimer7980000:
+	stopnpctimer;
+    	switch(rand(6))
+	{
+
+	case 0:
+	monster "niflheim",327,193,"죽은자의 주인",1373,1,"NifInvasion::OnLoDDead";
+	monster "niflheim",330,193,"블러디 머더러",1507,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",324,193,"블러디 머더러",1507,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",327,196,"블러디 머더러",1507,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",327,190,"블러디 머더러",1507,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",324,190,"로리루리",1505,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",330,190,"로리루리",1505,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",324,196,"로리루리",1505,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",330,196,"로리루리",1505,1,"NifInvasion::OnInvasionMonsters";
+	break;
+
+	case 1:
+	monster "niflheim",337,252,"죽은자의 주인",1373,1,"NifInvasion::OnLoDDead";
+	monster "niflheim",337,255,"블러디 머더러",1507,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",337,249,"블러디 머더러",1507,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",334,252,"블러디 머더러",1507,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",340,252,"블러디 머더러",1507,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",334,249,"로리루리",1505,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",340,255,"로리루리",1505,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",340,249,"로리루리",1505,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",334,255,"로리루리",1505,1,"NifInvasion::OnInvasionMonsters";
+	break;
+
+	case 2:
+	monster "niflheim",190,185,"죽은자의 주인",1373,1,"NifInvasion::OnLoDDead";
+	monster "niflheim",190,188,"블러디 머더러",1507,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",190,182,"블러디 머더러",1507,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",193,185,"블러디 머더러",1507,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",187,185,"블러디 머더러",1507,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",187,182,"로리루리",1505,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",193,182,"로리루리",1505,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",193,188,"로리루리",1505,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",187,188,"로리루리",1505,1,"NifInvasion::OnInvasionMonsters";
+	break;
+
+	case 3:
+	monster "niflheim",131,138,"죽은자의 주인",1373,1,"NifInvasion::OnLoDDead";
+	monster "niflheim",131,141,"블러디 머더러",1507,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",131,135,"블러디 머더러",1507,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",128,138,"블러디 머더러",1507,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",134,138,"블러디 머더러",1507,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",134,141,"로리루리",1505,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",128,141,"로리루리",1505,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",134,135,"로리루리",1505,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",128,135,"로리루리",1505,1,"NifInvasion::OnInvasionMonsters";
+	break;
+
+	case 4:
+	monster "niflheim",311,64,"죽은자의 주인",1373,1,"NifInvasion::OnLoDDead";
+	monster "niflheim",311,67,"블러디 머더러",1507,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",311,61,"블러디 머더러",1507,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",308,64,"블러디 머더러",1507,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",314,64,"블러디 머더러",1507,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",314,61,"로리루리",1505,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",314,67,"로리루리",1505,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",308,67,"로리루리",1505,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",308,61,"로리루리",1505,1,"NifInvasion::OnInvasionMonsters";
+	break;
+
+	case 5:
+	monster "niflheim",238,131,"죽은자의 주인",1373,1,"NifInvasion::OnLoDDead";
+	monster "niflheim",238,134,"블러디 머더러",1507,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",238,128,"블러디 머더러",1507,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",235,131,"블러디 머더러",1507,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",241,131,"블러디 머더러",1507,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",235,128,"로리루리",1505,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",235,134,"로리루리",1505,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",241,128,"로리루리",1505,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",241,134,"로리루리",1505,1,"NifInvasion::OnInvasionMonsters";
+	break;
+
+	case 6:
+	monster "niflheim",86,219,"죽은자의 주인",1373,1,"NifInvasion::OnLoDDead";
+	monster "niflheim",86,222,"블러디 머더러",1507,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",86,216,"블러디 머더러",1507,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",89,219,"블러디 머더러",1507,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",83,219,"블러디 머더러",1507,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",89,222,"로리루리",1505,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",89,216,"로리루리",1505,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",83,222,"로리루리",1505,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",83,216,"로리루리",1505,1,"NifInvasion::OnInvasionMonsters";
+	break;
+
+	}
+	monster "niflheim",154,95,"디스가이즈",1506,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",115,65,"디스가이즈",1506,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",330,195,"디스가이즈",1506,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",151,83,"디스가이즈",1506,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",285,245,"디스가이즈",1506,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",235,135,"디스가이즈",1506,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",265,48,"디스가이즈",1506,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",186,139,"디스가이즈",1506,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",166,267,"디스가이즈",1506,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",82,202,"디스가이즈",1506,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",219,44,"디스가이즈",1506,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",287,44,"디스가이즈",1506,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",275,165,"디스가이즈",1506,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",138,204,"디스가이즈",1506,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",299,39,"디스가이즈",1506,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",31,154,"디스가이즈",1506,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",154,96,"듀라한",1504,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",116,65,"듀라한",1504,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",151,84,"듀라한",1504,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",286,245,"듀라한",1504,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",330,196,"듀라한",1504,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",236,135,"듀라한",1504,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",165,49,"듀라한",1504,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",167,267,"듀라한",1504,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",82,203,"듀라한",1504,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",220,44,"듀라한",1504,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",287,45,"듀라한",1504,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",287,44,"듀라한",1504,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",276,166,"듀라한",1504,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",139,205,"듀라한",1504,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",300,39,"듀라한",1504,1,"NifInvasion::OnInvasionMonsters";
+	monster "niflheim",31,155,"듀라한",1504,1,"NifInvasion::OnInvasionMonsters";
+	end;
+
+OnInvasionMonsters:
+	end;
+
+OnLoDDead:
+	killmonster "niflheim","NifInvasion::OnInvasionMonsters";
+	}
+
+}

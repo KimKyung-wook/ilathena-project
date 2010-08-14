@@ -1,0 +1,49 @@
+
+//    kk  ""tt""  "";;    """"JJ;;kkJJ  JJtt""    ""tt""  ;;tt""""tt    ""tt""   
+//   JJ  kk""tt;;JJ      ttkk    ""tt    ;;;;ttJJ;;  ""ttkk;;"";;;;ttkk;;  ;;kk  
+//  "";;  ""  kk  kk  tt  ttww    ZZ;;  ww    RR  ;;JJ  JJJJ  tt    RR  ;;JJ  JJ 
+//  JJ      """";;""  kk  ttkk  ;;kk    ZZ    ww  ;;""  kk""  ww    kk;;kk""  JJ 
+//  kk      JJ  kk    ww  ttkk  JJJJ  ;;ww  ""JJ  ;;tt""RR    ZZ  ;;ZZJJ      kk 
+//  kk  ;;  "";;JJ        JJtt  JJJJ  ""kk  JJ""  ww""""ww    ww  ""JJ  ZZ    kk 
+//  JJ  JJ  ;;JJ""  "";;  ww;;  kkJJ  JJ""  kk;;  ww  ;;ww  ""JJ  ww;;  ww  ;;tt 
+//;;""  RR    RR    ww""  kk""  ;;tt  ww    kkkk      kktt  JJ;;  ZZ;;  ;;  tt   
+//  JJkkttkkkk;;kkkk;;JJkktt""kkJJJJkkttJJkk;;  kkkkJJ  ttkkttJJkk;;ttkkJJkkJJ   
+//| I | - | L | U | N | A | A | T | H | E | N | A | P | R | O | J | E | C | T |  
+//------------------------------------------------------------------------------
+// iLAthena 민스트럴/원더러 "불확정 요소의 언어" 스킬 <http://www.i-luna.com>
+// 한글화 by 아이루나 iLAthena Project
+//------------------------------------------------------------------------------
+// 버전 - 2010-06-24.00
+//------------------------------------------------------------------------------
+// 한글화 by 아이루나(사이버짱)
+//------------------------------------------------------------------------------
+// 형태: 스킬코드,확률
+
+// 마법사 스킬
+10,5000	// Sight
+11,5000	// Napalm Beat
+12,5000	// Safety Wall
+13,5000	// Soul Strike
+14,5000	// Cold Bolt
+15,5000	// Frost Diver
+16,5000	// Stone Curse
+17,5000	// Fire Ball
+18,5000	// Fire Wall
+19,5000	// Fire Bolt
+20,5000	// Lightning Bolt
+21,5000	// Thunderstorm
+
+// 위저드 스킬
+80,2500	// Fire Pillar
+81,2500	// Sightrasher
+83,2500	// Meteor Storm
+84,2500	// Jupitel Thunder
+85,2500	// Lord of Vermilion
+86,2500	// Water Ball
+87,2500	// Ice Wall
+88,2500	// Frost Nova
+89,2500	// Storm Gust
+90,2500	// Earth Spike
+91,2500	// Heaven's Drive
+92,2500	// Quagmire
+93,2500	// Sense

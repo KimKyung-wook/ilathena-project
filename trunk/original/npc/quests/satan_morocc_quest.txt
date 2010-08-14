@@ -1,0 +1,686 @@
+//===== eAthena Script ======================================= 
+//= Satan Morroc Quest related NPC
+//===== By: ================================================== 
+//= Jobbie
+//===== Current Version: ===================================== 
+//= 2.1
+//===== Compatible With: ===================================== 
+//= eAthena 13+
+//===== Episode ==============================================
+//= Episode 12.1
+//===== Description: ========================================= 
+//= Continental Messengers & Continental guards
+//===== Additional Comments: ================================= 
+//= 1.0	First version [Jobbie]
+//= 1.1 Fix the Continental Guard OnTouch function. [Jobbie]
+//= 2.0 Implemented Satan Morroc Quest [Jobbie]
+//= 2.1	Updated coordinates of continental guards. [Jobbie]
+//============================================================
+//= Note: Uses quest variable in morroc quest
+//	  satan_morroc_quest 1-9 variable
+//	  getreward variable
+//===========================================================
+//== Continental Messengers 
+//===========================================================
+prontera,164,304,3	script	Continental Messengers::mess	997,{
+
+	mes "[Continental Guard Messengers]";
+	getmapxy(@map$,@x,@y,1,strnpcinfo(3));
+	if(@map$=="prontera"){set @town$,"Prontera";}
+	if(@map$=="geffen"){set @town$,"Geffen";}
+	if(@map$=="payon"){set @town$,"Payon";}
+	if(@map$=="alberta"){set @town$,"Alberta";}
+	if(@map$=="aldebaran"){set @town$,"Aldebaran";}
+	mes "I'm a messenger from the Morroc Continental Guards Headquarters, and I've come here to "+@town$+" with an urgent message for everyone here in Rune-Midgarts Kingdom.";
+	next;
+	switch(select("Morroc Continental Guard Headquarters?")){
+	case 1:
+		mes "[Continental Guard Messengers]";
+		mes "Time's running out, so I can only give you a brief explanation.";
+		next;
+		mes "[Continental Guard Messengers]";
+		mes "Satan Morroc, the heinous demon imprisoned deep in Morroc's underground for centuries, has resurrected and broken free.";
+		next;
+		mes "[Continental Guard Messengers]";
+		mes "The revival of Satan Morroc has completely devastated Morroc Village and the area surrounding it.";
+		next;
+		mes "[Continental Guard Messengers]";
+		mes "All and the death and suffering...";
+		mes "Anywhere else must seem like heaven compared to what's happening in and around Morroc.";
+		next;
+		mes "[Continental Guard Messengers]";
+		mes "The Morroc Continental Guard was immediately organized to fight Satan Morroc and bring relief to this dire situation. I'm here to inform everyone in the Rune-Midgarts Kingdom about this catastrophe.";
+		next;
+		mes "[Continental Guard Messengers]";
+		mes "Part of my duty is to help recruit adventurers from around the world to help drive Satan Morroc back into confinement. It won't be easy, but he was defeated once before.";
+		mes "Satan Morroc can be sealed away again.";
+		next;
+		mes "[Continental Guard Messengers]";
+		mes "At least 70% of Morroc Village was destroyed by an impact caused by Satan Morroc's resurrection.";
+		next;
+		mes "[Continental Guard Messengers]";
+		mes "The desert around Morroc also has turned into a land of death after it was claimed by Satan Morroc and his powerful doppelgangers and underlings.";
+		mes "So heed my warnings, and stay away from the Morroc area unless you're on a mission organized by the Morroc Continental Guard.";
+		close;
+	}
+}
+
+geffen,128,90,3	duplicate(mess)	Continental Messengers#1	997
+payon,200,113,3	duplicate(mess)	Continental Messengers#2	997
+alberta,127,64,3	duplicate(mess)	Continental Messengers#3	997
+aldebaran,135,128,3	duplicate(mess)	Continental Messengers#4	997
+
+//===========================================================
+//== Continental Guards 
+//===========================================================
+
+moc_fild20,38,174,5	script	Continental Guard#22_ed	707,3,4,{
+
+	mes "[Continental Guard]";
+	if((satan_morroc_quest == 4) && (countitem(7826))) {
+	mes "Satan Morroc has hidden himself somewhere in the old deserts, which are lost to us.  The only clue we have are these dimensional rips, but they're too dangerous to carelessly touch; however my friend over there loves danger, he's currently checking one out.";
+	close;
+	} else if((satan_morroc_quest == 4) && (!countitem(7826))) { 
+		mes "Please bring certification that you are indeed part of the Satan Morroc faction of our organization."; 
+	} else if(satan_morroc_quest == 5) { 
+		mes "Back again?  Don't run away this time!"; 
+	} else if(satan_morroc_quest == 6) { 
+		mes "You're back again, hero?  I must thank you for having saved Morroc."; 
+	} else if(satan_morroc_quest == 7) { 
+		mes "How'd you get out of the red mess? Either way, going back in I guess, hmm?"; 
+		close2; 
+		warp "moc_fild22",38,194; 
+		end; 
+	} else if(satan_morroc_quest >= 8) { 
+		mes "Nice, you've actually killed Satan Morroc! You're beyond godly!"; 
+	} else if(satanm_defeated == 1) { 
+		mes "Gonna try finishing him off? Good luck, I have hopes if it's you!"; 
+	} else { 
+		mes "No commoners are allowed in the area beyond this point.";
+		mes "This place is extremely dangerous so you are restricted from entering.";
+		next;
+		switch(select("Cancel Conversation","Ask What Happened")){
+		case 1:
+			close;
+		case 2:
+			mes "[Continental Guard]";
+			mes "Didn't you know? Satan morroc has resurrected and broke out the Morroc Village where he was confined.";
+			next;
+			mes "[Continental Guard]";
+			mes "His resurrection has caused irreperable damage to the village and to the desert around it, and now he has moved to the Sograt Desert.";
+			next;
+			mes "[Continental Guard]";
+			mes "We are here to carry out the orders of the Prontera Kingdom by preventing commoners, aside from the members of Morroc Subjugation, from accessing the area.";
+			next;
+			mes "[Continental Guard]";
+			mes "If you'd like to know more information, I suggest that you speak to the Continental Guard in charge of the accident site in Morroc Village.";
+			next;
+			switch(select("End Conversation","Ask About the Guard's Location")){
+				case 1: close;
+				case 2:
+					mes "[Continental Guard]";
+					mes "The guard that you want to talk to is at a camp built in the center of Morroc Village.";
+					next;
+					mes "[Continental Guard]";
+					mes "If you like, I can send you to the place directly.";
+					next;
+					switch(select("No, thanks","Please do.")){
+					case 1:
+						close;
+					case 2:
+						mes "[Continental Guard]";
+						mes "Great. I'll send you to Morroc village's accident site shortly";
+						warp "morocc",160,64;
+						close;
+					}
+				}
+			
+			}
+	}
+	close;
+OnTouch:
+	mes "[Continental Guard]";
+	mes "No commoners are allowed in the area beyond this point.";
+	mes "This place is extremely dangerous so you are restricted from entering.";
+	close;
+}
+
+moc_fild20,38,183,5	script	Continental Guard#21_ed	707,4,7,{
+
+OnClick:
+	mes "[Continental Guard]";
+	if((satan_morroc_quest == 4) && (countitem(7826))) {
+		mes "No commoners are allowed in the area beyond this point.";
+		mes "This place is extremely dangerous so you are restricted from entering.";
+		next;
+		mes "[Continental Guard]";
+		mes "People don't have permission to the Chief Official are not allowed in this place.";
+		next;
+		switch(select("I'm here to investigate.")) {
+				mes "[" + strcharinfo(0) + "]";
+				mes "Let's see then.";
+				next;
+				mes "^0000FFYou step near the glowing section of land indicated by the guard and feel a weightless sensation.  When you wake up, the land around you has changed form.";
+				close2;
+				warp "moc_fild21",28,195;
+				end;
+		}
+		} else if(satan_morroc_quest == 5) { 
+			mes "Whoa, I thought you died! You just suddenly disappeared! Well, since you're back, I assume this thing leads to Satan Morroc?  Gonna try again?"; 
+			next;
+			if(select("Yes.:No.") == 2) close; 
+			close2; 
+			warp "moc_fild21",28,195; 
+			end;
+		} else if(satan_morroc_quest == 6) { 
+			mes "You're back again, hero? I must thank you for having saved Morroc.";
+		} else if(satan_morroc_quest >= 8) { 
+			mes "Nice, you've actually killed Satan Morroc.";
+			next;
+			mes "You want to enter again the dimensional gorge?";
+			next;
+			if(select("Yes I will:No")==2) close;{
+				close2;
+				warp "moc_fild22",38,194;
+				end;
+			}
+		} else if(satanm_defeated == 1) {
+			mes "You want to finish defeating Satan Morroc? Well, I'm sure if it's you, you can do it. Anyways, when you defeated Satan Morroc, the dimensional portals started to morph, now it's RED. Blood red, I tell you! That's some ominous stuff there. Still feel like going?";
+			next;
+			if(select("Yes.:No.") == 2) close;
+			next;
+			mes "[Continental Guard]";
+			mes "Okay then, good luck!";
+			next;
+			mes "^0000FFYou step into the sickeningly red area and experience weightlessness yet again, ending up in a field different from the last...";
+			close2;
+			warp "moc_fild22",38,194;
+			set satan_morroc_quest,8;
+		}else { 
+		mes "No commoners are allowed in the area beyond this point.";
+		mes "This place is extremely dangerous so you are restricted from entering.";
+		next;
+		switch(select("Cancel Conversation","Ask What Happened")){
+			case 1:
+				close;
+			case 2:
+				mes "[Continental Guard]";
+				mes "Didn't you know? Satan morroc has resurrected and broke out the Morroc Village where he was confined.";
+				next;
+				mes "[Continental Guard]";
+				mes "His resurrection has caused irreperable damage to the village and to the desert around it, and now he has moved to the Sograt Desert.";
+				next;
+				mes "[Continental Guard]";
+				mes "We are here to carry out the orders of the Prontera Kingdom by preventing commoners, aside from the members of Morroc Subjugation, from accessing the area.";
+				next;
+				mes "[Continental Guard]";
+				mes "If you'd like to know more information, I suggest that you speak to the Continental Guard in charge of the accident site in Morroc Village.";
+				next;
+				switch(select("End Conversation","Ask About the Guard's Location")){
+					case 1: close;
+					case 2:
+						mes "[Continental Guard]";
+						mes "The guard that you want to talk to is at a camp built in the center of Morroc Village.";
+						next;
+						mes "[Continental Guard]";
+						mes "If you like, I can send you to the place directly.";
+						next;
+						switch(select("No, thanks","Please do.")){
+						case 1:
+							close;
+						case 2:
+							mes "[Continental Guard]";
+							mes "Great. I'll send you to Morroc village's accident site shortly";
+							warp "morocc",160,64;
+							close;
+						}
+					}	
+			}
+	}
+	close;
+OnTouch:
+	mes "[Continental Guard]";
+	mes "No commoners are allowed in the area beyond this point.";
+	mes "This place is extremely dangerous so you are restricted from entering.";
+	close;
+}
+
+moc_fild20,200,21,1	duplicate(Continental Guard#22_ed)	Continental Guard#32_ed	707,4,3
+moc_fild20,189,21,1	duplicate(Continental Guard#21_ed)	Continental Guard#31_ed	707,7,4
+moc_fild20,354,174,3	duplicate(Continental Guard#22_ed)	Continental Guard#12_ed	707,3,4
+moc_fild20,354,183,3	duplicate(Continental Guard#21_ed)	Continental Guard#11_ed	707,4,7
+moc_fild20,215,336,4	duplicate(Continental Guard#22_ed)	Continental Guard#42_ed	707,4,3
+moc_fild20,203,336,5	duplicate(Continental Guard#21_ed)	Continental Guard#41_ed	707,7,4
+
+//===================================================================
+//== Resurrection of Morocc Quest
+//===================================================================
+
+morocc,176,103,3	script	컨티넨탈 가드 사무관#1	754,{
+	if(satan_morroc_quest == 0){
+		mes "[컨티넨탈 가드 사무관]";
+		mes "모로크 토벌단 중앙 안내처 입니다. 무슨 일로 오셨습니까?";
+		next;
+		switch(select("이곳은 무엇을 하는 곳입니까?:접수를 하러 왔습니다.:마을의 상황에 대해서 알려주세요.")){
+		case 1:
+			mes "[컨티넨탈 가드 사무관]";
+			mes "이곳은 이 대륙 곳곳의 용기있는 모험가들이 마왕 모로크를 저지하고자 모인 컨티넨탈 가드의 등록을 담당하는 곳입니다.";
+			next;
+			mes "[컨티넨탈 가드 사무관]";
+			mes "아시다시피 마왕의 부활은 지금 일각을 다투는 룬 미드가츠 왕국과 이 대륙의 위기와 즉결된 문제입니다.";
+			next;
+			mes "[컨티넨탈 가드 사무관]";
+			mes "왕국에서 칙령을 받고 마왕을 타도하고자 모인 컨티넨탈 가드로 하여금 부활할 마왕을 저지할 목적을 가지고 여러가지 준비중입니다.";
+			next;
+			mes "[컨티넨탈 가드 사무관]";
+			mes "당신도 칙령을 받은 모험가이거나 자신의 실력을 증명할 수 있는 모험가라면 지금 등록하셔서 이 대륙의 평화를 되찾아 주시기 바랍니다.";
+			close;
+		case 2:
+			if(BaseLevel < 80){
+				mes "[컨티넨탈 가드 사무관]";
+				mes "그 의기는 높이 평가할만 합니다만... 의욕만으로 해결할 수 없는 문제도 있습니다.";
+				next;
+				mes "[컨티넨탈 가드 사무관]";
+				mes "마왕 모로크는 당신이 지금까지 보아왔던 그 어떤 존재보다도 강력한 존재입니다. 목숨도 보장할 수 없겠지요.";
+				next;
+				mes "[컨티넨탈 가드 사무관]";
+				mes "지금은 일단 자기 신변의 안전과 목숨을 소중히 여겨주시기 바랍니다.";
+				close;
+			}else{
+				mes "[Continental Guard Official]";
+				mes "Welcome, "+strcharinfo(0)+". I've been waiting for you. I assume our messenger informed you of our situation.";
+				next;
+				mes "[Continental Guard Official]";
+				mes "Let me process your application immediately. Please wait.";
+				next;
+				mes "[Continental Guard Official]";
+				mes "Now please go speak to Chief Balrog of the Continental Guard. You can find him in the center.";
+				close2;
+				set satan_morroc_quest,1;
+				//getquest(3050,0);
+				set questvariable,1;
+				end;
+			}
+		case 3:
+			mes "[컨티넨탈 가드 사무관]";
+			mes "상황은 좋지 않습니다. 보시다시피 마을은 이미 치명적인 타격을 입고 이 주변도 더할 나위 없이 위험해져 버렸습니다.";
+			next;
+			mes "[컨티넨탈 가드 사무관]";
+			mes "왕국의 칙령이후 속속 각지의 모험가들과 강자들이 토벌단의 아래에 모여들고 있으나... 아직 강대한 마왕에 대적하기는 무리일지 모릅니다.";
+			next;
+			mes "[컨티넨탈 가드 사무관]";
+			mes "가능하면 이 주위에선 저희의 지시를 따라수지고 각별히 주의하여 봉변을 당하는 일이 없도록 하십시오.";
+			close;
+		}
+	}
+	if(satan_morroc_quest == 1 || satan_morroc_quest == 2 || satan_morroc_quest == 3) {
+		mes "[Continental Guard Official]";
+		mes "Your application already has been registered. Please go speak to Chief Balrog.";
+		close;
+	} else if(satan_morroc_quest >= 3 && satan_morroc_quest <= 5) {
+		mes "[Continental Guard Official]";
+		mes "You have passed the test over Chief Balrog. Good luck defeating Satan Morroc.";
+		close;
+	} else if(satan_morroc_quest >= 6) {
+		mes "[Continental Guard Official]";
+		mes "I didn't think you had it in you, but nice work!";
+		close;
+	}
+}
+
+morocc,159,113,3	script	대장 발록#1	752,{
+	
+	if((BaseLevel < 80)) { 
+	mes "[Chief Balrog]";
+	mes "You want to try defeating Satan Morroc? You're much too green! Come back when you've grown!"; 
+	close; 
+	} else
+	switch(satan_morroc_quest) {
+	case 1:
+		mes "[대장 발록]";
+		mes "그다지 좋지 못한 시기에 이 모로크를 찾아왔군 젊은이. 난 마왕 모로크의 부활을 저지하고자 파견된 컨티넨탈 가드의 대장 발록이네.";
+		next;
+		mes "[Chief Balrog]";
+		mes "It looks like you have a business to me. Please make it brief since I don't have a lot of time on my hands. There's lots of things I need to take care of...";
+		next;
+		switch(select("Ask about Continental Guards.:I want to join the Continental Guard.:End Converation")){
+			case 3: close;
+			case 1:
+				mes "[Chief Balrog]";
+				mes "The damage that Satan Morroc's resurrection has caused is obvious just by taking a look around this area.";
+				mes "What's scary is that all this was caused just by breaking out from it's prison. Just think of the damage it could do if was left to roam around freely...";
+				next;
+				mes "[Chief Balrog]";
+				mes "Morroc Village is completely devastated, and Satan Morroc has now claimed possession of the Sograt Desert.";
+				next;
+				mes "[Chief Balrog]";
+				mes "I've no doubt that it left unchecked, Satan Morroc will take over the entire Midgart Continent. We've got to stop him right now before the entire world suffers.";
+				next;
+				mes "[Chief Balrog]";
+				mes "That's why the kingdom has ordered us elite soldiers to form the Continental Guard, and recruit reputable adventurers around the world so that we can make a united stand against Satan Morroc.";
+				next;
+				mes "[Chief Balrog]";
+				mes "Of course, it'll be incredibly difficult... We'll need to make sacrifices... I'm not even sure if we can win. Still, the fate of the world is at stake, and we've got to do something. Dark times have truly fallen upon us...";
+				close;
+			case 2:
+				mes "[Chief Balrog]";
+				mes "Huh? Do you want to join us and volunteer for the Continental Guard?";
+				next;
+				mes "[Chief Balrog]";
+				mes "What was your name? "+strcharinfo(0)+"? Oh yes I've heard of you.";
+				next;
+				mes "[Chief Balrog]";
+				mes "Hmm, it occurs to me that you don't understand the danger involved in all this. Do you have any idea how powerful Satan Morroc is?";
+				next;
+				mes "[Chief Balrog]";
+				mes "You won't be able to help us if you don't fully understand the risks. I've seen thousands of foolhardy adventurers throw their lives away by thinking they could defeat Satan Morroc with their own strength.";
+				next;
+				mes "[Chief Balrog]";
+				mes "We are facing a threat that will determine the world's future, and fools that can't work in a team will be liabilities, not assets.";
+				next;
+				mes "[Chief Balrog]";
+				mes "I'm sorry, but inexperienced adventurers would just get in our way. I hope you understand. If you really want to help us, then please focus on your training for now.";
+				next;
+				if(select("End Conversation:Ask again")==1) close;
+					next;
+					mes "[Chief Balrog]";
+					mes "Look, I understand your enthusiasm, but you're mistaken if you think you can help us. I don't have time to fully explain the danger that we're all facing.";
+					next;
+					mes "[Chief Balrog]";
+					mes "Satan Morroc is nothing like the monsters you may have encountered. At best you'll throw your like away, but there's the chance that you might get one of my men killed by your mistakes and incompetence. I can't have that!";
+					next;
+					mes "[Chief Balrog]";
+					mes "Please understand that this is for your own good. Fight some Porings or whatever else might be a good match of your level.";
+					next;
+					if(select("End Converstaion:You've just got to let me join")==1){ close; }
+						next;
+						mes "[Chief Balrog]";
+						mes "Sigh... Why are you so persistent?";
+						mes "Can't you understand that no means no? Let me say this one more times.";
+						next;
+						mes "[Chief Balrog]";
+						mes "We're too busy fighting Satan Morroc to watch after rookies like you. You'd just be throwing your life away.";
+						next;
+						mes "[Chief Balrog]";
+						mes "Stop bothering me. You'd be nothing but a burden.";
+						next;
+						if(select("Give Up:Give me a chance to prove myself!")==1) close; 
+							mes "[Chief Balrog]";
+							mes "Huh? You want a chance to prove yourself?";
+							next;
+							mes "["+ strcharinfo(0) +"]";
+							mes "Yes, I'll do whatever it takes to join the Continental Guard!";
+							next;
+							mes "[Chief Balrog]";
+							mes "Hmmm...";
+							next;
+							mes "[Chief Balrog]";
+							mes "Interesting. You have my attention.";
+							mes "Alright, I guess it's only fair that I acknowledge your strength if you can handle something for me.";
+							next;
+							mes "[Chief Balrog]";
+							mes "The Continental Guard has been on full alert around this village and the desert. We need to prepared in case Satan Morroc storms our defenses.";
+							next;
+							mes "[Chief Balrog]";
+							mes "Soldiers need firewood to keep the bonefires burning all night, but we've been suffering a firewood shortage.";
+							next;
+							mes "[Chief Balrog]";
+							mes "I happened to hear that the monsters in the Lava Dungeon have everlasting flame which would solve our bonfire problems. I want you to gather those flames for us.";
+							next;
+							switch(select("That's too hard! Let me think about it!:No problem.")){
+								case 1: mes "[Chief Balrog]";
+									mes "Hmpf, I was right. I knew you wouldn't be able to handle such a simple task. I shouldn't have wasted my time to you.";
+									close;
+								case 2: mes "[Chief Balrog]";
+									mes "Excellent! Bring back ^0000FF30 Live Coals^000000. I'll be waiting for your return.";
+									close2;
+									//getquest(3051,0);
+									set questvariable,1;
+									set satan_morroc_quest,2;
+									//deletequest(3050);
+									end;
+							}
+		}
+	case 2:
+		mes "[Chief Balrog]";
+		mes "So, did you find  ^0000FF30 Live Coals^000000? You didn't come empty-handed, did you? ";
+		next;
+		if(countitem(7098) < 30){
+			mes "[Chief Balrog]";
+			mes "Umm... Didn't you hear what I said? I said 30 Live Coals, 30.";
+			next;
+			mes "[Chief Balrog]";
+			mes "Now hurry up. If you feel like giving up, it's no problem. Let me know, though!";
+			close;
+			}else{
+				mes "[Chief Balrog]";
+				mes "Now that you have brought firewoods for the bonefire, soldiers in the field will no longer have problem during night time.";
+				next;
+				mes "[Chief Balrog]";
+				mes "But I'm still not convinced that you are good enough to defeat the demon. I have one last thing required for you to be one of us.";
+				next;
+				mes "[Chief Balrog]";
+				mes "I've heard also that soldiers have problem regarding the heat of the field. They needed some icy water to avoid burning their skin.";
+				next;
+				mes "[Chief Balrog]";
+				mes "It happened that Ice Dungeon have monsters who have everlasting water to fulfill the needs of our soldier.";
+				next;
+				switch(select("That's too hard! Let me think about it!:No problem.")){
+					case 1: mes "[Chief Balrog]";
+							mes "Hmpf, I was right. I knew you wouldn't be able to handle such a simple task. I shouldn't have wasted my time to you.";
+							close;
+					case 2: mes "[Chief Balrog]";
+							mes "Excellent! Bring back ^0000FF50 Frozen Heart^000000. I'll be waiting for your return.";
+							close2;
+							delitem 7098,30; //Deleting item Live Coal
+							//getquest(3052,0);
+							set questvariable,1;
+							set satan_morroc_quest,3;
+							//deletequest(3051);
+							end;
+				}
+			}
+	case 3:
+		mes "[Chief Balrog]";
+		mes "So, did you find  ^0000FF50 Frozen Heart^000000? You didn't come empty-handed, did you? ";
+		next;
+		if(countitem(7561) < 50){
+			mes "[Chief Balrog]";
+			mes "Umm... Didn't you hear what I said? I said 50 Frozen Heart, 50.";
+			next;
+			mes "[Chief Balrog]";
+			mes "Now hurry up. If you feel like giving up, it's no problem. Let me know, though!";
+			close;
+		}else{
+			mes "[Chief Balrog]";
+			mes "Wonderful you have brought the frozen item, now soldiers in the field will protect their skin from the heat.";
+			next;
+			mes "[Chief Balrog]";
+			mes "Now that you have proven yourself that you're strong enough, given this proof of certificate that will testify that you are one of us.";
+			next;
+			mes "[Chief Balrog]";
+			mes "I will highly declare you are one of us. You are a member now of the Continental Guards.";
+			close2;
+			set questvariable,1;
+			set satan_morroc_quest,4;
+			delitem 7561,50; //Deleting item Frozen Heart
+			getitem 7826,1; //Getting item Continental Certificate
+			//getquest(3053,0);
+			//deletequest(3052);
+			end;
+		}
+	}
+	if(satan_morroc_quest >= 4 && satan_morroc_quest <= 5){
+		mes "[Chief Balrog]";
+		mes "Come back when you've defeated Satan Morroc, and bring the^0000FF Piece of Morocc Skin^000000 with you!";
+		close;
+	} else if(satan_morroc_quest == 6 && getreward == 0){
+		mes "[Chief Balrog]";
+		mes "You've come back hero of Midgard. Have you brought the proof of your strength, the Skin of Morroc?";
+		next;
+		if(!countitem(7820)) {
+			mes "[Chief Balrog]"; 
+			mes "You don't even have the skin in your hands. Come back here after you defeat Satan Morroc and bring with me here the skin."; 
+			close; 
+		}
+		mes "[Chief Balrog]";
+		mes "Now that you have defeated Satan Morroc, this village will become peaceful again.";
+		next;
+		mes "[Chief Balrog]";
+		mes "Perhaps, there is a reward waiting for you by defeating Satan Morroc";
+		close2;
+		delitem 7820,1;
+		//getquest(3056,0);
+		set questvariable,1;
+		set getreward,1;
+		//deletequest(3055);
+		end;
+	} else if(satan_morroc_quest ==6 && getreward == 1){
+		mes "[Chief Balrog]";
+		mes "Which of these proofs of your deeds do you desire?";
+		next;
+		select(getitemname(2730),getitemname(2731),getitemname(2732));
+		getitem (2729 + @menu),1;
+		mes "[Chief Balrog]";
+		mes "Here you go! Thanks again by defeating the Demon Morroc.";
+		close2;
+		set satan_morroc_quest,7;
+		set getreward,0;
+		//deletequest(3056);
+		set questvariable,0;
+		end;
+	} else if(satan_morroc_quest >= 7){
+		mes "[Chief Balrog]";
+		mes "You have defeated Satan Morroc, this continent have brought back to its peaceful living. We hope that the demon Morroc will be sealed forever after his defeat.";
+		close;
+	}
+	mes "[대장 발록]";
+	mes "그다지 좋지 못한 시기에 이 모로크를 찾아왔군 젊은이. 난 마왕 모로크의 부활을 저지하고자 파견된 컨티넨탈 가드의 대장 발록이네.";
+	next;
+	mes "[대장 발록]";
+	mes "난 너무 바빠서 일일히 자네와 같은 모험자들을 상대할 시간이 없으니 볼 일이 있다면 이 곳에 있는 다른 사람들과 이야길 해보게.";
+	next;
+	mes "[대장 발록]";
+	mes "난 지금 우리 컨티넨탈 가드에 새로 들어올 인재들을 뽑는데 만으로도 충분히 정신이 없으니 말일세.";
+	close;
+}
+
+morocc,300,207,0	script	#satanmoc001	45,2,2,{
+OnTouch:
+	if(satan_morroc_quest == 4) {
+		mes "^0000FFYou exit Morroc through the east exit which is rumored to now contain dimensional rips and fall into the old deserts.^000000";
+		close2;
+		warp "moc_fild20",37,177;
+	} else if(satan_morroc_quest == 5 || satan_morroc_quest == 6) {
+		warp "moc_fild20",37,177;
+	} else if((satan_morroc_quest == 7) && (!satanm_defeated)) {
+		mes "You decide that you must defeat Satan Morroc for real and enter the old desert once again.";
+		close2;
+		set satanm_defeated,1;
+		warp "moc_fild20",37,177;
+	} else if(satanm_defeated == 1) {
+		warp "moc_fild20",37,177;
+	} else {
+		warp "moc_fild20",37,177;
+	}
+	end;
+
+OnInit:
+	disablenpc "moc005";
+	end;
+}
+
+moc_fild21,24,195,0	script	#satanmoc002	45,1,1,{
+OnTouch:
+	mes "^0000FFYou step into the dimensional gap ahead and end up back in Morroc.^000000";
+	close2;
+	warp "morocc",296,207;
+	end;
+}
+
+moc_fild22,32,196,0	script	#satanmoc003	45,1,1,{
+OnTouch:
+	mes "^0000FFYou step into the dimensional gap ahead and end up back in Morroc.^000000";
+	close2;
+	warp "morocc",296,207;
+	end;
+}
+
+moc_fild21,177,239,0	script	Group of Evil#moc_21_001	111,{
+	if(satan_morroc_quest == 5) {
+		//getquest(3055,0);
+		set questvariable,1;		
+		getitem 7820,1;
+		set satan_morroc_quest,6;
+		//deletequest(3054);
+		end;
+	}
+	switch(.satanstatus){
+	case 0:
+		if(satan_morroc_quest == 4 && !mobcount("moc_fild21","Group of Evil#moc_21_001::OnSatanMorrocDeath")){
+			mes "^0000FFYou see a cluster of evil energy gathered in the black impression. Upon inspection, the evil energy begins to glow and a voice resonates through the land.";
+			close2;
+			mapannounce "moc_fild21","Satan Morroc: Foolish mortal, you believe that you can seal me away?  There is no point in taking precautions to seal off the lands if there are only weaklings like you!",1,0xFF3333;
+			monster "moc_fild21",182,226,"Satan Morroc",1916,1,"Group of Evil#moc_21_001::OnSatanMorrocDeath";
+			set .satanstatus,1;
+			sleep2 5000;
+			mapannounce "moc_fild21","Satan Morroc: Weaklings! Challenge me if you have the courage",1,0xFF3333;
+			sleep2 10000;
+			mapannounce "moc_fild21","Satan Morroc: My loyal servants! Welcome them with peaceful death!",1,0xFF3333;
+			end;
+		}
+	case 1:
+		if(mobcount("moc_fild21","Group of Evil#moc_21_001::OnSatanMorrocDeath")){
+			mes "Satan Morroc already summoned";
+			close;
+		}
+		mes "You haved recieved the piece of skin of morroc. You may now return to the village to exchange for rewards.!";
+		close;
+	}
+	end;
+ 
+OnInit:
+	set .satanstatus,0;
+	end;
+ 
+OnSatanMorrocDeath:
+	getpartymember(getcharid(1));
+	for(set $@k,0; $@k < $@partymembercount; set $@k,$@k+1) {
+		if(isloggedin(getcharid(3,$@partymembername$[$@k]))) {
+			attachrid(getcharid(3,$@partymembername$[$@k]));
+			//getquest(3054,0);
+			set questvariable,1;
+			set satan_morroc_quest,5;
+			//deletequest(3053);
+			end;
+		} 
+	}
+	mapannounce "moc_fild21","Satan Morroc: No, this can't be happening! I'm Satan Morroc, Demon King of Destruction!",1,0xFF3333;
+	sleep 10000;
+	set .satanstatus,0;
+	end;
+}
+
+moc_fild22,0,0,0	script	Morroc Control	-1,{
+OnInit:
+	monster "moc_fild22",0,0,"Wounded Morroc",1917,1,"Morroc Control::OnWoundedMorrocDeath";
+	end;
+
+OnWoundedMorrocDeath:
+	initnpctimer;
+	end;
+
+OnTimer43200000:
+	stopnpctimer;
+	monster "moc_fild22",0,0,"Wounded Morroc",1917,1,"Morroc Control::OnWoundedMorrocDeath";
+	end;
+}
+
+
+//Mapflags
+moc_fild20	mapflag	nowarpto
+moc_fild20	mapflag	nomemo
+moc_fild21	mapflag	nowarpto
+moc_fild21	mapflag	nomemo
+moc_fild22	mapflag	nowarpto
+moc_fild22	mapflag	nomemo

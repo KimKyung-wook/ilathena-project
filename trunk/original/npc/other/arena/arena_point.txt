@@ -1,0 +1,181 @@
+//===== eAthena Script =======================================
+//= Point Exchanger
+//===== By: ==================================================
+//= L0ne_W0lf
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= eAthena SVN
+//===== Description: ========================================= 
+//= [Aegis Conversion]
+//= Point exchanger: Turbo track points -> Arena Points
+//===== Additional Comments: =================================
+//= 1.0 First version. [L0ne_W0lf]
+//============================================================
+
+prt_are_in,103,11,3	script	아레나 포인트 안내원	732,{
+	mes "[아레나 포인트 안내원]";
+	mes "즐거운 시간 되셨습니까?";
+	mes "이제부터 저를 통해,";
+	mes "이즈루드의 ^FF0000타임포스 배틀 아레나^000000와";
+	mes "알데바란의 ^3131FF터보 트랙^000000의 포인트";
+	mes "를 교환하실 수 있습니다.";
+	mes "자아, 무엇을 도와드릴까요?";
+	next;
+	switch(select("포인트 확인:포인트 전환:^660000Conversion Info^000000")) {
+	case 1:
+		mes "[아레나 포인트 안내원]";
+		mes "+ strcharinfo(0) +님의 포인트는 아래와 같습니다.";
+		mes " 터보트랙 포인트 : + tt_point +점"; 
+		mes " 아레나 포인트 : + arena_point +점";
+		close;
+	case 2:
+		mes "[아레나 포인트 안내원]";
+		mes "+ strcharinfo(0) +님의 포인트는 아래와 같습니다.";
+		mes " 터보트랙 포인트 : + tt_point +점"; 
+		mes " 아레나 포인트 : + arena_point +점";
+		next;
+		mes "[아레나 포인트 안내원]";
+		mes "아레나 포인트를 터보트랙 포인트로 환산이 가능합니다.";
+		mes "그 비율은 2:1 로 10점의 터보트랙 포인트를 주고 5점의 아레나 포인트를 받는 것입니다.";
+		next;
+		mes "[아레나 포인트 안내원]";
+		mes "8점 이하는 선택해 주시고";
+		mes "10점 이상의 포인트 환산을 원하실경우에는 ^4d4dff10단위의 몇배^000000를 환산 하실 것인지 직접 입력해 주시기 바랍니다.";
+		next;
+		switch(select("터보트랙 2점 -> 아레나 1점:터보트랙 4점 -> 아레나 2점:터보트랙 6점 -> 아레나 3점:터보트랙 8점 -> 아레나 4점:터보트랙 포인트 10단위:취소")) {
+		case 1:
+			callsub S_ExchangePoints,28999,2,1;
+		case 2:
+			callsub S_ExchangePoints,28998,4,2;
+		case 3:
+			callsub S_ExchangePoints,28997,6,2;
+		case 4:
+			callsub S_ExchangePoints,28996,8,4;
+		case 5:
+			mes "[아레나 포인트 안내원]";
+			mes "Please enter the number";
+			mes "of times you wish to convert";
+			mes "10 Turbo Track Points into";
+			mes "Arena Points. The largest";
+			mes "value you may enter is 20.";
+			mes "To cancel, enter ''^3355FF0^000000.''";
+			next;
+			input .@input;
+			if (.@input == 0) {
+				mes "[아레나 포인트 안내원]";
+				mes "You have";
+				mes "canceled";
+				mes "this service.";
+				close;
+			}
+			else if (.@input > 20) {
+				mes "[아레나 포인트 안내원]";
+				mes "Your request exceeds";
+				mes "the maximum limit. Please";
+				mes "enter a value no greater than 20.";
+				close;
+			}
+			else {
+				set .@want_point1,10 * .@input;
+				set .@want_point,5 * .@input;
+				set .@my_arena_all,arena_point + .@want_point;
+				set .@my_turbo_all,tt_point - .@want_point1;
+				if (.@my_arena_all > 28999) {
+					mes "[아레나 포인트 안내원]";
+					mes "You will exceed the";
+					mes "maximum amount of";
+					mes "Arena Points if we proceed";
+					mes "with this conversion of your";
+					mes "Turbo Track Points. You cannot";
+					mes "have more than 29,000 Arena Points.";
+					next;
+					mes "[아레나 포인트 안내원]";
+					mes "Please spend some of";
+					mes "your Arena Points before";
+					mes "using this service again.";
+					mes "Thank you for your patronage.";
+					close;
+				}
+				if (.@my_turbo_all < 0) {
+					mes "[아레나 포인트 안내원]";
+					mes "I'm sorry, but";
+					mes "you don't have enough";
+					mes "Turbo Track Points to";
+					mes "perform this Arena";
+					mes "Point conversion.";
+					close;
+				}
+				else {
+					mes "[아레나 포인트 안내원]";
+					mes "You have converted";
+					mes "10 Turbo Track Points";
+					mes "into 5 Arena Points " + .@input + " times.";
+					mes "A total of " + .@want_point1 + " Turbo Track Points were converted into";
+					mes "" + .@want_point +" Arena Points.";
+					set tt_point,tt_point - .@want_point1;
+					set arena_point,arena_point+.@want_point;
+					next;
+					mes "[아레나 포인트 안내원]";
+					mes "" + strcharinfo(0) + ",";
+					mes "you now have";
+					mes "^4682B4" + arena_point + "^000000 Arena Points";
+					mes "and ^00688B" + tt_point + "^000000 Turbo Track Points.";
+					mes "Thank you for your patronage.";
+					close;
+				}
+			}
+		case 6:
+			mes "[Arena Point Manager]";
+			mes "You have";
+			mes "canceled";
+			mes "this service.";
+			close;
+		}
+	case 3:
+		// Again. no dialog for this option.
+		close;
+	}
+	close;
+
+S_ExchangePoints:
+	if (arena_point > getarg(0) ) {
+		mes "[Arena Point Manager]";
+		mes "You will exceed the";
+		mes "maximum amount of";
+		mes "Arena Points if we proceed";
+		mes "with this conversion of your";
+		mes "Turbo Track Points. You cannot";
+		mes "have more than 29,000 Arena Points.";
+		next;
+		mes "[Arena Point Manager]";
+		mes "Please spend some of";
+		mes "your Arena Points before";
+		mes "using this service again.";
+		mes "Thank you for your patronage.";
+		close;
+	}
+	if (tt_point >= getarg(1)) {
+		mes "[Arena Point Manager]";
+		mes "" + strcharinfo(0) + ",";
+		mes "you've converted "+getarg(1)+" Track";
+		mes "Points into "+getarg(2)+" Arena Point.";
+		set tt_point,tt_point-getarg(1);
+		set arena_point,arena_point+getarg(2);
+		next;
+		mes "[Arena Point Manager]";
+		mes "" + strcharinfo(0) + ",";
+		mes "you now have";
+		mes "^4682B4" + arena_point + "^000000 Arena Points";
+		mes "and ^00688B" + tt_point + "^000000 Turbo Track Points.";
+		mes "Thank you for your patronage.";
+		close;
+	}
+	else {
+		mes "[Arena Point Manager]";
+		mes "터보트랙 포인트가 부족합니다.";
+		mes "최소 2점 이상 가지고 계셔야 합니다.";
+		mes "터보트랙 포인트를 다시 확인해 주시기 바랍니다.";
+		close;
+	}
+}

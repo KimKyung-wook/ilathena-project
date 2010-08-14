@@ -1,0 +1,716 @@
+
+//    kk  ""tt""  "";;    """"JJ;;kkJJ  JJtt""    ""tt""  ;;tt""""tt    ""tt""   
+//   JJ  kk""tt;;JJ      ttkk    ""tt    ;;;;ttJJ;;  ""ttkk;;"";;;;ttkk;;  ;;kk  
+//  "";;  ""  kk  kk  tt  ttww    ZZ;;  ww    RR  ;;JJ  JJJJ  tt    RR  ;;JJ  JJ 
+//  JJ      """";;""  kk  ttkk  ;;kk    ZZ    ww  ;;""  kk""  ww    kk;;kk""  JJ 
+//  kk      JJ  kk    ww  ttkk  JJJJ  ;;ww  ""JJ  ;;tt""RR    ZZ  ;;ZZJJ      kk 
+//  kk  ;;  "";;JJ        JJtt  JJJJ  ""kk  JJ""  ww""""ww    ww  ""JJ  ZZ    kk 
+//  JJ  JJ  ;;JJ""  "";;  ww;;  kkJJ  JJ""  kk;;  ww  ;;ww  ""JJ  ww;;  ww  ;;tt 
+//;;""  RR    RR    ww""  kk""  ;;tt  ww    kkkk      kktt  JJ;;  ZZ;;  ;;  tt   
+//  JJkkttkkkk;;kkkk;;JJkktt""kkJJJJkkttJJkk;;  kkkkJJ  ttkkttJJkk;;ttkkJJkkJJ   
+//| I | - | L | U | N | A | A | T | H | E | N | A | P | R | O | J | E | C | T |  
+//------------------------------------------------------------------------------
+// iLAthena 마법사 전직 스크립트 <http://www.i-luna.com>
+// 한글화 by 아이루나 iLAthena Project
+//------------------------------------------------------------------------------
+// 한글화 by 인즈
+// 수정 by 제로니에
+//------------------------------------------------------------------------------
+
+geffen_in,164,124,4	script	마법사 길드원	123,{
+	if (Upper == 1) {
+		if (ADVJOB == Job_High_Wizard || ADVJOB == Job_Professor) {
+			if (Class == Job_Novice_High) {
+				mes "[마법사 길드원]";
+				mes "이봐, 오랜만이군! 죽은 줄로만 알고 있었는데?";
+				next;
+				mes "[마법사 길드원]";
+				mes "아, 다시 살아났다는 건가? 음, 다시 살아아 와 기쁘군.";
+				next;
+				if (getskilllv("NV_BASIC") < 9) {
+					mes "[마법사 길드원]";
+					mes "미안하군, 난 아직 네가 마법을 배울 준비가 안 되어있다고 생각해. 어째서 기본 기능을 모두 배우지 않았지?";
+					next;
+					mes "[마법사 길드원]";
+					mes "시간을 가지고 더 수련하고, 네가 준비 되었다고 생각하면 그때 다시 내게로 와.";
+					close;
+				}
+				mes "[마법사 길드원]";
+				mes "좋아, 너는 한 번 마법사 시험을 통과한 적이 있으니, 네게 시험을 요구하지 않겠어. 너의 마법 능력을 다시금 당장 되 찾고 싶은 거지?";
+				next;
+				skill 143,0,0;
+				jobchange Job_Mage_High;
+				skill 157,1,0;
+				mes "[마법사 길드원]";
+				mes "오, 어찌되었든 예전보다 훨씬 낳아 보이는 군. 그래, 네가 마법사가 됨으로써 마법사가 한 층 더 발전될 것 같군.";
+				close;
+			}
+			else {
+				mes "[마법사 길드원]";
+				mes "난 더 이상 너를 도와줄 수 없어. 왜 너의 마법을 시험하지 않는 거지? 세계는 너의 마법을 기다리고 있어.";
+				close;
+			}
+		}
+		else {
+			mes "[마법사 길드원]";
+			mes "마법사에 흥미를 느끼신다고요? 아쉽게도, 당신은 마법사가 될 수 없으십니다..";
+			next;
+			mes "[마법사 길드원]";
+			mes "왜 제 앞에 계속 서 계신 줄 모르겠군요. 저는 분명히 당신은 마법사가 될 수 없다는 뜻을 전했습니다.";
+			close;
+		}
+	}
+	mes "[마법사 길드원]";
+	mes "거기, 무슨 일이죠?";
+	next;
+	switch(select("마법사가 되고 싶어요.:전직조건을 알려주세요.:아무것도 아닙니다.")) {
+	case 1:
+		mes "[마법사 길드원]";
+		if (BaseJob == Job_Mage) {
+			mes "이봐, 실감이 안 나는 건가? 넌 이미 마법사라고! 덜 떨어지긴.";
+			next;
+			mes "[마법사 길드원]";
+			mes "뭐, 언젠가 너의 의지로 불을 피울 수 있게 되면 그때서 깨닫게 되겠지.";
+			close;
+		}
+		if (BaseJob != Job_Novice) {
+			mes "거기~ 장난은 끝내고, 넌 마법사가 될 수 없어. 왜냐고? 넌 이미 직업이 있잖아.";
+			close;
+		}
+		if (job_magician_q == 0) {
+			mes "마법사가 되고 싶다고…?";
+			if (sex)
+				mes "이봐, 너 꽤 귀엽군! 내 취향은 아니지만…";
+			else {
+				mes "유후, 너 정말 귀여운데?";
+				mes "너 같은 동생을 가지고 싶은걸~";
+			}
+			next;
+			mes "[마법사 길드원]";
+			mes "좋아, 마법사가 되고 싶다고 했지? 맞는다면 여기 신청 양식에 서명 해.";
+			next;
+			if (select("Sign Up.:Quit.") == 1) {
+				mes "[마법사 길드원]";
+				mes "좋아, 잘 되었군. " + strcharinfo(0) + "인가? 멋진 이름인걸.";
+				next;
+				mes "[마법사 길드원]";
+				mes "좋아 이젠";
+				mes "마법사가 되기 위한 시험을 주겠어.";
+				switch(rand(3)) {
+				case 1:
+					mes "내게 ^3355FF혼합액 1호^000000를";
+					mes "만들어 오라고.";
+					set job_magician_q,1;
+					break;
+				case 2:
+					mes "내게 ^3355FF혼합액 2호^000000를";
+					mes "만들어 오라고.";
+					set job_magician_q,2;
+					break;
+				case 3:
+					mes "내게 ^3355FF혼합액 3호^000000를";
+					mes "만들어 와.";
+					set job_magician_q,3;
+					break;
+				default:
+					mes "내게 ^3355FF혼합액 4호^000000를";
+					mes "만들어 오라고.";
+					set job_magician_q,4;
+				}
+				next;
+				getitem 1092,1; //빈 실험관
+				mes "[마법사 길드원]";
+				mes "필요한 재료는 책에 나와있어. 책장은 네 오른쪽에 있고. 그러니까 만들기 전에 뭐가 필요한 지 보고 가는 게 좋을 거야.";
+				next;
+				mes "[마법사 길드원]";
+				mes "재료를 다 모아 왔다면, 저기 중앙에 있는 기계를 사용해서, 혼합액을 만들 수 있어. 잘 해봐!";
+				close;
+			}
+			mes "[마법사 길드원]";
+			mes "뭐라고? 저번에는 마법사가 되고 싶다고 했잖아, 왜 생각을 바꾼 거야?! 좀 더 신중하지 그랬어!";
+			close;
+		}
+		mes "음? 준비됬다고?";
+		if (getskilllv("NV_BASIC") < 9) {
+			mes "뭐야, 넌 아직 충분하지 않은 걸?";
+			next;
+			mes "[마법사 길드원]";
+			mes "돌아가서 먼저 직업 레벨은 9까지 올리고 와. 그리고 기본 기능을 배워 오는 거 잊지 말고~";
+			close;
+		}
+		mes "" + strcharinfo(0) + "'의 시험은...";
+		if (job_magician_q == 1)
+			mes "혼합액 1호를 만들어 오는 거군.";
+		else if (job_magician_q == 2)
+			mes "혼합액 2호를 만들어 오는 거군.";
+		else if (job_magician_q == 3)
+			mes "혼합액 3호를 만들어 오는 거군.";
+		else
+			mes "혼합액 4호를 만들어 오는 거군.";
+		next;
+		mes "[마법사 길드원]";
+		mes "좋아,";
+		mes "네가 제대로 만들었나";
+		mes "확인 해 볼게...";
+		next;
+		mes "[마법사 길드원]";
+		if (countitem(1071) == 0 && countitem(1085) == 0 && countitem(1086) == 0 && countitem(1087) == 0 && countitem(1090) == 0) {
+			mes "이봐 혼합액은 어디 있어?";
+			mes "네가 보여주지 않으면 확인 할 수 없다고. 알았어?";
+			close;
+		}
+		else {
+			if ((job_magician_q == 1 && countitem(1071) == 0) || (job_magician_q == 2 && countitem(1085) == 0) || (job_magician_q == 3 && countitem(1086) == 0) || (job_magician_q == 4 && countitem(1087) == 0)) {
+				mes "기다려.";
+				mes "이건 네가 만들어야 할";
+				mes "혼합액이 아니잖아!";
+				next;
+				mes "[마법사 길드원]";
+				if (job_magician_q == 1)
+					mes "네가 만들어야 할 것은 혼합액 1호 라고. 그걸 만들어서 다시 가져 와.";
+				else if (job_magician_q == 2)
+					mes "네가 만들어야 할 것은 혼합액 2호 라고. 그걸 만들어서 다시 가져 와.";
+				else if (job_magician_q == 3)
+					mes "네가 만들어야 할 것은 혼합액 3호 라고. 그걸 만들어서 다시 가져 와.";
+				else
+					mes "네가 만들어야 할 것은 혼합액 4호 라고. 그걸 만들어서 다시 가져 와.";
+
+				if (countitem(1071) != 0) delitem 1071,1; //Mage_Test_1
+				else if (countitem(1085) != 0) delitem 1085,1; //Mage_Test_2
+				else if (countitem(1086) != 0) delitem 1086,1; //Mage_Test_3
+				else if (countitem(1087) != 0) delitem 1087,1; //Mage_Test_4
+				else delitem 1090,1; //마법사 시험 기타 아이템 삭제
+				close;
+			}
+		}
+		if (countitem(1071) != 0) delitem 1071,1; //시험 1
+		else if (countitem(1085) != 0) delitem 1085,1; //시험 2
+		else if (countitem(1086) != 0) delitem 1086,1; //시험 3
+		else if (countitem(1087) != 0) delitem 1087,1; //시험 4
+		else delitem 1090,1; //시험 기타
+		mes "흐음. 정말 노력했네. 처음 치고는 정말 잘 했어.";
+		next;
+		mes "[마법사 길드원]";
+		mes "아주 좋아! 넌 마법사 전직 시험에 통과했어. 자 이제 널 마법사로 등록 시켜 줄게!";
+		next;
+		mes "[마법사 길드원]";
+		mes "*이얍*";
+		mes "축하해!";
+		mes "이젠 너도 마법사야!";
+		next;
+		callfunc "Job_Change",Job_Mage;
+		callfunc "F_ClearJobVar";
+		set Zeny,Zeny+50;
+		mes "[마법사 길드원]";
+		mes "'마법사의 세계에 오신 걸 환영합니다~'";
+		mes "흠흠, 그냥 한번 유명한 영화의 대사를 인용 해 본 거야.~";
+		next;
+		mes "[마법사 길드원]";
+		mes "이제 너도 마법사니까, 사이 좋게 지내자. 좋지?";
+		close;
+	case 2:
+		mes "[마법사 길드원]";
+		mes "마법사가 되길 원한다고?";
+		if (sex)
+			mes "너 같은 귀염이가 되길 원한다면야 환영이지!";
+		else
+			mes "너 같은 어여쁜 소녀에게 설명하게 되어서 정말 기쁘군!";
+		next;
+		mes "[마법사 길드원]";
+		mes "첫 번째로, 넌 직업 레벨이 10이 되어야 해. 그리고 기본 기능도 배워와야 하고.";
+		mes "저걸 다 충족 해 오면, 시험에 응시할 수 있어.";
+		next;
+		if (job_magician_q != 0) {
+			mes "[마법사 길드원]";
+			mes "네가 치뤄야 할 시험은";
+			switch(job_magician_q) {
+			case 1:
+				mes "내게";
+				mes "^3355FF혼합액 1호^000000를";
+				mes "만들어 오는 거야.";
+				break;
+			case 2:
+				mes "내게";
+				mes "^3355FF혼합액 2호^000000를";
+				mes "만들어 오는 거야.";
+				break;
+			case 3:
+				mes "내게";
+				mes "^3355FF혼합액 3호^000000를";
+				mes "만들어 오는 거야.";
+				break;
+			default:
+				mes "내게";
+				mes "^3355FF혼합액 4호^000000를";
+				mes "만들어 오는 거야.";
+			}
+			next;
+			mes "[마법사 길드원]";
+			mes "혼합액을 만드는데 필요한 재료는 저쪽 책에 적혀 있을거야.";
+		}
+		else {
+			mes "[마법사 길드원]";
+			mes "어떤 혼합액을 만들어야 할 지는 마법사 전직 신청서를 작성해야 알려줄 수 있어.";
+		}
+		next;
+		mes "[마법사 길드원]";
+		mes "마법사가 될 준비가 되었다고 생각하면 내게 말 해줘. 알았지?";
+		close;
+	case 3:
+		mes "[마법사 길드원]";
+		mes "아무것도…?";
+		close;
+	}
+}
+
+geffen_in,164,112,4	script	아이템 조합기	111,{
+	mes "[Mixing Machine]";
+	mes "이 기계는 게펜 마법사 길드의 소유입니다. 마법사 길드에 허락을 받고, 혼합액을 만드는 데에만 사용하실 수 있습니다";
+	next;
+	if (select("Use Machine.:Cancel.") == 1) {
+		mes "[Mixing Machine]";
+		mes "만드실";
+		mes "혼합액의 종류를";
+		mes "선택 해 주세요.";
+		next;
+		switch(select("페이욘 수용액.:모로크 수용액.:아무것도.")) {
+		case 1:
+			if (countitem(1089) == 0) {
+				mes "[Mixing Machine]";
+				mes "오류 발생.";
+				mes "아이템을 찾을 수 없습니다.";
+				mes "다시 한 번 확인해 주십시오.";
+				mes "작동을 중지합니다.";
+				close;
+			}
+			set .@mixitem2,1;
+			break;
+		case 2:
+			if (countitem(1088) == 0) {
+				mes "[Mixing Machine]";
+				mes "오류 발생.";
+				mes "아이템을 찾을 수 없습니다..";
+				mes "다시 한 번 확인해 주십시오..";
+				mes "작동을 중지합니다.";
+				close;
+			}
+			set .@mixitem2,2;
+			break;
+		case 3:
+			set .@mixitem2,0;
+			break;
+		}
+		while (1) {
+			if (.@progress == 2) {
+				mes "[Mixing Machine]";
+				if (.@mixitem1_1 != 0) mes "젤로피: " + .@mixitem1_1 + " 개.";
+				if (.@mixitem1_2 != 0) mes "솜털: " + .@mixitem1_2 + " 개.";
+				if (.@mixitem1_3 != 0) mes "우유: " + .@mixitem1_3 + " 개.";
+				if (.@mixitem2 == 0) mes "수용액 : 없음.";
+				if (.@mixitem2 == 1) mes "수용액 : 페이욘 수용액.";
+				if (.@mixitem2 == 2) mes "수용액 : 모로크 수용액.";
+				next;
+				mes "[Mixing Machine]";
+				mes "원하시는 조합을 선택해주세요. 혹은, 재료 아이템의 숫자를 재설정 하시겠습니까?";
+				next;
+				switch(select("조합을 시작한다.:재료 아이템을 재설정한다.:초기화한다.")) {
+				case 1:
+					mes "[Mixing Machine]";
+					mes "조합에 필요한 아이템들을 정확한 수량을 맞춰 통에 넣어주세요.";
+					next;
+					mes "[Mixing Machine]";
+					mes "조합에 들어가는 아이템들은, 다시 되돌려 받으실 수 없습니다.";
+					next;
+					mes "[Mixing Machine]";
+					mes "전부 정확하시다면, ‘조합’버튼을, 다시 설정하시려면 ‘취소’버튼을 눌러주세요.";
+					next;
+					if (select("’조합’버튼을 누른다.:’취소’버튼을 누른다.") == 1) {
+						mes "[Mixing Machine]";
+						mes "아이템들의 조합을 시작하겠습니다. 잠시만 기다려주세요.";
+						next;
+						mes "[Mixing Machine]";
+						if (countitem(909) < .@mixitem1_1) {
+							mes "젤로피가 부족합니다.";
+							mes "다시 확인해 주세요.";
+							mes "작동이 종료됩니다.";
+							close;
+						}
+						else if (countitem(914) < .@mixitem1_2) {
+							mes "솜털이 부족합니다.";
+							mes "다시 확인해 주세요..";
+							mes "작동이 종료됩니다.";
+							close;
+						}
+						else if (countitem(519) < .@mixitem1_3) {
+							mes "우유가 부족합니다..";
+							mes "다시 확인해 주세요..";
+							mes "작동이 종료됩니다.";
+							close;
+						}
+						else if (.@mixitem2 == 1 || .@mixitem2 == 2) {
+							if (countitem(1089) == 0 && countitem(1088) == 0) {
+								mes "혼합액을 찾을 수 없습니다.";
+								mes "다시 확인해 주세요.";
+								mes "작동이 종료됩니다.";
+								close;
+							}
+						}
+						if (.@mixitem1_1 != 0) delitem 909,.@mixitem1_1; //젤로피
+						if (.@mixitem1_2 != 0) delitem 914,.@mixitem1_2; //솜털
+						if (.@mixitem1_3 != 0) delitem 519,.@mixitem1_3; //우유
+						if (.@mixitem2 == 1) delitem 1089,1; //페이욘 수용액
+						if (.@mixitem2 == 2) delitem 1088,1; //모로크 수용액
+						mes "조합을 시작합니다..";
+						mes "뚜껑이 닫힙니다.";
+						set .@progress,3;
+						next;
+					}
+					break;
+				case 2:
+					set .@continue,0;
+					next;
+					break;
+				case 3:
+					set .@mixitem1_1,0;
+					set .@mixitem1_2,0;
+					set .@mixitem1_3,0;
+					set .@progress,0;
+					set .@continue,0;
+					mes "[Mixing Machine]";
+					mes "초기화 완료.";
+					mes "다시 하시겠습니까?";
+					next;
+					if (select("네.:아니오.") == 1)
+						break;
+					mes "[Mixing Machine]";
+					mes "작동이 중지됩니다.";
+					mes "이용해주셔서 감사합니다.";
+					close;
+				}
+				if (.@progress == 3) break;
+			}
+			else if (.@progress == 1) {
+				mes "[Mixing Machine]";
+				mes "아무것도 찾을 수 없습니다.";
+				next;
+			}
+			mes "[Mixing Machine]";
+			mes "조합하실 아이템을 선택해 주세요.";
+			while(1) {
+				switch(select("젤로피:솜털:우유:조합 준비 완료.")) {
+				case 1:
+					while(1) {
+						input .@input;
+						if (.@input > 10000) {
+							next;
+							mes "[Mixing Machine]";
+							mes "오류 : 아이템의 한계수량을 초과했습니다. 수량을 10,000이하로 다시 시도해 주세요.";
+							next;
+						}
+						else {
+							if (countitem(909) > 0) set .@mixitem1_1,.@mixitem1_1 + .@input;
+							set .@progress,2;
+							break;
+						}
+					}
+					break;
+				case 2:
+					while(1) {
+						input .@input;
+						if (.@input > 10000) {
+							next;
+							mes "[Mixing Machine]";
+							mes "오류 : 아이템의 한계수량을 초과했습니다. 수량을 10,000 이하로 다시 시도해 주세요.";
+							next;
+						}
+						else {
+							if (countitem(914) > 0) set .@mixitem1_2,.@mixitem1_2 + .@input;
+							set .@progress,2;
+							break;
+						}
+					}
+					break;
+				case 3:
+					while(1) {
+						input .@input;
+						if (.@input > 10000) {
+							next;
+							mes "[Mixing Machine]";
+							mes "오류 : 아이템의 한계 수량을 초과했습니다. 수량을 10,000 이하로 다시 시도해주세요.";
+							next;
+						}
+						else {
+						if (countitem(519) > 0) set .@mixitem1_3,.@mixitem1_3 + .@input;
+							set .@progress,2;
+							break;
+						}
+					}
+					break;
+
+				case 4:
+					if (.@progress != 2)
+						set .@progress,1;
+					set .@continue,1;
+					next;
+				}
+				if (.@continue) break;
+			}
+		}
+		mes "[Mixing Machine]";
+		mes "조합하실 ";
+		mes "마법 가루의";
+		mes "일련 번호를 입력해 주십시오.";
+		next;
+		while(1) {
+			input .@input;
+			if (.@input < 1000 || .@input > 9999) {
+				mes "[Mixing Machine]";
+				if (.@input == 0) {
+					mes "이 과정을 넘어가시겠습니까?";
+					next;
+					if (select("Yes.:No.") == 1) {
+						break;
+					}
+				}
+				else {
+					mes "유효하지 않은 번호입니다.";
+					mes "다시 시도해주세요.";
+					next;
+				}
+			}
+			else {
+				mes "[Mixing Machine]";
+				mes "일련 번호는 #" + .@input + "입니다. 일치합니까?";
+				next;
+				if (select("확인한다.:취소한다.") == 1) {
+					if (.@input == 8472)
+						set .@magic_powder,1;
+					else if (.@input == 3735)
+						set .@magic_powder,2;
+					else if (.@input == 2750)
+						set .@magic_powder,3;
+					else if (.@input == 5429)
+						set .@magic_powder,4;
+					else
+						set .@magic_powder,5;
+				}
+				break;
+			}
+		}
+		mes "[Mixing Machine]";
+		mes "마지막으로";
+		mes "젬스톤을 선택해 주세요.";
+		next;
+		switch(select("옐로우 젬스톤:레드 젬스톤:블루 젬스톤:다이아몬드 1캐럿:넘어간다")) {
+		case 1: set .@mixitem3,1; break;
+		case 2: set .@mixitem3,2; break;
+		case 3: set .@mixitem3,3; break;
+		case 4: set .@mixitem3,4; break;
+		case 5: break;
+		}
+		mes "[Mixing Machine]";
+		mes "준비가 완료되었습니다..";
+		mes "조합 작업을";
+		mes "시작합니다.";
+		mes "잠시만 기다려주세요.";
+		next;
+		mes "[Mixing Machine]";
+		mes "- 오늘의 속담 -";
+		switch(rand(1,5)) {
+		case 1:
+			mes "’눈에는 눈, 이에는 이.'";
+			mes "’해를 끼친 만큼, 언젠가 같은 만큼의 해를 당한다.’라는 뜻입니다.";
+			break;
+		case 2:
+			mes "’신용은 사람의 액면가다.’";
+			mes "’믿음은 가치를 매길 수 없다.’라는 뜻입니다.";
+			break;
+		case 3:
+			mes "'원수는 외 나무 다리에서 만난다.'";
+			mes "'원수를 만들면 피할 수 없다는 곳에서 마주치게 되어 화를 입게 된다.' 라는 뜻입니다.";
+			break;
+		case 4:
+			mes "'먼 사촌보다 가까운 이웃이 낫다.'";
+			mes "'멀리 떨어져 있는 일가보다 오히려 가까운 이웃사람에게 어려운 일이 있을 때 도움을 받을 수 있다.'라는 뜻입니다.";
+			break;
+		default:
+			mes "’유유상종.’"; 
+mes "'같은 자들끼리 서로 보여 집단을 형성한다.’라는 뜻입니다.";
+		}
+		next;
+		if (.@mixitem1_1 == 2 && .@mixitem1_2 == 3 && .@mixitem1_3 == 1 && .@mixitem2 == 1 && .@mixitem3 == 1 && .@magic_powder == 1) {
+			mes "[Mixing Machine]";
+			mes "혼합액 1호 완성되었습니다.";
+			getitem 1071,1; //Mage_Test_1
+			next;
+		}
+		else if (.@mixitem1_1 == 3 && .@mixitem1_2 == 1 && .@mixitem1_3 == 1 && .@mixitem2 == 0 && .@mixitem3 == 2 && .@magic_powder == 2) {
+			mes "[Mixing Machine]";
+			mes "혼합액 2호 완성되었습니다.";
+			getitem 1085,1; //Mage_Test_2
+			next;
+		}
+		else if (.@mixitem1_1 == 6 && .@mixitem1_2 == 1 && .@mixitem1_3 == 0 && .@mixitem2 == 1 && .@mixitem3 == 3 && .@magic_powder == 3) {
+			mes "[Mixing Machine]";
+			mes "혼합액 3호 완성되었습니다.";
+			getitem 1086,1; //Mage_Test_3
+			next;
+		}
+		else if (.@mixitem1_1 == 2 && .@mixitem1_2 == 3 && .@mixitem1_3 == 0 && .@mixitem2 == 2 && .@mixitem3 == 4 && .@magic_powder == 4) {
+			mes "[Mixing Machine]";
+			mes "혼합액 4호 완성되었습니다.";
+			getitem 1087,1; //Mage_Test_4
+			next;
+		}
+		else {
+			mes "[Mixing Machine]";
+			mes "갑작스런 오류가 발생했습니다.";
+			getitem 1090,1; //Mage_Test_Etc
+			next;
+		}
+		mes "[Mixing Machine]";
+		mes "조합이 완료 되었습니다.";
+		mes "이용해 주셔서 감사합니다.";
+		close;
+	}
+	close;
+}
+
+pay_arche,122,100,0	script	돌쇼이	88,{
+	mes "[마법사 길드원]";
+	mes "수용액이 필요하다고? 하나에 50제니고 1개 이상의 빈 시험관이 필요해.";
+	next;
+	if (select("Alright, Deal.:Nah, forget it.") == 1) {
+		mes "[마법사 길드원]";
+		if (Zeny < 50) {
+			mes "이봐! 돈이 충분하지 않잖아. 50제니를 가져와.";
+			close;
+		}
+		if (countitem(1092) == 0) {
+			mes "용기 없이는 수용액을 가져갈 수 없잖아! 빈 시험관을 가져오라고. ";
+			close;
+		}
+		delitem 1092,1; //Empty_Cylinder
+		set zeny,zeny-50;
+		getitem 1089,1; //Payon_Potion
+	}
+	close;
+}
+
+moc_ruins,91,150,0	script	포카혼타스	93,{
+	mes "[마법사 길드원]";
+	mes "수용액이 필요 하시다고요? 50제니와 빈 시험관 1개 이상이 필요해요. ";
+	next;
+	IF (select("Alright, Deal.:Nah, forget it.") == 1) {
+		mes "[마법사 길드원]";
+		if (zENY < 50) {
+			mes "죄송하지만 제니가 충분하지 않군요. 50제니가 필요하답니다. ";
+			close;
+		}
+		if (countitem(1092) == 0) {
+			mes "병 없이는 수용액을 가져가실 수 없으실 거에요. 빈 시험관을 가지고 다시 와 주세요. ";
+			close;
+		}
+		delitem 1092,1; //Empty_Cylinder
+		set zeny,zeny-50;
+		getitem 1088,1; //Morocc_Potion
+	}
+	CLOSE;
+}
+
+geffen_in,177,112,4	script	Bookshelf	111,{
+	mes "[Guide Book]";
+	mes "이 설명서는 게펜 마법사 협회의 소유이다. 조심해서 다뤄주길 바란다. ";
+	next;
+	switch(select("혼합액 1호:혼합액 2호:혼합액 3호.:혼합액 4호.:책을 덮는다.")) {
+	case 1:
+		mes "[마법사 시험 혼합액 1호]";
+		mes "* 재료 목록 *";
+		mes "젤로피 2개";
+		mes "솜털 3개";
+		mes "우유 1병";
+		next;
+		mes "[마법사 시험 혼합액 1호]";
+		mes "* 수용액 *";
+		mes "페이온 수용액";
+		mes "발견 장소:";
+		mes "페이온 궁수 마을의 작은 샘.";
+		next;
+		mes "[마법사 시험 혼합액 1호]";
+		mes "* 마법 가루 일련 번호  *";
+		mes "8472";
+		next;
+		mes "[마법사 시험 혼합액 1호]";
+		mes "* 젬스톤  *";
+		mes "옐로우 젬스톤";
+		mes "(아이템 조합기 안에";
+		mes "내장되어 있음.)";
+		close;
+	case 2:
+		mes "[마법사 시험 혼합액 2호]";
+		mes "* 재료 목록 *";
+		mes "젤로피 3개";
+		mes "솜털 1개";
+		mes "우유 1병";
+		next;
+		mes "[마법사 시험 혼합액 2호]";
+		mes "* 수용액 *";
+		mes "사용안함";
+		next;
+		mes "[마법사 시험 혼합액 2호]";
+		mes "* 마법가루 일련 번호 *";
+		mes "3735";
+		next;
+		mes "[마법사 시험 혼합액 2호]";
+		mes "* 젬스톤 *";
+		mes "레드 젬스톤";
+		mes "(아이템 조합기 안에";
+		mes "내장되어 있음.)";
+		close;
+	case 3:
+		mes "[마법사 시험 혼합액 3호]";
+		mes "* 재료 목록 *";
+		mes "젤로피 6개";
+		mes "솜털 1개";
+		next;
+		mes "[마법사 시험 혼합액 3호]";
+		mes "* 수용액 *";
+		mes "페이온 수용액";
+		mes "발견장소:";
+		mes "페이온 궁수 마을의 작은 샘.";
+		next;
+		mes "[마법사 시험 혼합액 3호]";
+		mes "* 마법가루 일련 번호 *";
+		mes "2750";
+		next;
+		mes "[마법사 시험 혼합액 3호]";
+		mes "* 젬스톤 *";
+		mes "블루 젬스톤";
+		mes "(아이템 조합기 안에";
+		mes "내장되어 있음.)";
+		close;
+	case 4:
+		mes "[마법사 시험 혼합액 4호]";
+		mes "* 재료 목록 *";
+		mes "젤로피 2개";
+		mes "솜털 3개";
+		next;
+		mes "[마법사 시험 혼합액 4호]";
+		mes "* 수용액 *";
+		mes "모로크 수용액";
+		mes "발견장소:";
+		mes "모로크 피라미드 입구 근처의 작은 샘.";
+		next;
+		mes "[마법사 시험 혼합액 4호]";
+		mes "* 마법가루 일련 번호 *";
+		mes "5429";
+		next;
+		mes "[마법사 시험 혼합액 4호]";
+		mes "* 젬스톤 *";
+		mes "다이아몬드 1캐럿";
+		mes "(아이템 조합기 안에";
+		mes "내장되어 있음.)";
+		close;
+	}
+}
+

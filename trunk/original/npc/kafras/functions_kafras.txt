@@ -1,0 +1,515 @@
+
+//    kk  ""tt""  "";;    """"JJ;;kkJJ  JJtt""    ""tt""  ;;tt""""tt    ""tt""   
+//   JJ  kk""tt;;JJ      ttkk    ""tt    ;;;;ttJJ;;  ""ttkk;;"";;;;ttkk;;  ;;kk  
+//  "";;  ""  kk  kk  tt  ttww    ZZ;;  ww    RR  ;;JJ  JJJJ  tt    RR  ;;JJ  JJ 
+//  JJ      """";;""  kk  ttkk  ;;kk    ZZ    ww  ;;""  kk""  ww    kk;;kk""  JJ 
+//  kk      JJ  kk    ww  ttkk  JJJJ  ;;ww  ""JJ  ;;tt""RR    ZZ  ;;ZZJJ      kk 
+//  kk  ;;  "";;JJ        JJtt  JJJJ  ""kk  JJ""  ww""""ww    ww  ""JJ  ZZ    kk 
+//  JJ  JJ  ;;JJ""  "";;  ww;;  kkJJ  JJ""  kk;;  ww  ;;ww  ""JJ  ww;;  ww  ;;tt 
+//;;""  RR    RR    ww""  kk""  ;;tt  ww    kkkk      kktt  JJ;;  ZZ;;  ;;  tt   
+//  JJkkttkkkk;;kkkk;;JJkktt""kkJJJJkkttJJkk;;  kkkkJJ  ttkkttJJkk;;ttkkJJkkJJ   
+//| I | - | L | U | N | A | A | T | H | E | N | A | P | R | O | J | E | C | T |  
+//------------------------------------------------------------------------------
+// iLAthena 카프라 직원 스크립트 <http://www.i-luna.com>
+// 한글화 by 아이루나 iLAthena Project
+//------------------------------------------------------------------------------
+// 한글화 by 아이루나(사이버짱)
+//------------------------------------------------------------------------------
+
+function	script	F_Kafra	{
+	callfunc "F_ClearGarbage";
+
+	// 카프라 직원 환영 메세지 표시
+	switch(getarg(0)){
+		// 기본 환영 메세지
+		default:
+		case 0:
+			mes "[카프라 직원]";
+			mes "어서오십시오. 카프라 서비스는 언제나 여러분 곁에 있습니다. 무엇을 도와드릴까요?";
+			break;
+
+		// 니플헤임
+		case 1:
+			mes "[카프라 직원]";
+			mes "어서...오십시오. (주) 카프라 서비스는... 죽어서도... 여러분 곁에... 있습니다... 무엇을... 도와드릴까요?";
+			break;
+
+		// 길드 카프라
+		case 2:
+			set @GID,getcharid(2);
+			mes "[카프라 직원]";
+	 		mes "^5533FF" + GetGuildName(@GID) + "^000000 길드원 여러분, 어서오십시오. 카프라 서비스는 언제나 여러분 곁에 있습니다.";
+			break;
+
+		// 아마쯔
+		case 3:
+			mes "[카프라 직원]";
+			mes "외지인이시군요. 저희의 문화를 배우러 오신 건가요? 아니면 단순한 관광인가요?";
+			mes "이 곳의 상쾌한 공기를 좀 더 즐기시면서, 천천히 머물다 가시기 바랍니다.";
+			break;
+
+		// 용지성 및 아요타야
+		case 4:
+			mes "[카프라 직원]";
+			mes "전 세계의 수많은 카프라 서비스와 함께라면 어딜 가시더라도 불편함이 없을 것입니다.";
+			break;
+
+		case 5:
+			break;
+	}
+	next;
+
+	M_Menu:
+		cleararray @K_Menu0$[0],"",7;
+	switch(getarg(1)){
+		// 저장 및 창고
+		case 1:
+			setarray @K_Menu0$[0],"저장 서비스 이용","창고 서비스 이용","취소";
+			break;
+
+		// 저장 전용
+		case 2:
+			setarray @K_Menu0$[0],"창고 서비스 이용","취소";
+			break;
+
+		// 이동 서비스 없음
+		case 3: 
+			setarray @K_Menu0$[0],"저장 서비스 이용","창고 서비스 이용","카트 서비스 이용","기타 정보 확인","취소";
+			break;
+
+		// Case 4 아인브로크 이동불가
+
+		case 5:
+			setarray @K_Menu0$[0],"창고 서비스 이용","카트 서비스 이용","기타 정보 확인","취소";
+			break;
+
+		case 6:
+			setarray @K_Menu0$[0],"창고 서비스 이용","기타 정보 확인","취소";
+			break;
+
+		case 7:
+			setarray @K_Menu0$[0],"저장 서비스 이용","창고 서비스 이용","카트 서비스 이용","취소";
+			break;
+
+		case 8:
+			setarray @K_Menu0$[0],"저장 서비스 이용","창고 서비스 이용","기타 정보 확인","취소";
+			break;
+
+		default:
+			setarray @K_Menu0$[0],"저장 서비스 이용","창고 서비스 이용","공간이동 서비스 이용","카트 서비스 이용","기타 정보 확인","취소";
+			break;
+	}
+
+	// 길드 카프라 메뉴
+	if(getarg(0)==2) {
+		cleararray @K_Menu0$[0],"",7;
+		setarray @K_Menu0$[0],"창고 서비스 이용","길드창고 서비스 이용","카트 서비스 이용","공간이동 서비스 이용","취소";
+	}
+	menu 	@K_Menu0$[0],K_Menu0,@K_Menu0$[1],K_Menu1,@K_Menu0$[2],K_Menu2,
+		@K_Menu0$[3],K_Menu3,@K_Menu0$[4],K_Menu4,@K_Menu0$[5],K_Menu5,
+		@K_Menu0$[6],K_Menu6,@K_Menu0$[7],K_Menu7;
+	K_Menu0:
+		set @num,0;
+		goto K_Menuf;
+	K_Menu1:
+		set @num,1;
+		goto K_Menuf;
+	K_Menu2:
+		set @num,2;
+		goto K_Menuf;
+	K_Menu3:
+		set @num,3;
+		goto K_Menuf;
+	K_Menu4:
+		set @num,4;
+		goto K_Menuf;
+	K_Menu5:
+		set @num,5;
+		goto K_Menuf;
+	K_Menu6:
+		set @num,6;
+		goto K_Menuf;
+	K_Menu7:
+		set @num,7;
+	K_Menuf:
+		if (@K_Menu0$[@num] == "저장 서비스 이용") return;
+		if (@K_Menu0$[@num] == "창고 서비스 이용"){
+			if(getarg(0) == 2) callfunc "F_KafStor",2,0,0;
+			else callfunc "F_KafStor",0,getarg(3),getarg(0);
+			next;
+			goto M_Menu;
+		}
+		if (@K_Menu0$[@num] == "공간이동 서비스 이용"){
+			if(getarg(1) == 4){
+				mes "[카프라 직원]";
+				mes "^FF0000텔레포트 금지 조약^000000으로 인하여 카프라 서비스는 슈발츠발드 공화국 내에서는 공간이동 서비스를 더 이상 제공하지 않습니다.";
+				next;
+				mes "[카프라 직원]";
+				mes "각 마을의 비공정을 이용해 주시기 바랍니다.";
+				mes "협조해 주셔서 감사합니다.";
+				next;
+				goto M_Menu;
+			}
+			callfunc "F_KafTele",getarg(0);
+			goto M_Menu;
+		}
+		if (@K_Menu0$[@num] == "카트 서비스 이용"){
+			if(callfunc("F_KafCart",getarg(0),getarg(4)) == 1) next;
+			goto M_Menu;
+		}
+		if (@K_Menu0$[@num] == "기타 정보 확인"){
+			callfunc "F_KafInfo",getarg(2);
+			goto M_Menu;
+		}
+		if (@K_Menu0$[@num] == "취소"){
+			callfunc "F_KafEnd",getarg(0),0;
+			end;
+		}
+		if (@K_Menu0$[@num] == "길드창고 서비스 이용"){
+			callfunc "F_KafStor",1,0;
+			next;
+			goto M_Menu;
+		}
+
+}
+
+
+// 창고 서비스 기능 =======================================================
+function	script	F_KafStor	{
+	if(getarg(0) == 1){
+		if(guildopenstorage(0) == 1){
+			mes "[카프라 직원]";
+			mes "죄송합니다만, 지금 다른 길드원께서 이미 길드창고를 열고 계신 중입니다.";
+			mes "다른 분의 창고 이용이 끝날 때 까지 기다려 주시기 바랍니다.";
+			close2;
+			cutin "", 255;
+			end;
+		}
+		cutin "", 255;
+		close;
+	}
+
+	if(basicskillcheck() && getskilllv("NV_BASIC") < 6){
+		mes "[카프라 직원]";
+		if (getarg(2) == 1) {
+			mes "^666666죄송합니다. 고객님.";
+			mes "창고를 이용하시려면 초보자 스킬레벨을 6 이상 올리셔야 합니다....^000000";
+			return;
+		}
+		mes "죄송합니다. 고객님.";
+		mes "창고를 이용하시려면 초보자 스킬레벨을 6 이상 올리셔야 합니다.";
+		return;
+	}
+
+	if(getarg(0) != 2){
+		if(countitem(7059)) delitem 7059,1;
+		else {
+			if(Zeny<getarg(1)){
+				mes "[카프라 직원]";
+				if (getarg(2) == 1) {
+					percentheal -50,-50;
+					mes "지불하실 금액이... 부족... 합니다. 창고 이용료는... 150 제니... 모자라면... 당신의 생명이라도... 제게... 나누어주세요...";
+					return;
+				}
+				mes "고객님. 지불하실 금액이 부족 합니다. 창고 이용료는 "+getarg(1)+" 제니 입니다.";
+				return;
+			}
+			set Zeny, Zeny-getarg(1);
+			set RESRVPTS, RESRVPTS + (getarg(1)/5);
+		}
+	}
+
+	if (getarg(0) != 2) {
+		if (getarg(2) == 1) {
+			percentheal 0,-10;
+			mes "[카프라 직원]";
+			mes "이용해... 주셔서... 감사합니다...";
+			mes "이용해... 주셔서... 감사합니다...";
+			mes "이용해... 주셔서... 감사합니다...";
+			mes "이용해... 주셔서... 감사합니다...";
+			mes "이용해... 주셔서... 감사합니다...";
+		}
+		else {
+			mes "[카프라 직원]";
+			mes "창고를 열겠습니다. 이용해 주셔서 감사합니다.";
+		}
+	}
+	callfunc("F_CheckKafCode");
+
+	close2;
+	openstorage;
+	cutin "", 255;
+	end;
+}
+
+
+// 이동 서비스 기능 ==================================================
+function	script	F_KafTele	{
+	mes "[카프라 직원]";
+	mes "목적지를 말씀해 주십시오.";
+	next;
+
+	menu 	@wrpC$[0],M_Wrp0, @wrpC$[1],M_Wrp1, @wrpC$[2],M_Wrp2, @wrpC$[3],M_Wrp3, 
+		@wrpC$[4],M_Wrp4, @wrpC$[5],M_Wrp5, @wrpC$[6],M_Wrp6;
+
+	M_Wrp0:
+		set @num, 0;
+		goto L_Warp;
+	M_Wrp1:
+		set @num, 1;
+		goto L_Warp;
+	M_Wrp2:
+		set @num, 2;
+		goto L_Warp;
+	M_Wrp3:
+		set @num, 3;
+		goto L_Warp;
+	M_Wrp4:
+		set @num, 4;
+		goto L_Warp;
+	M_Wrp5:
+		set @num, 5;
+		goto L_Warp;
+	M_Wrp6:
+		set @num, 6;
+
+	L_Warp:
+		if (@wrpC$[@num] == "취소") return;
+		if(countitem(7060) > 0 && getarg(0) != 2) delitem 7060,1;
+		else {
+			if (Zeny<@wrpP[@num]){
+				mes "[카프라 직원]";
+				mes "고객님. 지불하실 금액이 부족 합니다. 다시 확인해 주세요.";
+				close2;
+				cutin "", 255;
+				end;
+			}
+			set Zeny, Zeny-@wrpP[@num];
+			set RESRVPTS, RESRVPTS + (@wrpP[@num]/16);
+		}
+		if (@wrpD$[@num] == "알베르타") warp "alberta", 117, 56;
+		if (@wrpD$[@num] == "알데바란") warp "aldebaran",168,112;
+		if (@wrpD$[@num] == "코모도") warp "comodo", 209, 143;
+		if (@wrpD$[@num] == "이즈루드") warp "izlude", 91, 105;
+		if (@wrpD$[@num] == "게펜") warp "geffen", 120, 39;
+		if (@wrpD$[@num] == "모로크") warp "morocc", 156, 46;
+		if (@wrpD$[@num] == "폐이욘") warp "payon", 161, 58;
+		if (@wrpD$[@num] == "프론테라") warp "prontera", 116, 72;
+		if (@wrpD$[@num] == "묘르닐 폐광 던전") warp "mjolnir_02", 99, 351;
+		if (@wrpD$[@num] == "파로스 등대섬") warp "cmd_fild07", 127, 134;
+		if (@wrpD$[@num] == "오크 던전") warp "gef_fild10", 52, 326;
+		if (@wrpD$[@num] == "움발라") warp "umbala", 100, 154;
+		if (@wrpD$[@num] == "유노") warp "yuno", 158, 125;
+		cutin "", 255;
+		end;
+}
+
+
+// 카트 서비스 기능 ========================================================
+function	script	F_KafCart	{
+	if(baseClass != Job_Merchant){
+		mes "[카프라 직원]";
+		mes "죄송합니다.";
+		mes "카트는 상인과 블랙스미스, 알케미스트 전용입니다.";
+		return 1;
+	}
+	else if(checkcart() == 1){
+		mes "[카프라 직원]";
+		mes "고객님은 현재 카트를 이용하시고 있습니다.";
+		return 1;
+	}
+
+	if(countitem(7061) > 0 && getarg(0) != 2) delitem 7061,1;
+	else {
+		mes "[카프라 직원]";
+		mes "카트 이용요금은 800 Zeny입니다. 카트를 대여하시겠습니까?";
+		next;
+		menu "카트 서비스 이용",-, "취소",M_End;
+			if(Zeny<getarg(1)){
+				mes "[카프라 직원]";
+				mes "고객님,돈이 충분하지 않습니다.";
+				mes "카트 이용요금은 800 Zeny입니다.";
+				return 1;
+			}
+			set Zeny,Zeny-getarg(1);
+			set RESRVPTS, RESRVPTS + 48;
+	}
+	setcart;
+	return 1;
+
+M_End:
+	return 0;
+}
+
+function	script	F_KafInfo	{
+
+	sM_Menu:
+	if(getarg(0) == 0) menu "적립포인트 확인",sM_ResChk,"창고 비밀번호 서비스",sM_KafCode,"카프라요원 위치 확인",sM_KafLoc,"취소",sM_End;
+
+	sM_ResChk:
+		mes "[카프라 직원]";
+		mes "" +strcharinfo(0) + " 고객님의 적립포인트는 ^0000ff"+RESRVPTS+"^000000점 입니다.";
+		next;
+		mes "[카프라 직원]";
+		mes "적립포인트는 저희 카프라 본사에서 상품과 교환이 가능합니다.";
+		mes "편리한 저희 카프라 서비스도 이용하시고 많은 상품도 받아가세요~";
+		next;
+		if(getarg(0) == 1) return;
+		goto sM_Menu;
+
+	sM_KafLoc:
+		viewpoint 1,@viewpX[0],@viewpY[0],1,0xFF00FF;
+		viewpoint 1,@viewpX[1],@viewpY[1],2,0xFF00FF;
+		viewpoint 1,@viewpX[2],@viewpY[2],3,0xFF00FF;
+		viewpoint 1,@viewpX[3],@viewpY[3],4,0xFF00FF;
+		next;
+		viewpoint 2,@viewpX[0],@viewpY[0],1,0xFF00FF;
+		viewpoint 2,@viewpX[1],@viewpY[1],2,0xFF00FF;
+		viewpoint 2,@viewpX[2],@viewpY[2],3,0xFF00FF;
+		viewpoint 2,@viewpX[3],@viewpY[3],4,0xFF00FF;
+		goto sM_Menu;
+
+	sM_KafCode:
+		callfunc("F_SetKafCode","[카프라 직원]","Kafra Services");
+
+	sM_End:
+		return;
+}
+
+//===================================================================
+function	script	F_KafEnd	{
+	mes "[카프라 직원]";
+	if(getarg(1)==1) {
+		mes "저장 되었습니다.";
+		mes "이용해 주셔서 감사합니다.";
+	}
+
+	else if(getarg(0)==0 || getarg(0)==5) {
+		mes "이용해 주셔서 감사합니다.";
+	    	mes "저희 카프라 서비스는 보다 완벽한 서비스와 엄격한 관리 업무로 고객 여러분이 안심하고 편하게 이용하실 수 있도록 최선을 다하고 있습니다.";
+	}
+
+	else if(getarg(0)==1) {
+		percentheal 0,- 25;
+		mes "저희.. 카프라 서비스는.. 언제.. 어디서나.. 고객 여러분 곁에... 있습..니다... 그러니까... 결코... 잊지 말아주세요...";
+	}
+
+	close2;
+	cutin "", 255;
+	end;
+}
+
+// 창고 비밀번호 확인 기능 ====================
+function	script	F_CheckKafCode	{
+	if(#kafra_code==0) return;
+	mes "창고 비밀번호 입력:";
+	set @code_,0;
+	input @code_;
+	if(@code_ != #kafra_code) {
+		dispbottom "비밀번호 오류";
+		close2;
+		cutin "",255;
+		end;
+	}
+	set @kafcode_try,0;
+	set @code_,0;
+	return;
+}
+
+// 창고 비밀번호 관리 기능 ====================
+function	script	F_SetKafCode	{
+	mes getarg(0);
+	if(#kafra_code) {
+		mes "창고는 현재 비밀번호로 보호되어 있습니다. 원하시는 서비스를 선택하여 주세요.";
+		next;
+		menu "비밀번호 변경 -> 5000z",-,
+		"비밀번호 제거 -> 1000z",M_CLEAR,
+		"취소",M_END;
+	} else {
+		mes ""+getarg(1)+" 새로운 서비스 선택:";
+		next;
+		menu "창고 비밀번호 만들기 -> 5000z",M_SET,
+		"취소",M_END;
+	}
+
+	mes getarg(0);
+	mes "먼저 ^0000FF현재 비밀번호^000000를 입력하여 주십시오.";
+	set @code,callfunc("F_EntKafCode");
+	if(@code==0 || @code != #kafra_code) {
+		mes "비밀번호가 틀렸습니다. 새로운 비밀번호를 설정할 수 없습니다.";
+		emotion e_hmm;
+		goto M_END;
+	}
+	next;
+
+M_SET:
+	mes getarg(0);
+	mes "다음 ^FF0000새로운 비밀번호^000000를 입력하여 주십시오.";
+	set @code,callfunc("F_EntKafCode");
+	if(@code==0) {
+		mes "창고 비밀번호가 변경되었습니다.";
+		emotion e_hmm;
+		goto M_END;
+	}
+	next;
+	mes getarg(0);
+	if(Zeny < 5000) goto L_ZENY;
+	set Zeny,Zeny-5000;
+	set #kafra_code,@code;
+	mes "고객님은 현재 창고를 비밀번호로 보호하고 계십니다.";
+	mes "이용하여 주셔서 감사합니다.";
+	emotion e_thx;
+	goto M_END;	
+
+M_CLEAR:
+	mes getarg(0);
+	mes "먼저 현재 비밀번호를 입력하여 주십시오.";
+	set @code,callfunc("F_EntKafCode");
+	if(@code==0) {
+		mes "비밀번호가 틀렸습니다. 비밀번호를 삭제할 수 없습니다.";
+		emotion e_hmm;
+		goto M_END;
+	}
+	next;
+	mes getarg(0);
+	if(Zeny < 1000) goto L_ZENY;
+	set Zeny,Zeny-1000;
+	if(@code == #kafra_code) {
+		set #kafra_code,0;
+		mes "비밀번호를 삭제하였습니다. 이용해 주셔서 감사합니다.";
+		emotion e_thx;
+	} else {
+		mes "잘못된 비밀번호입니다.";
+		mes "정확한 비밀번호를 입력해 주십시오.";
+		emotion e_sry;
+	}
+	goto M_END;	
+
+L_ZENY:
+	mes "고객님. 이용료가 부족합니다.";
+	emotion e_cash;
+M_END:
+	close2;
+	cutin "",255;
+	end;
+}
+
+function	script	F_EntKafCode	{
+	mes "1000~10000000 사이의 숫자를 입력하여 주십시오.";
+	set @code_,0;
+	set @kafcode_try,@kafcode_try+1;
+	if(@kafcode_try>10) {
+		set @kafcode_try,0;
+		logmes "해킹시도 : 개인창고 열기시도";
+	}
+	input @code_;
+	if(@code_<1000) {
+		mes "비밀번호의 길이가 너무 짧습니다.";
+		return 0;
+	}
+	if(@code_>10000000) {
+		mes "비밀번호의 길이가 너무 깁니다.";
+		return 0;
+	}
+	return @code_;
+}

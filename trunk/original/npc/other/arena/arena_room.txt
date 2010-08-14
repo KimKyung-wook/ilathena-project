@@ -1,0 +1,1234 @@
+//===== eAthena Script ========================================
+//= Izlude Arena Room
+//===== By: ==================================================
+//= SinSloth
+//===== Current Version: =====================================
+//= 1.1
+//===== Compatible With: =====================================
+//= Any Athena Version
+//===== Description: =========================================
+//= Izlude Battle Arena Main Room
+//===== Additional Comments: =================================
+//= 1.0 First version.
+//= 1.1 Fixed a small reward typo (was giving potato.) [L0ne_W0lf]
+//============================================================
+
+arena_room,94,93,5	script	벤디고스	97,{
+
+	mes "[벤디고스]";
+	mes "피말리는 시간과의 싸움! 아레나의 세계에 오신 것을 환영합니다.";
+	mes "저는 이곳의 안내를 맡고 있는 벤디고스라고 합니다.";
+	next;
+	mes "[벤디고스]";
+	mes "궁금하신 점이 있으면 말씀해 주세요.";
+L_Menu:
+	next;
+	switch( select( "아레나에 도전하려면?","아레나 포인트란?","아레나 포인트 점수 확인","대화를 마친다" ) )
+	{
+		case 1:
+			mes "[벤디고스]";
+			mes "아레나는 크게 ^3131FF개인도전 모드^000000와 ^3131FF파티모드^000000로 나뉘어집니다.";
+			next;
+			mes "[벤디고스]";
+			mes "^3131FF개인도전 모드^000000는 50레벨/60레벨/70레벨/80레벨 이상 제한 모드로 되어있으며,";
+			mes "^3131FF파티도전 모드^000000는 5명이 한 팀을 이뤄 도전하는 방식입니다.";
+			next;
+			mes "[벤디고스]";
+			mes "^3131FF개인도전 모드^000000는 고레벨 플레이어의 상대적 저레벨 아레나 모드 랭크 선점을 방지하기 위하여 각 제한 레벨보다 20렙 높은 캐릭은 입장할 수 없으니 유의해 주시기 바랍니다.";
+			next;
+			mes "[벤디고스]";
+			mes "12시부터 반시계 방향으로 각 방안에 각 레벨별 아레나 NPC가 채팅방을 개설하고 있을 것 입니다.";
+			mes "채팅방 안으로 들어가 대기하고 계시면, 순서에 따라 아레나를 이용하실 수 있습니다.";
+			break;
+		
+		case 2:
+			mes "[벤디고스]";
+			mes "^3131FF아레나 포인트^000000에 대해 설명해 드리도록 하겠습니다.";
+			mes "아레나 포인트란 ^3131FF각 부문별 아레나를 클리어 할 시^000000 주어지는 포인트로, 최대 3만포인트까지 획득할 수 있습니다.";
+			next;
+			mes "[벤디고스]";
+			mes "아레나를 시간초과로 클리어하지 못할 시에도 아레나 포인트가 지급되나, 매우 미약한 정도의 포인트만 주어질 것입니다.";
+			next;
+			mes "[벤디고스]";
+			mes "아레나 포인트의 사용에 관해선,";
+			mes "현재 기념촬영 모드 등 폭넓은 활용 방안을 준비중에 있습니다.";
+			break;
+
+		case 3:
+			mes "[벤디고스]";
+			mes "+strcharinfo(0)+님의 아레나 포인트를 확인해 드리겠습니다.";
+			next;
+			mes "[벤디고스]";
+			mes "+strcharinfo(0)+님께서 소유하고 계신 아레나 포인트는.. ^3131FF0^000000점 입니다.";
+			next;
+			mes "[벤디고스]";
+			mes "아레나 포인트 사용방식에 대해선 앞 선택지의 ^3131FF'아레나 포인트란?'^000000에서 설명드리고 있사오니 참고하시기 바랍니다.";
+			break;
+
+		case 4:
+			mes "[벤디고스]";
+			mes "그럼 좋은 시간 되시길 바랍니다.";
+			close;
+	}
+	next;
+	mes "[벤디고스]";
+	mes "더 궁금하신 점이 있으신가요?";
+	goto L_Menu;
+	
+Onlinerec_50:
+	mapannounce "arena_room",""+$arena_50topn$+" has renewed the top record in the Arena Time Force Battle level 50. Congratulations!",0;
+	end;
+	
+Onlinerec_60:
+	mapannounce "arena_room",""+$arena_60topn$+" has renewed the top record in the Arena Time Force Battle level 60. Congratulations!",0;
+	end;
+	
+Onlinerec_70:
+	mapannounce "arena_room",""+$arena_70topn$+" has renewed the top record in the Arena Time Force Battle level 70. Congratulations!",0;
+	end;
+Onlinerec_80:
+	mapannounce "arena_room",""+$arena_80topn$+" has renewed the top record in the Arena Time Force Battle level 80. Congratulations!",0;
+	end;
+	
+Onlinerec_pt:
+	mapannounce "arena_room","Party "+$arena_pttopn$+" has renewed the top record in the Arena Time Force Battle. Congratulations!",0;
+	end;
+
+//OnCommand: "linerec_vs"
+// var vs_winner = GetGlobalStr "040611_arn_vstopn"
+// broadcastinmap "Party "+vs_winner+" has renewed the top record in the Arena Time Force Battle. Congratulations!"
+// end;
+
+}
+
+arena_room,105,82,5	script	아우웬 키우프	57,{
+
+	mes "[아우웬 키우프]";
+	mes "안녕하세요";
+	mes "아레나의 여러 기록들을 관리/안내하고 있는 아우웬 키우프입니다.";
+	next;
+	mes "[아우웬 키우프]";
+	mes "각 부문에서 최단시간을 기록한 용사들의 이름을 알고 싶으신가요?";
+	mes "다음에서 원하시는 모드를 선택해 주세요.";
+	next;
+	switch( select( "50레벨 제한:60레벨 제한:70레벨 제한:80레벨 제한:파티도전" ) )
+	{
+		case 1:
+			mes "[아우웬 키우프]";
+			mes "현재 아레나 50레벨 제한 부문은 ^3131FF +$arena_50topn$+^000000님께서 1위를 차지하고 계시며, 그 기록은 ^3131FF+$top_50min+^000000분 ^3131FF+$top_50sec+^000000초 입니다. 축하드립니다.";
+			close;
+
+		case 2:
+			mes "[아우웬 키우프]";
+			mes "현재 아레나 60레벨 제한 부문은 ^3131FF+$arena_60topn$+^000000님께서 1위를 차지하고 계시며, 그 기록은 ^3131FF+$top_60min+^000000분 ^3131FF+$top_60sec+^000000초 입니다. 축하드립니다.";
+			close;
+
+		case 3:
+			mes "[아우웬 키우프]";
+			mes "현재 아레나 70레벨 제한 부문은 ^3131FF+$arena_70topn$+^000000님께서 1위를 차지하고 계시며, 그 기록은 ^3131FF+$top_70min+^000000분 ^3131FF+$top_70sec+^000000초 입니다. 축하드립니다.";
+			close;
+
+		case 4:
+			mes "[아우웬 키우프]";
+			mes "Currenly the top player of the arena lvl 80 stage is ^3131FF"+$arena_80topn$+"^000000, the top record is ^3131FF"+$top_80min+"^000000 minutes ^3131FF"+$top_80sec+"^000000 seconds.";
+			close;
+
+		case 5:
+			mes "[아우웬 키우프]";
+			mes "Currenly the top party is ^3131FF"+$arena_pttopn$+"^000000, the top record is ^3131FF"+$top_ptmin+"^000000 minutes ^3131FF"+$top_ptsec+"^000000 seconds.";
+			close;
+	}
+}
+
+arena_room,68,135,3	script	페츠	726,{
+
+	mes "[페츠]";
+	mes "안녕하세요 안녕하세요~♬";
+	mes "50레벨 이상 제한 모드 도우미 역할을 하고 있는 페츠입니다.";
+	next;
+	mes "[페츠]";
+	mes "^3131FF50레벨 이상 제한 모드^000000는,";
+	mes "^FF000050레벨^000000부터 ^FF000069레벨^000000까지 입장이 가능합니다.";
+	next;
+	mes "[페츠]";
+	mes "이는 고레벨 플레이어의 상대적 저레벨 아레나 모드 랭크 선점을 방지하기 위한 것이니 양해 부탁드려요♡";
+	mes "그리고 입장료는 1000z에요.";
+	next;
+	mes "[페츠]";
+	mes "그럼, 아레나 진행 방식에 대해 알려드리도록 할께요.";
+	next;
+	mes "[페츠]";
+	mes "^3131FF일단 채팅방 안에서 자신의 순서를 기다리도록 합니다.^000000";
+	mes "자신의 순서가 되면 아레나맵으로 이동이 되죠.";
+	next;
+	mes "[페츠]";
+	mes "아레나맵 입장과 동시에 타이머가 작동되게 됩니다.";
+	mes "^3131FF힐앤토^000000가 제시하는 조건에 따라 시계방향으로 각 방을 클리어 하시면 됩니다. ";
+	next;
+	mes "[페츠]";
+	mes "제한시간은 ^3131FF5분^000000 이니 시간조절을 잘 하셔야 해요.";
+	next;
+	mes "[페츠]";
+	mes "아레나를 마지막 보스룸까지 모두 클리어 하면, ^3131FF종료대기실^000000로 이동되어집니다.";
+	mes "^3131FF종료대기실^000000에선 1분밖에 머무르지 못하니, 해당 담당 NPC에게 아레나 포인트를 받고 재빨리 밖으로 나와주세요.";
+	next;
+	mes "[페츠]";
+	mes "종료대기실에서 머무르다 아레나 포인트를 받지 못하고 밖으로 강제 이동될 경우의 손실된 아레나 포인트는 재지급되지 않는다는 점, 꼭 기억해두세요 !";
+	next;
+	mes "[페츠]";
+	mes "그럼 이상 50레벨 제한 모드 도움말이었습니다~";
+	mes "유쾌한 시간 보내세요♡";
+	close;
+}
+
+arena_room,41,93,5	script	벤	750,{
+
+	mes "[벤]";
+	mes "반갑습니다,";
+	mes "전 60레벨 이상 제한 모드 도우미, 벤입니다.";
+	next;
+	mes "[벤]";
+	mes "^3131FF60레벨 이상 제한 모드^000000는,";
+	mes "^FF000060레벨^000000부터 ^FF000079레벨^000000까지 입장이 가능합니다.";
+	next;
+	mes "[벤]";
+	mes "고레벨 플레이어의 상대적 저레벨 아레나 모드 랭크 선점을 방지하기 위한 것이죠. 양해 부탁드립니다.";
+	mes "그리고 입장료는 1000z입니다.";
+	next;
+	mes "[벤]";
+	mes "그럼, 아레나 진행 방식에 대해 알려드리도록 하겠습니다.";
+	next;
+	mes "[벤]";
+	mes "^3131FF일단 채팅방 안에서 자신의 순서를 기다리도록 합니다.^000000";
+	mes "자신의 순서가 되면 아레나맵으로 이동이 되죠.";
+	next;
+	mes "[벤]";
+	mes "아레나맵 입장과 동시에 타이머가 작동되게 됩니다.";
+	mes "^3131FF미니로버^000000가 제시하는 조건에 따라 시계방향으로 각 방을 클리어 하시면 됩니다. ";
+	next;
+	mes "[벤]";
+	mes "제한시간은 ^3131FF6분^000000 이니 시간조절을 잘 하시는게 중요합니다.";
+	next;
+	mes "[벤]";
+	mes "아레나를 마지막 보스룸까지 모두 클리어 하면, ^3131FF종료대기실^000000로 이동되어집니다.";
+	mes "^3131FF종료대기실^000000에선 1분밖에 머무르지 못하니, 해당 담당 NPC에게 아레나 포인트를 받고 재빨리 밖으로 나와주세요.";
+	next;
+	mes "[벤]";
+	mes "종료대기실에서 머무르다 아레나 포인트를 받지 못하고 밖으로 강제 이동될 경우의 손실된 아레나 포인트는 재지급되지 않는다는 점, 유념해 두시기 바랍니다.";
+	next;
+	mes "[벤]";
+	mes "그럼 이상 60레벨 제한 모드에 대해 알려드렸습니다.";
+	mes "부디 좋은 시간 보내시길.";
+	close;
+}
+
+arena_room,53,49,5	script	Helper Vicious	730,{
+
+	mes "[비셔스]";
+	mes "어서오시게나.";
+	mes "난 70레벨 이상 제한 모드에 투입된 비셔스.";
+	mes "(..어째서 내가 이런일을 해야 하는지는 모르겠지만.. ..중얼중얼.. 투덜투덜..)";
+	next;
+	mes "[비셔스]";
+	mes "^3131FF70레벨 이상 제한 모드^000000는,";
+	mes "^FF000070레벨^000000부터 ^FF000089레벨^000000까지 입장이 가능하지.";
+	next;
+	mes "[비셔스]";
+	mes "레벨 좀 높다고 으스대는 플레이어들이 상대적 레벨이 낮은 모드의 아레나 랭크를 모두 가로채는 일을 방지하기 위해서 그런거니 아쉬워하지 말게나.";
+	mes "또, 입장료는 1000z다.";
+	next;
+	mes "[비셔스]";
+	mes "그럼, 아레나 진행 방식에 대해 좀 알려줄까?";
+	next;
+	mes "[비셔스]";
+	mes "^3131FF일단 채팅방 안에서 자신의 순서를 기다리고 있으면^000000,";
+	mes "때가 되면 아레나 맵으로 이동되어 지지.";
+	next;
+	mes "[비셔스]";
+	mes "아레나맵 입장과 동시에 타이머가 작동! 그때부터가 아레나의 진정한 시작이다.";
+	mes "^3131FF캐딜락^000000이 제시하는 조건에 따라 시계방향으로 각 방에서 전투를 해야하는 것이지.";
+	next;
+	mes "[비셔스]";
+	mes "제한시간은 ^3131FF7분^000000! 그리 길지 않은 시간이니 유연하게 정신을 집중해서 최단시간에 최고의 효율을 보이도록 해야한다.";
+	next;
+	mes "[비셔스]";
+	mes "아레나를 마지막 보스룸까지 모두 클리어 후, 마지막 워프를 타면 ^3131FF종료대기실^000000에 도착하게 되네. ";
+	mes "^3131FF종료대기실^000000에선 1분밖에 머무르지 못하니, 해당 담당 NPC에게 아레나 포인트를 받고 재빨리 밖으로 나와주는게 좋아.";
+	next;
+	mes "[비셔스]";
+	mes "종료대기실에서 머무르다 아레나 포인트를 받지 못하고 밖으로 강제 이동될 경우, 손실된 아레나 포인트는 재지급되지 않으니 나중에 울어도 소용없어. 잘 기억해 두라고.";
+	next;
+	mes "[비셔스]";
+	mes "내가 알려줄 수 있는건 여기까지~";
+	mes "잘 알아들었나?";
+	close;
+}
+
+arena_room,147,49,3	script	Helper Epin	727,{
+
+	mes "[에핑]";
+	mes "안녕하세요,";
+	mes "80레벨 이상 제한 모드 도우미를 맡고 있는 에핑입니다.";
+	mes "취미는 독서고, 나이는 .. 에, 필요없다구요?";
+	next;
+	emotion e_cry,0;
+	mes "[에핑]";
+	mes "본연의 임무에나 충실해야겠군요..";
+	next;
+	mes "[에핑]";
+	mes "^3131FF80레벨 이상 제한 모드^000000는,";
+	mes "^FF000080레벨^000000부터 ^FF000099레벨^000000까지 입장이 가능합니다.";
+	mes "그리고 입장료는 1000z에요.";
+	next;
+	mes "[에핑]";
+	mes "아레나 진행 과정은요,";
+	next;
+	mes "[Epin]";
+	mes "[에핑]";
+	mes "일단^3131FF 채팅방 안에서 자신의 순서를 기다리도록 합니다.^000000";
+	mes "자신의 순서가 되면 아레나맵으로 이동이 되죠. 기다리는 동안 졸지 않도록 조심♥";
+	next;
+	mes "[Epin]";
+	mes "[에핑]";
+	mes "아레나맵 입장과 동시에 타이머 Start ~ !!";
+	mes "^3131FF악토스^000000가 제시하는 조건에 따라 시계방향으로 각 방을 클리어 하시면 됩니다. ";
+	next;
+	mes "[에핑]";
+	mes "제한시간은 ^3131FF8분^000000입니다. 효율적이며 재빠른 대처능력으로 시간을 잘 활용하는 것이 중요하죠. 아마 쉽진 않을 거에요.";
+	next;
+	mes "[에핑]";
+	mes "아레나를 마지막 보스룸까지 모두 클리어 하면, ^3131FF종료대기실^000000로 이동되어집니다.";
+	mes "^3131FF종료대기실^000000에선 1분밖에 머무르지 못하니, 해당 담당 NPC에게 아레나 포인트를 받고 재빨리 밖으로 나와주세요.";
+	next;
+	mes "[에핑]";
+	mes "종료대기실에서 머무르다 아레나 포인트를 받지 못하고 밖으로 강제 이동될 경우의 손실된 아레나 포인트는 재지급되지 않는다는 점, 꼭! 주의해 주세요.";
+	next;
+	mes "[에핑]";
+	mes "80레벨 제한 모드에 대해 좀 아시겠나요?";
+	mes "그럼 지금까지 에핑이었습니다. 당신의 이름이 랭크에 오를 수 있도록.. 화이팅 !";
+	close;
+}
+
+arena_room,158,93,5	script	루닉	828,{
+
+	mes "[루닉]";
+	mes "반갑습니다,";
+	mes "파티도전 모드에 관한 설명을 받으시는게 좋겠죠?";
+	mes "파티모드는 개인모드와 조~금 다르니 귀 쫑긋 세우시고 잘 새겨두시길 !";
+	next;
+	mes "[루닉]";
+	mes "^3131FF파티도전 모드^000000는,";
+	mes "^FF000010레벨^000000부터 ^FF000099레벨^000000까지 입장이 가능합니다.";
+	next;
+	mes "[루닉]";
+	mes "또한, 함께 아레나를 즐길 인원 5명이 모여야지만 아레나가 시작됩니다. 입장료는 1000z입니다.";
+	next;
+	mes "[루닉]";
+	mes "그럼, 아레나 진행 방식에 대해 알려드리도록 하겠습니다.";
+	next;
+	mes "[루닉]";
+	mes "일단 함께 할 ^3131FF동료들과 파티를 맺고 채팅방 안에서 순서를 기다리도록^000000 합니다.";
+	mes "파티는 반드시 맺어져야 하며, 맺지 않아도 진행은 되나 후에 여러가지 불편이 생길 수 있으니 파티를 맺도록 합니다.";
+	next;
+	mes "[루닉]";
+	mes "아레나에 입장하게 되는 5인은 ^FF0000파티순^000000이 아닌, ^FF0000채팅방 입장순^000000으로 이뤄지므로 주의해주세요.";
+	next;
+	mes "[루닉]";
+	mes "그리고 또한 채팅방 입장시엔, 필요인원 ^3131FF5명^000000을 모두 파티 맺은 채로 입장하도록 합니다.";
+	next;
+	mes "[루닉]";
+	mes "채팅방에서 대기중, 순서가 되면 워프와 도우미NPC가 있는 조그만 맵으로 이동 되어집니다.";
+	mes "파티의 순서가 뒤틀린채로 입장하게 되었을 경우 맵 하단의 워프로 탈출하시면 처음의 아레나 대기실로 빠져나가게 됩니다.";
+	next;
+	mes "[루닉]";
+	mes "그렇지 않고, 아레나를 계속할 경우에는 NPC와 대화를 진행하도록 합니다.";
+	mes "그곳에 있는 NPC는 해당 맵에 있는 사람 중 ^FF0000 1명 ^000000과 대화를 나누게 됩니다.";
+	next;
+	mes "[루닉]";
+	mes "NPC를 통해 아레나를 시작하면 맵안의 사람들이 모두 아레나로 이동하나,";
+	mes "^3131FF캐릭터 내에 입장료가 부족할 경우엔 대기실밖으로 이동^000000 되어집니다.";
+	next;
+	mes "[루닉]";
+	mes "아레나 시작 전 대기실에서 머무를 수 있는 대기 시간은 ^FF0000 1분 ^000000 입니다.";
+	next;
+	mes "[루닉]";
+	mes "일단 아레나맵에 입장하게 되면, 동시에 타이머가 작동되게 됩니다.";
+	mes "^3131FF슬립슬라런^000000이 제시하는 조건에 따라 각 방을 클리어 하시면 됩니다. ";
+	next;
+	mes "[루닉]";
+	mes "제한시간은 다른 모드와 달리 ^3131FF10분^000000 이지만, 난이도가 결코 쉽지 않으니 시간조절을 잘 하시는게 중요합니다.";
+	next;
+	mes "[루닉]";
+	mes "아레나를 마지막 보스룸까지 모두 클리어 하고 탈출 워프를 통하게 되면, ^3131FF종료대기실^000000로 이동되어집니다.";
+	mes "^3131FF종료대기실^000000에선 1분밖에 머무르지 못하니, 해당 담당 NPC에게 아레나 포인트를 받고 재빨리 밖으로 나와주세요.";
+	next;
+	mes "[루닉]";
+	mes "종료대기실에서 머무르다 아레나 포인트를 받지 못하고 밖으로 강제 이동될 경우의 손실된 아레나 포인트는 재지급되지 않는다는 점, 유념해 두시기 바랍니다.";
+	next;
+	mes "[루닉]";
+	mes "또한, 만약 파티가 클리어 타임 신기록을 세울 경우엔";
+	mes "^3131FF파티장^000000이 ^3131FF팀의 이름을 기록^000000하도록 되어 있습니다.";
+	next;
+	mes "[루닉]";
+	mes "이 때 파티장이 여러명이거나 없을 경우, ^FF0000정상적인 기록이 불가능^000000해지므로,";
+	mes "반드시 아레나가 시작되기 전에 하나의 파티를 맺고 입장 해주십시오.";
+	next;
+	mes "[루닉]";
+	mes "그럼 이상 파티도전 모드에 대해 알려드렸습니다.";
+	mes "부디 좋은 시간 보내시길 바랍니다.";
+	close;
+}
+
+arena_room,158,82,1	script	로닉	828,{
+
+	emotion e_no1,0;
+	mes "[로닉]";
+	mes "욧샤 !  당신을 위해 내가 왔다- !";
+	next;
+	mes "[로닉]";
+	mes "지금 안에 사람이 있을까 없을까 안절부절 지루 초조 불안하지? 맞지? 그렇지?";
+	next;
+	mes "[로닉]";
+	mes "나의 대답은..";
+	mes ".............";
+	if(getmapusers("force_1-2"))
+	{
+		emotion e_oh,0;
+		mes "Yes!";
+		mes "There is someone inside.";
+		next;
+		mes "[Lonik]";
+		mes "You'd better wait a little bit longer!";
+	}
+	else
+	{
+		emotion e_x,0;
+		mes " N O - !!!!!!!";
+		mes "지금 당장 출격이다 !";
+	}
+	close;
+}
+
+sec_in02,72,180,3	script	Arena Manager#arena	802,{
+
+	input .@arena;
+	if(!.@arena)
+	{
+		mes "[Arena Manager]";
+		mes "Command has been canceled.";
+		close;
+	}
+	else if(.@arena == 1357)
+	{
+		mes "[Arena Manager]";
+		mes "Select an option.";
+		next;
+		switch( select( "Restart arena","Rearrange the Ranking Time" ) )
+		{
+			case 1:
+				switch( select( "lvl 50","lvl 60","lvl 70","lvl 80","Party Mode" ) ) 
+				{
+					case 1:
+						set .@arena,50;
+						break;
+					case 2:
+						set .@arena,60;
+						break;
+					case 3:
+						set .@arena,70;
+						break;
+					case 4:
+						set .@arena,80;
+						break;
+					case 5:
+						mes "[Arena Manager]";
+						mes "== Caution ==";
+						mes "You have chosen to restart party arena stage.";
+						mes "Do you wish to proceed?";
+						next;
+						switch( select( "Yes","No" ) )
+						{
+							case 1:
+								donpcevent "Ponox::Onstart";
+								mes "[Arena Manager]";
+								mes "The arena stage has been successfuly reactivated.";
+								close;
+
+							case 2:
+								mes "[Arena Manager]";
+								mes "Command has been canceled.";
+								close;
+						}
+				}
+				mes "[Arena Manager]";
+				mes "== Caution ==";
+				mes "You have chosen to restart lvl "+.@arena+" arena stage.";
+				mes "Do you wish to proceed?";
+				next;
+				switch( select( "Yes","No" ) )
+				{
+					case 1:
+						donpcevent "lvl "+.@arena+"s Waiting Room::Onstart";
+						mes "[Arena Manager]";
+						mes "The arena stage has been successfuly reactivated.";
+						close;
+					
+					case 2:
+						mes "[Arena Manager]";
+						mes "Command has been canceled.";
+						close;
+				}
+				
+			case 2:
+				mes "[Arena Manager]";
+				mes "== Caution ==";
+				mes "^CE0000You have chosen to rearrange the ranking time. Make sure this is not a good decision unless if something serious was happened!^000000";
+				next;
+				mes "[Arena Manager]";
+				mes "Are you sure you want to rearrange the ranking time?";
+				next;
+				switch( select( "No","Yes" ) )
+				{
+					case 1:
+						mes "[Arena Manager]";
+						mes "Phew~ :)";
+						close;
+
+					case 2:
+						switch( select( "lvl 50","lvl 60","lvl 70","lvl 80","Party Mode" ) )
+						{
+							case 1:
+								mes "[Arena Manager]";
+								mes "Please enter 0 to cancel.";
+								mes "If not, please write within 400 letters.";
+								next;
+								input .@arenamin;
+								set $top_50min,.@arenamin;
+								input .@arenasec;
+								set $top_50sec,.@arenasec;
+								mes "[Arena Manager]";
+								mes "Current lvl 50 ranker's play time has been rearranged to ^FF0000"+$top_50min+"^000000 minutes and ^FF0000"+$top_50sec+"^000000 seconds.";
+								close;
+							case 2:
+								mes "[Arena Manager]";
+								mes "Please enter 0 to cancel.";
+								mes "If not, please write within 400 letters.";
+								next;
+								input .@arenamin;
+								set $top_60min,.@arenamin;
+								input .@arenasec;
+								set $top_60sec,.@arenasec;
+								mes "[Arena Manager]";
+								mes "Current lvl 60 ranker's play time has been rearranged to ^FF0000"+$top_60min+"^000000 minutes and ^FF0000"+$top_60sec+"^000000 seconds.";
+								close;
+							case 3:
+								mes "[Arena Manager]";
+								mes "Please enter 0 to cancel.";
+								mes "If not, please write within 400 letters.";
+								next;
+								input .@arenamin;
+								set $top_70min,.@arenamin;
+								input .@arenasec;
+								set $top_70sec,.@arenasec;
+								mes "[Arena Manager]";
+								mes "Current lvl 70 ranker's play time has been rearranged to ^FF0000"+$top_70min+"^000000 minutes and ^FF0000"+$top_70sec+"^000000 seconds.";
+								close;
+							case 4:
+								mes "[Arena Manager]";
+								mes "Please enter 0 to cancel.";
+								mes "If not, please write within 400 letters.";
+								next;
+								input .@arenamin;
+								set $top_80min,.@arenamin;
+								input .@arenasec;
+								set $top_80sec,.@arenasec;
+								mes "[Arena Manager]";
+								mes "Current lvl 80 ranker's play time has been rearranged to ^FF0000"+$top_80min+"^000000 minutes and ^FF0000"+$top_80sec+"^000000 seconds.";
+								close;
+							case 5:
+								mes "[Arena Manager]";
+								mes "Please enter 0 to cancel.";
+								mes "If not, please write within 400 letters.";
+								next;
+								input .@arenamin;
+								set $top_ptmin,.@arenamin;
+								input .@arenasec;
+								set $top_ptsec,.@arenasec;
+								mes "[Arena Manager]";
+								mes "Current party ranker's play time has been rearranged to ^FF0000"+$top_ptmin+"^000000 minutes and ^FF0000"+$top_ptsec+"^000000 seconds.";
+								close;
+						}
+				}
+		}
+	}
+	mes "Password is incorrect.";
+	close;
+}
+
+sec_in02,79,171,3	script	Reward Manager#arena	802,{
+
+	input .@arena;
+	if(!.@arena)
+	{
+		mes "[Reward Manager]";
+		mes "Command has been canceled.";
+		close;
+	}
+	else if(.@arena == 1357)
+	{
+		mes "[Reward Manager]";
+		mes "You have chosen to hide the teleporter NPC.";
+		next;
+		switch( select( "Cancel","Yes","Turn on" ) )
+		{
+			case 1:
+				mes "[Reward Manager]";
+				mes "You have canceled the command.";
+				close;
+		
+			case 2:
+				mes "[Reward Manager]";
+				mes "NPC has been hidden";
+				disablenpc "Teleporter#arena";
+				close;
+				
+			case 3:
+				mes "[Reward Manager]";
+				mes "NPC has been enabled.";
+				enablenpc "Teleporter#arena";
+				close;
+		}
+	}
+	mes "[Reward Manager]";
+	mes "Password is incorrect.";
+	close;
+}
+
+arena_room,105,93,5	script	공간이동사	55,{
+
+	mes "[공간이동사]";
+	mes "당신을 아레나의 다른 공간으로 이동시켜 드리겠습니다.";
+	mes "가보시겠습니까?";
+	next;
+	switch( select( "간다","가지 않는다" ) )
+	{
+		case 1:
+			mes "[공간이동사]";
+			mes "자아.. 그럼 저를 잘 따라 오십시요.";
+			close2;
+			warp "prt_are_in",60,14;
+			end;
+
+		case 2:
+			mes "[Teleporter]";
+			mes "No problem, feel free to come back any time.";
+			close;
+	}
+}
+
+prt_are_in,98,14,3	script	기브유	728,{
+
+
+	if(checkweight(526,5) != 1)
+	{
+		mes "- Wait a moment! -";
+		mes "- Currently you're carrying -";
+		mes "- too many items with you. -";
+		mes "- Please enlighten your weight -";
+		mes "- and try again. -";
+		close;
+	}
+	mes "[기브유]";											// 기브유 소비품 교환 숫자 입력해서 교환하는걸로 바꿔야함,
+	mes "안녕하세요- 아레나를 찾아주신 모든 여러분, 진심으로 환영합니다.";
+	mes "저는 아레나 포인트의 보상 교환을 담당하고 있는 기브유라고 합니다.";
+	next;
+	mes "[기브유]";
+	mes "이곳에서는, 여러분이 소유하고 계신 아레나 포인트를 소비하여 각종 혜택 및 보상을 받으실 수 있습니다.";
+	mes "원하시는 서비스를 선택해 주세요.";
+	next;
+	switch( select("소비품으로 교환한다:경험치로 교환한다:사진촬영을 한다:아레나포인트를 확인한다") )
+	{
+		case 1:
+			mes "[기브유]";
+			mes "아레나 포인트를 어떤 소비품으로 교환하시겠습니까?";
+			next;
+			switch( select( "꿀:로얄제리:마스테라의 열매:화이트 슬림 포션:안티 페인멘트:이그드라실의 씨앗:이그드라실의 열매:오래된 파란 상자:오래된 보라색 상자:낡은 카드첩" ) )
+			{
+				case 1: callfunc "Func_Are_Rew",518,5,20;
+				case 2: callfunc "Func_Are_Rew",526,5,30;
+				case 3: callfunc "Func_Are_Rew",522,5,30;
+				case 4: callfunc "Func_Are_Rew",547,8,30;
+				case 5: callfunc "Func_Are_Rew",605,3,20;
+				case 6: callfunc "Func_Are_Rew",608,1,20;
+				case 7: callfunc "Func_Are_Rew",607,1,40;
+				case 8: callfunc "Func_Are_Rew",603,1,100;
+				case 9: callfunc "Func_Are_Rew",617,1,300;
+				case 10: callfunc "Func_Are_Rew",616,1,1000;
+
+//
+//
+			}
+			
+		case 2:
+			mes "[기브유]";
+			mes "아레나 포인트를 경험치로 환산 하시겠습니까?";
+			mes "환산하는 데에는 40 포인트가 소요됩니다.";
+			next;
+			switch( select( "하지 않는다","환산 한다" ) )
+			{
+				case 1:
+					mes "[Givu]";
+					mes "You have canceled your request.";
+					close;
+				
+				case 2:
+					if(arena_point < 40)
+					{
+					mes "[기브유]";
+					mes "아레나 포인트가 부족합니다.";
+					mes "소유하고 계신 포인트 점수를 다시 확인하신 후 거래해 주시기 바랍니다.";
+						close;
+					}
+					set arena_point,arena_point -40;
+					if(BaseLevel < 70) getexp 3000,0;
+					else if(BaseLevel < 80) getexp 9000,0;
+					else if(BaseLevel < 90) getexp 10000,0;
+					else if(BaseLevel < 100) getexp 30000,0;
+					mes "[Givu]";
+					mes "You have gained experience points. Thank you.";
+					close;
+			}
+
+		case 3:
+			mes "[기브유]";
+			mes "네에- ! 사진촬영 모드를 선택 하셨습니다.";
+			next;
+			switch( select( "사진촬영 모드에 대해","사진촬영을 한다" ) )
+			{
+				case 1:
+					mes "[기브유]";
+					mes "제 오른쪽으로 계단들이 보이시죠?";
+					next;
+					mes "[기브유]";
+					mes "저 계단에서 NPC 혹은 몬스터들과 ♥유쾌하게♥ 스크린샷을 찍으실 수 있는 시간을 주어드립니다.";
+					next;
+					mes "[기브유]";
+					mes "아레나 포인트 지급 후 원하는 NPC를 고르시면, 소환된 NPC는 ^FF00001분^000000동안 몇가지 이모션을 취할 것입니다.";
+					next;
+					mes "[기브유]";
+					mes "1분 동안 좋아하는 NPC와 웃음과 센스가 넘치는 스크린샷을 찍을 수 있는 절호의 기회~!";
+					mes "놓치면 안되겠죠?";
+					close;
+
+				case 2:
+					if($arenapic)
+					{
+						mes "[기브유]";
+						mes "네에- ! 사진촬영 모드를 선택 하셨습니다.";
+						close;
+					}
+					mes "[기브유]";
+					mes "함께 촬영을 하고 싶은 NPC를 골라 주세요.";
+					mes "NPC는 소환 후 1분동안 나타나며, 10 아레나 포인트를 소비 하시게 됩니다.";
+					next;
+					switch( select( "바포메트:다크로드:도플갱어:에드가:드라큘라:사무라이:폭풍의 기사:프리오니:여자아이:발키리" ) )
+					{
+						case 1: set $@arenapic,1039; break;
+						case 2: set $@arenapic,1272; break;
+						case 3: set $@arenapic,1046; break;
+						case 4: set $@arenapic,1115; break;
+						case 5: set $@arenapic,1389; break;
+						case 6: set $@arenapic,1492; break;
+						case 7: set $@arenapic,1251; break;
+						case 8: set $@arenapic,1159; break;
+						case 9: set $@arenapic,6969; break;
+						case 10: set $@arenapic,7777; break;
+					}
+					if(arena_point < 10)
+					{
+						mes "[기브유]";
+						mes "아레나 포인트가 부족합니다.";
+						mes "소유하고 계신 포인트 점수를 다시 확인하신 후 거래해 주시기 바랍니다.";
+						close;
+					}
+					mes "[기브유]";
+					if($@arenapic == 6969) mes "Would you like to take a picture with pretty girls?";
+					else if($@arenapic == 7777) mes "Would you like to take a picture with a Valkyrie?";
+					else mes "Would you like to take a picture with a "+getmonsterinfo($@arenapic,0)+"?";
+					next;
+					switch( select( "Yes","No" ) )
+					{
+						case 1:
+							set arena_point,arena_point -10;
+							set $arenapic,1;
+							enablenpc "#arena_"+$@arenapic+"";
+							movenpc "#arena_"+$@arenapic+"",96,28;
+							if($@arenapic == 6969)
+							{
+								enablenpc "#arena_ss_2";
+								enablenpc "#arena_ss_3";
+								enablenpc "#arena_ss_4";
+							}
+							donpcevent "npctime#arena::OnStart";
+							mes "[기브유]";
+							mes "Thank you.";
+							close;
+
+						case 2:
+							mes "[기브유]";
+							mes "Would you like to consider a little longer?";
+							close;
+					}
+			}
+			
+		case 4:
+			mes "[기브유]";
+			mes "+strcharinfo(0)+님의 아레나 포인트를 확인해 드리겠습니다.";
+			next;
+			mes "[기브유]";
+			mes "+strcharinfo(0)+님께서 소유하고 계신 아레나 포인트는 ^3131FF"+arena_point+"^000000점 입니다.";
+			close;
+	}
+
+OnInit:
+	set $arenapic,0;
+	end;
+}
+
+prt_are_in,1,1,5	script	#arena_1039	1039,{
+	end;
+	
+OnInit:
+	disablenpc "#arena_6969";
+	disablenpc "#arena_ss_2";
+	disablenpc "#arena_ss_3";
+	disablenpc "#arena_ss_4";
+	disablenpc "#arena_1272";
+	disablenpc "#arena_1046";
+	disablenpc "#arena_1115";
+	disablenpc "#arena_1389";
+	disablenpc "#arena_1492";
+	disablenpc "#arena_1251";
+	disablenpc "#arena_1159";
+	disablenpc "#arena_7777";
+	disablenpc "#arena_1039";
+	end;
+
+OnHeart:
+	emotion e_lv,0;
+	end;
+OnSci:
+	emotion e_scissors,0;
+	end;
+OnBest:
+	emotion e_no1,0;
+	end;
+OnOmg:
+	emotion e_omg,0;
+	end;
+OnKik:
+	emotion e_gg,0;
+	end;
+OnKis:
+	emotion e_kis,0;
+	end;
+}
+
+prt_are_in,1,1,5	duplicate(#arena_1039)	#arena_6969	714
+prt_are_in,94,26,5	duplicate(#arena_1039)	#arena_ss_2	714
+prt_are_in,100,28,3	duplicate(#arena_1039)	#arena_ss_3	714
+prt_are_in,102,26,3	duplicate(#arena_1039)	#arena_ss_4	714
+prt_are_in,1,1,5	duplicate(#arena_1039)	#arena_1272	1272
+prt_are_in,1,1,5	duplicate(#arena_1039)	#arena_1046	1046
+prt_are_in,1,1,5	duplicate(#arena_1039)	#arena_1115	1115
+prt_are_in,1,1,5	duplicate(#arena_1039)	#arena_1389	1389
+prt_are_in,1,1,5	duplicate(#arena_1039)	#arena_1492	1492
+prt_are_in,1,1,5	duplicate(#arena_1039)	#arena_1251	1251
+prt_are_in,1,1,5	duplicate(#arena_1039)	#arena_1159	1159
+prt_are_in,1,1,5	duplicate(#arena_1039)	#arena_7777	811
+
+prt_are_in,130,30,3	script	npctime#arena	139,{
+
+OnStop:
+	stopnpctimer;
+	end;
+	
+OnStart:
+	initnpctimer;
+	end;
+	
+OnTimer2000:
+	mapannounce "prt_are_in","Givu : You should keep time with popping emotion icons~",1,0xFFCE00;
+	end;
+	
+OnTimer5000:
+	mapannounce "prt_are_in","Emoticon : /lv",1,0xFFCE00;
+	end;
+	
+OnTimer7000:
+	mapannounce "prt_are_in"," 3 ",1,0xFFCE00;
+	end;
+	
+OnTimer8000:
+	mapannounce "prt_are_in"," 2 ",1,0xFFCE00;
+	end;
+	
+OnTimer9000:
+	mapannounce "prt_are_in"," 1 ",1,0xFFCE00;
+	end;
+	
+OnTimer10000:
+	mapannounce "prt_are_in"," ",1,0xFFCE00;
+	donpcevent "#arena_"+$@arenapic+"::OnHeart";
+	if($@arenapic == 6969)
+	{
+		donpcevent "#arena_ss_2::OnHeart";
+		donpcevent "#arena_ss_3::OnHeart";
+		donpcevent "#arena_ss_4::OnHeart";
+	}
+	end;
+	
+OnTimer15000:
+	mapannounce "prt_are_in","Emoticon : /gawi",1,0xFFCE00;
+	end;
+	
+OnTimer17000:
+	mapannounce "prt_are_in"," 3 ",1,0xFFCE00;
+	end;
+	
+OnTimer18000:
+	mapannounce "prt_are_in"," 2 ",1,0xFFCE00;
+	end;
+	
+OnTimer19000:
+	mapannounce "prt_are_in"," 1 ",1,0xFFCE00;
+	end;
+	
+OnTimer20000:
+	mapannounce "prt_are_in"," ",1,0xFFCE00;
+	donpcevent "#arena_"+$@arenapic+"::OnSci";
+	if($@arenapic == 6969)
+	{
+		donpcevent "#arena_ss_2::OnSci";
+		donpcevent "#arena_ss_3::OnSci";
+		donpcevent "#arena_ss_4::OnSci";
+	}
+	end;
+	
+OnTimer25000:
+	mapannounce "prt_are_in","Emoticon : /no1",1,0xFFCE00;
+	end;
+	
+OnTimer27000:
+	mapannounce "prt_are_in"," 3 ",1,0xFFCE00;
+	end;
+	
+OnTimer28000:
+	mapannounce "prt_are_in"," 2 ",1,0xFFCE00;
+	end;
+	
+OnTimer29000:
+	mapannounce "prt_are_in"," 1 ",1,0xFFCE00;
+	end;
+	
+OnTimer30000:
+	mapannounce "prt_are_in"," ",1,0xFFCE00;
+	donpcevent "#arena_"+$@arenapic+"::OnBest";
+	if($@arenapic == 6969)
+	{
+		donpcevent "#arena_ss_2::OnBest";
+		donpcevent "#arena_ss_3::OnBest";
+		donpcevent "#arena_ss_4::OnBest";
+	}
+	end;
+	
+OnTimer35000:
+	mapannounce "prt_are_in","Emoticon : /huk",1,0xFFCE00;
+	end;
+	
+OnTimer37000:
+	mapannounce "prt_are_in"," 3 ",1,0xFFCE00;
+	end;
+	
+OnTimer38000:
+	mapannounce "prt_are_in"," 2 ",1,0xFFCE00;
+	end;
+	
+OnTimer39000:
+	mapannounce "prt_are_in"," 1 ",1,0xFFCE00;
+	end;
+	
+OnTimer40000:
+	mapannounce "prt_are_in"," ",1,0xFFCE00;
+	donpcevent "#arena_"+$@arenapic+"::OnOmg";
+	if($@arenapic == 6969)
+	{
+		donpcevent "#arena_ss_2::OnOmg";
+		donpcevent "#arena_ss_3::OnOmg";
+		donpcevent "#arena_ss_4::OnOmg";
+	}
+	end;
+	
+OnTimer45000:
+	mapannounce "prt_are_in","Emoticon : /gg",1,0xFFCE00;
+	end;
+	
+OnTimer47000:
+	mapannounce "prt_are_in"," 3 ",1,0xFFCE00;
+	end;
+	
+OnTimer48000:
+	mapannounce "prt_are_in"," 2 ",1,0xFFCE00;
+	end;
+	
+OnTimer49000:
+	mapannounce "prt_are_in"," 1 ",1,0xFFCE00;
+	end;
+	
+OnTimer50000:
+	mapannounce "prt_are_in"," ",1,0xFFCE00;
+	donpcevent "#arena_"+$@arenapic+"::OnKik";
+	if($@arenapic == 6969)
+	{
+		donpcevent "#arena_ss_2::OnKik";
+		donpcevent "#arena_ss_3::OnKik";
+		donpcevent "#arena_ss_4::OnKik";
+	}
+	end;
+	
+OnTimer55000:
+	mapannounce "prt_are_in","Emoticon : /kis",1,0xFFCE00;
+	end;
+	
+OnTimer57000:
+	mapannounce "prt_are_in"," 3 ",1,0xFFCE00;
+	end;
+
+OnTimer58000:
+	mapannounce "prt_are_in"," 2 ",1,0xFFCE00;
+	end;
+	
+OnTimer59000:
+	mapannounce "prt_are_in"," 1 ",1,0xFFCE00;
+	end;
+	
+OnTimer60000:
+	mapannounce "prt_are_in"," ",1,0xFFCE00;
+	donpcevent "#arena_"+$@arenapic+"::OnKis";
+	if($@arenapic == 6969)
+	{
+		donpcevent "#arena_ss_2::OnKis";
+		donpcevent "#arena_ss_3::OnKis";
+		donpcevent "#arena_ss_4::OnKis";
+	}
+	end;
+	
+OnTimer62000:
+	mapannounce "prt_are_in","Time is over. Thank you for using my services.",1,0xFFCE00;
+	movenpc "#arena_"+$@arenapic+"",1,1;
+	donpcevent "#arena_1039::OnInit";
+	set $arenapic,0;
+	stopnpctimer;
+	end;
+}
+
+sec_in02,72,171,3	script	Picture Manager#arena	802,{
+
+	input .@arena;
+	if(!.@arena)
+	{
+		mes "[Picture Manager]";
+		mes "Command has been canceled.";
+		close;
+	}
+	else if(.@arena == 1357)
+	{
+		mes "[Picture Manager]";
+		mes "Would you like to reset Picture Reward variable to 0?";
+		next;
+		switch( select( "Cancel","Yes" ) )
+		{
+			case 1:
+				mes "[Picture Manager]";
+				mes "You have canceled your request.";
+				close;
+
+			case 2:
+				mes "[Picture Manager]";
+				mes "Picture rewarding reseted.";
+				set $arenapic,0;
+				close;
+		}
+	}
+	mes "[Picture Manager]";
+	mes "Password is incorrect.";
+	close;
+}
+
+sec_in02,76,176,5	script	Live Broadcast#arena	802,{
+
+	mes "[Live Broadcast]";
+	mes "Currently there are "+getmapusers("force_1-1")+" people in lvl 50s map.";
+	mes "Currently there are "+getmapusers("force_2-1")+" people in lvl 60s map.";
+	mes "Currently there are "+getmapusers("force_3-1")+" people in lvl 70s map.";
+	mes "Currently there are "+getmapusers("force_4-1")+" people in lvl 80s map.";
+	mes "Currently there are "+getmapusers("force_1-2")+" people in party map.";
+	mes "Currently there are "+getmapusers("arena_room")+" people in the waiting room.";
+	close;
+}
+
+function	script	Func_Are_Rew	{
+				
+	mes "[Givu]";
+	mes "Would you like to exchange your arena points with "+getitemname(getarg(0))+"?";
+	mes "You can exchange ^3131FF"+getarg(2)+" arena points with "+getarg(1)+" "+getitemname(getarg(0))+"^000000.";
+	mes "If you wish to cancel, please enter 0. If you don't, please enter how many ^3131FFtimes^000000 of arena points you wish to spend.";
+	next;
+	input .@reward;
+	if(!.@reward)
+	{
+		mes "[Givu]";
+		mes "You have canceled your request.";
+		close;
+	
+	}
+	else if(.@reward > 1500)
+	{
+		mes "[Givu]";
+		mes "You have exceeded the maximum capacity.";
+		close;
+	}
+	if(arena_point < .@reward * getarg(2))
+	{
+		mes "[Givu]";
+		mes "You do not have enough arena points.";
+		mes "Please check the total amount of arena points you have.";
+		close;
+	}
+	set arena_point,arena_point - (.@reward * getarg(2));
+	getitem getarg(0),.@reward * getarg(1);
+	mes "[Givu]";
+	mes "Thank you, please come again.";
+	close;
+}
+
+arena_room,63,126,0	script	LevelCheck#50	139,5,5,{
+
+OnTouch:
+	if(BaseLevel < 50 || BaseLevel > 69)
+	{
+		mes "[Helper Pat]";
+		mes "I'm sorry but that place is";
+		mes "only available to people from";
+		mes "level ^FF000050^000000 to ^FF000069^000000. I'm afraid you";
+		mes "have to leave immediately.";
+		mes "Please proceed to your proper";
+		mes "arenas. Have fun !";
+		close2;
+		warp "arena_room",100,75;
+	}
+	else if(Zeny < 1000)
+	{
+		mes "[Helper Pat]";
+		mes "Oh! That's too bad!";
+		mes "You have the required level";
+		mes "to attempt this arena but";
+		mes "it costs 1000 zeny to enter.";
+		mes "Please come back when you'll";
+		mes "have them!";
+		close2;
+		warp "arena_room",100,75;
+	}
+	end;
+}
+
+arena_room,49,87,0	script	LevelCheck#60	139,5,5,{
+
+OnTouch:
+	if(BaseLevel < 60 || BaseLevel > 79)
+	{
+		mes "[Helper Ben]";
+		mes "I'm sorry but that place is";
+		mes "only available to people from";
+		mes "level ^FF000060^000000 to ^FF000079^000000. I'm afraid you";
+		mes "have to leave immediately.";
+		mes "Please proceed to your proper";
+		mes "arenas. Have fun !";
+		close2;
+		warp "arena_room",100,75;
+	}
+	else if(Zeny < 1000)
+	{
+		mes "[Helper Ben]";
+		mes "Oh! That's too bad!";
+		mes "You have the required level";
+		mes "to attempt this arena but";
+		mes "it costs 1000 zeny to enter.";
+		mes "Please come back when you'll";
+		mes "have them!";
+		close2;
+		warp "arena_room",100,75;
+	}
+	end;
+}
+
+arena_room,63,53,0	script	LevelCheck#70	139,5,5,{
+
+OnTouch:
+	if(BaseLevel < 70 || BaseLevel > 89)
+	{
+		mes "[Helper Vicious]";
+		mes "I'm sorry but that place is";
+		mes "only available to people from";
+		mes "level ^FF000070^000000 to ^FF000089^000000. I'm afraid you";
+		mes "have to leave immediately.";
+		mes "Please proceed to your proper";
+		mes "arenas. Have fun !";
+		close2;
+		warp "arena_room",100,75;
+	}
+	else if(Zeny < 1000)
+	{
+		mes "[Helper Vicious]";
+		mes "Oh! That's too bad!";
+		mes "You have the required level";
+		mes "to attempt this arena but";
+		mes "it costs 1000 zeny to enter.";
+		mes "Please come back when you'll";
+		mes "have them!";
+		close2;
+		warp "arena_room",100,75;
+	}
+	end;
+}
+
+arena_room,136,53,0	script	LevelCheck#80	139,5,5,{
+
+OnTouch:
+	if(BaseLevel < 80)
+	{
+		mes "[Helper Epin]";
+		mes "I'm sorry but that place is";
+		mes "only available to people from";
+		mes "level ^FF000080^000000 to ^FF000099^000000. I'm afraid you";
+		mes "have to leave immediately.";
+		mes "Please proceed to your proper";
+		mes "arenas. Have fun !";
+		close2;
+		warp "arena_room",100,75;
+	}
+	else if(Zeny < 1000)
+	{
+		mes "[Helper Epin]";
+		mes "Oh! That's too bad!";
+		mes "You have the required level";
+		mes "to attempt this arena but";
+		mes "it costs 1000 zeny to enter.";
+		mes "Please come back when you'll";
+		mes "have them!";
+		close2;
+		warp "arena_room",100,75;
+	}
+	end;
+
+}

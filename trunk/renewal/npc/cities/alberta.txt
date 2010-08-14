@@ -1,0 +1,490 @@
+
+//    kk  ""tt""  "";;    """"JJ;;kkJJ  JJtt""    ""tt""  ;;tt""""tt    ""tt""   
+//   JJ  kk""tt;;JJ      ttkk    ""tt    ;;;;ttJJ;;  ""ttkk;;"";;;;ttkk;;  ;;kk  
+//  "";;  ""  kk  kk  tt  ttww    ZZ;;  ww    RR  ;;JJ  JJJJ  tt    RR  ;;JJ  JJ 
+//  JJ      """";;""  kk  ttkk  ;;kk    ZZ    ww  ;;""  kk""  ww    kk;;kk""  JJ 
+//  kk      JJ  kk    ww  ttkk  JJJJ  ;;ww  ""JJ  ;;tt""RR    ZZ  ;;ZZJJ      kk 
+//  kk  ;;  "";;JJ        JJtt  JJJJ  ""kk  JJ""  ww""""ww    ww  ""JJ  ZZ    kk 
+//  JJ  JJ  ;;JJ""  "";;  ww;;  kkJJ  JJ""  kk;;  ww  ;;ww  ""JJ  ww;;  ww  ;;tt 
+//;;""  RR    RR    ww""  kk""  ;;tt  ww    kkkk      kktt  JJ;;  ZZ;;  ;;  tt   
+//  JJkkttkkkk;;kkkk;;JJkktt""kkJJJJkkttJJkk;;  kkkkJJ  ttkkttJJkk;;ttkkJJkkJJ   
+//| I | - | L | U | N | A | A | T | H | E | N | A | P | R | O | J | E | C | T |  
+//------------------------------------------------------------------------------
+// iLAthena 알베르타 마을 스크립트 <http://www.i-luna.com/>
+// 한글화 by 아이루나 iLAthena Project
+//------------------------------------------------------------------------------
+// 한글화 by ★orz。
+//------------------------------------------------------------------------------
+// 포치 미완성
+// 선원 미완성
+// 펠릭스 미완성
+// Fisk#a2t 안찾아감
+//------------------------------------------------------------------------------
+// 꼬마아이 추가 (어디에 쓰이는 NPC인지 확실하지 않음, 아테나에 기본적으로도 없음)
+//------------------------------------------------------------------------------
+
+alberta,97,51,0	script	상인#albe1	84,{
+	mes "[상인]";
+	mes "세상을 돌다보면 여러가지 소문들을";
+	mes "접하게 되지. 개중에는 이런 것도";
+	mes "있다오. 몬스터들의 힘을 마법으로";
+	mes "봉인해 놓은 카드라는 것이 있다고";
+	mes "말야.";
+	mes "그 카드를 이용하면 강력한 힘을";
+	mes "소유할 수도 있을 거라고... 훗 뭐";
+	mes "물론 이것또한 뜬소문에 불과하겠지만";
+	mes "말야.";
+	close;
+}
+
+alberta,53,39,0	script	상인#albe2	100,{
+	mes "[상인]";
+	mes "오 처음 보는 얼굴인데? 반갑네.";
+	mes "그런데 내가 지금 생각할 게 있으니";
+	mes "대화는 나중에 하자구.";
+	mes "마법의 도시 게펜에서 마법에 대한";
+	mes "저항력을 가지고 있는 신비한";
+	mes "방어구들을 판다고 들었거든. 그걸";
+	mes "대량으로 유통시킬 수 있다면 부자가";
+	mes "될 수 있을텐데 말야";
+	close;
+}
+
+alberta,16,28,0	script	꼬마아이	706,{
+	mes "[꼬마]";
+	mes "아~ 배고파. 우리 동네는";
+	mes "너무 군것질거리가 없어.";
+	next;
+	mes "[꼬마]";
+	mes "저기 멀리 다른 마을처럼";
+	mes "이것저것 맛있는 걸 많이";
+	mes "팔면 좋을텐데 말이야.";
+	next;
+	mes "[꼬마]";
+	mes "여긴 영 심심한 동네야..";
+	mes "정말루.";
+	close;
+}
+
+alberta_in,20,183,0	script	청년	49,{
+	mes "[상인]";
+	mes "전설속에 등장하는 궁그닐이라는 무기는 한번 목표로한 상대를 절대로 놓치는 법이 없다고 하는데 말야... 정말로 있다면... 재미있을거 같지?";
+	close;
+}
+
+alberta,189,151,5	script	선원	100,{
+	mes "[선원]";
+	mes "어디로 모실까요?";
+	next;
+	switch(select("난파선 -> 250 제니.","이즈루드 항구 -> 500 제니.","그만둔다.")) {
+		case 1:
+			if (Zeny < 250) {
+				mes "[선원]";
+				mes "Hey now, don't try to cheat me!";
+				mes "I said 250 zeny!";
+				close;
+			}
+			set Zeny,Zeny - 250;
+			warp "alb2trea",43,53;
+			end;
+		case 2:
+			if (Zeny < 500) {
+				mes "[선원]";
+				mes "Ain't no way yer getting there";
+				mes "without the 500 zeny first!";
+				close;
+			}
+			set Zeny,Zeny - 500;
+			warp "izlude",176,182;
+			end;
+		case 3:
+			mes "[선원]";
+			mes "좋으실대로....";
+			close;
+	}
+}
+
+alb2trea,39,50,6	script	Fisk#a2t	100,{
+	mes "[Fisk]";
+	mes "So you wanna head back to the";
+	mes "mainland in Alberta, eh?";
+	next;
+	if(select("Yes please.","I changed my mind.")==1)
+		warp "alberta",192,169;
+	close;
+}
+
+alberta,131,139,2	script	주정뱅이	54,{
+	mes "[주정뱅이]";
+	mes "딸꾹.... 응?.... 뭐..뭘보는거야?";
+	mes "저리가지못해!!";
+	next;	
+	switch(select("그냥 있는다.", "자리를 비킨다.")) {
+		case 1:
+			mes "[주정뱅이]";
+			mes "웨헤헤헤 딸꾹...";
+			mes "배짱있는녀석이로구만..";
+			mes "헤.. 내가 이래뵈도 말이쥐~ 딸꾹";
+			mes "예전엔 잘나가던 고잉메리호의";
+			mes "선원이었단말이지";
+			next;
+			switch(select("그게 무슨 배인가요?","와!멋지군요!")) {
+				case 1:
+					mes "[주정뱅이";
+					mes "엥? 모른다구?";
+					mes "때끼!그 잘나가던 해적이였던";
+					mes "고잉메리단을 모른단말이냣! 딸꾹~";
+					next;
+					mes "아~ 그립다.. 그때 그 태풍만";
+					mes "아니었어도 흑흑... 딸꾹";
+					mes "특히 울 선장님이 생각나는군..딸꾹";
+					mes "선장님이 휘두룬칼에 살아남는 녀석은";
+					mes "없었는데 말이야";
+					next;
+					mes "[주정뱅이]";
+					mes "울 선장님이 말이야아아아~! 딸꾹 칼을";
+					mes "한번 휘이~ 하구 휘두르면";
+					mes "말이야아~!";
+					mes "목표된놈 뿐만아니라 주변놈들까지";
+					mes "불덩이 휩쓸려서 놀아았었지.우리";
+					mes "선장님의 솜씨도 솜씨지만 그칼에";
+					mes "신비한 힘이 있었던거 같아.";
+					next;
+					mes "[주정뱅이]";
+					mes "아~~ 흑흑.. 그립구나 모두들 보구싶다";
+					mes "우울해졌어 그만 저리 비켜줄래?";
+					close;
+				case 2:	
+					mes "[주정뱅이]";
+					mes "울 선장님이 말이야아아아~! 딸꾹 칼을";
+					mes "한번 휘이~ 하구 휘두르면";
+					mes "말이야아~!";
+					mes "목표된놈 뿐만아니라 주변놈들까지";
+					mes "불덩이 휩쓸려서 놀아았었지.우리";
+					mes "선장님의 솜씨도 솜씨지만 그칼에";
+					mes "신비한 힘이 있었던거 같아.";
+					next;
+					mes "[주정뱅이]";
+					mes "아~~ 흑흑.. 그립구나 모두들 보구싶다";
+					mes "우울해졌어 그만 저리 비켜줄래?";
+					close;
+			}
+		case 2:
+			mes "[주정뱅이]";
+			mes "그래! 빨랑 꺼져버리라구!~";
+			close;
+	}
+}
+
+alberta,58,80,2	script	상인아저씨	99,{
+	mes "[상인아저씨]";
+	if (rand(2)) {
+		mes "우리 상인들은 특유의 흥정기술로";
+		mes "물건들을 다른사람들보다 비싸게";
+		mes "팔아먹을수 있다네.";
+		mes "다른사람이 제발 쫌더 비싸게";
+		mes "쳐주세요!~~~ 하고 흥정할때.";
+		next;
+		mes "[상인아저씨]";
+		mes "우린 무려 24%나 더 비싸게 상점에 팔";
+		mes "수 있지! 하지만 그러기위한 수련을";
+		mes "게을리하면 안돼!";
+	} else {
+		mes "우리상인들은 노점을 열어 장사를";
+		mes "할수있지 디스카운트 기술로 상점에서";
+		mes "헐값에 필요한 물품들을 산 후에";
+		mes "카트를 빌려서 카트에다 잔뜩싣고서";
+		mes "파는거야.";
+		next;
+		mes "[상인아저씨]";
+		mes "일일이 거래하는것보다 훨씬 간편하고";
+		mes "실수할일도 없지. 너무편하다고";
+		mes "장사하면서 졸거나 하지나 말라구.";
+	}
+	close;
+}
+
+alberta,62,156,2	script	피나	102,{
+	mes "[피나]";
+	switch(rand(3)){
+	case 0:
+		mes "어느날 길을 걷다가 숲속에 이쁘게";
+		mes "뾰족솟은 연두색 풀을 봤어요.";
+		mes "너무 이쁘길래 만져보려구 손을";
+		mes "대려는데 그 풀이 갑자기 휙~ 하더니";
+		mes "제 손을 찰싹 때리지 뭐예요.";
+		next;
+		mes "[피나]";
+		mes "너무 너무 놀래서 뒤로 물러서서 보니";
+		mes "풀이 아니더라구요.아주 작고 귀여운";
+		mes "동물이였어요.";
+		mes "하지만 저처럼 실수로라도 놀래키지";
+		mes "마세요. 원래는 온순해도 화나니까";
+		mes "무섭더라구요.";
+	case 1:
+		mes "아시나요? 늑대들은 보기보다 협동심이";
+		mes "강하답니다.동료가 위험에 빠지면 당장";
+		mes "도와주려 달려들죠.";
+		mes "의리있는 동물이니 건드릴땐";
+		mes "조심하는게 좋아요.";
+	case 2:
+		mes "알베르타와 연결되어있는 숲에서";
+		mes "페이욘방향으로 가는숲에는 참";
+		mes "멍청하게 생긴 곰들이 살고있죠.";
+		mes "윙윙 파리가지고 장난이나치고요.";
+		next;
+		mes "장난이나 쳐볼려고 나뭇가지를 툭";
+		mes "던졌는데 갑자기 달려들어서 얼마나";
+		mes "놀랐는지 제가 재빠르게 휙 하고";
+		mes "도망쳤길래 망정이지 옆에있는 나무가";
+		mes "우지끈 할정도로 쎈 힘이였어요.";
+		mes "어떤 동물이든 섣불리 건드리면";
+		mes "안되겠구나라고 생각했지요.";
+	}
+	close;
+}
+
+alberta,93,174,2	script	할머니	103,{
+	mes "[할머니]";
+	mes "얼마전에 왠 다 부서진배가 알베르타";
+	mes "어귀에 흘러들어왔다우.";
+	mes "혹시 생존자라도 남아있나 해서 마을";
+	mes "청년들이 몇명 배안으로 들어갔다가";
+	mes "아주 기겁을 하고 나왔었지 안에";
+	mes "생존자는 고사하고 시체들이 일어나서";
+	mes "걸어다닌다고 하더라구";
+	next;
+	mes "[할머니]";
+	mes "그리고 뭔지 모를 바다생물들이";
+	mes "우글우글 나오는데 차마 입구에서 더";
+	mes "들어가지 못하고 돌아왔다고";
+	mes "하더구만....";
+	next;
+	mes "[할머니]";
+	mes "그런 사정으로 보기 좋지않아도 어쩔수";
+	mes "없이 저렇게 다 부서진배를 섬에";
+	mes "놔두고 가라앉기만을 기다리고";
+	mes "있었는데 그 소문을 어디서 들었는지";
+	mes "존다기획이라는곳에서 시에 큰돈을";
+	mes "내고 배처리를 맡겨달라고 하더이다.";
+	next;
+	mes "[할머니]";
+	mes "그러더니 글쎄 그 난파선에 젊은이들을";
+	mes "끌어들여 몬스터 처리를 하더구만";
+	mes "뭐.. 젊은이들에겐 자신을";
+	mes "시험해보고싶지않냐라고 꼬득이는거";
+	mes "같은데..젊은나이에 그런 경험도";
+	mes "좋겠지....";
+	mes "하지만 위험하지 않으련지 원....";
+	close;
+}
+
+alberta,195,151,2	script	포치	86,{
+	mes "[포치]";
+	mes "안녕하십니까 저희 존다기획에서";
+	mes "마련한 무료해진 젊은이들을 위한";
+	mes "던전탐험 환상적인 쵸야쵸야난파선에";
+	mes "입장하시겠습니까?";
+	mes "아! 한가지 미리 알아두셔야할점은";
+	mes "어지간한 수준이 아니시면 함부로";
+	mes "도전하시지 말라는 거지요~ 에헴.";
+	next;
+	mes "[포치]";
+	mes "어때요? 준비는 되셨는지요. 자 그럼";
+	mes "선택해주세요.";
+	mes "참!입장료는 200z 입니다.";
+	next;
+	switch(select("입장","포기한다")) {
+		case 1:
+			if (Zeny < 200) {
+				mes "[Paul]";
+				mes "It seems you don't have the money,";
+				mes "my friend. But please come back";
+				mes "when you're able to pay.";
+				close;
+			} else {
+				set Zeny,Zeny - 200;
+				warp "alb2trea",62,69;
+				close;
+			}
+		case 2:
+			mes "[포치]";
+			mes "다음에도 꼭 들러주세요.";
+			close;
+	}
+}
+
+alberta,190,173,4	script	펠릭스	85,{
+	set .@weight,MaxWeight-Weight;
+	mes "[펠릭스]";
+	if ((.@weight) < 10000) {
+		mes "Wait a moment!!";
+		mes "You have brought too many things!";
+		mes "You cannot accept any more items!";
+		mes "Please reduce the amount of items,";
+		mes "then come see me again.";
+		close;
+	}
+	if (@event_zelopy == 0) {
+		mes "[펠릭스]";
+		mes "이 배엔 왠일이야?";
+		mes "아무리 어슬렁 거려봤자 이배에 얻어먹을것같은거 없다고. 뭔가 얻고싶으면 일을해 일을!!";
+		next;
+		mes "[펠릭스]";
+		mes "흠 하지만 자네가 만약 젤로피 10개를 주워온다면 내 포션한개로 바꿔줄수있지.";
+		mes "뭐 그게 어렵다면 젤로피3개를 주워오면 고구마하나를 줄수도있고.";
+		next;
+		mes "[펠릭스]";
+		mes "관심있다면 필요한것들 챙겨서 다시 들르게나.";
+		set @event_zelopy,1;
+		close;
+	} else {
+		mes "흠.. 젤로피들을 빨간포션 이나";
+		mes "고구마로 교환하고 싶나? 자..";
+		mes "어떤것으로 바꿔줄까?";
+		next;
+		switch(select("빨간포션이요.","고구마요.")) {
+		case 1:
+			mes "[펠릭스]";
+			mes "그럼 가져온것들을 한번";
+			mes "보기로하지..";
+			next;
+			mes "[펠릭스]";
+			if (countitem(909) < 10) {
+				mes "이런! 모자르는군 젤로피 10개당";
+				mes "빨간포션 하나라고..알겠나?";
+				close;
+			} else {
+				set .@max,countitem(909)/10;
+				mes "Hmm, not bad...";
+				mes "How many potions";
+				mes "do you want to get?";
+				next;
+				switch(select("As many as I can, please.","I want this many.","Never mind, I like my jellopy.")) {
+				case 1:
+					delitem 909,.@max*10;
+					getitem 501,.@max;
+					mes "[펠릭스]";
+					mes "There you go! As I promised. Don't";
+					mes "go suckin' them all down at once.";
+					close;
+				case 2:
+					mes "[펠릭스]";
+					mes "I'm not giving you more than 100";
+					mes "at a time so don't bother, OK? If";
+					mes "you don't want any, just say '0'.";
+					mes "Right now, the most you can get is";
+					mes ""+.@max+" but remember, 100 at most,";
+					mes "you want to break my back?";
+					input .@amount;
+					next;
+					mes "[펠릭스]";
+					if (.@amount <= 0) {
+						mes "Much obliged, come again anytime.";
+						close;
+					}
+					if (.@amount > 100) {
+						mes "Hey, what'd I say? 100 at a time at";
+						mes "most, you're trying to kill me";
+						mes "aren't you!";
+						close;
+					}
+					if (countitem(909) < .@amount*10) {
+						mes "Hmmm, it looks like you don't have";
+						mes "enough. Go get more jellopies if";
+						mes "you want anything else from me.";
+						close;
+					}
+					delitem 909,.@amount*10;
+					getitem 501,.@amount;
+					mes "[펠릭스]";
+					mes "There you go! As I promised. Don't";
+					mes "go suckin' them all down at once.";
+					close;
+				case 3:
+					mes "[펠릭스]";
+					mes "No problem,";
+					mes "see you next time.";
+					close;
+				}
+			}
+		case 2:
+			mes "[펠릭스]";
+			mes "그럼 가져온것들을 한번";
+			mes "보기로하지..";
+			next;
+			mes "[펠릭스]";
+			if (countitem(909) < 3) {
+				mes "이런! 모자르는군 젤로피 3개당 고구마";
+				mes "하나라고..알겠나?";
+				close;
+			} else {
+				set .@max,countitem(909)/3;
+				mes "Not too bad pansy...";
+				mes "How many do you want?";
+				next;
+				switch(select("As many as I can get, please","I want this many.","Never mind, I like my jellopy.")) {
+				case 1:
+					delitem 909,.@max*3;
+					getitem 515,.@max;
+					mes "[펠릭스]";
+					mes "There you go~! As I promised. Try";
+					mes "not to stuff yer face.";
+					close;
+				case 2:
+					mes "[펠릭스]";
+					mes "Right I'm not giving you more than";
+					mes "100 at a time so don't bother,";
+					mes "okay? If you don't want any, just";
+					mes "say '0'.";
+					input .@amount;
+					next;
+					mes "[펠릭스]";
+					if (.@amount == 0) {
+						mes "Alright then, see you next time.";
+						close;
+					}
+					if (.@amount > 100) {
+						mes "Hey pansy ass, I said 100 at most,";
+						mes "no more than that! I'm not going to";
+						mes "break my back for the likes of you!";
+						close;
+					}
+					if (countitem(909) < .@amount*10) {
+						mes "Seems you don't have enough. Go get";
+						mes "some more if you want anything";
+						mes "else.";
+						close;
+					}
+					delitem 909,.@amount*3;
+					getitem 515,.@amount;
+					mes "[펠릭스]";
+					mes "There you go~! As I promised. Try";
+					mes "not to stuff yer face.";
+					close;
+				case 3:
+					mes "[펠릭스]";
+					mes "Catch'ya later.";
+					close;
+				}
+			}
+		}
+	}
+}
+
+alberta,43,49,5	script	가난해 보이는 상인	89,{
+	mes "[마첸]";
+	mes "하아....";
+	mes "우리 트다 가문이 어쩌다";
+	mes "이렇게 되었는지..";
+	mes "할아버님때만 해도";
+	mes "이 알베르타를 주름잡는";
+	mes "거상이었건만..";
+	next;
+	mes "[마첸]";
+	mes "저 알키쉬 가문이 들어오고";
+	mes "나서부터 정말 말도 못하게";
+	mes "되어버렸으니...";
+	mes "조상님들을 어떻게 뵈려나...";
+	close;
+}

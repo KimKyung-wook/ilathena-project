@@ -1,0 +1,689 @@
+
+//    kk  ""tt""  "";;    """"JJ;;kkJJ  JJtt""    ""tt""  ;;tt""""tt    ""tt""   
+//   JJ  kk""tt;;JJ      ttkk    ""tt    ;;;;ttJJ;;  ""ttkk;;"";;;;ttkk;;  ;;kk  
+//  "";;  ""  kk  kk  tt  ttww    ZZ;;  ww    RR  ;;JJ  JJJJ  tt    RR  ;;JJ  JJ 
+//  JJ      """";;""  kk  ttkk  ;;kk    ZZ    ww  ;;""  kk""  ww    kk;;kk""  JJ 
+//  kk      JJ  kk    ww  ttkk  JJJJ  ;;ww  ""JJ  ;;tt""RR    ZZ  ;;ZZJJ      kk 
+//  kk  ;;  "";;JJ        JJtt  JJJJ  ""kk  JJ""  ww""""ww    ww  ""JJ  ZZ    kk 
+//  JJ  JJ  ;;JJ""  "";;  ww;;  kkJJ  JJ""  kk;;  ww  ;;ww  ""JJ  ww;;  ww  ;;tt 
+//;;""  RR    RR    ww""  kk""  ;;tt  ww    kkkk      kktt  JJ;;  ZZ;;  ;;  tt   
+//  JJkkttkkkk;;kkkk;;JJkktt""kkJJJJkkttJJkk;;  kkkkJJ  ttkkttJJkk;;ttkkJJkkJJ   
+//| I | - | L | U | N | A | A | T | H | E | N | A | P | R | O | J | E | C | T |  
+//------------------------------------------------------------------------------
+// iLAthena 건슬링거 전직 퀘스트 스크립트 <http://www.i-luna.com>
+// 한글화 by 아이루나 iLAthena Project
+//------------------------------------------------------------------------------
+// 한글화 by 불근앙Ma
+//------------------------------------------------------------------------------
+
+alberta,30,65,3	script	Akagi#nq	730,{
+
+	if(Class == Job_Novice)
+	{
+		if(JobLevel > 9)
+		{
+			mes "[Akagi]";
+			mes "Hmm...";
+			mes "Some force must have lead your feet to this dark alley because you are needed here.";
+			mes "Would you like to walk the path of Patience?";
+			next;
+			if(select("No, I don't want to go.:Yep, I'll walk the path.") == 1)
+			{
+				mes "[Akagi]";
+				mes "Ok.";
+				mes ".....";
+				mes "Then farewell.";
+				close;
+			}
+			else
+			{
+				mes "[Akagi]";
+				mes "Very well, I'll send you over right away.";
+				close2;
+				switch (rand(3)) {
+					case 1:  warp "amatsu", 170, 229; break;
+					case 2:  warp "amatsu", 216, 188; break;
+					default: warp "amatsu", 178, 176; break;
+				}
+				end;
+			}
+		}
+		else
+		{
+			mes "[Akagi]";
+			mes "This isn't where you should be.";
+			mes "Come back after you've become stronger.";
+			close;
+		}
+	}
+	else
+	{
+		mes "[Akagi]";
+		mes "I have nothing to say to you.";
+		mes "Go back to where you came from.";
+		close;
+	}
+}
+
+que_ng,30,65,3	script	Cougar Gai	730,{
+
+	if(Class == Job_Novice && JobLevel > 9)
+	{
+		switch(NINJ_Q)
+		{
+			case 0:
+				mes "["+strcharinfo(0)+"]";
+				mes "저기요.";
+				next;
+				mes "[쿠우가 가이]";
+				mes "음?...";
+				mes "아니이잇~!!";
+				mes "내가 보이다니!";
+				next;
+				mes "[쿠우가 가이]";
+				mes "토리얏~!";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "-나무젓가락을 다발로 던지는 남자.-";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "-후두둑~!-";
+				mes "아얏~!";
+				mes "우앗~! 이게 무슨 짓이세요!";
+				next;
+				mes "[쿠우가 가이]";
+				mes "음?...";
+				mes "나를 죽이러 온 자객이 아니군.";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "우씨~ 뭐예요~ 그게.";
+				mes "다짜고짜.";
+				mes "확신도 없이 뭘 막 던지고...";
+				next;
+				mes "[쿠우가 가이]";
+				mes "으헐~! 분하구나아아아~~";
+				mes "나의 영원한 라이벌이자 원수!";
+				mes "들고양이 죠!";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "........";
+				next;
+				mes "[쿠우가 가이]";
+				mes "으아아아아아~~~!!!";
+				mes "으허~으허~";
+				mes "팟!팟!팟~";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "-뭐야 듣고 있지 않잖아.-";
+				next;
+				mes "[쿠우가 가이]";
+				mes "음...";
+				mes "앗! 자네는 누군가?!";
+				mes "게다가 어느 틈에 내 주변에 인기척도 없이!";
+				mes "에잇 받아랏!";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "아악~";
+				mes "어흑 제발 그만 두세요~";
+				mes "게다가 지금 껏 한 짓은...";
+				next;
+				mes "[쿠우가 가이]";
+				mes "호오.";
+				mes "대단한 실력이군~";
+				mes "내 기술을 모두 피하다니.";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "-뭘 한건데...-";
+				mes "-게다가 전혀 내말을 듣고 있지 않아.-";
+				next;
+				mes "[쿠우가 가이]";
+				mes "음~ 그래~";
+				mes "그러고 보니 자네 나에게 무슨 볼 일 이라도?";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes ".........";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "아...음...";
+				mes "예.";
+				mes "닌자 전직을 하고 싶어서 왔습니다.";
+				next;
+				mes "[쿠우가 가이]";
+				mes "오호~ 그렇다면 잘 찾아왔군.";
+				mes "하지만!";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes ".....";
+				next;
+				mes "[쿠우가 가이]";
+				mes "좀 힘들 것 같군.";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "아우~ 왜요~";
+				next;
+				mes "[쿠우가 가이]";
+				mes "일단 자네에게 믿음이 가지 않고 내가 보기엔 닌자로 살아가기엔 아직 너무 경험이 부족해 보여.";
+				next;
+				mes "[쿠우가 가이]";
+				mes "그렇기 때문에.";
+				mes "가!!! 가란말이야~!";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "...........";
+				next;
+				mes "[쿠우가 가이]";
+				mes "흠흠...";
+				mes "그런 것이지.";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "...........";
+				next;
+				mes "[쿠우가 가이]";
+				mes "알아 들었으면 그만 가 보게.";
+				mes "보다시피 난 아주 바쁜 몸이라서 말야...";
+				next;
+				mes "[쿠우가 가이]";
+				mes "난 주변에 적이 많아서 한시라도 경계를 게을리 해서는 안되는 몸이지.";
+				next;
+				mes "[쿠우가 가이]";
+				mes "나는 이만 다음 결투를 위해 수련에 들어가야겠군.";
+				mes "이요오오옵~!";
+				next;
+				mes "[쿠우가 가이]";
+				mes "다음에는 반드시 이기고 말겠다!";
+				mes "기다리고 있어라.";
+				mes "들고양이 죠!";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "들고양이 죠?";
+				mes "고양이 하고 싸우시나요?";
+				next;
+				mes "[쿠우가 가이]";
+				mes "음? 이런 이런 하하하~ 껄껄~";
+				mes "들고양이 죠는 그 녀석의 별명이지.";
+				next;
+				mes "[쿠우가 가이]";
+				mes "아주 영악한 녀석이야.";
+				mes "이기기 위해선 방법을 아끼지 않아.";
+				next;
+				mes "[쿠우가 가이]";
+				mes "더군다나 그 녀석이 사용하는 인술은 아주 현란하고 강하지.";
+				next;
+				mes "[쿠우가 가이]";
+				mes "마침 그 녀석도 나도 서로 사용하는 수리검과 두루마리가 떨어진 상태라서 잠시 휴전 상태라네. 하하.";
+				next;
+				mes "[쿠우가 가이]";
+				mes "그러고보니 자네 만약 정 닌자가 되고싶다면, 내 심부름 하나 해주겠나?";
+				mes "만약 일을 잘 해 준다면, 내가 닌자로 만들어 주진 못해도 기술 몇개라도 알려줄지 혹시 아나?";
+				next;
+				switch( select( "승락한다.","거절한다." ) )
+				{
+
+					case 1:
+						mes "["+strcharinfo(0)+"]";
+						mes "음... 좋아요.";
+						next;
+						mes "[쿠우가 가이]";
+						mes "오.. 그래.";
+						mes "그렇다면 이 편지를 들고양이 죠라는 녀석에게 전해주게.";
+						next;
+						mes "[쿠우가 가이]";
+						mes "대충 내용은 잠시 서로 준비가 될 때까지 휴전하자는 내용이니.";
+						mes "꼭 답장을 받아오도록 해주게.";
+						next;
+						mes "[쿠우가 가이]";
+						mes "참고로 그 녀석은 정보에 의하면 아인브로크로 갔다는 이야기가 있다네.";
+						mes "거기에 왜 갔는지 이유는 모르겠네만...";
+						next;
+						mes "[쿠우가 가이]";
+						mes "그 녀석은 변신술에도 능하기 때문에 알아보기 힘들 수도 있네.";
+						next;
+						mes "[쿠우가 가이]";
+						mes "잘 찾아봐야 할게야.";
+						mes "그 녀석은 높은 곳을 좋아하니.";
+						mes "잘 돌아보게.";
+						next;
+						mes "["+strcharinfo(0)+"]";
+						mes "오케이~";
+						mes "그러죠.";
+						set NINJ_Q,1;
+						close;
+
+					case 2:
+						mes "["+strcharinfo(0)+"]";
+						mes "기술만 몇개, 같은건 배우고 싶지 않네요.";
+						mes "죄송합니다.";
+						mes "다른 사람을 알아보세요.";
+						next;
+						mes "[쿠우가 가이]";
+						mes "음...그렇군...";
+						mes "알았네.";
+						mes "내가 괜한 소리를 한 것 같군.";
+						mes "그럼 이만 가보게.";
+						close;
+				}
+
+			case 1:
+				mes "[쿠우가 가이]";
+				mes "음...그렇게 급한 일은 아니지만.";
+				mes "서둘러 주게.";
+				mes "들고양이 죠 녀석은 아인브로크에 있네.";
+				close;
+
+			case 2:
+				mes "[쿠우가 가이]";
+				mes "잊지말고 답장도 꼭 받아와 주게.";
+				mes "나중에 딴소리를 할 수도 있거든.";
+				close;
+
+			case 3:
+				mes "[쿠우가 가이]";
+				mes "답장은 받아 온 겐가?";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "네, 여기.";
+				next;
+				mes "[쿠우가 가이]";
+				mes "오오 용캐도 잘 만나서 잘 받아왔나 보군.";
+				mes "어디... 그럼.";
+				mes "-슥슥...-";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "-아저씨는 내가 가지고 온-";
+				mes "-편지를 자세히 읽고 있다.-";
+				next;
+				mes "[쿠우가 가이]";
+				mes "어이쿠~!!! 이럴 수가!";
+				mes "잠시 휴전을 거부하다닛!!!";
+				mes "설마 쿠나이를 다시 만든건가!";
+				mes "이런이런...";
+				next;
+				mes "[쿠우가 가이]";
+				mes "다시 골치 아퍼지게 생겼군.";
+				mes "이보게 자네 미안하지만 내 부탁 좀 들어주게.";
+				mes "죠 녀석과의 대결에 필요한 무기를 만들어야 하는데, 재료가 부족 하다네.";
+				next;
+				mes "[쿠우가 가이]";
+				mes "만약 재료를 잘 구해다 주면 자네의 능력을 인정하고 닌자를 만들어주겠네.";
+				mes "일단 가져다 줘야할 물건은 프라콘 1개, 사이파 5개일세.";
+				mes "시간이 급하니 서둘러주게.";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "앗!!";
+				mes "이것들은...";
+				next;
+				mes "[쿠우가 가이]";
+				mes "왜 그런가 무슨 문제라도 있나?";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "이 재료들은 제가 죠아저씨한테 구해다준... 으어어어...";
+				next;
+				mes "[쿠우가 가이]";
+				mes "뭣이?!!!";
+				mes "그럼 그 녀석이 그걸 만들게끔 도와준 것이!";
+				mes "끄어억...";
+				mes "엉엉~멍청이!멍게!해삼!!말미잘!!!";
+				next;
+				mes "[쿠우가 가이]";
+				mes "아아.. 일단 진정 좀 하고.";
+				mes "하아하아...";
+				next;
+				mes "[쿠우가 가이]";
+				mes "일단 자네가 날 꼭 도와줘야하네.";
+				mes "기왕 이렇게 된거 얘기는 나중에 하도록 하고.";
+				mes "어서 출발해주게.";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "아아...네에..";
+				next;
+				mes "[쿠우가 가이]";
+				mes "어서어어어~~!!";
+				mes "엉엉~";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "-가이 아저씨에게 프라콘 1개-";
+				mes "-사이파 5개를  가져오도록 하자.-";
+				set NINJ_Q,4;
+				close;
+
+			case 4:
+				mes "[쿠우가 가이]";
+				if(countitem(7053) < 5 || countitem(1010) < 1)
+				{
+					mes "프라콘 1개와 사이파 5개를 가져다 주게. 지금은 내가 말했던 것과 수가 틀리다네.";
+					mes "아주 급한 일이니 서둘러주게.";
+					close;
+				}
+				if(skillpoint >0)
+				{
+					mes "기본적인 스킬들을 전부 배우고 돌아오게.";
+					close;
+				}
+				mes "오오 그래 잘 가지고 온겐가.";
+				mes "어디어디...";
+				mes "음~ 내가 말한대로 잘 가지고 온 것 같군.";
+				next;
+				mes "[쿠우가 가이]";
+				mes "휴우~ 늦지 않아서 다행이군.";
+				mes "생각보다 일을 잘 하는걸?";
+				next;
+				mes "[쿠우가 가이]";
+				mes "좋네.";
+				mes "약속대로 자네를 정식으로 닌자로 전직을 시켜주겠네.";
+				next;
+				mes "[쿠우가 가이]";
+				mes "그럼 나도 정식으로 소개를 하지.";
+				mes "나는 동방의 토우가 닌자군단의 상급닌자인 쿠우가 가이라고 하네.";
+				mes "도주한 마을의 두령이신 카즈마 님을 찾는 임무의 수색분대장으로 지금은 자리하고 있다네.";
+				next;
+				mes "[쿠우가 가이]";
+				mes "사실 지금은 우리 닌자군단 내부적으로 이런저런 많은 일이 있어서 사실은 자네를 새로 우리 군단에 받지 않으려고 했었다네.";
+				next;
+				mes "[쿠우가 가이]";
+				mes "하지만 죠녀석의 편지에 자네를 높게 평가한 글도 있었고 내 부탁도 잘 완수해 온 것을 보고 마음이 바뀌었다네.";
+				next;
+				mes "[쿠우가 가이]";
+				mes "닌자는 고독한 직업이라네.";
+				mes "임무를 가장 중요시 하되 인간을 잃어서는 안되지.";
+				next;
+				mes "[쿠우가 가이]";
+				mes "앞으로 많이 고달플 것일세.";
+				mes "우리 닌자들은 많은 마을에 자신의 정체를 숨기고 활동하고 있다네.";
+				next;
+				mes "[쿠우가 가이]";
+				mes "닌자는 기본적으로 장비해야하는 무기는 그 제조법과 사용법이 비밀로 내려오기 때문에 구입과 매각은 철저하게 관리하에 이루어 지고 있으니 각별히 조심해 주기를 바라네.";
+				next;
+				mes "[쿠우가 가이]";
+				mes "자 그럼 자네를 정식으로 우리 토우가 닌자의 일원으로 인정하겠네.";
+				next;
+				mes "[쿠우가 가이]";
+				mes "서풍의 매처럼 빠르고, 동풍에 흩날리는 낙옆처럼 가벼워라!!";
+				next;
+				mes "[쿠우가 가이]";
+				mes "핫!!!!";
+				next;
+				nude;
+				callfunc "Job_Change",Job_Ninja;
+				callfunc "F_ClearJobVar";				
+				getitem 13010,1;
+				close;
+
+		}
+	}
+	else if(Class == Job_Novice && JobLevel < 10)
+	{
+		mes "[쿠우가 가이]";
+		mes "It looks like you need to train more.";
+		mes "Come back after you gained more muscle.";
+		close;
+	}
+	else if(Class == Job_Ninja)
+	{
+		mes "[쿠우가 가이]";
+		mes "음 잘 지내고 있나?";
+		mes "임무는 언제 어디서라도 생길 수 있으니, 수련을 게을리하지 말게.";
+		close;
+	}
+	else if(Class == Job_Baby)
+	{
+		mes "[쿠우가 가이]";
+		mes "어..그러니까.. 슈퍼 베이비!!";
+		mes "Has this location been so exposed that even babies know where it is?";
+		mes "Oh no~ Ah no~";
+		close;
+	}
+	else
+	{
+		mes "[쿠우가 가이]";
+		mes "What the.. What's that stench?!";
+		mes "I was wondering what was causing that stench -- it was you.";
+		mes "Why, you're so young, there's still a milk mustache on your lips from drinking from your mother's bosoms.";
+		mes "Get lost, squirt.";
+		close;
+	}
+}
+
+einbroch,184,194,3	script	Suspicious Guy#nin	881,{
+
+	if(Class == Job_Ninja)
+	{
+		mes "[Crimson Panther Joe]";
+		mes "Oh, I see you've become a Ninja";
+		mes "There will be many hardships in the future, so don't slack off in training.";
+		close;
+	}
+	else if(!NINJ_Q)
+	{
+		mes "[수상한남자]";
+		mes "히야~ 이곳은 정말 높군요.";
+		mes "여러 나라를 여행해 보았지만.";
+		mes "이렇게 높은 곳은 처음 이군요.";
+		mes "이렇게 경치 좋은 곳에서 좀 더 멋지고 아름다운 자연을 구경할 수 없다는게 정말 아쉽네요.";
+		close;
+	}
+	switch(NINJ_Q)
+	{
+		case 1:
+			mes "[수상한남자]";
+			mes "히야 ~ 정말 높죠?";
+			mes "전 여러나라를 여행해 봤지만 이렇게 높은 건물이 있는 곳은 처음이군요.";
+			next;
+			mes "[수상한남자]";
+			mes "제가 살던 곳은 조용하고 공기좋고 집들이 모두 아주 작고 아담 했거든요.";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "앗! 설마!";
+			mes "아마쯔?!!!";
+			next;
+			mes "[수상한남자]";
+			mes "아뇨.";
+			mes "....";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "응허~";
+			mes "아닌가...";
+			mes "그렇다면 이즈루드에 사셨나요?";
+			next;
+			mes "[수상한남자]";
+			mes "네 맞아요.";
+			mes "저는 이즈루드 출신이예요.";
+			next;
+			mes "[수상한남자]";
+			mes "사정이 생겨서 광물이 많이 나오는 나라에 잠깐 여행을 왔거든요.";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "그러시군요...";
+			mes "아 혹시 들고양이 죠라는 사람을 알고 계신가요?";
+			mes "아마쯔에서 온 닌자인데.";
+			mes "꼭 찾아야 하거든요.";
+			next;
+			mes "[수상한남자]";
+			mes "글쎄요. 처음 듣는 이름이군요.";
+			mes "그사람을 만나야 하는 중요한 일이 있나 보군요.";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "네, 그분을 만나서 이 편지를 전해주고 답장을 받아가야지만 저도 닌자로 전직을 할 수 있거든요.";
+			next;
+			mes "[수상한남자]";
+			mes "음...그러고 보니 그쪽도 행색이 지금보니 여행자시군요.";
+			next;
+			mes "[수상한남자]";
+			mes "지금 가만히 생각을 해보니 그쪽에서 찾는 사람을 찾을 수도 있다는 생각이 드는군요.";
+			next;
+			mes "[수상한남자]";
+			mes "여기 마을에 도착해서 한번 만난적이 있었던 것 같군요.";
+			next;
+			mes "[수상한남자]";
+			mes "같이 찾는것을 도와드리고 싶지만 저도 여기에 일때문에 와서 아직 끝을 못낸 상태라.";
+			next;
+			mes "[수상한남자]";
+			mes "혹시나 저의 일을 같이 도와주신다면 같이 찾는것을 도와드리겠습니다.";
+			next;
+			switch( select( "그냥 저 혼자 찾아 볼래요.","좋아요. 도와드릴게요." ) )
+			{
+				case 1:
+					mes "[수상한남자]";
+					mes "아, 그러시군요.";
+					mes "알겠습니다.";
+					mes "잘 찾아 보시고 혹시나 나중에 다시 도움이 필요하시면, 제가 떠나기 전까지 다시 얘기 주시길...";
+					close;
+
+				case 2:
+					mes "[수상한남자]";
+					mes "음.. 좋습니다.";
+					mes "저는 여기에 광물을 구하러 왔습니다.";
+					mes "그 광물로 꼭 만들어야 하는게 있거든요.";
+					next;
+					mes "[수상한남자]";
+					mes "일단 저도 같이 구해 보겠지만, 개수가 조금 모자라서 말이죠.";
+					mes "사이파 5개, 그리고 프라콘 1개를 구해오시면 고맙겠군요.";
+					next;
+					mes "["+strcharinfo(0)+"]";
+					mes "-프라콘 1개와 사이파 5개를 구해오자.-";
+					set NINJ_Q,2;
+					close;
+			}
+
+		case 2:
+			if(countitem(1010) < 1 || countitem(7053) < 5){
+				mes "[수상한남자]";
+				mes "프라콘 1개와 사이파 5개입니다.";
+				mes "제가 말했던 것과 수가 틀리군요.";
+				mes "급한 것은 아니지만 정확하게 가져다 주세요.";
+				close;
+			}
+			mes "[수상한남자]";
+			mes "정확하게 가져 오셨군요.";
+			mes "음... 좋습니다.";
+			mes "제가 부탁한 물건들을 잘 가져다 주셨으니, 저도 이제 그쪽을 도와드려야겠군요. 음...";
+			next;
+			mes "[수상한남자]";
+			mes "일단 그 편지나 봅시다.";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "?????!!";
+			next;
+			mes "[수상한남자]";
+			mes "음? 혹시 가이 녀석이 보내서 온 것 아닌가요?";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "헉...그럼 아저씨가 혹시 들고양이~!";
+			next;
+			mes "[수상한남자]";
+			mes "아뇨.";
+			mes "전 들고양이 죠가 아니고,";
+			mes "적 표범 죠입니다.";
+			mes "들고양이는 가이 녀석이 저를 놀리려고 부르는 이름이죠. 하하.";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "하아... 머어어엉~~";
+			next;
+			mes "[적 표범 죠]";
+			mes "만약 닌자가 되기를 원하신다면 눈으로 보이는 것 만을 믿지 마셔야할 겁니다.";
+			next;
+			mes "[적 표범 죠]";
+			mes "그림책에나 나오는 복장을 하고 다니는 닌자는 실제로 없을 뿐더러 있다고 해도 보기가 힘들죠.";
+			next;
+			mes "[적 표범 죠]";
+			mes "잊지말아주세요.";
+			mes "닌자는 자신의 정체를 상대에게 들켜지는 순간 수명을 잃게 되는겁니다.";
+			next;
+			mes "[적 표범 죠]";
+			mes "지금 저의 모습이나 제가 알려드린 이름 모든 것이 사실이 아닐 수도 있습니다.";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "네에...";
+			mes "...........";
+			next;
+			mes "[적 표범 죠]";
+			mes "자, 일단 어디 볼까요?";
+			mes "그 편지.";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "아, 네.";
+			mes "여기.";
+			mes "-부시럭 부시럭-";
+			next;
+			mes "[적 표범 죠]";
+			mes "음~~어디...";
+			mes "가이 녀석의 유치 찬란한 도전장인줄 알았더니, 잠깐 쉬자는 내용이군요.";
+			next;
+			mes "[적 표범 죠]";
+			mes "그런데 이를 어쩌죠.";
+			mes "그 쪽 덕분에 전 쿠나이를 만들 재료를 다 구했는데.";
+			mes "하하~";
+			next;
+			mes "[적 표범 죠]";
+			mes "일단 제가 답장을 써드리죠.";
+			mes "제가 부탁 드린 일의 해결속도를 보니 닌자를 지망하신다고 했는데 눈치만 조금 더 감각을 익히시면 훌륭한 닌자가 되실 것 같군요.";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes ".....";
+			next;
+			mes "[적 표범 죠]";
+			mes "잠시만 기다리세요.";
+			mes "제가 여기서 답장을 써서 드리겠습니다.";
+			mes "어디 어디...";
+			mes "흠흠...슥슥...삭삭...";
+			next;
+			mes "[적 표범 죠]";
+			mes "자 여기 있습니다.";
+			mes "뭐 내용은 그 녀석에게 보여주면 알게 될 겁니다.";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "-죠 아저씨가 금세 휘갈겨-";
+			mes "-쓴 편지를 받았다.-";
+			next;
+			mes "[적 표범 죠]";
+			mes "자 그럼 얼른 떠나세요.";
+			mes "닌자가 되려면 모든 일에 시간을 아껴야 한답니다.";
+			next;
+			mes "[적 표범 죠]";
+			mes "나중에 닌자가 된다면 저하고는 자주 볼 일이 많을지도 모르겠군요.";
+			mes "기대하고 있겠습니다.";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "네...그럼 전 이만...";
+			next;
+			mes "[적 표범 죠]";
+			mes "아, 아마쯔까지 가시려면 상당히 오래걸릴텐데.";
+			mes "제가 "+strcharinfo(0)+" 씨를 아마쯔까지 보내드리겠습니다.";
+			mes "그럼 나중에 보도록 하죠.";
+			delitem 1010,1;
+			delitem 7053,5;
+			set NINJ_Q,3;
+			close2;
+			warp "amatsu",113,127;
+			end;
+
+		case 3:
+			mes "[적 표범 죠]";
+			mes "음 어떻게 된 일인지는 모르겠지만 아직 가이를 만나지 않고 다시 오신 것 같군요.";
+			next;
+			mes "[적 표범 죠]";
+			mes "만약 원하신다면 다시 아마쯔로 보내드리도록 하죠.";
+			next;
+			switch( select( "아니요.","네, 보내주세요." ) )
+			{
+				case 1 :
+					mes "[적 표범 죠]";
+					mes "음 알겠습니다.";
+					mes "언제나 결정은 스스로 내리는 것이죠.";
+					close;
+
+				case 2:
+					mes "[적 표범 죠]";
+					mes "알겠습니다.";
+					mes "그럼 이제 아마쯔로.";
+					close2;
+					warp "amatsu",113,127;
+					end;
+			}
+
+		case 4:
+			mes "[적 표범 죠]";
+			mes "가이녀석이 귀찮은 일을 많이 시키나 보군요.";
+			mes "힘내세요. 다 수행에 도움이 될겁니다.";
+			close;
+	}
+}

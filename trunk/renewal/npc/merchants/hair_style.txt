@@ -1,0 +1,513 @@
+
+//    kk  ""tt""  "";;    """"JJ;;kkJJ  JJtt""    ""tt""  ;;tt""""tt    ""tt""   
+//   JJ  kk""tt;;JJ      ttkk    ""tt    ;;;;ttJJ;;  ""ttkk;;"";;;;ttkk;;  ;;kk  
+//  "";;  ""  kk  kk  tt  ttww    ZZ;;  ww    RR  ;;JJ  JJJJ  tt    RR  ;;JJ  JJ 
+//  JJ      """";;""  kk  ttkk  ;;kk    ZZ    ww  ;;""  kk""  ww    kk;;kk""  JJ 
+//  kk      JJ  kk    ww  ttkk  JJJJ  ;;ww  ""JJ  ;;tt""RR    ZZ  ;;ZZJJ      kk 
+//  kk  ;;  "";;JJ        JJtt  JJJJ  ""kk  JJ""  ww""""ww    ww  ""JJ  ZZ    kk 
+//  JJ  JJ  ;;JJ""  "";;  ww;;  kkJJ  JJ""  kk;;  ww  ;;ww  ""JJ  ww;;  ww  ;;tt 
+//;;""  RR    RR    ww""  kk""  ;;tt  ww    kkkk      kktt  JJ;;  ZZ;;  ;;  tt   
+//  JJkkttkkkk;;kkkk;;JJkktt""kkJJJJkkttJJkk;;  kkkkJJ  ttkkttJJkk;;ttkkJJkkJJ   
+//| I | - | L | U | N | A | A | T | H | E | N | A | P | R | O | J | E | C | T |  
+//------------------------------------------------------------------------------
+// iLAthena 무명섬 퀘스트 스크립트 <http://www.i-luna.com/>
+// 한글화 by 아이루나 iLAthena Project
+//------------------------------------------------------------------------------
+// 스타일리스트(달순 베로니카)- 한글화 by ★orz。(미완성)
+//------------------------------------------------------------------------------
+
+// Stylist - alberta_in 55 142
+alberta_in,55,142,1	script	스타일리스트	91,{
+	mes "[달순 베로니카]";
+	mes "어서오세요, 세계적인 헤어 디자이너";
+	mes "베로니카 뷰티 싸롱입니다. 호호호.";
+	mes "머리하러 오셨지요? 뭘 도와드려요?";
+	next;
+	switch(select("헤어 스타일을 본다.:헤어 스타일을 바꾼다.:대화를 끝낸다.")) {
+		case 1:
+	mes "[달순 베로니카]";
+	mes "헤어 스타일은 1번부터 19번까지";
+	mes "있지요. 몇번을 보여드릴까요?";
+	mes "그만 보시려면 0번을 골라주세요.";
+	next;
+			input .@style;
+			if(.@style > 19) {
+				mes "[달순 베로니카]";
+				mes "어머, 그런 스타일은 없어요. 번호는 1번부터 19번까지랍니다.";
+				next;
+			} else if(.@style == 0) {
+				mes "[달순 베로니카]";
+				mes "어때요, 충분히 보셨나요? 좋아하는";
+				mes "스타일이 있으시면 언제든 부탁해요.";
+				mes "최선을 다해서 꾸며드릴테니까요.";
+				close;
+			}
+				callsub L_cutin,.@style;
+				mes "[달순 베로니카]";
+				switch(.@style) {
+					case 1:
+						if(Sex == 1) {
+							mes "'죽은척하기' 스타일이군요!";
+							mes "단정하고 느긋한 것이 특징이죠.";
+							mes "어때요, 마음에 드시는지요?";
+							close2;
+							cutin "",255;
+							end;
+						}
+							mes "Oh~ 'First Aid' style'!";
+							mes "It is the style people wants to stroke your hair^^.";
+							mes "How do you think? Do you like it?";
+							close2;
+							cutin "",255;
+							end;
+					case 2:
+						if(Sex == 1) {
+							mes "'양손검 수련' 스타일이군요!";
+							mes "유명한 한 검사의 머리와 비슷하죠.";
+							mes "어때요, 마음에 드시는지요?";
+							close2;
+							cutin "",255;
+							end;
+						}
+							mes "Oh~ 'Bash' style!";
+							mes "It feels unrevealed strong power is hidden inside of....";
+							mes "How do you think? Do you like it?";
+							close2; cutin "",255; end;
+					case 3:
+						if(Sex == 1) {
+							mes "'네이팜 비트' 스타일이군요!";
+							mes "알 수 없는 힘이 느껴지는 머리죠.";
+							mes "어때요, 마음에 드시는지요?";
+							close2; cutin "",255; end;
+						}
+							mes "Oh~ 'Frost Diver' style!";
+							mes "It feels cold but also warm...";
+							mes "How do you think? Do you like it?";
+							close2; cutin "",255; end;
+					case 4:
+						if(Sex == 1) {
+							mes "'더블 스트레이핑' 스타일이군요!";
+							mes "마음이 청명해지는 머리 스타일이죠.";
+							mes "어때요, 마음에 드시는지요?";
+							close2; cutin "",255; end;
+						}
+							mes "Oh~ 'Arrow Shower' style!";
+							mes "It feels very refreshed~";
+							mes "How do you think? Do you like it?";
+							close2; cutin "",255; end;
+					case 5:
+						if(Sex == 1) {
+							mes "'안젤루스' 스타일이군요!";
+							mes "차분하고 경건한 느낌의 스타일이죠.";
+							mes "어때요, 마음에 드시는지요?";
+							close2; cutin "",255; end;
+						}
+							mes "Oh~ 'Heal' style!";
+							mes "It feels mind is cured.";
+							mes "How do you think? Do you like it?";
+							close2; cutin "",255; end;
+					case 6:
+						if(Sex == 1) {
+							mes "'푸쉬카트' 스타일이군요!";
+							mes "듬직한 카트를 모티브로 한 스타일..";
+							mes "어때요, 마음에 드시는지요?";
+							close2; cutin "",255; end;
+						}
+							mes "Oh~ 'Vending' style!";
+							mes "It seems like making lots of money.";
+							mes "How do you think? Do you like it?";
+							close2; cutin "",255; end;
+					case 7:
+						if(Sex == 1) {
+							mes "'인베넘' 스타일이군요!";
+							mes "왠지 중독될 것 같은 느낌을 주죠.";
+							mes "어때요, 마음에 드시는지요?";
+							close2; cutin "",255; end;
+						}
+							mes "Oh~ 'Double Strafe' style!";
+							mes "It makes whomever dash twice.";
+							mes "How do you think? Do you like it?";
+							close2; cutin "",255; end;
+					case 8:
+						if(Sex == 1) {
+							mes "'볼링배쉬' 스타일이군요!";
+							mes "한번보면 여러명이 반한다는 스타일!";
+							mes "어때요, 마음에 드시는지요?";
+							close2; cutin "",255; end;
+						}
+							mes "Oh~ 'Gloria' style!";
+							mes "Its nobleness and holiness moods are great.";
+							mes "How do you think? Do you like it?";
+							close2; cutin "",255; end;
+					case 9:
+						if(Sex == 1) {
+							mes "'베넘더스트' 스타일이군요!";
+							mes "치명적인 매력을 풍기는 스타일이죠.";
+							mes "어때요, 마음에 드시는지요?";
+							close2; cutin "",255; end;
+						}
+							mes "Oh~ 'Increase SP Recovery' style!";
+							mes "It makes feel like recovering spirit fully.";
+							mes "How do you think? Do you like it?";
+							close2; cutin "",255; end;
+					case 10:
+						if(Sex == 1) {
+							mes "'턴언데드' 스타일이군요!";
+							mes "마물을 한방에 보낼 느낌의 스타일!";
+							mes "어때요, 마음에 드시는지요?";
+							close2; cutin "",255; end;
+						}
+							mes "Oh~ 'Prepare Potion' style!";
+							mes "It feels a wound is healed already!";
+							mes "How do you think? Do you like it?";
+							close2; cutin "",255; end;
+					case 11:
+						if(Sex == 1) {
+							mes "'드래고놀로지' 스타일이군요!";
+							mes "신비로운 용족을 모티브로 한 머리..";
+							mes "어때요, 마음에 드시는지요?";
+							close2; cutin "",255; end;
+						}
+							mes "Oh~ 'Grand Cross' style!";
+							mes "It feels a firm faith...";
+							mes "How do you think? Do you like it?";
+							close2; cutin "",255; end;
+					case 12:
+						if(Sex == 1) {
+							mes "'메이스 수련' 스타일이군요!";
+							mes "단단해 보이는 것이 매력적인 머리!";
+							mes "어때요, 마음에 드시는지요?";
+							close2; cutin "",255; end;
+						}
+							mes "Oh~ 'Intimidate' style!";
+							mes "It seems you saw this style somewhere...?";
+							mes "How do you think? Do you like it?";
+							close2; cutin "",255; end;
+					case 13:
+						if(Sex == 1) {
+							mes "'썬더스톰' 스타일이군요!";
+							mes "어디서 번개라도 맞고 온 느낌이죠!!";
+							mes "어때요, 마음에 드시는지요?";
+							close2; cutin "",255; end;
+						}
+							mes "Oh~ 'Spiritual Sphere Absorption' style!";
+							mes "It catches people's spirits^^";
+							mes "How do you think? Do you like it?";
+							close2; cutin "",255; end;
+					case 14:
+						if(Sex == 1) {
+							mes "'앵콜' 스타일이군요!";
+							mes "노래를 청하고 싶어지는 스타일이죠.";
+							mes "어때요, 마음에 드시는지요?";
+							close2; cutin "",255; end;
+						}
+							mes "Oh~ 'Gypsy's Kiss' style!";
+							mes "It makes people think you are very kind to all...";
+							mes "How do you think? Do you like it?";
+							close2; cutin "",255; end;
+					case 15:
+						if(Sex == 1) {
+							mes "'그림투스' 스타일이군요!";
+							mes "뾰족뾰족해서 찔릴 것 같은 스타일!";
+							mes "어때요, 마음에 드시는지요?";
+							close2; cutin "",255; end;
+						}
+							mes "Oh~ 'Counter Attack' style!";
+							mes "It feels it will kick when someone is near!";
+							mes "How was it? Do you like it?";
+							close2; cutin "",255; end;
+					case 16:
+						if(Sex == 1) {
+							mes "'블릿츠 비트' 스타일이군요!";
+							mes "다섯번정도 차일 것 같은 스타일...?";
+							mes "어때요, 마음에 드시는지요?";
+							close2; cutin "",255; end;
+						}
+							mes "Oh~ 'Ankle Snare' style!";
+							mes "This is the style hardly move.";
+							mes "How was it? Do you like it?";
+							close2; cutin "",255; end;
+					case 17:
+						if(Sex == 1) {
+							mes "'광석발견' 스타일이군요!";
+							mes "걷다가 이것 저것 많이 줏을 머리죠.";
+							mes "어때요, 마음에 드시는지요?";
+							close2; cutin "",255; end;
+						}
+							mes "Oh~ 'Hammer Fall' style!";
+							mes "It will make feeling dizzy!";
+							mes "How was it? Do you like it?";
+							close2; cutin "",255; end;
+					case 18:
+						if(Sex == 1) {
+							mes "'파이어 필라' 스타일이군요!";
+							mes "한 시대를 풍미했던 멋진 스타일...!";
+							mes "어때요, 마음에 드시는지요?";
+							close2; cutin "",255; end;
+						}
+							mes "Oh~ 'Jupitel Thunder' style!";
+							mes "It feels very neat.";
+							mes "How was it? Do you like it?";
+							close2; cutin "",255; end;
+					case 19:
+						if(Sex == 1) {
+							mes "'아수라패황권' 스타일이군요!";
+							mes "한방에 모든 것을 거는 스타일이죠!!";
+							mes "어때요, 마음에 드시는지요?";
+							close2; cutin "",255; end;
+						}
+							mes "Oh~ 'Whirlwind' style!";
+							mes "It feels very refresh like wind.";
+							mes "How was it? Do you like it?";
+							close2; cutin "",255; end;
+				}
+		case 2:
+			if(BaseLevel < 60) {
+				mes "[달순 베로니카]";
+				mes "어머, 손님. 손님은 지금 스타일이";
+				mes "제일 잘 어울려요. 이상하게 바꾸지";
+				mes "말고, 다른 장식품으로 꾸며봐요.";
+				close;
+			} else if((countitem(973) < 3) || (countitem(974) < 3) || (countitem(901) <100) || (countitem(1094) <100) || (countitem(1020) <100) || (countitem(1060) <100) || (countitem(7152) <100) || (Zeny < 99800)) {
+				mes "[달순 베로니카]";
+				mes "If you want to change your hair style, you need several items";
+				mes "Since you need many items....";
+				mes "I think you should write those down.";
+				next;
+				mes "[달순 베로니카]";
+				mes "3 Counteragent,";
+				mes "3 Mixture,";
+				mes "100 Daenggies,";
+				mes "100 Short Daenggies,";
+				mes "100 Black Hairs,";
+				mes "100 Golden Hairs,";
+				mes "100 Glossy Hair.";
+				next;
+				mes "[달순 베로니카]";
+				mes "And also you need 99,800 zeny.";
+				mes "If you gather them all...";
+				mes "I will show you what I can do~!! ^^ HoHoHo.";
+				close;
+			}
+			mes "[달순 베로니카]";
+			mes "Well, then... Please choose Hair Style you like the most.";
+			mes "I will do my best ^^";
+			mes "There are 19 different Hair Styles.";
+			mes "Numbers from 1 to 19~";
+			next;
+			input .@style;
+			if(.@style > 19) {
+				mes "[달순 베로니카]";
+				mes "There are no such numbers like that!";
+				mes "Please check your number~";
+				close;
+			} else if(.@style == 0) {
+				mes "[달순 베로니카]";
+				mes "It's been canceled.";
+				close;
+			} else if(getlook(1) == .@style) {
+				mes "[달순 베로니카]";
+				mes "You already have this style!!";
+				mes "I think you should look through Hair Styles again";
+				close;
+			}
+				callsub L_cutin,.@style;
+				mes "[달순 베로니카]";
+				mes "This is (" + .@style + ") style.";
+				mes "I will change your hair with this again.";
+				mes "Is that OK with you??";
+				next;
+				if(select("Yeah~ I'd love to.","No..I don't like it...") == 1) {
+						if(getlook(6) == 0) {
+							mes "[달순 베로니카]";
+							mes "You haven't dyeing your hair~ Not even once!!";
+							mes "I think dyeing your hair makes you much better...";
+							mes "I can do it for you as a service... for FREE ^^";
+							mes "Which color do you want?";
+							next;
+							switch(select("Red","Yellow","Purple","Orange","Green","Blue","White","Black","Cancel")) {
+								case 1:
+									set .@pallete,8;
+									goto L_style;
+								case 2:
+									set .@pallete,1;
+									goto L_style;
+								case 3:
+									set .@pallete,2;
+									goto L_style;
+								case 4:
+									set .@pallete,3;
+									goto L_style;
+								case 5:
+									set .@pallete,4;
+									goto L_style;
+								case 6:
+									set .@pallete,5;
+									goto L_style;
+								case 7:
+									set .@pallete,6;
+									goto L_style;
+								case 8:
+									set .@pallete,7;
+									goto L_style;
+								case 9:
+									mes "[달순 베로니카]";
+									mes "Well.. then think it over..";
+									mes "and come visit me again.";
+									mes "Not only type of hair style but also color of it is very important.";
+									close;
+							}
+						}
+				L_style:
+						mes "[달순 베로니카]";
+						mes "Now, It begins~. Hold still~";
+						mes "If you move, you will have very bad style^^";
+						mes "Just trust me on this!!";
+						next;
+						mes "[달순 베로니카]";
+						mes "- Clip clip Clip clip -";
+						mes "- Klit klit Klit klit -";
+						mes "- Snip snip Snip snip -";
+						next;
+						delitem 973,3;
+						delitem 974,3;
+						delitem 901,100;
+						delitem 1094,100;
+						delitem 1020,100;
+						delitem 1060,100;
+						delitem 7152,100;
+						setlook 1,.@style;
+						setlook 6,.@pallete;
+						cutin "",255;
+						mes "[달순 베로니카]";
+						mes "Wow~ it came out very well~~~ ";
+						mes "I hope you like this (" + .@style + ") style. ^^";
+						mes "If you'd like to have other hair style,";
+						mes "you are welcome to visit me anytime~ HoHoHo";
+						setlook 1,.@style;
+						setlook 6,.@pallete;
+						close;
+				}
+						mes "[달순 베로니카]";
+						mes "Well~ choose again please~";
+						mes "There shold be a style you like.";
+						mes "Just remember the number you like the most abd tell me.";
+						close;
+		case 3:
+			mes "[달순 베로니카]";
+			mes "사람은 누구라도 아름다워질 권리가";
+			mes "있어요... 자신에게 어울리는 머리를";
+			mes "꼭 찾길 바래요.";
+			close;
+	}
+L_cutin:
+	if(Sex == 1) {
+		if(getarg(0) < 10)
+			cutin "hair_m_0"+getarg(0),4;
+		else
+			cutin "hair_m_"+getarg(0),4;
+	} else {
+		if(getarg(0) < 10)
+			cutin "hair_f_0"+getarg(0),4;
+		else
+			cutin "hair_f_"+getarg(0),4;
+	}
+	return;
+}
+
+// Gypsy Hairdresser - alberta 33 141
+alberta,33,141,1	script	Gypsy Hairdresser	87,{
+	mes "[Bisharm]";
+	mes "Omg! Kidding me she is a desinger!!";
+	mes "One of the best?? Yeah..whatever...";
+	mes "I'm the only one who knows what's the true dudism and value of hair!";
+	mes "I am a CREATOR of BEAUTY!";
+	next;
+	switch(select("What do you do?","Please bless me also!!",".....")) {
+		case 1:
+			mes "[Bisharm]";
+			mes "ME? I am a hairdresser.";
+			mes "I am drifting from place to place...and";
+			mes "giving people beauty of hair.";
+			mes "I heard there is....";
+			mes "there is a novice who is calling oneself a hair designer in this town...";
+			next;
+			mes "[Bisharm]";
+			mes "That's why I came to this town.";
+			mes "I was watching and I find out everyone asks what they want from the menu...";
+			mes "That is not the way!!";
+			mes "There are some cases..";
+			mes "hairs don't look good on people when listening to them!";
+			next;
+			mes "[Bisharm]";
+			mes "Also very amateur skill...";
+			mes "Very very...amateur...";
+			mes "You can't call it a beauty designer!";
+			mes "Waisting too mush hairs!";
+			mes "In short I don't like it very well!!";
+			next;
+			mes "[Bisharm]";
+			mes "If you want me to touch your hair,";
+			mes "please ask me anytime.";
+			mes "I'll specially do my best for you.";
+			mes "Got it?";
+			mes "Don't ever let novice touch your hair!";
+			close;
+		case 2:
+			if(BaseLevel < 60) {
+				mes "[Bisharm]";
+				mes "Hmm, From my artistic perspective,";
+				mes "the hair style you have looks very good on you!";
+				mes "You should stay with it!";
+				mes "Trust me!";
+				close;
+			} else if(Zeny < 199800) {
+				mes "[Bisharm]";
+				mes "Yeah? You don't need anything else. You only need ZENY!";
+				mes "You just need 199,800 zeny.";
+				mes "Just let you know.... ";
+				mes "that you should feel an honor about me touching your hair with only this price...";
+				close;
+			}
+				mes "[Bisharm]";
+				mes "Good, I will take 199,800 zeny for my fee.";
+				mes "OK?";
+				mes "You still have chance to go to that novice and do your hair....";
+				mes "It's up to you...";
+				next;
+				if(select("I will ask you a favor","Well..I will pass..") ==1 ) {
+					mes "[Bisharm]";
+					mes "Alright!----- Here goes!!!";
+					mes "Watch yourself!!";
+					next;
+					mes "[Bisharm]";
+					mes "Wooohhhhhhhhh!!!!";
+					next;
+					mes "[Bisharm]";
+					mes "Yipe!! Yeah!! Yeah~~~~~!!";
+					next;
+					mes "[Bisharm]";
+					mes "Finished...!! great...GREAT!!";
+					mes "The style no one can't creat!!!!";
+					mes "Phu..Hahahahahaha!!";
+					setlook 1,rand(1,19);
+					setlook 6,rand(1,6);
+					set Zeny,Zeny-199800;
+					close;
+				}
+					mes "[Bisharm]";
+					mes "Hmm! Whatever...!! You'll regret this!!";
+					mes "You'll relize only great artisan can...";
+					mes "can creat real beauty.....";
+					mes "You will relize it...someday...";
+					close;
+		case 3:
+			mes "[Bisharm]";
+			mes "I feel so sorry for people";
+			mes "who let their hairs to be touched by a NOVICE";
+			mes "who doesn't know anything about beauty!!";
+			mes "I feel really really sorry for them!!";
+			close;
+	}
+}
+
