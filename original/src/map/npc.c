@@ -149,6 +149,9 @@ int npc_enable_sub(struct block_list *bl, va_list ap)
 
 		if( npc_ontouch_event(sd,nd) > 0 && npc_ontouch2_event(sd,nd) > 0 )
 		{ // failed to run OnTouch event, so just click the npc
+			if (sd->npc_id != 0)
+				return 0;
+
 			pc_stop_walking(sd,1);
 			npc_click(sd,nd);
 		}
@@ -2631,9 +2634,6 @@ static const char* npc_parse_mob(char* w1, char* w2, char* w3, char* w4, const c
 		ShowError("npc_parse_mob: Invalid mob definition in file '%s', line '%d'.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
 		return strchr(start,'\n');// skip and continue
 	}
-	// iLAthena 수정
-	safestrncpy(mob.eventname, !strcmpi(w2,"big_monster") ? "4" : !strcmpi(w2,"small_monster") ? "2" : "0", sizeof(mob.eventname));
-
 	if( mapindex_name2id(mapname) == 0 )
 	{
 		ShowError("npc_parse_mob: Unknown map '%s' in file '%s', line '%d'.\n", mapname, filepath, strline(buffer,start-buffer));
@@ -3166,8 +3166,7 @@ void npc_parsesrcfile(const char* filepath)
 		{
 			p = npc_parse_duplicate(w1,w2,w3,w4, p, buffer, filepath);
 		}
-		// iLAthena 수정
-		else if( (strcmpi(w2,"monster") == 0 || strcmpi(w2,"boss_monster") == 0 || strcmpi(w2,"big_monster") == 0 || strcmpi(w2,"small_monster") == 0) && count > 3 )
+		else if( (strcmpi(w2,"monster") == 0 || strcmpi(w2,"boss_monster") == 0) && count > 3 )
 		{
 			p = npc_parse_mob(w1, w2, w3, w4, p, buffer, filepath);
 		}
