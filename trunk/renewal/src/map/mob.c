@@ -599,7 +599,7 @@ int mob_spawn_guardian(const char* mapname, short x, short y, const char* mobnam
 		return 0;
 	}
 	
-	if((x<=0 || y<=0) && !map_search_freecell(NULL, m, &x, &y, -1,-1, 0))
+	if((x<=0 || y<=0) && !map_search_freecell(NULL, m, &x, &y, -1,-1, 1))
 	{
 		ShowWarning("mob_spawn_guardian: Couldn't locate a spawn cell for guardian class %d (index %d) at castle map %s\n",class_, guardian, map[m].name);
 		return 0;
@@ -690,7 +690,7 @@ int mob_spawn_bg(const char* mapname, short x, short y, const char* mobname, int
 	}
 
 	data.class_ = class_;
-	if( (x <= 0 || y <= 0) && !map_search_freecell(NULL, m, &x, &y, -1,-1, 0) )
+	if( (x <= 0 || y <= 0) && !map_search_freecell(NULL, m, &x, &y, -1,-1, 1) )
 	{
 		ShowWarning("mob_spawn_bg: Couldn't locate a spawn cell for guardian class %d (bg_id %d) at map %s\n",class_, bg_id, map[m].name);
 		return 0;
@@ -2289,6 +2289,10 @@ int mob_dead(struct mob_data *md, struct block_list *src, int type)
 				(int)(md->level - sd->status.base_level) >= 20)
 				drop_rate = (int)(drop_rate*1.25); // pk_mode increase drops if 20 level difference [Valaris]
 
+			// Increase drop rate if user has SC_ITEMBOOST
+			if (sd && sd->sc.data[SC_ITEMBOOST]) // now rig the drop rate to never be over 90% unless it is originally >90%.
+				drop_rate = max(drop_rate,cap_value((int)(0.5+drop_rate*(sd->sc.data[SC_ITEMBOOST]->val1)/100.),0,9000));
+
 			// @이벤트 명령어 [JaVb]
 			if(event_dflag==1) {
 				drop_rate=(drop_rate+(drop_rate/10*event_rate));
@@ -2296,10 +2300,7 @@ int mob_dead(struct mob_data *md, struct block_list *src, int type)
 
 			// attempt to drop the item
 			if (rand() % 10000 >= drop_rate)
-			{	// Double try by Bubble Gum
-				if (!(mvp_sd && mvp_sd->sc.data[SC_ITEMBOOST] && rand() % 10000 < drop_rate))
 					continue;
-			}
 
 			ditem = mob_setdropitem(md->db->dropitem[i].nameid, 1);
 

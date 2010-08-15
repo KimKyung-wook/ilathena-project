@@ -21,7 +21,7 @@
 // 20070821 - 2007-08-21aSakexe+   - 0x2c5
 // 20070918 - 2007-09-18aSakexe+   - 0x2d7, 0x2d9, 0x2da
 // 20071106 - 2007-11-06aSakexe+   - 0x78, 0x7c, 0x22c
-// 20080102 - 2008-01-02aSakexe+   - 0x2ed, 0x2ee
+// 20080102 - 2008-01-02aSakexe+   - 0x2ec, 0x2ed , 0x2ee
 // 20081126 - 2008-11-26aSakexe+   - 0x1a2, 0x441
 // 20081210 - 2008-12-10aSakexe+   - 0x442
 // 20090408 - 2009-04-08aSakexe+   - 0x44a (dont use as it overlaps with RE client packets)
@@ -35,12 +35,17 @@
 // 20091103 - 2009-11-03aRagexeRE+ - 0x7f7, 0x7f8, 0x7f9, 0x7fb
 // 20091110 - 2009-11-10aRagexeRE+ - 0x7f6
 // 20100105 - 2010-01-05aRagexeRE+ - 0x133, 0x800, 0x801
+// 20100126 - 2010-01-26aRagexeRE+ - 0x80e
 // 20100217 - 2010-02-17aRagexeRE+ - 0xf4 -> 0x1c4 (guildsotrage)
 // 20100223 - 2010-02-23aRagexeRE+ - 0x80f
-// 20100414 - 2010-04-14aRagexeRE+ - 0x6b (Note: Add support to the new char slots managment.)
+// 20100413 - 2010-04-13aRagexeRE+ - 0x6b (Note: Add support to the new char slots managment.)
+// 20100629 - 2010-06-29aRagexeRE+ - 0x2d0, 0xaa, 0x2d1, 0x2d2
+// 20100721 - 2010-07-21aRagexeRE+ - 0x6b, 0x6d
+// 20100727 - 2010-07-27aRagexeRE+ - 0x6b, 0x6d
+
 #ifndef PACKETVER
 	//#define PACKETVER	20081126
-	#define PACKETVER 20100518
+	#define PACKETVER 20100629
 #endif
 // backward compatible PACKETVER 8 and 9
 #if PACKETVER == 8
@@ -74,6 +79,7 @@
 
 #define MAX_MAP_PER_SERVER 1500 // Increased to allow creation of Instance Maps
 #define MAX_INVENTORY 100
+
 //Max number of characters per account. Note that changing this setting alone is not enough if the client is not hexed to support more characters as well.
 //Note: clients from 2010-04-14aRagexeRE don't need be hexed and the char slot amount is fixed server side.
 #define MAX_CHARS_SLOTS 9	// Max slots, should be multiple of 3. Is the old MAX_CHARS.
@@ -175,22 +181,30 @@
 
 //Mercenary System
 #define MC_SKILLBASE 8201
-#define MAX_MERCSKILL 37
-#define MAX_MERCENARY_CLASS 38 // iLAthena ¼öÁ¤
+#define MAX_MERCSKILL 40
+#define MAX_MERCENARY_CLASS 38
 
 enum item_types {
-	IT_HEALING = 0,
-	IT_UNKNOWN, //1
-	IT_USABLE,  //2
-	IT_ETC,     //3
-	IT_WEAPON,  //4
-	IT_ARMOR,   //5
-	IT_CARD,    //6
-	IT_PETEGG,  //7
-	IT_PETARMOR,//8
-	IT_UNKNOWN2,//9
-	IT_AMMO,    //10
-	IT_DELAYCONSUME,//11
+	IT_HEALING = 0,				//IT_HEAL				= 0x00
+	IT_UNKNOWN, //1				//IT_SCHANGE			= 0x01
+	IT_USABLE,  //2				//IT_SPECIAL			= 0x02
+	IT_ETC,     //3				//IT_EVENT				= 0x03
+	IT_WEAPON,  //4				//IT_ARMOR				= 0x04
+	IT_ARMOR,   //5				//IT_WEAPON				= 0x05
+	IT_CARD,    //6				//IT_CARD				= 0x06
+	IT_PETEGG,  //7				//IT_QUEST				= 0x07
+	IT_PETARMOR,//8				//IT_BOW				= 0x08
+	IT_UNKNOWN2,//9				//IT_BOTHHAND			= 0x09
+	IT_AMMO,    //10			//IT_ARROW				= 0x0a
+	IT_DELAYCONSUME,//11		//IT_ARMORTM			= 0x0b
+								//IT_ARMORTB			= 0x0c
+								//IT_ARMORMB			= 0x0d
+								//IT_ARMORTMB			= 0x0e
+								//IT_GUN				= 0x0f
+								//IT_AMMO				= 0x10
+	IT_THROWWEAPON = 17,		//IT_THROWWEAPON		= 0x11
+								//IT_CASH_POINT_ITEM	= 0x12
+	IT_CANNONBALL = 19,			//IT_CANNONBALL			= 0x13
 	IT_MAX 
 };
 
@@ -668,12 +682,14 @@ enum {
 	JOB_ARCH_BISHOP,
 	JOB_MECHANIC,
 	JOB_GUILLOTINE_CROSS,
+
 	JOB_RUNE_KNIGHT_T,
 	JOB_WARLOCK_T,
 	JOB_RANGER_T,
 	JOB_ARCH_BISHOP_T,
 	JOB_MECHANIC_T,
 	JOB_GUILLOTINE_CROSS_T,
+
 	JOB_ROYAL_GUARD,
 	JOB_SORCERER,
 	JOB_MINSTREL,
@@ -681,6 +697,7 @@ enum {
 	JOB_SURA,
 	JOB_GENETIC,
 	JOB_SHADOW_CHASER,
+
 	JOB_ROYAL_GUARD_T,
 	JOB_SORCERER_T,
 	JOB_MINSTREL_T,
@@ -688,6 +705,7 @@ enum {
 	JOB_SURA_T,
 	JOB_GENETIC_T,
 	JOB_SHADOW_CHASER_T,
+
 	JOB_RUNE_KNIGHT2,
 	JOB_RUNE_KNIGHT_T2,
 	JOB_ROYAL_GUARD2,

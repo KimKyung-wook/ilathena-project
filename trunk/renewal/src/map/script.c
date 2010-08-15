@@ -199,7 +199,6 @@ int str_hash[SCRIPT_HASH_SIZE];
 //#define SCRIPT_HASH_SDBM
 #define SCRIPT_HASH_ELF
 
-
 static DBMap* scriptlabel_db=NULL; // const char* label_name -> int script_pos
 static DBMap* userfunc_db=NULL; // const char* func_name -> struct script_code*
 static int parse_options=0;
@@ -3517,7 +3516,6 @@ int script_reload()
 	return 0;
 }
 
-
 //-----------------------------------------------------------------------------
 // buildin functions
 //
@@ -4231,10 +4229,10 @@ BUILDIN_FUNC(warpchar)
 	
 	return 0;
 } 
- 
 /*==========================================
- * Warpparty - [Fredzilla]
- * Syntax: warpparty "mapname",x,y,Party_ID;
+ * Warpparty - [Fredzilla] [Paradox924X]
+ * Syntax: warpparty "to_mapname",x,y,Party_ID,{"from_mapname"};
+ * If 'from_mapname' is specified, only the party members on that map will be warped
  *------------------------------------------*/
 BUILDIN_FUNC(warpparty)
 {
@@ -4317,6 +4315,7 @@ BUILDIN_FUNC(warpparty)
 		break;
 		}
 	}
+
 	return 0;
 }
 /*==========================================
@@ -6155,7 +6154,7 @@ BUILDIN_FUNC(strnpcinfo)
 		case 0: // display name
 			name = aStrdup(nd->name);
 			break;
-		case 1: // visible part of display name name
+		case 1: // visible part of display name
 			if((buf = strchr(nd->name,'#')) != NULL)
 			{
 				name = aStrdup(nd->name);
@@ -7203,6 +7202,7 @@ BUILDIN_FUNC(setwarg)
 
 	return 0; 
 }
+
 /// Sets the save point of the player.
 ///
 /// save "<map name>",<x>,<y>
@@ -7412,7 +7412,7 @@ BUILDIN_FUNC(cooking)
 		return 0;
 
 	trigger=script_getnum(st,2);
-	clif_cooking_list(sd, trigger);
+	clif_cooking_list(sd, trigger, AM_PHARMACY, 1, 1);
 	return 0;
 }
 /*==========================================
@@ -8238,6 +8238,7 @@ static int buildin_announce_sub(struct block_list *bl, va_list ap)
 		clif_broadcast(bl, mes, len, type, SELF);
 	return 0;
 }
+
 BUILDIN_FUNC(mapannounce)
 {
 	const char *mapname   = script_getstr(st,2);
@@ -9489,7 +9490,7 @@ BUILDIN_FUNC(gvgoff)
 }
 /*==========================================
  *	Shows an emoticon on top of the player/npc
- *	emotion emotion#, <target: 0 - NPC, 1 - PC>
+ *	emotion emotion#, <target: 0 - NPC, 1 - PC>, <NPC/PC name>
  *------------------------------------------*/
 //Optional second parameter added by [Skotlex]
 BUILDIN_FUNC(emotion)
@@ -9505,11 +9506,22 @@ BUILDIN_FUNC(emotion)
 		player=script_getnum(st,3);
 	
 	if (player) {
-		TBL_PC *sd = script_rid2sd(st);
+		TBL_PC *sd = NULL;
+		if( script_hasdata(st,4) )
+			sd = map_nick2sd(script_getstr(st,4));
+		else
+			sd = script_rid2sd(st);
 		if (sd)
 			clif_emotion(&sd->bl,type);
 	} else
-		clif_emotion(map_id2bl(st->oid),type);
+		if( script_hasdata(st,4) )
+		{
+			TBL_NPC *nd = npc_name2id(script_getstr(st,4));
+			if(nd)
+				clif_emotion(&nd->bl,type);
+		}
+		else
+			clif_emotion(map_id2bl(st->oid),type);
 	return 0;
 }
 
@@ -10706,6 +10718,71 @@ BUILDIN_FUNC(misceffect)
 	return 0;
 }
 /*==========================================
+ * Play a BGM on a single client [Rikter/Yommy]
+ *------------------------------------------*/
+BUILDIN_FUNC(playBGM)
+{
+	TBL_PC* sd = script_rid2sd(st);
+	const char* name = script_getstr(st,2);
+
+	if(sd)
+	{
+		if(!st->rid)
+			clif_playBGM(sd,map_id2bl(st->oid),name);
+		else
+			clif_playBGM(sd,&sd->bl,name);
+	}
+
+	return 0;
+}
+
+int playBGM_sub(struct block_list* bl,va_list ap)
+{
+	char* name = va_arg(ap,char*);
+
+	clif_playBGM((TBL_PC *)bl, bl, name);
+
+    return 0;
+}
+
+/*==========================================
+ * Play a BGM on multiple client [Rikter/Yommy]
+ *------------------------------------------*/
+BUILDIN_FUNC(playBGMall)
+{
+	struct block_list* bl;
+	const char* name;
+
+	bl = (st->rid) ? &(script_rid2sd(st)->bl) : map_id2bl(st->oid);
+	if (!bl)
+		return 0;
+
+	name = script_getstr(st,2);
+
+	if(script_hasdata(st,7))
+	{	// specified part of map
+		const char* map = script_getstr(st,3);
+		int x0 = script_getnum(st,4);
+		int y0 = script_getnum(st,5);
+		int x1 = script_getnum(st,6);
+		int y1 = script_getnum(st,7);
+		map_foreachinarea(playBGM_sub, map_mapname2mapid(map), x0, y0, x1, y1, BL_PC, name);
+	}
+	else
+	if(!script_hasdata(st,7))
+	{	// entire map
+		const char* map = script_getstr(st,3);
+		map_foreachinmap(playBGM_sub, map_mapname2mapid(map), BL_PC, name);
+	}
+	else
+	{
+		ShowError("buildin_playBGMall: insufficient arguments for specific area broadcast.\n");
+	}
+
+	return 0;
+}
+
+/*==========================================
  * サウンドエフェクト
  *------------------------------------------*/
 BUILDIN_FUNC(soundeffect)
@@ -10990,7 +11067,14 @@ BUILDIN_FUNC(specialeffect)
 	if(bl==NULL)
 		return 0;
 
-	clif_specialeffect(bl, type, target);
+	if( script_hasdata(st,4) )
+	{
+		TBL_NPC *nd = npc_name2id(script_getstr(st,4));
+		if(nd)
+			clif_specialeffect(&nd->bl, type, target);
+	}
+	else
+		clif_specialeffect(bl, type, target);
 
 	return 0;
 }
@@ -11001,10 +11085,11 @@ BUILDIN_FUNC(specialeffect2)
 	int type = script_getnum(st,2);
 	enum send_target target = script_hasdata(st,3) ? (send_target)script_getnum(st,3) : AREA;
 
-	if(sd==NULL)
-		return 0;
+	if( script_hasdata(st,4) )
+		sd = map_nick2sd(script_getstr(st,4));
 
-	clif_specialeffect(&sd->bl, type, target);
+	if (sd)
+		clif_specialeffect(&sd->bl, type, target);
 
 	return 0;
 }
@@ -15068,6 +15153,8 @@ struct script_function buildin_func[] = {
 	BUILDIN_DEF(clearitem,""),
 	BUILDIN_DEF(classchange,"ii"),
 	BUILDIN_DEF(misceffect,"i"),
+	BUILDIN_DEF(playBGM,"s"),
+	BUILDIN_DEF(playBGMall,"s*"),
 	BUILDIN_DEF(soundeffect,"si"),
 	BUILDIN_DEF(soundeffectall,"si*"),	// SoundEffectAll [Codemaster]
 	BUILDIN_DEF(strmobinfo,"ii"),	// display mob data [Valaris]

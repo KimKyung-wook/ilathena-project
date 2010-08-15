@@ -131,6 +131,7 @@ int clif_poison_list(struct map_session_data *sd, int skill_lv);
 int clif_magicdecoy_list(struct map_session_data *sd, int skill_lv, short x, short y);
 int clif_spellbook_list(struct map_session_data *sd);	//self
 int clif_skill_select_request( struct map_session_data *sd ); //self
+int clif_skill_itemlistwindow( struct map_session_data *sd, int skill_id, int skill_lv ); //self
 int clif_statusupack(struct map_session_data *,int,int,int);	// self
 int clif_equipitemack(struct map_session_data *,int,int,int);	// self
 int clif_unequipitemack(struct map_session_data *,int,int,int);	// self
@@ -160,6 +161,7 @@ void clif_talkiebox(struct block_list* bl, const char* talkie);
 void clif_wedding_effect(struct block_list *bl);
 void clif_divorced(struct map_session_data* sd, const char* name);
 //void clif_callpartner(struct map_session_data *sd);
+void clif_playBGM(struct map_session_data* sd, struct block_list* bl, const char* name);
 void clif_soundeffect(struct map_session_data* sd, struct block_list* bl, const char* name, int type);
 int clif_soundeffectall(struct block_list* bl, const char *name, int type, enum send_target coverage);
 void clif_parse_ActionRequest_sub(struct map_session_data *sd, int action_type, int target_id, unsigned int tick);
@@ -212,7 +214,7 @@ void clif_skill_warppoint(struct map_session_data* sd, short skill_num, short sk
 void clif_skill_memomessage(struct map_session_data* sd, int type);
 void clif_skill_teleportmessage(struct map_session_data* sd, int type);
 int clif_skill_produce_mix_list(struct map_session_data *sd, int skill_num, int trigger);
-void clif_cooking_list(struct map_session_data *sd, int trigger);
+void clif_cooking_list(struct map_session_data *sd, int trigger, int skill_id, int qty, int list_type);
 
 int clif_produceeffect(struct map_session_data* sd,int flag,int nameid);
 
