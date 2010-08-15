@@ -199,7 +199,6 @@ int str_hash[SCRIPT_HASH_SIZE];
 //#define SCRIPT_HASH_SDBM
 #define SCRIPT_HASH_ELF
 
-
 static DBMap* scriptlabel_db=NULL; // const char* label_name -> int script_pos
 static DBMap* userfunc_db=NULL; // const char* func_name -> struct script_code*
 static int parse_options=0;
@@ -3517,7 +3516,6 @@ int script_reload()
 	return 0;
 }
 
-
 //-----------------------------------------------------------------------------
 // buildin functions
 //
@@ -4317,6 +4315,7 @@ BUILDIN_FUNC(warpparty)
 		break;
 		}
 	}
+
 	return 0;
 }
 /*==========================================
@@ -8176,6 +8175,7 @@ static int buildin_announce_sub(struct block_list *bl, va_list ap)
 		clif_broadcast(bl, mes, len, type, SELF);
 	return 0;
 }
+
 BUILDIN_FUNC(mapannounce)
 {
 	const char *mapname   = script_getstr(st,2);
@@ -11022,10 +11022,11 @@ BUILDIN_FUNC(specialeffect2)
 	int type = script_getnum(st,2);
 	enum send_target target = script_hasdata(st,3) ? (send_target)script_getnum(st,3) : AREA;
 
-	if(sd==NULL)
-		return 0;
+	if( script_hasdata(st,4) )
+		sd = map_nick2sd(script_getstr(st,4));
 
-	clif_specialeffect(&sd->bl, type, target);
+	if (sd)
+		clif_specialeffect(&sd->bl, type, target);
 
 	return 0;
 }

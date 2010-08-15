@@ -571,6 +571,7 @@ int party_broken(int party_id)
 			p->data[i].sd->status.party_id=0;
 		}
 	}
+
 	idb_remove(party_db,party_id);
 	return 0;
 }

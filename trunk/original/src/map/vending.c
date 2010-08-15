@@ -64,7 +64,6 @@ void vending_purchasereq(struct map_session_data* sd, int aid, int cid, const ui
 	struct map_session_data* vsd = map_id2sd(aid);
 
 	nullpo_retv(sd);
-
 	if( vsd == NULL || vsd->vender_id == 0 || vsd->vender_id == sd->bl.id )
 		return; // invalid shop
 #if PACKETVER >= 20100105

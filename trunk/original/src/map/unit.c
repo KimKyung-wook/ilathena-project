@@ -173,6 +173,7 @@ static int unit_walktoxy_timer(int tid, unsigned int tick, int id, intptr data)
 				return 0;
 		} else
 			sd->areanpc_id=0;
+
 		if (sd->state.gmaster_flag &&
 			(battle_config.guild_aura&((agit_flag || agit2_flag)?2:1)) &&
 			(battle_config.guild_aura&(map_flag_gvg2(bl->m)?8:4))
@@ -524,6 +525,7 @@ int unit_movepos(struct block_list *bl, short dst_x, short dst_y, int easy, bool
 				return 0;
 		} else
 			sd->areanpc_id=0;
+
 		if( sd->status.pet_id > 0 && sd->pd && sd->pd->pet.intimate > 0 )
 		{ // Check if pet needs to be teleported. [Skotlex]
 			int flag = 0;
