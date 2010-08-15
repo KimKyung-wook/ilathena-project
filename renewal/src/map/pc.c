@@ -642,7 +642,7 @@ int pc_makesavestatus(struct map_session_data *sd)
 	if(!battle_config.save_clothcolor)
 		sd->status.clothes_color=0;
 
-  	//Only copy the Cart/Peco/Falcon/Dragon options, the rest are handled via 
+  	//Only copy the Cart/Peco/Falcon/Dragon/Warg/Mado options, the rest are handled via
 	//status change load/saving. [Skotlex]
 	sd->status.option = sd->sc.option&(OPTION_CART|OPTION_FALCON|OPTION_RIDING|OPTION_RIDING_DRAGON|OPTION_WUG|OPTION_RIDING_WUG|OPTION_MADO);
 		
@@ -1314,7 +1314,6 @@ int pc_reg_received(struct map_session_data *sd)
 
 	status_calc_pc(sd,1);
 	chrif_scdata_request(sd->status.account_id, sd->status.char_id);
-
 #ifndef TXT_ONLY
 	chrif_skillcooldown_request(sd->status.account_id, sd->status.char_id);
 	intif_Mail_requestinbox(sd->status.char_id, 0); // MAIL SYSTEM - Request Mail Inbox
@@ -3273,7 +3272,7 @@ int pc_skill(TBL_PC* sd, int id, int level, int flag)
 	break;
 	case 2: //Add skill bonus on top of what you had.
 		if( sd->status.skill[id].id == id ){
-			if( !sd->status.skill[id].flag ) //Non-granted skill, store it's level.
+			if( !sd->status.skill[id].flag ) // Store previous level.
 				sd->status.skill[id].flag = sd->status.skill[id].lv + 2;
 		} else {
 			sd->status.skill[id].id   = id;
@@ -3702,7 +3701,7 @@ int pc_dropitem(struct map_session_data *sd,int n,int amount)
 			run_script(data->imd.script, 0, sd->bl.id, 0);
 		clif_displaymessage(sd->fd, "변화가 생긴것 같다!");
 	}
-	else if (!map_addflooritem(&sd->status.inventory[n], amount, sd->bl.m, sd->bl.x, sd->bl.y, 0, 0, 0, 2))
+	if (!map_addflooritem(&sd->status.inventory[n], amount, sd->bl.m, sd->bl.x, sd->bl.y, 0, 0, 0, 2))
 		return 0;
 	
 	pc_delitem(sd, n, amount, 0);
@@ -5124,7 +5123,6 @@ char* job_name(int class_)
 	case JOB_DARK_COLLECTOR:
 		return msg_txt(622 - JOB_GANGSI+class_);
 
-//[The Quality Maker]
 	case JOB_RUNE_KNIGHT:
 	case JOB_WARLOCK:
 	case JOB_RANGER:
@@ -5569,10 +5567,38 @@ static int pc_setstat(struct map_session_data* sd, int type, int val)
 	return val;
 }
 
-/// Returns the number of stat points needed to raise the specified stat by 1.
+/*======================================================
+ * Returns the number of stat points needed to raise
+ * the specified stat by 1.
+ * Old formula : (1 + (pc_getstat(sd,type) + 9) / 10)
+ * Renewal formula : (2 + (stat - 1) / 10)
+ * Stat required list:
+ *	  1 ~  10 ->  2
+ *	 11 ~  20 ->  3
+ *	 21 ~  30 ->  4
+ *	 31 ~  40 ->  5
+ *	 41 ~  50 ->  6
+ *	 51 ~  60 ->  7
+ *	 61 ~  70 ->  8
+ *	 71 ~  80 ->  9
+ *	 81 ~  90 -> 10
+ *	 91 ~  99 -> 11
+ *	100 ~ 104 -> 16
+ *	105 ~ 109 -> 20
+ *	110 ~ 114 -> 24
+ *	115 ~ 119 -> 28 
+------------------------------------------------------*/
 int pc_need_status_point(struct map_session_data* sd, int type)
 {
-	return ( 1 + (pc_getstat(sd,type) + 9) / 10 );
+	int stat = pc_getstat(sd, type);
+
+	if( stat >= pc_maxparameter(sd) )
+		return 0;
+
+	if( battle_config.use_renewal_statpoints )
+		return (1 + (stat + 9) / 10); // Old mechanic
+	else
+		return (stat < 100) ? (2 + (stat - 1) / 10) : (16 + 4 * ((stat - 100) / 5)); // Renewal machanic.
 }
 
 /// Raises a stat by 1.
@@ -6461,8 +6487,8 @@ int pc_dead(struct map_session_data *sd,struct block_list *src)
 	}
 	// pvp
 	// disable certain pvp functions on pk_mode [Valaris]
-	if( map[sd->bl.m].flag.gvg_dungeon || (map[sd->bl.m].flag.pvp && !battle_config.pk_mode && !map[sd->bl.m].flag.pvp_nocalcrank) )
-	{ // Pvp points always take effect on gvg_dungeon maps.
+	if( map[sd->bl.m].flag.pvp && !battle_config.pk_mode && !map[sd->bl.m].flag.pvp_nocalcrank )
+	{
 		sd->pvp_point -= 5;
 		sd->pvp_lost++;
 		if( src && src->type == BL_PC )
@@ -6900,7 +6926,7 @@ int pc_jobchange(struct map_session_data *sd,int job, int upper)
 	pc_calc_skilltree(sd);
 	clif_skillinfoblock(sd);
 
-	//Remove peco/cart/falcon/dragon/warg
+	//Remove peco/cart/falcon
 	i = sd->sc.option;
 	if(i&OPTION_RIDING && !pc_checkskill(sd, KN_RIDING))
 		i&=~OPTION_RIDING;
@@ -8882,7 +8908,10 @@ int pc_readdb(void)
 	memset(statp,0,sizeof(statp));
 	i=1;
 	stat = 45;	// base points
-	sprintf(line, "%s/statpoint.txt", db_path);
+	if( battle_config.use_renewal_statpoints )
+		sprintf(line, "%s/statpoint_renewal.txt", db_path); // Renewal mechanic
+	else
+		sprintf(line, "%s/statpoint.txt", db_path); // Old mechanic.
 	fp=fopen(line,"r");
 	if(fp == NULL){
 		ShowStatus("Can't read '"CL_WHITE"%s"CL_RESET"'... Generating DB.\n",line);

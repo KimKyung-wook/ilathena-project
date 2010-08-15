@@ -112,6 +112,12 @@ struct s_skill_unit_layout {
 	int dy[MAX_SKILL_UNIT_COUNT];
 };
 
+struct s_skill_nounit_layout {
+	int count;
+	int dx[MAX_SKILL_UNIT_COUNT];
+	int dy[MAX_SKILL_UNIT_COUNT];
+};
+
 #define MAX_SKILLTIMERSKILL 15
 struct skill_timerskill {
 	int timer;
@@ -365,6 +371,7 @@ int skill_poisoningweapon( struct map_session_data *sd, int nameid);
 int skill_magicdecoy( struct map_session_data *sd, int nameid);
 int skill_spellbook( struct map_session_data *sd, int nameid);	// Warlock Spellbooks. [LimitLine]
 int skill_select_menu( struct map_session_data *sd, int flag, int skill_id); // Shadow Cheser Auto Shadow Spell [pakpil]
+int skill_elementalanalysis(struct map_session_data *sd, int n, int type, unsigned short *item_list); // Sorcerer Four Elemental Analisys.
 
 int skill_stasis_check(struct block_list *bl, int src_id, int skillid);	// Stasis skill usage check. [LimitLine]
 
@@ -1368,12 +1375,15 @@ enum e_skill {
 	SR_GENTLETOUCH_ENERGYGAIN,
 	SR_GENTLETOUCH_CHANGE,
 	SR_GENTLETOUCH_REVITALIZE,
+
 	WA_SWING_DANCE = 2350,
 	WA_SYMPHONY_OF_LOVER,
 	WA_MOONLIT_SERENADE,
+
 	MI_RUSH_WINDMILL = 2381,
 	MI_ECHOSONG,
 	MI_HARMONIZE,
+
 	WM_LESSON = 2412,
 	WM_METALICSOUND,
 	WM_REVERBERATION,
@@ -1397,6 +1407,7 @@ enum e_skill {
 	WM_MELODYOFSINK,
 	WM_BEYOND_OF_WARCRY,
 	WM_UNLIMITED_HUMMING_VOICE,
+
 	SO_FIREWALK = 2443,
 	SO_ELECTRICWALK,
 	SO_SPELLFIST,
@@ -1456,10 +1467,14 @@ enum e_skill {
 	WM_SEVERE_RAINSTORM_MELEE,
 	SR_HOWLINGOFLION,
 	SR_RIDEINLIGHTNING,
+	LG_OVERBRAND_BRANDISH,
+	LG_OVERBRAND_PLUSATK,
 
 	ALL_ODINS_RECALL = 2533,
 	RETURN_TO_ELDICASTES,
 	ALL_BUYING_STORE,
+	ALL_GUARDIAN_RECALL,
+	ALL_ODINS_POWER,
 
 	HLIF_HEAL = 8001,
 	HLIF_AVOID,
@@ -1477,6 +1492,16 @@ enum e_skill {
 	HVAN_CHAOTIC,
 	HVAN_INSTRUCT,
 	HVAN_EXPLOSION,
+	MUTATION_BASEJOB,
+	MH_SUMMON_LEGION,
+	MH_NEEDLE_OF_PARALYZE,
+	MH_POISON_MIST,
+	MH_PAIN_KILLER,
+	MH_LIGHT_OF_REGENE,
+	MH_OVERED_BOOST,
+	MH_ERASER_CUTTER,
+	MH_XENO_SLASHER,
+	MH_SILENT_BREEZE,
 
 	MS_BASH = 8201,
 	MS_MAGNUM,

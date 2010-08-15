@@ -18,7 +18,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-// ファイル名のデフォルト
+// フ?イル名のデフォルト
 // inter_config_read()で再設定される
 char storage_txt[1024]="save/storage.txt";
 char guild_storage_txt[1024]="save/g_storage.txt";
@@ -26,7 +26,7 @@ char guild_storage_txt[1024]="save/g_storage.txt";
 static DBMap* storage_db; // int account_id -> struct storage_data*
 static DBMap* guild_storage_db; // int guild_id -> struct guild_storage*
 
-// 倉庫データを文字列に変換
+// 倉庫デ??を文字列に変換
 bool storage_tostr(char* str, int account_id, struct storage_data* p)
 {
 	int i,j;
@@ -51,7 +51,7 @@ bool storage_tostr(char* str, int account_id, struct storage_data* p)
 	return true;
 }
 
-// 文字列を倉庫データに変換
+// 文字列を倉庫デ??に変換
 bool storage_fromstr(char* str, int* account_id, struct storage_data* p)
 {
 	int tmp_int[256];
@@ -80,7 +80,7 @@ bool storage_fromstr(char* str, int* account_id, struct storage_data* p)
 		p->items[i].refine = tmp_int[5];
 		p->items[i].attribute = tmp_int[6];
 			
-		for(j = 0; j < MAX_SLOTS && tmp_str && sscanf(tmp_str, ",%d%[0-9,-]",&tmp_int[0], tmp_str) > 0; j++)
+		for(j = 0; j < MAX_SLOTS && tmp_str[0] && sscanf(tmp_str, ",%d%[0-9,-]",&tmp_int[0], tmp_str) > 0; j++)
 			p->items[i].card[j] = tmp_int[0];
 			
 		next += len;
@@ -145,7 +145,7 @@ int guild_storage_fromstr(char *str,struct guild_storage *p)
 			p->storage_[i].identify = tmp_int[4];
 			p->storage_[i].refine = tmp_int[5];
 			p->storage_[i].attribute = tmp_int[6];
-			for(j = 0; j < MAX_SLOTS && tmp_str && sscanf(tmp_str, ",%d%[0-9,-]",&tmp_int[0], tmp_str) > 0; j++)
+			for(j = 0; j < MAX_SLOTS && tmp_str[0] && sscanf(tmp_str, ",%d%[0-9,-]",&tmp_int[0], tmp_str) > 0; j++)
 				p->storage_[i].card[j] = tmp_int[0];
 			next += len;
 			if (str[next] == ' ')
@@ -206,7 +206,7 @@ bool storage_save(int account_id, struct storage_data* storage)
 }
 
 //---------------------------------------------------------
-// 倉庫データを読み込む
+// 倉庫デ??を読み込む
 int inter_storage_init()
 {
 	char line[65536];
@@ -286,7 +286,7 @@ void inter_storage_final() {
 }
 
 //---------------------------------------------------------
-// 倉庫データを書き込む
+// 倉庫デ??を書き込む
 int inter_storage_save()
 {
 	struct DBIterator* iter;
@@ -314,7 +314,7 @@ int inter_storage_save()
 }
 
 //---------------------------------------------------------
-// 倉庫データを書き込む
+// 倉庫デ??を書き込む
 int inter_guild_storage_save()
 {
 	struct DBIterator* iter;
@@ -343,7 +343,7 @@ int inter_guild_storage_save()
 	return 0;
 }
 
-// 倉庫データ削除
+// 倉庫デ??削除
 int inter_storage_delete(int account_id)
 {
 	struct storage_data *s = (struct storage_data*)idb_get(storage_db,account_id);
@@ -358,7 +358,7 @@ int inter_storage_delete(int account_id)
 	return 0;
 }
 
-// ギルド倉庫データ削除
+// ギルド倉庫デ??削除
 int inter_guild_storage_delete(int guild_id)
 {
 	struct guild_storage *gs = (struct guild_storage*)idb_get(guild_storage_db,guild_id);
@@ -450,9 +450,9 @@ int mapif_parse_SaveGuildStorage(int fd)
 
 // map server からの通信
 // ・１パケットのみ解析すること
-// ・パケット長データはinter.cにセットしておくこと
-// ・パケット長チェックや、RFIFOSKIPは呼び出し元で行われるので行ってはならない
-// ・エラーなら0(false)、そうでないなら1(true)をかえさなければならない
+// ・パケット長デ??はinter.cにセットしておくこと
+// ・パケット長?ェックや、RFIFOSKIPは呼び出し元で行われるので行ってはならない
+// ・エラ?なら0(false)、そうでないなら1(true)をかえさなければならない
 int inter_storage_parse_frommap(int fd)
 {
 	RFIFOHEAD(fd);
